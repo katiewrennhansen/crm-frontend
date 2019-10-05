@@ -1,0 +1,15 @@
+.footer-container {
+    background: #343434;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-container h2 {
+    margin-top: 0;
+    padding-top: 30px;
+}
+
+.footer-nav p {
+    color: white;
+}

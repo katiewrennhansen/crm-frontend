@@ -1,37 +1,40 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import './MainNav.css'
  
 class MainNav extends Component {
     render() {
         return (
             <nav>
+                <div className='logo'>
                 <Link to="/">
                     <h2>ApartmentChileLogo</h2>
                 </Link>
+                </div>
                 <div className='collapsed-content'>
                     <div className='main-nav'>
                         <Link to="/">
-                            Home
+                            <p className='link'>Home</p>
                         </Link>
                         <Link to="/about">
-                            About Us
+                            <p className='link'>About</p>
                         </Link>
                         <Link to="/services">
-                            Services
+                            <p className='link'>Services</p>
                         </Link>
                         <Link to="/search">
-                            Search
+                            <p className='link'>Search</p>
                         </Link>
                         <Link to="/contact">
-                            Contact
+                            <p className='link'>Contact</p>
                         </Link>
                     </div>
                     <div className='login-nav'>
                         <Link to="/login">
-                            Login
+                        <   p className='link'>Login</p>
                         </Link>
-                        <Link to="/register">
-                            Register
+                        <Link to="/select-account-type">
+                            <p className='link'>Register</p>
                         </Link>
                     </div>
                 </div>

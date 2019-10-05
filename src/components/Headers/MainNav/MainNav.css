@@ -1,0 +1,25 @@
+nav {
+    display: flex;
+}
+
+.logo {
+    padding-left: 50px;
+}
+
+.collapsed-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 50px;
+    width: 70%;
+}
+
+.link {
+    padding: 0 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.main-nav,
+.login-nav {
+    display: flex;
+}

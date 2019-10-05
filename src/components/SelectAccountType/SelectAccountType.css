@@ -1,0 +1,36 @@
+.account-type-container {
+    background: #343434;
+    padding: 40px;
+}
+
+.account-type-button-container h2 {
+    text-align: center;
+    color: white;
+}
+
+.account-type-button {
+    border: 2px solid lightgreen;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 15px 0;
+    background: rgba(255, 255, 255, 0);
+    display: block;
+    font-size: 18px;
+    color: lightgreen;
+}
+
+.account-type-button:hover {
+    background: lightgreen;
+    color: #343434;
+    transition: 200ms linear 10ms;
+}
+
+button {
+    cursor: pointer;
+    width: 100%;
+}
+
+.account-type-button-container {
+    width: 30%;
+    margin: 0 auto;
+}

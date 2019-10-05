@@ -1,0 +1,9 @@
+input[type='email'],
+input[type='password'],
+input[type='text'],
+input[type='number'] {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    width: 250px;
+}
