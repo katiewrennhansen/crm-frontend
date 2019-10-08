@@ -5,11 +5,14 @@ import AboutPage from './components/AboutPage/AboutPage'
 import MainNav from './components/Headers/MainNav/MainNav'
 import Footer from './components/Footer/Footer'
 import Login from './components/Login/Login'
+import ForgotPassword from './components/ResetPassword/ForgotPassword/ForgotPassword'
+import ChangePassword from './components/ResetPassword/ChangePassword/ChangePassword'
 import ServicesPage from './components/ServicesPage/ServicesPage'
 import UserRegistration from './components/RegistrationAccountTypes/UserRegistration/UserRegistration'
 import SelectAccountType from './components/SelectAccountType/SelectAccountType';
 import BrokerRegistration from './components/RegistrationAccountTypes/BrokerRegistration/BrokerRegistration'
 import OwnerRegistration from './components/RegistrationAccountTypes/OwnerRegistration/OwnerRegistration'
+import UserHome from './components/portalpages/user/UserHome/UserHome'
 import './App.css'
 
 class App extends Component {
@@ -36,6 +39,14 @@ class App extends Component {
             component={Login}
           />
           <Route 
+            path='/forgot-password'
+            component={ForgotPassword}
+          />
+          <Route 
+            path='/change-password'
+            component={ChangePassword}
+          />
+          <Route 
             path='/select-account-type'
             component={SelectAccountType}
           />
@@ -50,6 +61,10 @@ class App extends Component {
           <Route 
             path='/register-owner'
             component={OwnerRegistration}
+          />
+           <Route 
+            path='/user-home'
+            component={UserHome}
           />
         </Switch>
         <Footer />

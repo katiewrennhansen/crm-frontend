@@ -12,14 +12,13 @@ class OwnerRegistration extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const owner = {
-            first: e.target.first.value,
-            last: e.target.last.value,
+            firstname: e.target.first.value,
+            lastname: e.target.last.value,
             email: e.target.email.value,
             phone: e.target.phone.value,
             country: e.target.country.value,
             password: e.target.password.value,
-            repeatPassword: e.target.repeatPassword.value,
-            type: 'owner'
+            usertype: 'owner'
         }
         this.setState({
             registerUser: owner

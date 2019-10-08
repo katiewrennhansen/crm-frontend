@@ -4,11 +4,20 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+.services-content {
+    width: 85%;
+    margin: 70px auto;
+}
+
 .services-page h1 {
     font-size: 60px;
     margin-top: 0px;
     color: rgb(106, 104, 104);
     padding: 100px 180px;
+}
+
+.service {
+    margin-top: 50px;
 }
 
 .services-page h1,
@@ -22,4 +31,25 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.services-message {
+    margin-top: 50px;
+}
+
+.services-message button {
+    background-color: green;
+    border: none;
+    color: white;
+    width: 200px;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.services-message button:hover {
+    background: rgb(77, 154, 77);
+    transition: 300ms linear 10ms;
+
 }

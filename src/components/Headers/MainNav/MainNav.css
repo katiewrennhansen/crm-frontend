@@ -22,8 +22,9 @@ nav {
 .collapsed-content {
     display: flex;
     justify-content: space-between;
-    padding: 10px 50px;
+    padding: 0px 50px;
     width: 70%;
+    align-items: center;
 }
 
 .link {
@@ -36,14 +37,20 @@ nav {
     transition: 300ms linear 10ms;
 }
 
+.login,
+.register {
+    border-radius: 5px;
+    margin-top: 14px;
+
+}
+
 .login {
     background: green;
-    border-radius: 5px;
     padding: 8px 26px;
-    margin-top: 8px;
     margin-right: 10px;
     color: white;
 }
+
 
 .login:hover {
     background: rgb(77, 154, 77);
@@ -53,10 +60,9 @@ nav {
 .register {
     border: 2px solid green;
     padding: 6px 16px; 
-    border-radius: 5px;
-    margin-top: 8px;
     color: green;
 }
+
 
 .register:hover {
     color: rgb(77, 154, 77);

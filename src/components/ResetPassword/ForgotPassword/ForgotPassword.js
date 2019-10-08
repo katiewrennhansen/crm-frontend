@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import './Login.css'
+import './ForgotPassword.css'
 
-class Login extends Component {
+class ForgotPassword extends Component {
     constructor(props){
         super(props)
         this.state = {
             email: {
-                value: '',
-                touched: false
-            },
-            password: {
                 value: '',
                 touched: false
             }
@@ -44,29 +40,14 @@ class Login extends Component {
     //     }
     // }
 
-    // validatePassword(){
-    //     const password = this.state.password.value.trim();
-    //     if(password.length === 0){
-    //         console.log('password is required')
-    //         return 'password is required'
-    //     }
-    //     else if(password.length < 3 || password.length > 50){
-    //         console.log('password must be between 3 and 50 characters')
-    //         return 'password must be between 3 and 50 characters'
-    //     } else if(!password.match(/[0-9]/)){
-    //         console.log('password must contain at least one number')
-    //         return 'password must contain at least one number'
-    //     }
-    // }
+
 
     handleSubmit = (e) => {
         e.preventDefault();
         console.log('submitted')
         const email = this.state.email.value;
-        const password = this.state.password.value;
         console.log(`
         Email: ${email}
-        Password: ${password}
         `)
 
     }
@@ -74,7 +55,7 @@ class Login extends Component {
     render(){
         return (
             <div className='login-container'>
-                <h1>Enter your Login information</h1>
+                <h1>Enter your email to send reset password link</h1>
                 <div className='margin-container'>
                     <form onSubmit={(e) => this.handleSubmit(e)}>
                         <div className='form-group'>
@@ -84,15 +65,6 @@ class Login extends Component {
                                 name='email'
                                 id='email'
                                 onChange={(e) => this.updateEmail(e.target.value)}
-                            />
-                        </div>
-                        <div className='form-group'>
-                            <label htmlFor="password">Password: </label>
-                            <input 
-                                type='password' 
-                                name='password'
-                                id='password'
-                                onChange={(e) => this.updatePassword(e.target.value)}
                             />
                         </div>
                         <div className='form-group'>
@@ -107,16 +79,10 @@ class Login extends Component {
                             Sign up now!
                         </Link>
                     </p>
-                    <p className='forgot-password'>
-                        Forgot password?&nbsp;
-                        <Link to='/forgot-password' style={{color: 'lightgreen'}}>
-                            Reset password
-                        </Link>
-                    </p>
                 </div>
             </div>
         )
     }
 }
 
-export default Login
+export default ForgotPassword
