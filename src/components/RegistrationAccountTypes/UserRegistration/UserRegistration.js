@@ -11,41 +11,39 @@ class UserRegistration extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const first = e.target.first.value
-        const last = e.target.last.value
-        const email = e.target.email.value
-        const phone = e.target.phone.value
-        const country = e.target.country.value
-        const password = e.target.password.value
-        const repeatPassword = e.target.repeatPassword.value
+        const user = {
+            first: e.target.first.value,
+            last: e.target.last.value,
+            email: e.target.email.value,
+            phone: e.target.phone.value,
+            country: e.target.country.value,
+            password: e.target.password.value,
+            repeatPassword: e.target.repeatPassword.value,
+            type: 'user'
+        }
         this.setState({
-            registerUser: {
-                type: 'user',
-                first: first,
-                last: last,
-                email: email,
-                phone: phone,
-                country: country,
-                password: password,
-                repeatPassword: repeatPassword
-            }
+            registerUser: user
         })
         console.log('registered new user')
         //make a POST req to back-end API with registration information
     }
+
+
 
     render(){
         console.log(this.state.registerUser)
         return (
             <div className='user-registration-container'>
                 <h1>Create a user account to start the renting process</h1>
-                <RegistrationForm handleSubmit={this.handleSubmit}/>
-                <p>
-                    Already have an accout?  
-                    <Link to='/login'>
-                        Login now!
-                    </Link>
-                </p>
+                <div className='user-registration-content'>
+                    <RegistrationForm handleSubmit={this.handleSubmit}/>
+                    <p>
+                        Already have an account?&nbsp;  
+                        <Link to='/login' style={{color: 'lightgreen'}}>
+                            Login now!
+                        </Link>
+                    </p>
+                </div>
             </div>
         )
     }

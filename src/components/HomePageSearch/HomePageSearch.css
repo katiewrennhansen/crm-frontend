@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans:300&display=swap');
+
+.home-page-search{
+    background: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    position: absolute;
+    top: 160px;
+    left: 100px;  
+}
+
+.home-page-search h2 {
+    color: white;
+    font-family: 'Work Sans', sans-serif;
+    text-align: center;
+    font-size: 40px;
+    margin-top: 0;
+}
+
+.home-page-search form {
+    text-align: center;
+}
+
+.home-page-search input[type='text'],
+.home-page-search input[type='number'],
+.home-page-search select {
+    margin: 0 5px;
+    padding: 5px 12px;
+}
+
+.home-page-search input[type='number']{
+    width: 100px;
+}

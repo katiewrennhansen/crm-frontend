@@ -1,11 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans:300&display=swap');
+
+
 .account-type-container {
     background: #343434;
     padding: 40px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .account-type-button-container h2 {
     text-align: center;
     color: white;
+    font-family: 'Work Sans', sans-serif;
 }
 
 .account-type-button {

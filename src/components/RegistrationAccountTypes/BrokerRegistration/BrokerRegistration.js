@@ -13,24 +13,18 @@ class BrokerRegistration extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const first = e.target.first.value
-        const last = e.target.last.value
-        const email = e.target.email.value
-        const phone = e.target.phone.value
-        const country = e.target.country.value
-        const password = e.target.password.value
-        const repeatPassword = e.target.repeatPassword.value
+        const broker = {
+            first: e.target.first.value,
+            last: e.target.last.value,
+            email: e.target.email.value,
+            phone: e.target.phone.value,
+            country: e.target.country.value,
+            password: e.target.password.value,
+            repeatPassword: e.target.repeatPassword.value,
+            type: 'broker'
+        }
         this.setState({
-            registerUser: {
-                type: 'broker',
-                first: first,
-                last: last,
-                email: email,
-                phone: phone,
-                country: country,
-                password: password,
-                repeatPassword: repeatPassword
-            }
+            registerUser: broker
         })
         console.log(`broker registered`)
     }
@@ -40,13 +34,15 @@ class BrokerRegistration extends Component {
         return (
             <div className='broker-registration-container'>
                 <h1>Create a broker account to start the selling process</h1>
-                <RegistrationForm handleSubmit={this.handleSubmit}/>
-                <p>
-                    Already have an accout?  
-                    <Link to='/login'>
-                        Login now!
-                    </Link>
-                </p>
+                <div className='broker-registration-content'>
+                    <RegistrationForm handleSubmit={this.handleSubmit}/>
+                    <p>
+                        Already have an account?&nbsp; 
+                        <Link to='/login' style={{color: 'lightgreen'}}>
+                            Login now!
+                        </Link>
+                    </p>
+                </div>
             </div>
         )
     }

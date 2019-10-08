@@ -7,34 +7,34 @@ class MainNav extends Component {
         return (
             <nav>
                 <div className='logo'>
-                <Link to="/">
-                    <h2>ApartmentChileLogo</h2>
+                <Link to="/" style={{color: '#343434', textDecoration: 'none'}}>
+                    <h2>Apartment<span className='color'>Chile</span></h2>
                 </Link>
                 </div>
                 <div className='collapsed-content'>
                     <div className='main-nav'>
-                        <Link to="/">
+                        <Link to="/" style={{textDecoration: 'none'}}>
                             <p className='link'>Home</p>
                         </Link>
-                        <Link to="/about">
+                        <Link to="/about" style={{textDecoration: 'none'}}>
                             <p className='link'>About</p>
                         </Link>
-                        <Link to="/services">
+                        <Link to="/services" style={{textDecoration: 'none'}}>
                             <p className='link'>Services</p>
                         </Link>
-                        <Link to="/search">
+                        <Link to="/search" style={{textDecoration: 'none'}}>
                             <p className='link'>Search</p>
                         </Link>
-                        <Link to="/contact">
+                        <Link to="/contact" style={{textDecoration: 'none'}}>
                             <p className='link'>Contact</p>
                         </Link>
                     </div>
                     <div className='login-nav'>
-                        <Link to="/login">
-                        <   p className='link'>Login</p>
+                        <Link to="/login" style={{textDecoration: 'none'}}>
+                            <p className='login'>Login</p>
                         </Link>
-                        <Link to="/select-account-type">
-                            <p className='link'>Register</p>
+                        <Link to="/select-account-type" style={{textDecoration: 'none'}}>
+                            <p className='register'>Register</p>
                         </Link>
                     </div>
                 </div>

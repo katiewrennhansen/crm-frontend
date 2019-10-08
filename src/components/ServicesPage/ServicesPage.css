@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans:300&display=swap');
+
+.services-page {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.services-page h1 {
+    font-size: 60px;
+    margin-top: 0px;
+    color: rgb(106, 104, 104);
+    padding: 100px 180px;
+}
+
+.services-page h1,
+.services-page h2 {
+    font-family: 'Work Sans', sans-serif;
+}
+
+.services-background-image-container {
+    background: url('https://images.unsplash.com/photo-1429823040067-2c31b1d637ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80');
+    height: 40vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

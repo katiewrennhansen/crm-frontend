@@ -35,29 +35,29 @@ class Login extends Component {
         })
     }
 
-    validateEmail(){
-        const email = this.state.email.value.trim();
-        if(email.length < 3 || email.length > 40){
-            console.log('email must be between 3 and 40 characters')
-            return 'email must be between 3 and 40 characters'
+    // validateEmail(){
+    //     const email = this.state.email.value.trim();
+    //     if(email.length < 3 || email.length > 40){
+    //         console.log('email must be between 3 and 40 characters')
+    //         return 'email must be between 3 and 40 characters'
             
-        }
-    }
+    //     }
+    // }
 
-    validatePassword(){
-        const password = this.state.password.value.trim();
-        if(password.length === 0){
-            console.log('password is required')
-            return 'password is required'
-        }
-        else if(password.length < 3 || password.length > 50){
-            console.log('password must be between 3 and 50 characters')
-            return 'password must be between 3 and 50 characters'
-        } else if(!password.match(/[0-9]/)){
-            console.log('password must contain at least one number')
-            return 'password must contain at least one number'
-        }
-    }
+    // validatePassword(){
+    //     const password = this.state.password.value.trim();
+    //     if(password.length === 0){
+    //         console.log('password is required')
+    //         return 'password is required'
+    //     }
+    //     else if(password.length < 3 || password.length > 50){
+    //         console.log('password must be between 3 and 50 characters')
+    //         return 'password must be between 3 and 50 characters'
+    //     } else if(!password.match(/[0-9]/)){
+    //         console.log('password must contain at least one number')
+    //         return 'password must contain at least one number'
+    //     }
+    // }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -74,8 +74,8 @@ class Login extends Component {
     render(){
         return (
             <div className='login-container'>
+                <h1>Enter your Login information</h1>
                 <div className='margin-container'>
-                    <h1>Enter your Login information</h1>
                     <form onSubmit={(e) => this.handleSubmit(e)}>
                         <div className='form-group'>
                             <label htmlFor='email'>Email: </label>
@@ -98,16 +98,12 @@ class Login extends Component {
                         <div className='form-group'>
                             <input 
                                 type='submit'
-                                disabled={
-                                    this.validateEmail() ||
-                                    this.validatePassword()
-                                }
                             />
                         </div>
                     </form>
                     <p>
                         Don't have an accout?&nbsp;
-                        <Link to='/select-account-type' style={{color: 'lightgreen', textDecoration: 'none'}}>
+                        <Link to='/select-account-type' style={{color: 'lightgreen'}}>
                             Sign up now!
                         </Link>
                     </p>

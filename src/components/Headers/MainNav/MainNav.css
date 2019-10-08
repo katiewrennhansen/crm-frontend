@@ -1,9 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans:300&display=swap');
+
 nav {
     display: flex;
 }
 
+.link,
+.login,
+.register {
+    font-family: 'Open Sans', sans-serif;
+}
+
 .logo {
     padding-left: 50px;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.color {
+    color: green;
 }
 
 .collapsed-content {
@@ -14,9 +27,41 @@ nav {
 }
 
 .link {
-    padding: 0 10px;
-    text-decoration: none;
+    padding: 0 15px;
     color: black;
+}
+
+.link:hover {
+    color: rgb(77, 154, 77);
+    transition: 300ms linear 10ms;
+}
+
+.login {
+    background: green;
+    border-radius: 5px;
+    padding: 8px 26px;
+    margin-top: 8px;
+    margin-right: 10px;
+    color: white;
+}
+
+.login:hover {
+    background: rgb(77, 154, 77);
+    transition: 300ms linear 10ms;
+}
+
+.register {
+    border: 2px solid green;
+    padding: 6px 16px; 
+    border-radius: 5px;
+    margin-top: 8px;
+    color: green;
+}
+
+.register:hover {
+    color: rgb(77, 154, 77);
+    border: 2px solid rgb(77, 154, 77);
+    transition: 300ms linear 10ms;
 }
 
 .main-nav,

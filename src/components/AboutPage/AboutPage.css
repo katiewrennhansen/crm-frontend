@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans:300&display=swap');
+
+.about-page {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.about-page h1,
+.about-page h3 {
+    font-family: 'Work Sans', sans-serif;
+}
+
+.about-content {
+    width: 85%;
+    margin: 30px auto;
+}
+
+.about-end {
+    display: flex;
+}
+
+.end-content {
+    padding: 0 100px 0 30px;
+}
+
+.about-img {
+    width: 50vw;
+}

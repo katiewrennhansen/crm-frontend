@@ -6,8 +6,8 @@ class Footer extends Component {
     render(){
         return (
             <div className='footer-container'>
-                <div>
-                    <h2>ApartmentChile</h2>
+                <div className='company-info'>
+                    <h2>Apartment<span className='green-logo'>Chile</span></h2>
                     <p>Contáctese con nuestros ejecutivos y lo atenderemos en forma rápida y personalizada.</p>
                 </div>
                 <div className='contact-info'>
@@ -21,21 +21,21 @@ class Footer extends Component {
                     <p>Phone: +56 9 72131448</p>
                     <p>Email: info@apartmentchile.com</p>
                 </div>
-                <div>
                 <div className='footer-nav'>
-                        <Link to="/">
+                    <div className='footer-nav-links'>
+                        <Link to="/" style={{textDecoration: 'none'}}>
                             <p className='link'>Home</p>
                         </Link>
-                        <Link to="/about">
+                        <Link to="/about" style={{textDecoration: 'none'}}>
                             <p className='link'>About</p>
                         </Link>
-                        <Link to="/services">
+                        <Link to="/services" style={{textDecoration: 'none'}}>
                             <p className='link'>Services</p>
                         </Link>
-                        <Link to="/search">
+                        <Link to="/search" style={{textDecoration: 'none'}}>
                             <p className='link'>Search</p>
                         </Link>
-                        <Link to="/contact">
+                        <Link to="/contact" style={{textDecoration: 'none'}}>
                             <p className='link'>Contact</p>
                         </Link>
                     </div>

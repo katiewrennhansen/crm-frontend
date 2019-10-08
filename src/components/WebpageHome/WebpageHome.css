@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans:200,300&display=swap');
+
+.webpage-home {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.webpage-home h2 {
+    font-size: 30px;
+}
+
+.webpage-home h3 {
+    font-size: 22px;
+}
+
+.webpage-home h2,
+.webpage-home h3 {
+    font-family: 'Work Sans', sans-serif;
+}
+
+
+.background-image {
+    background: url('https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1953&q=80');
+    height: 50vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.services {
+    padding: 60px;
+}
+
+.services h2 {
+    text-align: center;
+}
+
+.services-cards {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+}
+
+.services-button {
+    width: 150px;
+    margin: 0 auto;
+}
+
+.services button {
+    background: green;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.tile {
+    width: 30%;
+}
+
+.company {
+    display: flex;
+}
+
+.company-content {
+    padding: 80px 150px;
+    line-height: 1.8;
+}
+
+.company-image {
+    width: 50vw;
+}

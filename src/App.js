@@ -5,10 +5,12 @@ import AboutPage from './components/AboutPage/AboutPage'
 import MainNav from './components/Headers/MainNav/MainNav'
 import Footer from './components/Footer/Footer'
 import Login from './components/Login/Login'
+import ServicesPage from './components/ServicesPage/ServicesPage'
 import UserRegistration from './components/RegistrationAccountTypes/UserRegistration/UserRegistration'
 import SelectAccountType from './components/SelectAccountType/SelectAccountType';
 import BrokerRegistration from './components/RegistrationAccountTypes/BrokerRegistration/BrokerRegistration'
 import OwnerRegistration from './components/RegistrationAccountTypes/OwnerRegistration/OwnerRegistration'
+import './App.css'
 
 class App extends Component {
   render() {
@@ -25,7 +27,10 @@ class App extends Component {
             path='/about'
             component={AboutPage}
           />
-          
+          <Route 
+            path='/services'
+            component={ServicesPage}
+          />
           <Route 
             path='/login'
             component={Login}
