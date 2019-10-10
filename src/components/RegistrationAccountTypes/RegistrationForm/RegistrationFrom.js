@@ -1,59 +1,7 @@
 import React, { Component } from 'react'
 import './RegistrationForm.css'
-// import RegistrationContext from '../../../RegistrationContext'
 
 class RegistrationForm extends Component {
-    // static contextType =  RegistrationContext
-
-    //    state = {
-    //         first: {
-    //             value: '',
-    //             touched: false
-    //         },
-    //         last: {
-    //             value: '',
-    //             touched: false
-    //         },
-    //         email: {
-    //             value: '',
-    //             touched: false
-    //         },
-    //         phone: {
-    //             value: '',
-    //             touched: false
-    //         },
-    //         country: {
-    //             value: '',
-    //             touched: false
-    //         },
-    //         password: {
-    //             value: '',
-    //             touched: false
-    //         },
-    //         repeatPassword: {
-    //             value: '',
-    //             touched: false
-    //         },
-    //     }
-    
-
-    updateEmail(email){
-        this.setState({
-            email: {
-                value: email,
-                touched: true
-            }
-        })
-    }
-
-    updatePassword(password){
-        this.setState({
-            password: {
-                value: password,
-                touched: true
-            }
-        })
-    }
 
     render(){
         return (
@@ -63,8 +11,8 @@ class RegistrationForm extends Component {
                         <label htmlFor='first'>First Name: </label>
                         <input 
                             type='text' 
-                            name='first'
-                            id='first'
+                            name='firstname'
+                            id='firstname'
                         />
                     </div>
 
@@ -72,8 +20,8 @@ class RegistrationForm extends Component {
                         <label htmlFor='last'>Last Name: </label>
                         <input 
                             type='text' 
-                            name='last'
-                            id='last'
+                            name='lastname'
+                            id='lastname'
                         />
                     </div>
 
@@ -83,7 +31,6 @@ class RegistrationForm extends Component {
                             type='email' 
                             name='email'
                             id='email'
-                            onChange={(e) => this.updateEmail(e.target.value)}
                         />
                     </div>
 
