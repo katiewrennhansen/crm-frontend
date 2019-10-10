@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './SelectAccountType.css'
+// import RegistrationForm from '../RegistrationAccountTypes/RegistrationForm'
 
 
 class SelectAccountType extends Component {
+
+
     render(){
         return (
             <div className='account-type-container'>

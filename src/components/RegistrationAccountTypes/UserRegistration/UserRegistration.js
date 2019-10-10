@@ -9,24 +9,39 @@ class UserRegistration extends Component {
         registerUser: {}
     }
 
+
+
     handleSubmit = (e) => {
         e.preventDefault();
-        const user = {
-            firstname: e.target.first.value,
-            lastname: e.target.last.value,
-            email: e.target.email.value,
-            phone: e.target.phone.value,
-            country: e.target.country.value,
-            password: e.target.password.value,
-            usertype: 'user'
+        const newUser = {
+            "user": {
+                "firstname": e.target.first.value,
+                "lastname": e.target.last.value,
+                "email": e.target.email.value,
+                "country": e.target.country.value,
+                "phone": e.target.phone.value,
+                "usertype": "user",
+                "company_id": 1,
+                "password": e.target.password.value,
+            }
         }
-        this.setState({
-            registerUser: user
+        const url = 'https://crmmia.herokuapp.com/api/users'
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(newUser),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        fetch(url, options)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
         })
         console.log('registered new user')
-        //make a POST req to back-end API with registration information
     }
-
 
 
     render(){

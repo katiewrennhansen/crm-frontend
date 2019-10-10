@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './Login.css'
+import axios from 'axios'
 
 class Login extends Component {
     constructor(props){
@@ -68,6 +69,31 @@ class Login extends Component {
         Email: ${email}
         Password: ${password}
         `)
+        const url = 'https://crmmia.herokuapp.com/api/users'
+
+        // fetch(url, {
+        //     method: 'POST',
+        //     body:  `${email}:${password}`
+
+        // }, 
+        // { withCredentials: true }
+        // )
+        // .then(res => {
+        //     console.log(res)
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        // })
+
+        axios.get(url)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+        
 
     }
 
