@@ -1,31 +1,28 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import './Login.css'
 
 class Login extends Component {
     constructor(props){
         super(props)
         this.state = {
-            email: {
-                value: '',
-                touched: false
-            },
-            usertype: 'user'
+            email: '',
+            usertype: 'user',
+            redirect: false,
+            authenticated: false
         }
+
     }
 
     updateEmail(email){
         this.setState({
-            email: {
-                value: email,
-                touched: true
-            }
+            email: email,
         })
     }
 
 
     validateEmail(){
-        const email = this.state.email.value.trim();
+        const email = this.state.email.trim();
         if(email.length < 3 || email.length > 40){
             console.log('email must be between 3 and 40 characters')
             return 'email must be between 3 and 40 characters'
@@ -53,28 +50,35 @@ class Login extends Component {
         fetch(url, options)
         .then(res => {
             console.log(res);
+            if(!res.ok){
+                throw new Error('user not authenticated')
+            }
+            this.props.isAuthenticated(true);
             return res.json();
         })
         .then(resJson => {
             console.log(resJson);
-            const usertype = resJson.usertype
-            if(this.state.usertype !== null){
-                this.props.history.push(`/${usertype}-home`); 
-            } 
-            return;
+            this.setState({
+                email: resJson.email,
+                usertype: resJson.usertype
+            })
         })
         .catch(err => {
             console.log(err)
         })
 
+        localStorage.setItem('email', this.state.email)
         // console.log(this.state.usertype)
         //Redirect newly registered users to login page
     }
 
+
         
 
     render(){
-
+        if(this.state.redirect === true) {
+            return <Redirect to='/user-home' />
+        }
         return (
             <div className='login-container'>
                 <h1>Enter your Login information</h1>

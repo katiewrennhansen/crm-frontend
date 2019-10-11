@@ -7,7 +7,8 @@ nav {
 
 .link,
 .login,
-.register {
+.register,
+.logout {
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -53,7 +54,8 @@ nav {
 }
 
 .login,
-.register {
+.register,
+.logout {
     border-radius: 5px;
     margin-top: 14px;
 }
@@ -69,14 +71,22 @@ nav {
     transition: 300ms linear 10ms;
 }
 
-.register {
+.register, 
+.logout {
     border: 2px solid green;
     padding: 6px 16px; 
     color: green;
 }
 
-.register:hover {
+.register:hover,
+.logout:hover {
     color: rgb(77, 154, 77);
     border: 2px solid rgb(77, 154, 77);
     transition: 300ms linear 10ms;
+}
+
+
+.logout {
+    margin: 5px 0;
+    font-size: 16px;
 }

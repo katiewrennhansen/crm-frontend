@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import WebpageHome from './components/webpages/WebpageHome/WebpageHome'
 import AboutPage from './components/webpages/AboutPage/AboutPage'
 import MainNav from './components/Headers/MainNav/MainNav'
@@ -14,14 +14,29 @@ import BrokerRegistration from './components/RegistrationAccountTypes/BrokerRegi
 import OwnerRegistration from './components/RegistrationAccountTypes/OwnerRegistration/OwnerRegistration'
 import UserHome from './components/portalpages/user/UserHome/UserHome'
 import './App.css'
-// import RegistrationForm from './components/RegistrationAccountTypes/RegistrationForm/RegistrationFrom';
+
+
+function AuthenticatedRoute({component: Component, authenticated, ...rest}) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => authenticated === true
+          ? <Component {...props} {...rest} />
+          : <Redirect to='/login' /> }
+    />
+  )
+}
+
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      usertype: ''
+      usertype: '',
+      authenticated: false
     }
+    this.isAuthenticated = this.isAuthenticated.bind(this)
+    this.componentWillMount = this.componentWillMount.bind(this)
   }
 
   handleUserType = (user) => {
@@ -31,10 +46,38 @@ class App extends Component {
     console.log(this.state.usertype)
   }
 
+  isAuthenticated = (value) => {
+    this.setState({
+      authenticated: value
+    })
+    console.log(this.state)
+  }
+
+  logout(){
+    console.log('logged out')
+    localStorage.clear()
+}
+
+  componentWillMount(){
+    const email = localStorage.getItem('email');
+    console.log(email)
+    if(email){
+      this.setState({
+        authenticated: true
+      })
+    } else {
+    this.setState({
+      authenticated: false
+    })
+    }
+    
+  }
+
+
   render() {
     return (
       <div className="App">
-        <MainNav />
+        <MainNav authenticated={this.state.authenticated} logout={this.logout} />
         <Switch>
           <Route 
             exact path='/'
@@ -50,8 +93,13 @@ class App extends Component {
           />
           <Route 
             path='/login'
-            component={Login}
+            render={(props) => {
+              return (
+                <Login isAuthenticated={this.isAuthenticated} />
+              )
+            }}
           /> 
+
           <Route 
             path='/forgot-password'
             component={ForgotPassword}
@@ -62,11 +110,6 @@ class App extends Component {
           />
           <Route 
             path='/select-account-type'
-            // render={() => {
-            //   return (
-            //   <SelectAccountType handleUserType={this.handleUserType} />
-            //   )
-            // }}
             component={SelectAccountType}
           />
           <Route 
@@ -81,17 +124,13 @@ class App extends Component {
             path='/register-owner'
             component={OwnerRegistration}
           />
-          {/* <Route 
-            path='/register' 
-            render={() => {
-              return (
-              <RegistrationForm usertype={this.state.usertype} />
-              )
-            }}
-          /> */}
           <Route 
             path='/user-home'
-            component={UserHome}
+            render={(props) => this.state.authenticated
+              ?
+              <UserHome />
+              :
+              <Redirect to='/login' /> }
           />
         </Switch>
        <Footer />
