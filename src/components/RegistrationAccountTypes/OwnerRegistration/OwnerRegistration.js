@@ -21,7 +21,7 @@ class OwnerRegistration extends Component {
             }
         }
         //call API to post registered users
-        const url = 'https://crmmia.herokuapp.com/api/users'
+        const url = 'https://crmmia-api.herokuapp.com/api/users'
         const options = {
             method: 'POST',
             body: JSON.stringify(newUser),
@@ -43,7 +43,7 @@ class OwnerRegistration extends Component {
     }
 
     render(){
-        console.log(this.state.registerUser)
+        // console.log(this.state.registerUser)
         return (
             <div className='owner-registration-container'>
                 <h1>Create an owner account to start the selling process</h1>

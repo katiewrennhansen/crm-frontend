@@ -13,13 +13,10 @@ class SelectAccountType extends Component {
                 <div className='account-type-button-container'>
                     <h2>Select Account Type</h2>
                     <Link to='/register-user' style={{ textDecoration: 'none'}}>
-                        <button className='account-type-button'>Buyer</button>
-                    </Link>
-                    <Link to='/register-broker' style={{ textDecoration: 'none'}}>
-                        <button className='account-type-button'>Broker</button>
+                        <button className='account-type-button'>I'm Buying</button>
                     </Link>
                     <Link to='/register-owner' style={{ textDecoration: 'none'}}>
-                        <button className='account-type-button'>Owner</button>
+                        <button className='account-type-button'>I'm Selling</button>
                     </Link>
                 </div>
             </div>

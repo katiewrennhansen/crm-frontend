@@ -21,7 +21,7 @@ class UserRegistration extends Component {
             }
         }
         //call API to post registered users
-        const url = 'https://crmmia.herokuapp.com/api/users'
+        const url = 'https://crmmia-api.herokuapp.com/api/users'
         const options = {
             method: 'POST',
             body: JSON.stringify(newUser),

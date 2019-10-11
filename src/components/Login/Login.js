@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './Login.css'
-import axios from 'axios'
 
 class Login extends Component {
     constructor(props){
@@ -11,10 +10,7 @@ class Login extends Component {
                 value: '',
                 touched: false
             },
-            password: {
-                value: '',
-                touched: false
-            }
+            usertype: 'user'
         }
     }
 
@@ -27,81 +23,63 @@ class Login extends Component {
         })
     }
 
-    updatePassword(password){
-        this.setState({
-            password: {
-                value: password,
-                touched: true
-            }
-        })
+
+    validateEmail(){
+        const email = this.state.email.value.trim();
+        if(email.length < 3 || email.length > 40){
+            console.log('email must be between 3 and 40 characters')
+            return 'email must be between 3 and 40 characters'
+            
+        }
     }
 
-    // validateEmail(){
-    //     const email = this.state.email.value.trim();
-    //     if(email.length < 3 || email.length > 40){
-    //         console.log('email must be between 3 and 40 characters')
-    //         return 'email must be between 3 and 40 characters'
-            
-    //     }
-    // }
-
-    // validatePassword(){
-    //     const password = this.state.password.value.trim();
-    //     if(password.length === 0){
-    //         console.log('password is required')
-    //         return 'password is required'
-    //     }
-    //     else if(password.length < 3 || password.length > 50){
-    //         console.log('password must be between 3 and 50 characters')
-    //         return 'password must be between 3 and 50 characters'
-    //     } else if(!password.match(/[0-9]/)){
-    //         console.log('password must contain at least one number')
-    //         return 'password must contain at least one number'
-    //     }
-    // }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('submitted')
-        const email = this.state.email.value;
-        const password = this.state.password.value;
-        console.log(`
-        Email: ${email}
-        Password: ${password}
-        `)
-        const url = 'https://crmmia.herokuapp.com/api/users'
-
-        // fetch(url, {
-        //     method: 'POST',
-        //     body:  `${email}:${password}`
-
-        // }, 
-        // { withCredentials: true }
-        // )
-        // .then(res => {
-        //     console.log(res)
-        // })
-        // .catch(err => {
-        //     console.log(err)
-        // })
-
-        axios.get(url)
+        //define user data object
+        const authUser = {
+            "email": e.target.email.value,
+            "password": e.target.password.value
+        }
+        //call API to post registered users
+        const url = 'https://crmmia-api.herokuapp.com/api/users/login'
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(authUser),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        fetch(url, options)
         .then(res => {
-            console.log(res)
+            console.log(res);
+            return res.json();
+        })
+        .then(resJson => {
+            console.log(resJson);
+            const usertype = resJson.usertype
+            if(this.state.usertype !== null){
+                this.props.history.push(`/${usertype}-home`); 
+            } 
+            return;
         })
         .catch(err => {
             console.log(err)
         })
 
-        
-
+        // console.log(this.state.usertype)
+        //Redirect newly registered users to login page
     }
 
+        
+
     render(){
+
         return (
             <div className='login-container'>
                 <h1>Enter your Login information</h1>
                 <div className='margin-container'>
+                    <div className='error-message'></div>
                     <form onSubmit={(e) => this.handleSubmit(e)}>
                         <div className='form-group'>
                             <label htmlFor='email'>Email: </label>
@@ -118,7 +96,6 @@ class Login extends Component {
                                 type='password' 
                                 name='password'
                                 id='password'
-                                onChange={(e) => this.updatePassword(e.target.value)}
                             />
                         </div>
                         <div className='form-group'>

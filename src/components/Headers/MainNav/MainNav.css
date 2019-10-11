@@ -2,7 +2,7 @@
 
 nav {
     display: grid;
-    grid-template-columns: repeat(24, 1fr);
+    /* grid-template-columns: repeat(4, 1fr), 100px, repeat(19, 1fr); */
 }
 
 .link,
@@ -15,7 +15,7 @@ nav {
     display: grid;
     align-content: center;
     font-family: 'Work Sans', sans-serif;
-    grid-column: 3 / 5;
+    grid-column: 3 / 4;
 }
 
 .logo h2 {
@@ -48,7 +48,7 @@ nav {
 .login-nav {
     display: grid;
     grid-template-columns: 92px 95px;
-    grid-column: 19 / 23;
+    grid-column: 20 / 23;
     grid-gap: 10px;
 }
 

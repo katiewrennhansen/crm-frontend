@@ -9,7 +9,7 @@ class WebpageHome extends Component {
             <div className='webpage-home'>
                 <div className='background-image'>
                     <div className='search-container'>
-                        <HomePageSearch />
+                        <HomePageSearch history={this.props.history}/>
                     </div>
                 </div>
                 <div className='featured-properties'>

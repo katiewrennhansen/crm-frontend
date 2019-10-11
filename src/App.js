@@ -51,7 +51,7 @@ class App extends Component {
           <Route 
             path='/login'
             component={Login}
-          />
+          /> 
           <Route 
             path='/forgot-password'
             component={ForgotPassword}
@@ -94,7 +94,7 @@ class App extends Component {
             component={UserHome}
           />
         </Switch>
-        <Footer />
+       <Footer />
       </div>
     );
   }

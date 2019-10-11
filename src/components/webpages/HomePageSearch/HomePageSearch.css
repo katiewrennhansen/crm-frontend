@@ -3,10 +3,7 @@
 .home-page-search{
     background: rgba(0, 0, 0, 0.7);
     border-radius: 5px;
-    padding: 30px;
-    position: absolute;
-    top: 30%;
-    left: 20%;  
+    padding: 20px 30px;
 }
 
 .home-page-search h2 {
@@ -24,12 +21,42 @@
 
 .home-page-search input[type='text'],
 .home-page-search input[type='number'],
+.home-page-search input[type='submit'],
 .home-page-search select {
-    margin: 0 5px;
-    padding: 5px 12px;
-    border-radius: 3px;
+    margin: 0 2px;
+    padding: 10px 12px;
+    border-radius: 2px;
+    border: none;
+    font-size: 16px;
+
+}
+
+select {
+    margin: 50px;
+    width: 160px;
+    padding: 5px 35px 5px 5px;
+    height: 38px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(https://image.flaticon.com/icons/svg/32/32195.svg) 94% / 10% no-repeat #fff;
 }
 
 .home-page-search input[type='number']{
     width: 100px;
+}
+
+.home-page-search input[type='submit']{
+    background: green;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 0.5px solid green;
+    border-radius: 5px;
+}
+
+.home-page-search input[type='submit']:hover {
+    background: rgb(77, 154, 77);
+    border: 0.5px solid rgb(77, 154, 77);
+    transition: 300ms linear 10ms;
 }
