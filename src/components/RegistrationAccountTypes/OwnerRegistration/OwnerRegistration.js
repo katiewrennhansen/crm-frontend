@@ -5,25 +5,41 @@ import './OwnerRegistration.css'
 
 class OwnerRegistration extends Component {
 
-    state = {
-        registerUser: {}
-    }
-
     handleSubmit = (e) => {
         e.preventDefault();
-        const owner = {
-            firstname: e.target.first.value,
-            lastname: e.target.last.value,
-            email: e.target.email.value,
-            phone: e.target.phone.value,
-            country: e.target.country.value,
-            password: e.target.password.value,
-            usertype: 'owner'
+        //define user data object
+        const newUser = {
+            "user": {
+                "firstname": e.target.firstname.value,
+                "lastname": e.target.lastname.value,
+                "email": e.target.email.value,
+                "country": e.target.country.value,
+                "phone": e.target.phone.value,
+                "usertype": "owner",
+                "company_id": 1,
+                "password": e.target.password.value,
+            }
         }
-        this.setState({
-            registerUser: owner
+        //call API to post registered users
+        const url = 'https://crmmia.herokuapp.com/api/users'
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(newUser),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        fetch(url, options)
+        .then(res => {
+            console.log(res)
         })
-        console.log('owner registered')
+        .catch(err => {
+            console.log(err)
+        })
+
+        console.log('registered new user')
+        //Redirect newly registered users to login page
+        this.props.history.push('/login');
     }
 
     render(){

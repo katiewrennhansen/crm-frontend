@@ -2,30 +2,44 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import RegistrationForm from '../RegistrationForm/RegistrationFrom';
 import './BrokerRegistration.css'
-// import RegistrationContext from '../../../RegistrationContext'
 
 class BrokerRegistration extends Component {
-    // static contextType = RegistrationContext;
-
-    state = {
-        registerUser: {}
-    }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const broker = {
-            firstname: e.target.first.value,
-            lastname: e.target.last.value,
-            email: e.target.email.value,
-            phone: e.target.phone.value,
-            country: e.target.country.value,
-            password: e.target.password.value,
-            usertype: 'broker'
+        //define user data object
+        const newUser = {
+            "user": {
+                "firstname": e.target.firstname.value,
+                "lastname": e.target.lastname.value,
+                "email": e.target.email.value,
+                "country": e.target.country.value,
+                "phone": e.target.phone.value,
+                "usertype": "broker",
+                "company_id": 1,
+                "password": e.target.password.value,
+            }
         }
-        this.setState({
-            registerUser: broker
+        //call API to post registered users
+        const url = 'https://crmmia.herokuapp.com/api/users'
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(newUser),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        fetch(url, options)
+        .then(res => {
+            console.log(res)
         })
-        console.log(`broker registered`)
+        .catch(err => {
+            console.log(err)
+        })
+
+        console.log('registered new user')
+        //Redirect newly registered users to login page
+        this.props.history.push('/login');
     }
 
     render(){

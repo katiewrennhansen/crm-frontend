@@ -1,29 +1,13 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import RegistrationForm from '../RegistrationForm/RegistrationFrom'
 import './UserRegistration.css'
 
 class UserRegistration extends Component {
-  
-    // state = {
-    //     user: {}
-    // }
-    
-    
-
-    // updateState(e){
-    //     const { name, value } = e.target
-    //     this.setState({
-    //         user: {
-    //             [name]: value,
-    //         }
-            
-    //     })
-    // }
 
     handleSubmit = (e) => {
         e.preventDefault();
-
+        //define user data object
         const newUser = {
             "user": {
                 "firstname": e.target.firstname.value,
@@ -36,8 +20,7 @@ class UserRegistration extends Component {
                 "password": e.target.password.value,
             }
         }
-
-        //THIS IS IMPORTANT
+        //call API to post registered users
         const url = 'https://crmmia.herokuapp.com/api/users'
         const options = {
             method: 'POST',
@@ -55,7 +38,7 @@ class UserRegistration extends Component {
         })
 
         console.log('registered new user')
-        //Redirect to new
+        //Redirect newly registered users to login page
         this.props.history.push('/login');
     }
 

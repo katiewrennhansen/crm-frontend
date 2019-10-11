@@ -13,8 +13,6 @@ class ChangePassword extends Component {
         }
     }
 
-
-
     updatePassword(password){
         this.setState({
             password: {

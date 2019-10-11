@@ -7,12 +7,12 @@ class MainNav extends Component {
         return (
             <nav>
                 <div className='logo'>
-                <Link to="/" style={{color: '#343434', textDecoration: 'none'}}>
-                    <h2>Apartment<span className='color'>Chile</span></h2>
-                </Link>
+                    <Link to="/" style={{color: '#343434', textDecoration: 'none'}}>
+                        <h2>Apartment<span className='color'>Chile</span></h2>
+                    </Link>
                 </div>
                 <div className='collapsed-content'>
-                    <div className='main-nav'>
+                    {/* <div className='main-nav'> */}
                         <Link to="/" style={{textDecoration: 'none'}}>
                             <p className='link'>Home</p>
                         </Link>
@@ -36,7 +36,7 @@ class MainNav extends Component {
                         <Link to="/select-account-type" style={{textDecoration: 'none'}}>
                             <p className='register'>Register</p>
                         </Link>
-                    </div>
+                    {/* </div> */}
                 </div>
             </nav>
         )
