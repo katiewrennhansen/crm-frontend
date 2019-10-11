@@ -4,7 +4,9 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-.webpage-home h2 {
+.featured-properties h2,
+.services h2,
+.company h2 {
     font-size: 30px;
 }
 
@@ -24,6 +26,11 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.search-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .services {

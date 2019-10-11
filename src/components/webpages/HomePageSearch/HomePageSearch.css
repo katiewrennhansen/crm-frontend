@@ -1,19 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans:300&display=swap');
 
 .home-page-search{
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
     padding: 30px;
     position: absolute;
-    top: 160px;
-    left: 100px;  
+    top: 30%;
+    left: 20%;  
 }
 
 .home-page-search h2 {
     color: white;
     font-family: 'Work Sans', sans-serif;
     text-align: center;
-    font-size: 40px;
-    margin-top: 0;
+    font-size: 50px;
+    margin: 0 0 10px;
+    text-shadow: 2px 2px 5px black;
 }
 
 .home-page-search form {
@@ -25,6 +27,7 @@
 .home-page-search select {
     margin: 0 5px;
     padding: 5px 12px;
+    border-radius: 3px;
 }
 
 .home-page-search input[type='number']{

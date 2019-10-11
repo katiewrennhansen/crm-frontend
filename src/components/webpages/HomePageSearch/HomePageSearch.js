@@ -6,7 +6,7 @@ class HomePageSearch extends Component {
     render(){
         return (
             <div className='home-page-search'>
-                <h2>Find Your Next Home</h2>
+                <h2 id='hp-search'>Find Your Next Home</h2>
                 <form>
                     <select className='rent'>
                         <option value='en arriendo'>En Arriendo</option>

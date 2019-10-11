@@ -29,7 +29,11 @@
 
 .footer-nav {
     flex: 1;
-    text-align: center;
+}
+
+.footer-nav-links {
+    display: grid;
+    justify-content: center;
 }
 
 .footer-nav-links p {
@@ -37,5 +41,5 @@
 }
 
 .footer-nav-links p:hover {
-    color: lightgreen;
+    color: green;
 }
