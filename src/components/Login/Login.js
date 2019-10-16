@@ -48,36 +48,42 @@ class Login extends Component {
                 'Access-Control-Allow-Origin': '*'
             }
         }
+        //fetch data from /users/login enpoint
         fetch(url, options)
         .then(res => {
             console.log(res);
+            //throw error if user is not authenticated
             if(!res.ok){
-                throw new Error('user not authenticated')
+                throw new Error('user not authenticated');
             }
+            //set App.js authentication state to true
             this.props.isAuthenticated(true);
             return res.json();
         })
         .then(resJson => {
             console.log(resJson);
+            //set Login.js authentication state to true
+            this.props.handleUserType(resJson.usertype);
             this.setState({
                 email: resJson.email,
                 usertype: resJson.usertype,
                 authenticated: true
             })
+            if (this.state.authenticated){
+                localStorage.setItem('email', this.state.email)
+            }
         })
         .catch(err => {
             console.log(err)
         })
-
-        localStorage.setItem('email', this.state.email)
-        // console.log(this.state.usertype)
-        //Redirect newly registered users to login page
+      
     }
 
 
         
 
     render(){
+        //redirect authenticated user to their homepage
         if(this.state.authenticated && this.state.usertype === 'user') {
             return <Redirect to='/user-home' />
         } else if (this.state.authenticated && this.state.userype === 'admin'){

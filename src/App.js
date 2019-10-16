@@ -14,19 +14,18 @@ import BrokerRegistration from './components/RegistrationAccountTypes/BrokerRegi
 import OwnerRegistration from './components/RegistrationAccountTypes/OwnerRegistration/OwnerRegistration'
 import UserHome from './components/portalpages/user/UserHome/UserHome'
 import './App.css'
-import { is } from '@babel/types';
 
 
-function AuthenticatedRoute({component: Component, authenticated, ...rest}) {
-  return (
-    <Route
-      {...rest}
-      render={(props) => authenticated === true
-          ? <Component {...props} {...rest} />
-          : <Redirect to='/login' /> }
-    />
-  )
-}
+// function AuthenticatedRoute({component: Component, authenticated, ...rest}) {
+//   return (
+//     <Route
+//       {...rest}
+//       render={(props) => authenticated === true
+//           ? <Component {...props} {...rest} />
+//           : <Redirect to='/login' /> }
+//     />
+//   )
+// }
 
 
 class App extends Component {
@@ -101,7 +100,7 @@ class App extends Component {
             path='/login'
             render={(props) => {
               return (
-                <Login isAuthenticated={this.isAuthenticated} />
+                <Login isAuthenticated={this.isAuthenticated} handleUserType={this.handleUserType} />
               )
             }}
           /> 
@@ -132,8 +131,23 @@ class App extends Component {
           />
           <Route 
             path='/user-home'
-            render={(props) => this.state.authenticated ? <UserHome /> : <Redirect to='/login' /> }
+            render={(props) => {
+              if(this.state.authenticated && this.state.usertype === 'user') {
+                return ( <UserHome /> )
+              } else {
+                return ( <Redirect to='/login' /> )
+              }}}
           />
+          {/* <Route
+            path='dashboard'
+            render={(props => {
+              if(this.state.authenticated && this.usertype === 'admin'){
+                return ( <AdminDashboard /> )
+              } else {
+                return ( <Redirect to='login' /> )
+              }
+            })}
+          /> */}
         </Switch>
        <Footer />
       </div>
