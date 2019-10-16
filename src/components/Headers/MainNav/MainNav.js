@@ -45,11 +45,16 @@ class MainNav extends Component {
                 <div className='login-nav'>
                     {(this.props.authenticated) 
                         ?
-                        <button 
-                            className='logout' 
-                            onClick={this.props.logout}
-                            >Logout
-                        </button>
+                        <>
+                            <Link to='/user-home' style={{textDecoration: 'none'}}>
+                                <p className='account'>Account</p>
+                            </Link>
+                            <button 
+                                className='logout' 
+                                onClick={this.props.logout}
+                                >Logout
+                            </button>
+                        </>
                         :
                         <>
                             <Link to="/login" style={{textDecoration: 'none'}}>

@@ -14,6 +14,7 @@ import BrokerRegistration from './components/RegistrationAccountTypes/BrokerRegi
 import OwnerRegistration from './components/RegistrationAccountTypes/OwnerRegistration/OwnerRegistration'
 import UserHome from './components/portalpages/user/UserHome/UserHome'
 import './App.css'
+import { is } from '@babel/types';
 
 
 function AuthenticatedRoute({component: Component, authenticated, ...rest}) {
@@ -37,6 +38,7 @@ class App extends Component {
     }
     this.isAuthenticated = this.isAuthenticated.bind(this)
     this.componentWillMount = this.componentWillMount.bind(this)
+    this.logout = this.logout.bind(this)
   }
 
   handleUserType = (user) => {
@@ -53,9 +55,13 @@ class App extends Component {
     console.log(this.state)
   }
 
+
+
   logout(){
     console.log('logged out')
     localStorage.clear()
+    this.isAuthenticated(false);
+    return ( <Redirect to='/login' /> )
 }
 
   componentWillMount(){
@@ -66,9 +72,9 @@ class App extends Component {
         authenticated: true
       })
     } else {
-    this.setState({
-      authenticated: false
-    })
+      this.setState({
+        authenticated: false
+      })
     }
     
   }
@@ -126,11 +132,7 @@ class App extends Component {
           />
           <Route 
             path='/user-home'
-            render={(props) => this.state.authenticated
-              ?
-              <UserHome />
-              :
-              <Redirect to='/login' /> }
+            render={(props) => this.state.authenticated ? <UserHome /> : <Redirect to='/login' /> }
           />
         </Switch>
        <Footer />

@@ -45,7 +45,6 @@ class Login extends Component {
             body: JSON.stringify(authUser),
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
             }
         }
         fetch(url, options)
@@ -61,7 +60,8 @@ class Login extends Component {
             console.log(resJson);
             this.setState({
                 email: resJson.email,
-                usertype: resJson.usertype
+                usertype: resJson.usertype,
+                authenticated: true
             })
         })
         .catch(err => {
@@ -77,8 +77,10 @@ class Login extends Component {
         
 
     render(){
-        if(this.state.redirect === true) {
+        if(this.state.authenticated && this.state.usertype === 'user') {
             return <Redirect to='/user-home' />
+        } else if (this.state.authenticated && this.state.userype === 'admin'){
+            return <Redirect to='admin-home' />
         }
         return (
             <div className='login-container'>
