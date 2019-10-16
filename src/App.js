@@ -75,15 +75,66 @@ class App extends Component {
         authenticated: false
       })
     }
-    
   }
+
+  // navLoad(){
+  //   if(this.state.authenticated){
+  //     return (
+  //       <AdminNav />
+  //     )
+  //   } else {
+  //     return (
+  //       <MainNav 
+  //             authenticated={this.state.authenticated} 
+  //             logout={this.logout} 
+  //         />
+  //     )
+  //   }
+  // }
 
 
   render() {
     return (
       <div className="App">
-        <MainNav authenticated={this.state.authenticated} logout={this.logout} />
+         <MainNav 
+              authenticated={this.state.authenticated} 
+              logout={this.logout} 
+          />
+          {/* {this.navLoad()} */}
         <Switch>
+          {/* <Route 
+            exact path='/'
+            render={(props) => {
+              return (
+                <WebpageHome 
+                  authenticated={this.state.authenticated}
+                  logout={this.logout}
+                />
+              )
+            }}
+          />
+          <Route 
+            exact path='/about'
+            render={(props) => {
+              return (
+                <AboutPage
+                  authenticated={this.state.authenticated}
+                  logout={this.logout}
+                />
+              )
+            }}
+          />
+          <Route 
+            exact path='/services'
+            render={(props) => {
+              return (
+                <ServicesPage
+                  authenticated={this.state.authenticated}
+                  logout={this.logout}
+                />
+              )
+            }}
+          /> */}
           <Route 
             exact path='/'
             component={WebpageHome}
@@ -103,8 +154,7 @@ class App extends Component {
                 <Login isAuthenticated={this.isAuthenticated} handleUserType={this.handleUserType} />
               )
             }}
-          /> 
-
+          />
           <Route 
             path='/forgot-password'
             component={ForgotPassword}
@@ -132,8 +182,14 @@ class App extends Component {
           <Route 
             path='/user-home'
             render={(props) => {
-              if(this.state.authenticated && this.state.usertype === 'user') {
-                return ( <UserHome /> )
+              if(this.state.authenticated) {
+                // && this.state.usertype === 'user'
+                return ( 
+                <UserHome 
+                  authenticated={this.state.authenticated}
+                  logout={this.logout}
+                />
+                )
               } else {
                 return ( <Redirect to='/login' /> )
               }}}
@@ -142,7 +198,7 @@ class App extends Component {
             path='dashboard'
             render={(props => {
               if(this.state.authenticated && this.usertype === 'admin'){
-                return ( <AdminDashboard /> )
+                return ( </> )
               } else {
                 return ( <Redirect to='login' /> )
               }

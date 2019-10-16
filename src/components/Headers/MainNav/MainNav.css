@@ -55,7 +55,8 @@ nav {
 
 .login,
 .register,
-.logout {
+.logout,
+.account {
     border-radius: 5px;
     margin-top: 14px;
 }
@@ -66,7 +67,7 @@ nav {
     color: white;
 }
 
-.login:hover {
+.login:hover{
     background: rgb(77, 154, 77);
     transition: 300ms linear 10ms;
 }

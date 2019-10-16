@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import './ServicesPage.css'
+import MainNav from '../../Headers/MainNav/MainNav'
 
 class ServicesPage extends Component {
     render(){
         return (
+            <>
+            {/* <MainNav 
+                authenticated={this.props.authenticated} 
+                logout={this.props.logout} 
+            /> */}
             <div className='services-page'>
                 <div className='services-background-image-container'>
                 <h1>Servicios</h1>
@@ -33,7 +39,7 @@ class ServicesPage extends Component {
                     </div>
                 </div>
             </div>
-            
+            </>
         )
     }
 }

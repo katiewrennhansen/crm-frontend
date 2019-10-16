@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
+import MainNav from '../Headers/MainNav/MainNav'
+
 import './Login.css'
 
 class Login extends Component {
@@ -90,6 +92,11 @@ class Login extends Component {
             return <Redirect to='admin-home' />
         }
         return (
+            <>
+            {/* <MainNav 
+                authenticated={this.props.authenticated} 
+                logout={this.props.logout} 
+            /> */}
             <div className='login-container'>
                 <h1>Enter your Login information</h1>
                 <div className='margin-container'>
@@ -132,6 +139,7 @@ class Login extends Component {
                     </p>
                 </div>
             </div>
+            </>
         )
     }
 }

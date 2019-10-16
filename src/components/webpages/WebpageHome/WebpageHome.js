@@ -2,10 +2,16 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom' 
 import HomePageSearch from '../HomePageSearch/HomePageSearch'
 import './WebpageHome.css'
+import MainNav from '../../Headers/MainNav/MainNav'
 
 class WebpageHome extends Component {
     render(){
         return (
+            <>
+            {/* <MainNav 
+                authenticated={this.props.authenticated} 
+                logout={this.props.logout} 
+            /> */}
             <div className='webpage-home'>
                 <div className='background-image'>
                     <div className='search-container'>
@@ -48,6 +54,7 @@ class WebpageHome extends Component {
                     </div>
                 </div>
             </div>
+            </>
         )
     }
 }
