@@ -45,6 +45,7 @@ class Login extends Component {
             body: JSON.stringify(authUser),
             headers: {
                 'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": '*'
             }
         }
         fetch(url, options)
