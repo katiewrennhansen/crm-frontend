@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans:300&display=swap');
+
+
+.dash-sidebar-container {
+    background-image: linear-gradient( to right, #343434 85%, #292929);
+    color: white;
+    height: 100vh;
+    font-family: 'Open Sans',sans-serif;
+}
+
+.admin-info {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr, 4fr;
+    align-items: center;
+}
+
+.admin-info:first-child{
+    grid-column: 1 / 2;
+}
+
+
+.dash-sidebar-container h1 {
+    margin: 0;
+    font-family: 'Work Sans', sans-serif;
+    grid-column: 2 / 3;
+}
+
+.dash-nav-ul {
+    list-style: none;
+}
+
+.dash-nav-link {
+    display: grid;
+    text-decoration: none;
+    grid-template-columns: 1fr, 4fr;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+
+}
+
+.dash-nav-link:first-child {
+    grid-column: 1 / 2;
+}
+
+.dash-nav-link p {
+    grid-column: 2 / 5;
+    padding-left: 20px;
+}

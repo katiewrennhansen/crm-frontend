@@ -14,10 +14,5 @@
 .dash-sidebar {
     grid-column: 1 / 4;
     grid-row: 1 / -1;
-    border: 1px solid black;
 }
 
-.dash-home {
-    border: 1px solid black;
-
-}
