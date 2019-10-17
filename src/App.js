@@ -144,6 +144,7 @@ class App extends Component {
             render={(props) => {
               return (
                 <Login 
+                  history={props.history}
                   isAuthenticated={this.isAuthenticated} 
                   handleUserType={this.handleUserType} 
                 />

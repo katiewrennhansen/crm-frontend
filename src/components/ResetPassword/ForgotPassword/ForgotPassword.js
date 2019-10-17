@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './ForgotPassword.css'
-import EmailInput from '../../Login/LoginComponents/EmailInput'
-import LoginButton from '../../Login/LoginComponents/LoginButton'
+import SubmitButton from '../../Login/LoginComponents/SubmitButton'
+import TextInput from '../../Login/LoginComponents/TextInput'
 
 class ForgotPassword extends Component {
     constructor(props){
         super(props)
         this.state = {
             email: {
-                value: '',
-                touched: false
+                value: ''
             }
         }
     }
@@ -18,17 +17,7 @@ class ForgotPassword extends Component {
     updateEmail(email){
         this.setState({
             email: {
-                value: email,
-                touched: true
-            }
-        })
-    }
-
-    updatePassword(password){
-        this.setState({
-            password: {
-                value: password,
-                touched: true
+                value: email
             }
         })
     }
@@ -41,7 +30,6 @@ class ForgotPassword extends Component {
             
     //     }
     // }
-
 
 
     handleSubmit = (e) => {
@@ -62,12 +50,16 @@ class ForgotPassword extends Component {
                     <form onSubmit={(e) => this.handleSubmit(e)}>
                         <div className='form-group'>
                             <label htmlFor='email'></label>
-                            <EmailInput
+                            <TextInput
+                                id='email'
+                                type='email'
+                                label='Email'
+                                name='email'
                                 onChange={(e) => this.updateEmail(e.target.value)}
                             />
                         </div>
                         <div className='form-group'>
-                            <LoginButton 
+                            <SubmitButton 
                                 text="Send password reset"
                             />
                         </div>
@@ -75,7 +67,7 @@ class ForgotPassword extends Component {
                     <div className='password-controls'>
                         <p>
                             Don't have an account?&nbsp;
-                            <Link to='/select-account-type' style={{color: 'green'}}>
+                            <Link to='/register' style={{color: 'green'}}>
                                 Sign up now!
                             </Link>
                         </p>

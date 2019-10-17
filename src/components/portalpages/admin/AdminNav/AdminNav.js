@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
  
-class MainNav extends Component {
+class AdminNav extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -18,7 +18,7 @@ class MainNav extends Component {
         return (
             <nav>
                 <div className='login-nav'>
-                    <Link to='/user-home' style={{textDecoration: 'none'}}>
+                    <Link to='/dashboard' style={{textDecoration: 'none'}}>
                         <p className='account'>Account</p>
                     </Link>
                     <button 
@@ -32,4 +32,4 @@ class MainNav extends Component {
     }
 }
 
-export default MainNav
+export default AdminNav

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './RegistrationForm.css'
-import LoginButton from '../../Login/LoginComponents/LoginButton'
+import SubmitButton from '../../Login/LoginComponents/SubmitButton'
 import TextInput from '../../Login/LoginComponents/TextInput'
 
 class RegistrationForm extends Component {
@@ -85,7 +85,7 @@ class RegistrationForm extends Component {
                     </div>
 
                     <div className='form-group'>
-                        <LoginButton text='Create account' />
+                        <SubmitButton text='Create account' />
                     </div>
                 </form>
             </div>

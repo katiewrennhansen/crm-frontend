@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './ChangePassword.css'
+import TextInput from '../../Login/LoginComponents/TextInput'
+import SubmitButton from '../../Login/LoginComponents/SubmitButton'
 
 class ChangePassword extends Component {
     constructor(props){
@@ -44,7 +46,6 @@ class ChangePassword extends Component {
         console.log(`
         Password: ${password}
         `)
-
     }
 
     render(){
@@ -54,31 +55,34 @@ class ChangePassword extends Component {
                 <div className='margin-container'>
                     <form onSubmit={(e) => this.handleSubmit(e)}>
                         <div className='form-group'>
-                            <label htmlFor="password">Password: </label>
-                            <input 
+                            <label htmlFor="password"></label>
+                            <TextInput
                                 type='password' 
                                 name='password'
                                 id='password'
+                                label="New Password"
                                 onChange={(e) => this.updatePassword(e.target.value)}
                             />
                         </div>
                         <div className='form-group'>
-                            <label htmlFor="repeat-password">Repeat Password: </label>
-                            <input 
+                            <label htmlFor="repeat-password"></label>
+                            <TextInput
                                 type='password' 
-                                name='repeat-password'
-                                id='repeat-password'
+                                name='repeatPassword'
+                                id='repeatPassword'
+                                label="Repeat New Password"
+                                onChange={(e) => this.updatePassword(e.target.value)}
                             />
                         </div>
                         <div className='form-group'>
-                            <input 
-                                type='submit'
+                            <SubmitButton 
+                                text='Reset Password'
                             />
                         </div>
                     </form>
                     <p>
                         Don't have an account?&nbsp;
-                        <Link to='/select-account-type' style={{color: 'lightgreen'}}>
+                        <Link to='/register' style={{color: 'green'}}>
                             Sign up now!
                         </Link>
                     </p>

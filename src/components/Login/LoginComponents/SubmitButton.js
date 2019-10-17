@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-export default function LoginButton(props) {
+export default function SubmitButton(props) {
     const classes = useStyles();
        
     return (

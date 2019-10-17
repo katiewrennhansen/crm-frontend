@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import './Login.css'
-import LoginButton from './LoginComponents/LoginButton'
+import SubmitButton from './LoginComponents/SubmitButton'
 import TextInput from './LoginComponents/TextInput'
 
 
@@ -93,16 +93,15 @@ class Login extends Component {
         
 
     render(){
-        //redirect authenticated user to their homepage
-        if(this.state.authenticated && this.state.usertype === 'user') {
-            return <Redirect to='/user-home' />
-        }
-        if (this.state.authenticated && this.state.userype === 'admin'){
+        // redirect authenticated user to their homepage
+        if(this.state.usertype === 'admin' && this.state.authenticated) {
             return <Redirect to='/dashboard' />
         }
+        if(this.state.userype === 'user' && this.state.authenticated) {
+            return <Redirect to='/user-home' />
+        }
+
         return (
-            <>
-      
             <div className='login-container'>
                 <h1>Enter your Login information</h1>
                 <div className='margin-container'>
@@ -131,7 +130,7 @@ class Login extends Component {
                             />
                         </div>
                         <div className='form-group'>
-                            <LoginButton
+                            <SubmitButton
                                 text='Log In'
                             />
                         </div>
@@ -153,7 +152,6 @@ class Login extends Component {
                 </div>
                 
             </div>
-            </>
         )
     }
 }
