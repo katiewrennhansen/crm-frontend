@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import './AdminNav.css'
+import LogoutButton from '../../../Login/LoginComponents/LogoutButton'
  
 class AdminNav extends Component {
     constructor(props){
@@ -16,18 +18,19 @@ class AdminNav extends Component {
 
     render() {
         return (
-            <nav>
-                <div className='login-nav'>
-                    <Link to='/dashboard' style={{textDecoration: 'none'}}>
+            <div className='dash-header'>
+                <h1>Dashboard</h1>
+                <nav className='dashboard-nav'>
+                    <Link className='account-nav-link' to='/dashboard' style={{textDecoration: 'none'}}>
                         <p className='account'>Account</p>
                     </Link>
-                    <button 
-                        className='logout' 
-                        onClick={this.props.logout}
-                        >Logout
-                    </button>
-                </div>                    
-            </nav>
+                    <LogoutButton 
+                        className='dash-nav-logout' 
+                        text='logout'
+                        handleLogout={this.props.logout}
+                    />               
+                </nav>
+            </div>
         )
     }
 }

@@ -7,7 +7,7 @@ class MainNav extends Component {
         super(props)
         this.state = {
             email: '',
-            usertype: 'user',
+            usertype: '',
             redirect: false,
             authenticated: false
         }
@@ -46,7 +46,7 @@ class MainNav extends Component {
                     {(this.props.authenticated) 
                         ?
                         <>
-                            <Link to='/user-home' style={{textDecoration: 'none'}}>
+                            <Link to='/dashboard' style={{textDecoration: 'none'}}>
                                 <p className='account'>Account</p>
                             </Link>
                             <button 

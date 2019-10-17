@@ -1,0 +1,21 @@
+.dash-header {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    color: #343434;
+}
+
+.dash-header h1 {
+    padding-left: 40px;
+}
+
+.dashboard-nav {
+    grid-column: 5 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, 80px);
+    align-content: center;
+    justify-content: center;
+}
+.account {
+    color: #343434;
+    padding-right: 20px;
+}

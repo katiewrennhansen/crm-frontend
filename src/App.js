@@ -195,10 +195,6 @@ class App extends Component {
                 return ( <Redirect to='/login' /> )
               }}}
           />
-          {/* <Route
-            path='/dashboard'
-            component={AdminHome}
-          /> */}
         </Switch>
       </div>
     );

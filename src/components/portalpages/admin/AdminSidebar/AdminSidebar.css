@@ -11,7 +11,7 @@
 .admin-info {
     padding: 30px;
     display: grid;
-    grid-template-columns: 1fr, 4fr;
+    grid-template-columns: repeat(6, 1fr);
     align-items: center;
 }
 
@@ -20,14 +20,17 @@
 }
 
 
-.dash-sidebar-container h1 {
+.dash-sidebar-container h2 {
     margin: 0;
     font-family: 'Work Sans', sans-serif;
-    grid-column: 2 / 3;
+    grid-column: 2 / 6;
+    padding-left: 15px;
 }
 
 .dash-nav-ul {
     list-style: none;
+    padding: 0;
+    margin: 10px;
 }
 
 .dash-nav-link {
@@ -37,7 +40,14 @@
     align-items: center;
     justify-content: flex-start;
     color: white;
+    border-radius: 5px;
+    padding-left: 20px;
+    width: 92%;
+}
 
+.dash-nav-link:hover {
+    background: rgba(0, 0, 0, 0.6);
+    transition: 300ms linear;
 }
 
 .dash-nav-link:first-child {

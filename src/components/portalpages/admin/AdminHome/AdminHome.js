@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AdminNav from '../AdminNav/AdminNav'
 import AdminSidebar from '../AdminSidebar/AdminSidebar'
+import AdminDash from '../AdminDash/AdminDash'
 import './AdminHome.css'
 
 class AdminHome extends Component {
@@ -16,7 +17,7 @@ class AdminHome extends Component {
                     <AdminSidebar />
                 </div>
                 <div className='dash-home'>
-                    <div>Dashboard</div>
+                    <AdminDash />
                 </div>
             </div>
         )
