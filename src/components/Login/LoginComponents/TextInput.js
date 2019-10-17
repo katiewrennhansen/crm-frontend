@@ -4,23 +4,23 @@ import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(theme => ({
     textField: {
-      
-    },
+      width: '310px',
+      textAlign: 'center'
+    }
   }));
 
-export default function PasswordInput() {
-    const classes = useStyles()
-    
-    return (
+  export default function TextInput(props){
+      const classes = useStyles();
+      return (
         <TextField
-            id="outlined-password-input"
-            label="Password"
-            name='password'
+            id={props.id}
+            label={props.label}
+            type={props.type}
+            name={props.name}
             className={classes.textField}
-            type="password"
-            autoComplete="current-password"
+            autoComplete={props.name}
             margin="normal"
             variant="outlined"
-        />
-    )
+      />
+      )
   }

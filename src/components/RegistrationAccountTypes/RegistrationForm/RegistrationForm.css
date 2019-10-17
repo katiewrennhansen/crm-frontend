@@ -4,25 +4,6 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-input[type='email'],
-input[type='password'],
-input[type='text'],
-input[type='number'] {
-    margin: 5px 0 10px;
-    border-radius: 5px;
-    padding: 8px 5px;
-    width: 300px;
-}
-
-
-input[type='checkbox'] {
-    display: inline-block;
-}
-
 #terms {
     font-size: 12px;
-}
-
-input[type='submit'] {
-    margin-top: 15px;
 }

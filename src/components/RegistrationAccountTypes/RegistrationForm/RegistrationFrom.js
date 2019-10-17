@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import './RegistrationForm.css'
+import LoginButton from '../../Login/LoginComponents/LoginButton'
+import TextInput from '../../Login/LoginComponents/TextInput'
 
 class RegistrationForm extends Component {
 
@@ -8,65 +10,72 @@ class RegistrationForm extends Component {
             <div>
                 <form onSubmit={(e) => this.props.handleSubmit(e)}>
                     <div className='form-group'>
-                        <label htmlFor='first'>First Name: </label>
-                        <input 
-                            type='text' 
-                            name='firstname'
+                        <label htmlFor='first'></label>
+                        <TextInput 
                             id='firstname'
+                            type='text'
+                            name='firstname'
+                            label='First Name'
                         />
                     </div>
 
                     <div className='form-group'>
-                        <label htmlFor='last'>Last Name: </label>
-                        <input 
-                            type='text' 
-                            name='lastname'
+                        <label htmlFor='last'></label>
+                        <TextInput 
                             id='lastname'
+                            type='text'
+                            name='lastname'
+                            label='Last Name'
                         />
                     </div>
 
                     <div className='form-group'>
-                        <label htmlFor='email'>Email: </label>
-                        <input 
+                        <label htmlFor='email'></label>
+                        <TextInput 
+                            id='email'
                             type='email' 
                             name='email'
-                            id='email'
+                            label='Email'
                         />
                     </div>
 
                     <div className='form-group'>
-                        <label htmlFor='phone'>Phone: </label>
-                        <input 
+                        <label htmlFor='phone'></label>
+                        <TextInput 
+                            id='phone'
                             type='number' 
                             name='phone'
-                            id='phone'
+                            label='Phone'
                         />
                     </div>
 
                     <div className='form-group'>
-                        <label htmlFor='country'>Country: </label>
-                        <input 
+                        <label htmlFor='country'></label>
+                        <TextInput
+                            id='country'
                             type='text' 
                             name='country'
-                            id='country'
+                            label='Country'
                         />
                     </div>
 
                     <div className='form-group'>
-                        <label htmlFor="password">Password: </label>
-                        <input 
+                        <label htmlFor="password"></label>
+                        <TextInput
+                            id='password'
                             type='password' 
                             name='password'
-                            id='password'
+                            label='Password'
                         />
                     </div>
 
                     <div className='form-group'>
-                        <label htmlFor="repeatPassword">Repeat Password: </label>
-                        <input 
+                        <label htmlFor="repeatPassword"></label>
+                        <TextInput
+                            id='repeatPassword'
                             type='password' 
                             name='repeatPassword'
-                            id='repeatPassword'
+                            label='Repeat Password'
                         />
                     </div>
 
@@ -76,7 +85,7 @@ class RegistrationForm extends Component {
                     </div>
 
                     <div className='form-group'>
-                        <input type='submit'></input>
+                        <LoginButton text='Create account' />
                     </div>
                 </form>
             </div>

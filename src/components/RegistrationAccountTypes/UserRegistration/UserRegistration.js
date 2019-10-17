@@ -46,7 +46,7 @@ class UserRegistration extends Component {
     render(){
         return (
             <div className='user-registration-container'>
-                <h1>Create a user account to start the renting process</h1>
+                <h1>Create an account</h1>
                 <div className='user-registration-content'>
                     <RegistrationForm 
                         handleSubmit={this.handleSubmit}
@@ -54,7 +54,7 @@ class UserRegistration extends Component {
                     />
                     <p>
                         Already have an account?&nbsp;  
-                        <Link to='/login' style={{color: 'lightgreen'}}>
+                        <Link to='/login' style={{color: 'green'}}>
                             Login now!
                         </Link>
                     </p>

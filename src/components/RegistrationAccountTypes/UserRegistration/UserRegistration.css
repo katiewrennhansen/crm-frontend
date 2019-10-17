@@ -1,14 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans:300&display=swap');
 
 .user-registration-container {
-    background: #343434;
-    color: white;
+    background: rgb(232, 232, 232);
     font-family: 'Open Sans', sans-serif;
+    padding: 50px;
 }
 
 .user-registration-content {
-    width: 300px;
     margin: 0 auto;
+    width: 350px;
+    background: white;
+    padding: 30px 50px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .user-registration-container h1 {
@@ -21,4 +25,5 @@
 .user-registration-container p {
     margin-bottom: 0;
     padding-bottom: 30px;
+    font-size: 13px;
 }

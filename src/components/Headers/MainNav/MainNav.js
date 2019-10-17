@@ -60,7 +60,7 @@ class MainNav extends Component {
                             <Link to="/login" style={{textDecoration: 'none'}}>
                                 <p className='login'>Login</p>
                             </Link>
-                            <Link to="/select-account-type" style={{textDecoration: 'none'}}>
+                            <Link to="/register" style={{textDecoration: 'none'}}>
                                 <p className='register'>Register</p>
                             </Link>
                         </>

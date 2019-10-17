@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import './Login.css'
-import EmailInput from './LoginComponents/EmailInput'
-import PasswordInput from './LoginComponents/PasswordInput'
 import LoginButton from './LoginComponents/LoginButton'
+import TextInput from './LoginComponents/TextInput'
 
 
 
@@ -78,8 +77,10 @@ class Login extends Component {
                 usertype: resJson.usertype,
                 authenticated: true
             })
+            console.log(this.state)
             if (this.state.authenticated){
                 localStorage.setItem('email', this.state.email)
+                localStorage.setItem('usertype', this.state.usertype)
             }
         })
         .catch(err => {
@@ -95,8 +96,9 @@ class Login extends Component {
         //redirect authenticated user to their homepage
         if(this.state.authenticated && this.state.usertype === 'user') {
             return <Redirect to='/user-home' />
-        } else if (this.state.authenticated && this.state.userype === 'admin'){
-            return <Redirect to='admin-home' />
+        }
+        if (this.state.authenticated && this.state.userype === 'admin'){
+            return <Redirect to='/dashboard' />
         }
         return (
             <>
@@ -108,14 +110,25 @@ class Login extends Component {
                     <form onSubmit={(e) => this.handleSubmit(e)}>
                         <div className='form-group'>
                             <label htmlFor='email'></label>
-                            <EmailInput 
+                            <TextInput
+                                id='email'
+                                name='email'
+                                label='Email'
+                                type='email'
+                                autoComplete='email'
                                 updateEmail={(e) => this.updateEmail(e.target.value)}
                             />
                         </div>
                         
                         <div className='form-group'>
                             <label htmlFor="password"></label>
-                            <PasswordInput />
+                            <TextInput 
+                                id='password'
+                                name='password'
+                                label='Password'
+                                type='password'
+                                autoComplete='password'
+                            />
                         </div>
                         <div className='form-group'>
                             <LoginButton
@@ -126,7 +139,7 @@ class Login extends Component {
                     <div className='password-controls'>
                         <p>
                             Don't have an account?&nbsp;
-                            <Link to='/select-account-type' style={{color: 'green'}}>
+                            <Link to='/register' style={{color: 'green'}}>
                                 Sign up now!
                             </Link>
                         </p>

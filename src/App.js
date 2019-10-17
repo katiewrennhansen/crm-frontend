@@ -7,9 +7,6 @@ import ForgotPassword from './components/ResetPassword/ForgotPassword/ForgotPass
 import ChangePassword from './components/ResetPassword/ChangePassword/ChangePassword'
 import ServicesPage from './components/webpages/ServicesPage/ServicesPage'
 import UserRegistration from './components/RegistrationAccountTypes/UserRegistration/UserRegistration'
-import SelectAccountType from './components/SelectAccountType/SelectAccountType';
-import BrokerRegistration from './components/RegistrationAccountTypes/BrokerRegistration/BrokerRegistration'
-import OwnerRegistration from './components/RegistrationAccountTypes/OwnerRegistration/OwnerRegistration'
 import UserHome from './components/portalpages/user/UserHome/UserHome'
 import AdminHome from './components/portalpages/admin/AdminHome/AdminHome'
 import './App.css'
@@ -63,10 +60,12 @@ class App extends Component {
 
   componentWillMount(){
     const email = localStorage.getItem('email');
+    const usertype = localStorage.getItem('usertype');
     console.log(email)
     if(email){
       this.setState({
-        authenticated: true
+        authenticated: true,
+        usertype: usertype
       })
     } else {
       this.setState({
@@ -160,28 +159,15 @@ class App extends Component {
             component={ChangePassword}
           />
           <Route 
-            path='/select-account-type'
-            component={SelectAccountType}
-          />
-          <Route 
-            path='/register-user'
+            path='/register'
             component={UserRegistration}
-          />
-          <Route 
-            path='/register-broker'
-            component={BrokerRegistration}
-          />
-          <Route 
-            path='/register-owner'
-            component={OwnerRegistration}
           />
 
 {/* ******** USER PORTAL ROUTES ******* */}
           <Route 
             path='/user-home'
             render={(props) => {
-              if(this.state.authenticated) {
-                // && this.state.usertype === 'user'
+              if(this.state.authenticated && this.state.usertype === 'user') {
                 return ( 
                 <UserHome 
                   authenticated={this.state.authenticated}
@@ -194,10 +180,24 @@ class App extends Component {
           />
 
 {/* ******** ADMIN PORTAL ROUTES ******* */}
-          <Route
+          <Route 
+            path='/dashboard'
+            render={(props) => {
+              if(this.state.authenticated && this.state.usertype === 'admin') {
+                return ( 
+                <AdminHome 
+                  authenticated={this.state.authenticated}
+                  logout={this.logout}
+                />
+                )
+              } else {
+                return ( <Redirect to='/login' /> )
+              }}}
+          />
+          {/* <Route
             path='/dashboard'
             component={AdminHome}
-          />
+          /> */}
         </Switch>
       </div>
     );
