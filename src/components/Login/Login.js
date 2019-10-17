@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import MainNav from '../Headers/MainNav/MainNav'
-
 import './Login.css'
+import EmailInput from './LoginComponents/EmailInput'
+import PasswordInput from './LoginComponents/PasswordInput'
+import LoginButton from './LoginComponents/LoginButton'
+
+
+
 
 class Login extends Component {
     constructor(props){
@@ -14,12 +18,15 @@ class Login extends Component {
             authenticated: false
         }
 
+        this.updateEmail = this.updateEmail.bind(this)
+
     }
 
     updateEmail(email){
         this.setState({
             email: email,
         })
+        console.log(email);
     }
 
 
@@ -93,51 +100,45 @@ class Login extends Component {
         }
         return (
             <>
-            {/* <MainNav 
-                authenticated={this.props.authenticated} 
-                logout={this.props.logout} 
-            /> */}
+      
             <div className='login-container'>
                 <h1>Enter your Login information</h1>
                 <div className='margin-container'>
                     <div className='error-message'></div>
                     <form onSubmit={(e) => this.handleSubmit(e)}>
                         <div className='form-group'>
-                            <label htmlFor='email'>Email: </label>
-                            <input 
-                                type='email' 
-                                name='email'
-                                id='email'
-                                onChange={(e) => this.updateEmail(e.target.value)}
+                            <label htmlFor='email'></label>
+                            <EmailInput 
+                                updateEmail={(e) => this.updateEmail(e.target.value)}
                             />
                         </div>
+                        
                         <div className='form-group'>
-                            <label htmlFor="password">Password: </label>
-                            <input 
-                                type='password' 
-                                name='password'
-                                id='password'
-                            />
+                            <label htmlFor="password"></label>
+                            <PasswordInput />
                         </div>
                         <div className='form-group'>
-                            <input 
-                                type='submit'
+                            <LoginButton
+                                text='Log In'
                             />
                         </div>
                     </form>
-                    <p>
-                        Don't have an account?&nbsp;
-                        <Link to='/select-account-type' style={{color: 'lightgreen'}}>
-                            Sign up now!
-                        </Link>
-                    </p>
-                    <p className='forgot-password'>
-                        Forgot password?&nbsp;
-                        <Link to='/forgot-password' style={{color: 'lightgreen'}}>
-                            Reset password
-                        </Link>
-                    </p>
+                    <div className='password-controls'>
+                        <p>
+                            Don't have an account?&nbsp;
+                            <Link to='/select-account-type' style={{color: 'green'}}>
+                                Sign up now!
+                            </Link>
+                        </p>
+                        <p className='forgot-password'>
+                            Forgot password?&nbsp;
+                            <Link to='/forgot-password' style={{color: 'green'}}>
+                                Reset password
+                            </Link>
+                        </p>
+                    </div>
                 </div>
+                
             </div>
             </>
         )
@@ -145,3 +146,4 @@ class Login extends Component {
 }
 
 export default Login
+

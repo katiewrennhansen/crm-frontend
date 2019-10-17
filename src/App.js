@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import WebpageHome from './components/webpages/WebpageHome/WebpageHome'
 import AboutPage from './components/webpages/AboutPage/AboutPage'
-import MainNav from './components/Headers/MainNav/MainNav'
-import Footer from './components/Footer/Footer'
 import Login from './components/Login/Login'
 import ForgotPassword from './components/ResetPassword/ForgotPassword/ForgotPassword'
 import ChangePassword from './components/ResetPassword/ChangePassword/ChangePassword'
@@ -13,6 +11,7 @@ import SelectAccountType from './components/SelectAccountType/SelectAccountType'
 import BrokerRegistration from './components/RegistrationAccountTypes/BrokerRegistration/BrokerRegistration'
 import OwnerRegistration from './components/RegistrationAccountTypes/OwnerRegistration/OwnerRegistration'
 import UserHome from './components/portalpages/user/UserHome/UserHome'
+import AdminHome from './components/portalpages/admin/AdminHome/AdminHome'
 import './App.css'
 
 
@@ -51,7 +50,6 @@ class App extends Component {
     this.setState({
       authenticated: value
     })
-    console.log(this.state)
   }
 
 
@@ -77,81 +75,79 @@ class App extends Component {
     }
   }
 
-  // navLoad(){
-  //   if(this.state.authenticated){
-  //     return (
-  //       <AdminNav />
-  //     )
-  //   } else {
-  //     return (
-  //       <MainNav 
-  //             authenticated={this.state.authenticated} 
-  //             logout={this.logout} 
-  //         />
-  //     )
-  //   }
-  // }
 
 
   render() {
     return (
       <div className="App">
-         <MainNav 
-              authenticated={this.state.authenticated} 
-              logout={this.logout} 
-          />
-          {/* {this.navLoad()} */}
         <Switch>
-          {/* <Route 
-            exact path='/'
-            render={(props) => {
-              return (
-                <WebpageHome 
-                  authenticated={this.state.authenticated}
-                  logout={this.logout}
-                />
-              )
-            }}
-          />
-          <Route 
-            exact path='/about'
-            render={(props) => {
-              return (
-                <AboutPage
-                  authenticated={this.state.authenticated}
-                  logout={this.logout}
-                />
-              )
-            }}
-          />
-          <Route 
-            exact path='/services'
-            render={(props) => {
-              return (
-                <ServicesPage
-                  authenticated={this.state.authenticated}
-                  logout={this.logout}
-                />
-              )
-            }}
-          /> */}
-          <Route 
-            exact path='/'
-            component={WebpageHome}
-          />
-          <Route 
-            path='/about'
-            component={AboutPage}
-          />
-          <Route 
-            path='/services'
-            component={ServicesPage}
-          />
+{/* ******** MAIN WEBPAGE ROUTES ******* */}
+
+           <Route
+              exact path='/'
+              render={(props) => {
+                return (
+                  <WebpageHome
+                    authenticated={this.state.authenticated} 
+                    logout={this.logout} 
+                  />
+                )
+              }}
+            />
+            <Route
+              exact path='/about'
+              render={(props) => {
+                return (
+                  <AboutPage
+                    authenticated={this.state.authenticated} 
+                    logout={this.logout} 
+                  />
+                )
+              }}
+            />
+            <Route
+              exact path='/services'
+              render={(props) => {
+                return (
+                  <ServicesPage
+                    authenticated={this.state.authenticated} 
+                    logout={this.logout} 
+                  />
+                )
+              }}
+            />
+            {/* <Route
+              exact path='/search'
+              render={(props) => {
+                return (
+                  <SearchPage
+                    authenticated={this.state.authenticated} 
+                    logout={this.logout} 
+                  />
+                )
+              }}
+            />
+            <Route
+              exact path='/contact'
+              render={(props) => {
+                return (
+                  <Contact
+                    authenticated={this.state.authenticated} 
+                    logout={this.logout} 
+                  />
+                )
+              }}
+            /> */}
+{/* ******** LOGIN AND AUTH ROUTES ******* */}
+
           <Route 
             path='/login'
             render={(props) => {
               return (
-                <Login isAuthenticated={this.isAuthenticated} handleUserType={this.handleUserType} />
+                <Login 
+                  isAuthenticated={this.isAuthenticated} 
+                  handleUserType={this.handleUserType} 
+                />
               )
             }}
           />
@@ -179,6 +175,8 @@ class App extends Component {
             path='/register-owner'
             component={OwnerRegistration}
           />
+
+{/* ******** USER PORTAL ROUTES ******* */}
           <Route 
             path='/user-home'
             render={(props) => {
@@ -194,21 +192,17 @@ class App extends Component {
                 return ( <Redirect to='/login' /> )
               }}}
           />
-          {/* <Route
-            path='dashboard'
-            render={(props => {
-              if(this.state.authenticated && this.usertype === 'admin'){
-                return ( </> )
-              } else {
-                return ( <Redirect to='login' /> )
-              }
-            })}
-          /> */}
+
+{/* ******** ADMIN PORTAL ROUTES ******* */}
+          <Route
+            path='/dashboard'
+            component={AdminHome}
+          />
         </Switch>
-       <Footer />
       </div>
     );
   }
 }
 
 export default App;
+

@@ -2,15 +2,16 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './AboutPage.css'
 import MainNav from '../../Headers/MainNav/MainNav'
+import Footer from '../../Footer/Footer'
 
 class AboutPage extends Component {
     render(){
         return (
             <>
-            {/* <MainNav 
+            <MainNav 
                 authenticated={this.props.authenticated} 
                 logout={this.props.logout} 
-            /> */}
+            />
             <div className='about-page'>
                 <div className='about-content'>
                     <h1>Quiénes Somos</h1>
@@ -46,6 +47,7 @@ class AboutPage extends Component {
                     </div>
                 </div>
             </div>
+            <Footer />
             </>
         )
     }

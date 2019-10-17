@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-class AdminMenu extends Component {
+class AdminSidebar extends Component {
     render(){
         return (
             <>
-                <h1>Admin Menu</h1>
+                <h1>Admin Sidebar</h1>
             </>
         )
     }
 }
 
-export default AdminMenu
+export default AdminSidebar

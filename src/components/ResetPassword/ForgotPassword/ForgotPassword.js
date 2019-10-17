@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './ForgotPassword.css'
+import EmailInput from '../../Login/LoginComponents/EmailInput'
+import LoginButton from '../../Login/LoginComponents/LoginButton'
 
 class ForgotPassword extends Component {
     constructor(props){
@@ -59,26 +61,25 @@ class ForgotPassword extends Component {
                 <div className='margin-container'>
                     <form onSubmit={(e) => this.handleSubmit(e)}>
                         <div className='form-group'>
-                            <label htmlFor='email'>Email: </label>
-                            <input 
-                                type='email' 
-                                name='email'
-                                id='email'
+                            <label htmlFor='email'></label>
+                            <EmailInput
                                 onChange={(e) => this.updateEmail(e.target.value)}
                             />
                         </div>
                         <div className='form-group'>
-                            <input 
-                                type='submit'
+                            <LoginButton 
+                                text="Send password reset"
                             />
                         </div>
                     </form>
-                    <p>
-                        Don't have an account?&nbsp;
-                        <Link to='/select-account-type' style={{color: 'lightgreen'}}>
-                            Sign up now!
-                        </Link>
-                    </p>
+                    <div className='password-controls'>
+                        <p>
+                            Don't have an account?&nbsp;
+                            <Link to='/select-account-type' style={{color: 'green'}}>
+                                Sign up now!
+                            </Link>
+                        </p>
+                    </div>
                 </div>
             </div>
         )
