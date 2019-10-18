@@ -32,15 +32,15 @@ class AdminHome extends Component {
     render(){
         return (
             <div className='dashboard-container'>
+                <div className='dash-sidebar'>
+                    <AdminSidebar 
+                        handleTitle={this.handleTitle}
+                    />
+                </div>
                 <div className='dash-nav'>
                     <AdminNav 
                         logout={this.props.logout}
                         title={this.state.title}
-                        handleTitle={this.handleTitle}
-                    />
-                </div>
-                <div className='dash-sidebar'>
-                    <AdminSidebar 
                         handleTitle={this.handleTitle}
                     />
                 </div>

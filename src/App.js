@@ -50,10 +50,8 @@ class App extends Component {
     })
   }
 
-
-
   logout(){
-    console.log('logged out')
+    console.log('logged out');
     localStorage.clear()
     this.isAuthenticated(false);
     return ( <Redirect to='/login' /> )
@@ -77,13 +75,11 @@ class App extends Component {
   }
 
 
-
   render() {
     return (
       <div className="App">
         <Switch>
 {/* ******** MAIN WEBPAGE ROUTES ******* */}
-
            <Route
               exact path='/'
               render={(props) => {
@@ -181,6 +177,7 @@ class App extends Component {
                 return ( <Redirect to='/login' /> )
               }}}
           />
+
 
 {/* ******** ADMIN PORTAL ROUTES ******* */}
           <Route 

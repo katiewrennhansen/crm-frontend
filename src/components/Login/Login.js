@@ -13,10 +13,8 @@ class Login extends Component {
         this.state = {
             email: '',
             usertype: 'user',
-            redirect: false,
             authenticated: false
         }
-
         this.updateEmail = this.updateEmail.bind(this)
 
     }
@@ -29,15 +27,27 @@ class Login extends Component {
     }
 
 
-    validateEmail(){
-        const email = this.state.email.trim();
-        if(email.length < 3 || email.length > 40){
-            console.log('email must be between 3 and 40 characters')
-            return 'email must be between 3 and 40 characters'
-            
+    // validateEmail(){
+    //     const email = this.state.email.trim();
+    //     if(email.length < 3 || email.length > 40){
+    //         return 'email must be between 3 and 40 characters'
+    //     }
+    // }
+
+    selectUserAccount(usertype){
+        if(usertype === 'admin') {
+            this.props.history.push('/dashboard')
+        } else if(usertype === 'user') {
+            this.props.history.push('/user-home')
         }
     }
 
+    setLocalStorage(email, usertype){
+        if (this.state.authenticated){
+            localStorage.setItem('email', email)
+            localStorage.setItem('usertype', usertype)
+        }
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -59,7 +69,6 @@ class Login extends Component {
         //fetch data from /users/login enpoint
         fetch(url, options)
         .then(res => {
-            console.log(res);
             //throw error if user is not authenticated
             if(!res.ok){
                 throw new Error('user not authenticated');
@@ -69,7 +78,6 @@ class Login extends Component {
             return res.json();
         })
         .then(resJson => {
-            console.log(resJson);
             //set Login.js authentication state to true
             this.props.handleUserType(resJson.usertype);
             this.setState({
@@ -77,11 +85,8 @@ class Login extends Component {
                 usertype: resJson.usertype,
                 authenticated: true
             })
-            console.log(this.state)
-            if (this.state.authenticated){
-                localStorage.setItem('email', this.state.email)
-                localStorage.setItem('usertype', this.state.usertype)
-            }
+            this.setLocalStorage(resJson.email, resJson.usertype)
+            this.selectUserAccount(resJson.usertype);
         })
         .catch(err => {
             console.log(err)
@@ -89,18 +94,9 @@ class Login extends Component {
       
     }
 
-
-        
+   
 
     render(){
-        // redirect authenticated user to their homepage
-        if(this.state.usertype === 'admin' && this.state.authenticated) {
-            return <Redirect to='/dashboard' />
-        }
-        if(this.state.userype === 'user' && this.state.authenticated) {
-            return <Redirect to='/user-home' />
-        }
-
         return (
             <div className='login-container'>
                 <h1>Enter your Login information</h1>
