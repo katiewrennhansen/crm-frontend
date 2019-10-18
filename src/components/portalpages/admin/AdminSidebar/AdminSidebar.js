@@ -25,49 +25,81 @@ class AdminSidebar extends Component {
                 <hr />
                 <ul className='dash-nav-ul'>
                     <li>
-                        <Link to="/" className='dash-nav-link'>
+                        <Link 
+                            to="/dashboard/home" 
+                            className='dash-nav-link'
+                            onClick={() => this.props.handleTitle('Dashboard')}
+                        >
                             <DashboardIcon />
                             <p>Dashboard</p>
                         </Link>
                     </li>
                     <li >
-                        <Link to="/" className='dash-nav-link'>
+                        <Link 
+                            to="/dashboard/comments" 
+                            className='dash-nav-link' 
+                            onClick={() => this.props.handleTitle('Comments')}
+                        >
                             <ChatBubbleOutlineIcon />
                             <p>Comments Type</p>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/" className='dash-nav-link'>
+                        <Link 
+                            to="/dashboard/promotions" 
+                            className='dash-nav-link'
+                            onClick={() => this.props.handleTitle('Promotions')}
+                        >
                             <CardGiftcardIcon />
-                            <p>Promotion</p>
+                            <p>Promotions</p>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/" className='dash-nav-link'>
+                        <Link 
+                            to="/dashboard/maintenance" 
+                            className='dash-nav-link'
+                            onClick={() => this.props.handleTitle('Maintenance')}
+                        >
                             <BuildIcon />
                             <p>Maintenance</p>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/" className='dash-nav-link'>
+                        <Link 
+                            to="/dashboard/property-features" 
+                            className='dash-nav-link'
+                            onClick={() => this.props.handleTitle('Property Features')}                        
+                        >
                             <HomeIcon />
                             <p>Property Features</p>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/" className='dash-nav-link'>
+                        <Link 
+                            to="/dashboard/property-status" 
+                            className='dash-nav-link'
+                            onClick={() => this.props.handleTitle('Property Status')}                                                    
+                        >
                             <HomeWorkIcon />
                             <p>Property Status</p>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/" className='dash-nav-link'>
+                        <Link 
+                            to="/dashboard/customer-status" 
+                            className='dash-nav-link'
+                            onClick={() => this.props.handleTitle('Customer Status')}                        
+                        >
                             <AccountBoxIcon />
                             <p>Customer Status</p>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/" className='dash-nav-link'>
+                        <Link 
+                            to="/dashboard/reminders" 
+                            className='dash-nav-link'
+                            onClick={() => this.props.handleTitle('Reminders')}                        
+                        >
                             <NotificationsActiveIcon />
                             <p>Reminders</p>
                         </Link>

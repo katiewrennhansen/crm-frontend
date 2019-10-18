@@ -29,7 +29,8 @@ class App extends Component {
     super(props);
     this.state = {
       usertype: '',
-      authenticated: false
+      authenticated: false,
+      email: ''
     }
     this.isAuthenticated = this.isAuthenticated.bind(this)
     this.componentWillMount = this.componentWillMount.bind(this)
@@ -65,7 +66,8 @@ class App extends Component {
     if(email){
       this.setState({
         authenticated: true,
-        usertype: usertype
+        usertype: usertype,
+        email: email
       })
     } else {
       this.setState({
@@ -189,6 +191,7 @@ class App extends Component {
                 <AdminHome 
                   authenticated={this.state.authenticated}
                   logout={this.logout}
+                  name={this.state.email}
                 />
                 )
               } else {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import './AdminDash.css'
+// import './AdminComments.css'
 
-class AdminDash extends Component {
+class Maintenance extends Component {
     render(){
         return (
             <div className='admin-dashboard'>
                 <div className='dash-container'>
-                    <h3>Welcome Company Name</h3>
+                    <h3>Welcome to the Maintenance page</h3>
                 </div>
                 
             </div>
@@ -14,4 +14,4 @@ class AdminDash extends Component {
     }
 }
 
-export default AdminDash
+export default Maintenance

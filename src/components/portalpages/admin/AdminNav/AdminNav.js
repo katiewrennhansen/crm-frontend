@@ -19,9 +19,16 @@ class AdminNav extends Component {
     render() {
         return (
             <div className='dash-header'>
-                <h1>Dashboard</h1>
+            {
+            (!this.props.title) ? <h1>Dashboard</h1> : <h1>{this.props.title}</h1>
+            }   
                 <nav className='dashboard-nav'>
-                    <Link className='account-nav-link' to='/dashboard' style={{textDecoration: 'none'}}>
+                    <Link 
+                        className='account-nav-link' 
+                        to='/dashboard/account-settings' 
+                        style={{textDecoration: 'none'}}
+                        onClick={() => this.props.handleTitle('Account Settings')}                        
+                    >
                         <p className='account'>Account</p>
                     </Link>
                     <LogoutButton 
