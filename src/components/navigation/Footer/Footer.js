@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import './Footer.css'
+import NavLinks from '../NavLinks/NavLinks'
 
 class Footer extends Component {
     render(){
@@ -23,23 +23,10 @@ class Footer extends Component {
                 </div>
                 <div className='footer-nav'>
                     <div className='footer-nav-links'>
-                        <Link to="/" style={{textDecoration: 'none'}}>
-                            <p className='link'>Home</p>
-                        </Link>
-                        <Link to="/about" style={{textDecoration: 'none'}}>
-                            <p className='link'>About</p>
-                        </Link>
-                        <Link to="/services" style={{textDecoration: 'none'}}>
-                            <p className='link'>Services</p>
-                        </Link>
-                        <Link to="/search" style={{textDecoration: 'none'}}>
-                            <p className='link'>Search</p>
-                        </Link>
-                        <Link to="/contact" style={{textDecoration: 'none'}}>
-                            <p className='link'>Contact</p>
-                        </Link>
+                        <NavLinks />
                     </div>
                 </div>
+                
             </div>
         )
     }

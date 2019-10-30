@@ -2,26 +2,16 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import WebpageHome from './components/webpages/WebpageHome/WebpageHome'
 import AboutPage from './components/webpages/AboutPage/AboutPage'
+import ServicesPage from './components/webpages/ServicesPage/ServicesPage'
+import SearchPage from './components/webpages/SearchPage/SearchPage'
+import Contact from './components/webpages/Contact/Contact'
 import Login from './components/Login/Login'
 import ForgotPassword from './components/ResetPassword/ForgotPassword/ForgotPassword'
 import ChangePassword from './components/ResetPassword/ChangePassword/ChangePassword'
-import ServicesPage from './components/webpages/ServicesPage/ServicesPage'
 import UserRegistration from './components/RegistrationAccountTypes/UserRegistration/UserRegistration'
 import UserHome from './components/portalpages/user/UserHome/UserHome'
 import AdminHome from './components/portalpages/admin/AdminHome/AdminHome'
 import './App.css'
-
-
-// function AuthenticatedRoute({component: Component, authenticated, ...rest}) {
-//   return (
-//     <Route
-//       {...rest}
-//       render={(props) => authenticated === true
-//           ? <Component {...props} {...rest} />
-//           : <Redirect to='/login' /> }
-//     />
-//   )
-// }
 
 
 class App extends Component {
@@ -57,7 +47,7 @@ class App extends Component {
     return ( <Redirect to='/login' /> )
 }
 
-  componentWillMount(){
+ componentWillMount(){
     const email = localStorage.getItem('email');
     const usertype = localStorage.getItem('usertype');
     console.log(email)
@@ -113,7 +103,7 @@ class App extends Component {
                 )
               }}
             />
-            {/* <Route
+            <Route
               exact path='/search'
               render={(props) => {
                 return (
@@ -134,9 +124,9 @@ class App extends Component {
                   />
                 )
               }}
-            /> */}
-{/* ******** LOGIN AND AUTH ROUTES ******* */}
+            />
 
+{/* ******** LOGIN AND AUTH ROUTES ******* */}
           <Route 
             path='/login'
             render={(props) => {
@@ -180,7 +170,7 @@ class App extends Component {
 
 
 {/* ******** ADMIN PORTAL ROUTES ******* */}
-          <Route 
+          {/* <Route 
             path='/dashboard'
             render={(props) => {
               if(this.state.authenticated && this.state.usertype === 'admin') {
@@ -194,6 +184,10 @@ class App extends Component {
               } else {
                 return ( <Redirect to='/login' /> )
               }}}
+          /> */}
+          <Route 
+            path='/dashboard'
+            component={AdminHome}
           />
         </Switch>
       </div>

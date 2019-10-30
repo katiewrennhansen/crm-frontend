@@ -9,6 +9,7 @@ import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import BuildIcon from '@material-ui/icons/Build';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import './AdminSidebar.css'
 
 
@@ -102,6 +103,16 @@ class AdminSidebar extends Component {
                         >
                             <NotificationsActiveIcon />
                             <p>Reminders</p>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to="/dashboard/reminders" 
+                            className='dash-nav-link'
+                            onClick={() => this.props.handleTitle('Customer Accounts')}                        
+                        >
+                            <EmojiPeopleIcon />
+                            <p>Customer Accounts</p>
                         </Link>
                     </li>
                 </ul>

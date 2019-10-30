@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './Login.css'
 import SubmitButton from './LoginComponents/SubmitButton'
 import TextInput from './LoginComponents/TextInput'
@@ -25,14 +25,6 @@ class Login extends Component {
         })
         console.log(email);
     }
-
-
-    // validateEmail(){
-    //     const email = this.state.email.trim();
-    //     if(email.length < 3 || email.length > 40){
-    //         return 'email must be between 3 and 40 characters'
-    //     }
-    // }
 
     selectUserAccount(usertype){
         if(usertype === 'admin') {
