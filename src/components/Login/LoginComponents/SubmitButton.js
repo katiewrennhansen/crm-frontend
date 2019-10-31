@@ -24,6 +24,7 @@ export default function SubmitButton(props) {
             color="default" 
             className={classes.button}
             type='submit'
+            onClick={props.showModal}
         >
             {props.text}
         </Button>

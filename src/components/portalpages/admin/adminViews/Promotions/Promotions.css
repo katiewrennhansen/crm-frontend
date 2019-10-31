@@ -1,0 +1,39 @@
+.promotion-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid rgb(138, 138, 138);
+    grid-column: 1 / -1;   
+}
+
+th {
+    background: rgb(79, 79, 79);
+    color: white;
+}
+
+td {
+    border-top: 1px solid rgb(138, 138, 138);
+}
+
+td, th {
+    padding: 10px 30px;
+}
+
+.promotion-container h3 {
+    grid-column: 1 / 4;
+
+}
+
+.promotion-container button {
+    grid-column: 4 / -1;
+    margin-bottom: 10px;
+}
+
+
+.add_promotions {
+    width: 300px;
+    margin: 0 auto;
+}

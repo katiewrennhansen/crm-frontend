@@ -10,11 +10,30 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import BuildIcon from '@material-ui/icons/Build';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import WorkIcon from '@material-ui/icons/Work';
+import DescriptionIcon from '@material-ui/icons/Description';
 import './AdminSidebar.css'
 
 
+
+
 class AdminSidebar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            active: false,
+        };
+    }
+
+    toggleAccordion(){
+        const currentState = this.state.active;
+        this.setState({
+            active: !currentState
+        })
+    }
+
     render(){
+
         return (
             <div className='dash-sidebar-container'>
                 <div className='admin-info'>
@@ -35,11 +54,21 @@ class AdminSidebar extends Component {
                             <p>Dashboard</p>
                         </Link>
                     </li>
-                    <li >
+                    <li>
+                        <Link 
+                            to="/dashboard/company-setup" 
+                            className='dash-nav-link'
+                            onClick={() => {this.props.handleTitle('Company Set Up'); this.toggleAccordion();}}
+                        >
+                            <WorkIcon />
+                            <p>Company Set Up</p>
+                        </Link>
+                    </li>
+                    <li>
                         <Link 
                             to="/dashboard/comments" 
-                            className='dash-nav-link' 
-                            onClick={() => this.props.handleTitle('Comments')}
+                            className='dash-nav-link'
+                            onClick={() => this.props.handleTitle('Comments Type')}
                         >
                             <ChatBubbleOutlineIcon />
                             <p>Comments Type</p>
@@ -103,6 +132,16 @@ class AdminSidebar extends Component {
                         >
                             <NotificationsActiveIcon />
                             <p>Reminders</p>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to="/dashboard/process" 
+                            className='dash-nav-link'
+                            onClick={() => this.props.handleTitle('Process')}                        
+                        >
+                            <DescriptionIcon />
+                            <p>Process</p>
                         </Link>
                     </li>
                     <li>

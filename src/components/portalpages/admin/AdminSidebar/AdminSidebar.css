@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans:300&display=swap');
 
+ul {
+    list-style: none;
+}
 
 .dash-sidebar-container {
     background-image: linear-gradient( to right, #343434 85%, #292929);
@@ -28,7 +31,6 @@
 }
 
 .dash-nav-ul {
-    list-style: none;
     padding: 0;
     margin: 10px;
 }
@@ -57,4 +59,17 @@
 .dash-nav-link p {
     grid-column: 2 / 5;
     padding-left: 20px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+.bg-dark.active {
+    background: black;
+}
+
+.active {
+    height: 0px;
+    opacity: 0;
 }
