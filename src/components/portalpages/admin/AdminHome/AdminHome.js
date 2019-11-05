@@ -19,7 +19,9 @@ class AdminHome extends Component {
     constructor(props){
         super(props);
         this.state = {
-            title: ''
+            title: '',
+            show: false,
+            delete: false
         }
     }
 
@@ -28,8 +30,51 @@ class AdminHome extends Component {
             title: title
         })
     }
+
+    showModal = () => {
+        this.setState({ show: true });
+    };
+
+    hideModal = () => {
+        this.setState({ show: false });
+    };
+
+    showDelete = () => {
+        this.setState({ delete: true });
+    };
+
+    hideDelete = () => {
+        this.setState({ delete: false });
+    }
+
+    formatDate(){
+        const newDate = new Date();
+        let day = newDate.getDate();
+        let month = newDate.getMonth() + 1; 
+        const year = newDate.getFullYear();
+        if(day < 10){
+            day = `0${day}`;
+        } 
+        if(month < 10){
+            month = `0${month}`;
+        } 
+        const today = `${month}/${day}/${year}`;
+        return today;
+    }
   
     render(){
+
+        // const func = {
+        //     name: this.props.name,
+        //     showModal: this.showModal,
+        //     hideModal: this.hideModal,
+        //     showDelete: this.showDelete,
+        //     hideDelete: this.hideDelete,
+        //     show: this.state.show,
+        //     delete: this.state.delete,
+        //     formatDate: this.formatDate
+        // }
+
         return (
             <div className='dashboard-container'>
                 <div className='dash-sidebar'>
@@ -62,16 +107,103 @@ class AdminHome extends Component {
                                 return (
                                   <AdminComments
                                     name={this.props.name}
+                                    showModal={this.showModal}
+                                    hideModal={this.hideModal}
+                                    showDelete={this.showDelete}
+                                    hideDelete={this.hideDelete}
+                                    show={this.state.show}
+                                    delete={this.state.delete}
+                                    formatDate={this.formatDate}
                                   />
                                 )
                               }}
                         />
-                        <Route path='/dashboard/promotions' component={Promotions} />
-                        <Route path='/dashboard/maintenance' component={Maintenance} />
-                        <Route path='/dashboard/property-features' component={PropertyFeatures} />
-                        <Route path='/dashboard/property-status' component={PropertyStatus} />
+                        <Route 
+                        path='/dashboard/promotions' 
+                        render={(props) => {
+                            return (
+                                <Promotions
+                                    name={this.props.name}
+                                    showModal={this.showModal}
+                                    hideModal={this.hideModal}
+                                    showDelete={this.showDelete}
+                                    hideDelete={this.hideDelete}
+                                    show={this.state.show}
+                                    delete={this.state.delete}
+                                    formatDate={this.formatDate}
+                                />
+                            )
+                            }}
+                        />
+                        <Route 
+                        path='/dashboard/maintenance' 
+                        render={(props) => {
+                            return (
+                                <Maintenance
+                                    name={this.props.name}
+                                    showModal={this.showModal}
+                                    hideModal={this.hideModal}
+                                    showDelete={this.showDelete}
+                                    hideDelete={this.hideDelete}
+                                    show={this.state.show}
+                                    delete={this.state.delete}
+                                    formatDate={this.formatDate}
+                                />
+                            )
+                            }}
+                        />
+                        <Route 
+                        path='/dashboard/property-features' 
+                        render={(props) => {
+                            return (
+                                <PropertyFeatures
+                                    name={this.props.name}
+                                    showModal={this.showModal}
+                                    hideModal={this.hideModal}
+                                    showDelete={this.showDelete}
+                                    hideDelete={this.hideDelete}
+                                    show={this.state.show}
+                                    delete={this.state.delete}
+                                    formatDate={this.formatDate}
+                                />
+                            )
+                            }}
+                        />
+                        <Route 
+                        path='/dashboard/property-status' 
+                        render={(props) => {
+                            return (
+                                <PropertyStatus
+                                    name={this.props.name}
+                                    showModal={this.showModal}
+                                    hideModal={this.hideModal}
+                                    showDelete={this.showDelete}
+                                    hideDelete={this.hideDelete}
+                                    show={this.state.show}
+                                    delete={this.state.delete}
+                                    formatDate={this.formatDate}
+                                />
+                            )
+                            }}
+                        />
                         <Route path='/dashboard/customer-status' component={CustomerStatus} />
-                        <Route path='/dashboard/reminders' component={Reminders} />
+                        <Route 
+                        path='/dashboard/reminders' 
+                        render={(props) => {
+                            return (
+                                <Reminders
+                                    name={this.props.name}
+                                    showModal={this.showModal}
+                                    hideModal={this.hideModal}
+                                    showDelete={this.showDelete}
+                                    hideDelete={this.hideDelete}
+                                    show={this.state.show}
+                                    delete={this.state.delete}
+                                    formatDate={this.formatDate}
+                                />
+                            )
+                            }}
+                        />
                         <Route path='/dashboard/account-settings' component={AccountSettings} />
                         <Route path='/dashboard/edit-account-settings' component={EditSettings} />                        
                     </Switch>

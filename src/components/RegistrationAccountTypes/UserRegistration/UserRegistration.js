@@ -16,7 +16,7 @@ class UserRegistration extends Component {
                 "country": e.target.country.value,
                 "phone": e.target.phone.value,
                 "usertype": "user",
-                "company_id": 1,
+                "company_id": 6,
                 "password": e.target.password.value,
             }
         }

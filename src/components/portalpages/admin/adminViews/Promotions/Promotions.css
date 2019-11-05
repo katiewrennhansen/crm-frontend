@@ -19,7 +19,7 @@ td {
 }
 
 td, th {
-    padding: 10px 30px;
+    padding: 6px 30px;
 }
 
 .promotion-container h3 {
@@ -27,13 +27,32 @@ td, th {
 
 }
 
-.promotion-container button {
+.add_promotion  {
     grid-column: 4 / -1;
+    border-radius: 5px;
     margin-bottom: 10px;
+    border: 1px solid black;
+    font-size: 16px;
 }
-
 
 .add_promotions {
     width: 300px;
     margin: 0 auto;
+}
+
+.promotion_table button,
+button {
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 16px;
+    padding: 8px 10px;
+    display: inline-block;
+}
+
+.delete button {
+    border: 1px solid red;
+    color: red;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 8px 10px;
 }
