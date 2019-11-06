@@ -6,6 +6,9 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 
+
+let data = ADMIN_DATA.propertyStatus
+
 class PropertyStatus extends Component {
     constructor(props) {
         super(props);
@@ -28,7 +31,14 @@ class PropertyStatus extends Component {
                 user_id: 1
             }
         }
-        ADMIN_DATA.propertyStatus.push(newPropertyStatus)
+        data.push(newPropertyStatus)
+    }
+
+    deletePropertyStatus = (id) => {
+        data = data.filter(c => {
+            return c.status.id !== id
+        })
+        this.props.hideDelete();
     }
 
     render(){  
@@ -64,19 +74,19 @@ class PropertyStatus extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {ADMIN_DATA.propertyStatus.map(s => (
+                            {data.map(s => (
                             <tr key={s.status.id}>
                                 <td>{s.status.statusdesc}</td>
                                 <td>{s.status.dateCreated}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={this.props.showDelete}>Delete</button>
-                                    <Modal show={this.props.delete}>
+                                <td className='delete'><button onClick={() => this.deletePropertyStatus(s.status.id)}>Delete</button>
+                                    {/* <Modal show={this.props.delete}>
                                         <h3>Are you sure you would like to delete this property feature?</h3>
                                         <button onClick={this.props.hideDelete}>Cancel</button>
                                         <div className='delete'>
-                                            <button onClick={this.deletePromotion}>Delete</button>
+                                            <button onClick={() => this.deletePropertyStatus(s.status.id)}>Delete</button>
                                         </div>
-                                    </Modal>
+                                    </Modal> */}
                                 </td>
                             </tr>
                             ))}

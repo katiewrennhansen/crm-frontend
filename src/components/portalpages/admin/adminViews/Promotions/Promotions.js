@@ -7,6 +7,9 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 
 
+let data = ADMIN_DATA.promotions;
+
+
 class Promotions extends Component {
     constructor(props) {
         super(props);
@@ -50,15 +53,14 @@ class Promotions extends Component {
                 id: cuuid()
             }
         }
-        ADMIN_DATA.promotions.push(newPromotion)
-        console.log(ADMIN_DATA.promotions)
+        data.push(newPromotion)
     }
 
-    deletePromotion = () => {
-        console.log('promotion deleted!!')
-        this.setState({
-            delete: false,
+    deletePromotion = (id) => {
+        data = data.filter(c => {
+            return c.promotion.id !== id
         })
+        this.props.hideDelete();
     }
 
     render(){  
@@ -126,23 +128,23 @@ class Promotions extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {ADMIN_DATA.promotions.map(p => (
+                            {data.map(p => (
                             <tr key={p.promotion.id}>
                                 <td>{p.promotion.typepromotion}</td>
                                 <td>{p.promotion.startdate}</td>
                                 <td>{p.promotion.duedate}</td>
                                 <td>{p.promotion.totalcost}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={this.props.showDelete}>Delete</button>
-                                    <Modal show={this.props.delete}>
+                                <td className='delete'><button onClick={() => this.deletePromotion(p.promotion.id)}>Delete</button>
+                                    {/* <Modal show={this.props.delete}>
                                         <h3>
                                             Are you sure you would like to delete this promotion?
                                         </h3>
                                         <button onClick={this.props.hideDelete}>Cancel</button>
                                         <div className='delete'>
-                                            <button onClick={this.deletePromotion}>Delete</button>
+                                            <button onClick={() => this.deletePromotion(p.promotion.id)}>Delete</button>
                                         </div>
-                                    </Modal>
+                                    </Modal> */}
                                 </td>
                             </tr>
                             ))}

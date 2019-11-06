@@ -21,6 +21,7 @@ import Modal from '../pagecomponents/Modal'
 
 
 
+
 class AdminHome extends Component {
     constructor(props){
         super(props);
@@ -45,27 +46,38 @@ class AdminHome extends Component {
         this.setState({ show: false });
     };
 
-    showDelete = () => {
+    showDelete = (id) => {
         this.setState({ delete: true });
+        return (
+                <Modal id={id} show='show'>
+                    <h3>Are you sure you would like to deactivate</h3>
+                    <button onClick={this.hideDelete}>Cancel</button>
+                    <div className='delete'>
+                        <button>Deactivate</button>
+                    </div>
+                </Modal>
+            )
     };
 
-    openDelete = (id, data) => {
-        const el = data.find(c => {
-            return c.customer.id === id
-        })
+    // openDelete = (id) => {
+    //     let data = ADMIN_DATA.customerAccounts
 
-        console.log(`${el.customer.name} clicked`)
+    //     const el = data.find(c => {
+    //         return c.customer.id === id
+    //     })
 
-        return (
-            <Modal id={el.customer.id} show='show'>
-                <h3>Are you sure you would like to deactivate {el.customer.name}</h3>
-                <button onClick={this.hideDelete}>Cancel</button>
-                <div className='delete'>
-                    <button>Deactivate</button>
-                </div>
-            </Modal>
-        )
-    }
+    //     console.log(`${el.customer.name} clicked`)
+
+    //     return (
+    //         <Modal id={el.customer.id} show='show'>
+    //             <h3>Are you sure you would like to deactivate {el.customer.name}</h3>
+    //             <button onClick={this.hideDelete}>Cancel</button>
+    //             <div className='delete'>
+    //                 <button>Deactivate</button>
+    //             </div>
+    //         </Modal>
+    //     )
+    // }
 
     hideDelete = () => {
         this.setState({ delete: false });
@@ -85,6 +97,7 @@ class AdminHome extends Component {
         const today = `${month}/${day}/${year}`;
         return today;
     }
+
   
     render(){
 

@@ -5,6 +5,8 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 
+let data = ADMIN_DATA.process
+
 class Process extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +29,19 @@ class Process extends Component {
                 user_id: 1
             }
         }
-        ADMIN_DATA.propertyStatus.push(newPropertyStatus)
+        data.push(newPropertyStatus)
+    }
+
+    deleteProcess = (id) => {
+        data = data.filter(c => {
+            return c.ptype.id !== id
+        })
+        // for(let i = 0; i < data.length; i++){
+        //     if(data[i].ptype.id === id)
+        //         data.splice(i, 1)
+        // }
+        
+        this.props.hideDelete();
     }
 
     render(){  
@@ -63,22 +77,23 @@ class Process extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {ADMIN_DATA.process.map(p => (
-                            <tr key={p.ptype.id}>
-                                <td>{p.ptype.title}</td>
-                                <td>{p.ptype.dateCreated}</td>
-                                <td><button>Update</button></td>
-                                <td className='delete'><button onClick={this.props.showDelete}>Delete</button>
-                                    <Modal show={this.props.delete}>
-                                        <h3>Are you sure you would like to delete this process?</h3>
-                                        <button onClick={this.props.hideDelete}>Cancel</button>
-                                        <div className='delete'>
-                                            <button onClick={this.deletePromotion}>Delete</button>
-                                        </div>
-                                    </Modal>
-                                </td>
-                            </tr>
-                            ))}
+                            {data.map(p => {
+                                return (
+                                <tr key={p.ptype.id}>
+                                    <td>{p.ptype.title}</td>
+                                    <td>{p.ptype.dateCreated}</td>
+                                    <td><button>Update</button></td>
+                                    <td className='delete'><button onClick={() => this.deleteProcess(p.ptype.id)}>Delete</button>
+                                        {/* <Modal show={this.props.delete}>
+                                            <h3>Are you sure you would like to delete this process?</h3>
+                                            <button onClick={this.props.hideDelete}>Cancel</button>
+                                            <div className='delete'>
+                                                <button onClick={() => this.deleteProcess(p.ptype.id)}>Delete</button>
+                                            </div>
+                                        </Modal> */}
+                                    </td>
+                                </tr>
+                            )})}
                         </tbody>
                     </table>
                 </div>

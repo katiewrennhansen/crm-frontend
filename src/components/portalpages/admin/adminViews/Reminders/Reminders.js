@@ -5,6 +5,9 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 
+
+let data = ADMIN_DATA.reminders
+
 class Reminders extends Component {
     constructor(props) {
         super(props);
@@ -27,8 +30,16 @@ class Reminders extends Component {
                 user_id: 1
             }
         }
-        ADMIN_DATA.reminders.push(newReminder)
+        data.push(newReminder)
     }
+
+    deleteReminders = (id) => {
+        data = data.filter(c => {
+            return c.reminder.id !== id
+        })
+        this.props.hideDelete();
+    }
+
 
     render(){  
         return (
@@ -64,20 +75,20 @@ class Reminders extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {ADMIN_DATA.reminders.map(r => (
+                            {data.map(r => (
                             <tr key={r.reminder.id}>
                                 <td>{r.reminder.rtype}</td>
                                 <td>{r.reminder.periodmonths}</td>
                                 <td>{r.reminder.bodymessage}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={this.props.showDelete}>Delete</button>
-                                    <Modal show={this.props.delete}>
+                                <td className='delete'><button onClick={() => this.deleteReminders(r.reminder.id)}>Delete</button>
+                                    {/* <Modal show={this.props.delete}>
                                         <h3>Are you sure you would like to delete this reminder?</h3>
                                         <button onClick={this.props.hideDelete}>Cancel</button>
                                         <div className='delete'>
-                                            <button onClick={this.deletePromotion}>Delete</button>
+                                            <button onClick={() => this.deleteReminders(r.reminder.id)}>Delete</button>
                                         </div>
-                                    </Modal>
+                                    </Modal> */}
                                 </td>
                             </tr>
                             ))}

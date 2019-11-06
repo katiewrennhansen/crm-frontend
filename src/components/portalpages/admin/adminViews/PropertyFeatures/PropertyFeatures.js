@@ -5,7 +5,7 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 
-
+let data = ADMIN_DATA.propertyFeatures
 
 class PropertyFeatures extends Component {
     constructor(props) {
@@ -28,7 +28,14 @@ class PropertyFeatures extends Component {
                 id: cuuid()
             }
         }
-        ADMIN_DATA.propertyFeatures.push(newPropertyFeatures)
+        data.push(newPropertyFeatures)
+    }
+
+    deletePropertyFeatures = (id) => {
+        data = data.filter(c => {
+            return c.featuretype.id !== id
+        })
+        this.props.hideDelete();
     }
     
     render(){  
@@ -64,19 +71,19 @@ class PropertyFeatures extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {ADMIN_DATA.propertyFeatures.map(f => (
+                            {data.map(f => (
                             <tr key={f.featuretype.id}>
                                 <td>{f.featuretype.featuredescr}</td>
                                 <td>{f.featuretype.dateCreated}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={this.props.showDelete}>Delete</button>
-                                    <Modal show={this.props.delete}>
+                                <td className='delete'><button onClick={() => this.deletePropertyFeatures(f.featuretype.id)}>Delete</button>
+                                    {/* <Modal show={this.props.delete}>
                                         <h3>Are you sure you would like to delete this property feature?</h3>
                                         <button onClick={this.props.hideDelete}>Cancel</button>
                                         <div className='delete'>
-                                            <button onClick={this.deletePromotion}>Delete</button>
+                                            <button onClick={() => this.deletePropertyFeatures(f.featuretype.id)}>Delete</button>
                                         </div>
-                                    </Modal>
+                                    </Modal> */}
                                 </td>
                             </tr>
                             ))}

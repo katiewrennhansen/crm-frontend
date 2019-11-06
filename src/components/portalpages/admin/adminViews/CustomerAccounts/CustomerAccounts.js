@@ -4,6 +4,9 @@ import ADMIN_DATA from '../../../../../admin-data'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
+import './CustomerAccounts.css'
+
+let data = ADMIN_DATA.customerAccounts
 
 class CustomerAccounts extends Component {
     constructor(props) {
@@ -28,8 +31,26 @@ class CustomerAccounts extends Component {
                 user_id: 1
             }
         }
-        ADMIN_DATA.customerAccounts.push(newCustomer)
-        console.log(ADMIN_DATA.customerAccounts)
+        data.push(newCustomer)
+    }
+
+
+    deactivateCustomer = (id) => {
+        const el = data.find(c => c.customer.id === id)
+        const element = document.getElementById(id)
+        const button = document.getElementById(`delete${id}`)
+
+        if(el.customer.status === 'Active') {
+            element.classList.add('deactivated')
+            button.innerHTML = "Activate";
+            el.customer.status = "Deactive"            
+        } else {
+            element.classList.remove('deactivated')
+            button.innerHTML = "Deactivate";
+            el.customer.status = "Active"  
+        }
+
+    
     }
     
     render(){  
@@ -81,17 +102,16 @@ class CustomerAccounts extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {ADMIN_DATA.customerAccounts.map(c => {
+                            {data.map(c => {
                                 const id = c.customer.id
-                                const data = ADMIN_DATA.customerAccounts;
                                 return (
-                                    <tr key={id}>
+                                    <tr id={id} key={id}>
                                         <td>{c.customer.name}</td>
                                         <td>{c.customer.email}</td>
                                         <td>{c.customer.phone}</td>
                                         <td>{c.customer.status}</td>
                                         <td><button>View</button></td>
-                                        <td className='delete'><button onClick={() => {this.props.openDelete(id, data); this.props.showDelete()}}>Deactivate</button></td>
+                                        <td className='delete'><button className='delete' id={`delete${id}`} onClick={() => this.deactivateCustomer(id)}>Deactivate</button></td>
                                     </tr>
                             )})}
                         </tbody>

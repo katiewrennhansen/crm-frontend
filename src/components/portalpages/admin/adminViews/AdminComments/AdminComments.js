@@ -78,8 +78,8 @@ class AdminComments extends Component {
                                 <td>{c.commtype.commdesc}</td>
                                 <td>{c.dateCreated}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={this.props.showDelete}>Delete</button>
-                                    <Modal show={this.props.delete}>
+                                <td className='delete'><button onClick={() => this.deleteComment(c.id)}>Delete</button>
+                                    {/* <Modal show={this.props.delete}>
                                         <h3>
                                             Are you sure you would like to delete {c.name}?
                                         </h3>
@@ -87,7 +87,7 @@ class AdminComments extends Component {
                                         <div className='delete'>
                                             <button onClick={() => this.deleteComment(c.id)}>Delete</button>
                                         </div>
-                                    </Modal>
+                                    </Modal> */}
                                 </td>
                             </tr>
                         ))}

@@ -7,6 +7,8 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 
 
+let data = ADMIN_DATA.maintenanceType
+
 class Maintenance extends Component {
     constructor(props) {
         super(props);
@@ -28,14 +30,14 @@ class Maintenance extends Component {
                 user_id: 1
             }
         }
-        ADMIN_DATA.maintenanceType.push(newMaintenanceType)
+        data.push(newMaintenanceType)
     }
 
-    deleteMaintenanceType = () => {
-        console.log('promotion deleted!!')
-        this.setState({
-            delete: false,
+    deleteMaintenanceType = (id) => {
+        data = data.filter(c => {
+            return c.mainttype.id !== id
         })
+        this.props.hideDelete();
     }
 
     render(){  
@@ -72,21 +74,21 @@ class Maintenance extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {ADMIN_DATA.maintenanceType.map(m => (
+                            {data.map(m => (
                             <tr key={m.mainttype.id}>
                                 <td>{m.mainttype.maintdesc}</td>
                                 <td>{m.mainttype.dateCreated}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={this.props.showDelete}>Delete</button>
-                                    <Modal show={this.props.delete}>
+                                <td className='delete'><button onClick={() => this.deleteMaintenanceType(m.mainttype.id)}>Delete</button>
+                                    {/* <Modal show={this.props.delete}>
                                         <h3>
                                             Are you sure you would like to delete this maintenance type?
                                         </h3>
                                         <button onClick={this.props.hideDelete}>Cancel</button>
                                         <div className='delete'>
-                                            <button onClick={this.deletePromotion}>Delete</button>
+                                            <button onClick={() => this.deleteMaintenanceType(m.mainttype.id)}>Delete</button>
                                         </div>
-                                    </Modal>
+                                    </Modal> */}
                                 </td>
                             </tr>
                             ))}

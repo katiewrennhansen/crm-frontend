@@ -5,6 +5,8 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 
+let data = ADMIN_DATA.customerStatus
+
 class CustomerStatus extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +28,14 @@ class CustomerStatus extends Component {
                 user_id: 1
             }
         }
-        ADMIN_DATA.customerStatus.push(newCustomerStatus)
+        data.push(newCustomerStatus)
+    }
+
+    deleteCustomerStatus = (id) => {
+        data = data.filter(c => {
+            return c.cstatus.id !== id
+        })
+        this.props.hideDelete();
     }
     
     render(){  
@@ -62,19 +71,19 @@ class CustomerStatus extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {ADMIN_DATA.customerStatus.map(c => (
+                            {data.map(c => (
                             <tr key={c.cstatus.id}>
                                 <td>{c.cstatus.cdesc}</td>
                                 <td>{c.cstatus.dateCreated}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={this.props.showDelete}>Delete</button>
-                                    <Modal show={this.props.delete}>
+                                <td className='delete'><button onClick={() => this.deleteCustomerStatus(c.cstatus.id)}>Delete</button>
+                                    {/* <Modal show={this.props.delete}>
                                         <h3>Are you sure you would like to delete this property feature?</h3>
                                         <button onClick={this.props.hideDelete}>Cancel</button>
                                         <div className='delete'>
-                                            <button onClick={this.deletePromotion}>Delete</button>
+                                            <button onClick={() => this.deleteCustomerStatus(c.cstatus.id)}>Delete</button>
                                         </div>
-                                    </Modal>
+                                    </Modal> */}
                                 </td>
                             </tr>
                             ))}
