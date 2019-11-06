@@ -6,7 +6,8 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import ADMIN_DATA from '../../../../../admin-data'
 
 
-const data = ADMIN_DATA.commentsType;
+let data = ADMIN_DATA.commentsType;
+
 
 class AdminComments extends Component {
     constructor(props) {
@@ -33,7 +34,10 @@ class AdminComments extends Component {
     }
 
     deleteComment = (id) => {
-        console.log(id)
+        data = data.filter(c => {
+            return c.id !== id
+        })
+        this.props.hideDelete();
     }
 
     render(){  

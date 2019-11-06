@@ -156,6 +156,121 @@ const ADMIN_DATA =
                 }
                 
             },
+        ],
+        customerStatus: [
+            {
+                cstatus: {
+                    id: 1,
+                    cdesc: 'On Hold',
+                    dateCreated: '8/10/2019',
+                    company_id: 6,
+                    user_id: 1
+                },
+            }, 
+            {
+                cstatus: {
+                    id: 2,
+                    cdesc: 'Active',
+                    dateCreated: '8/10/2019',
+                    company_id: 6,
+                    user_id: 1
+                },
+            },
+            {
+                cstatus: {
+                    id: 3,
+                    cdesc: 'Inactive',
+                    dateCreated: '8/10/2019',
+                    company_id: 6,
+                    user_id: 1
+                },    
+            }
+        ],
+        process: [
+            {
+                ptype: {
+                    id: 1,
+                    title: 'Sell',
+                    steps : {
+                        a: 'Visit',
+                        b: 'Apply',
+                        c: 'Offer',
+                        d: 'Close'
+                    },
+                    dateCreated: '8/10/2019',                    
+                    company_id: 6,
+                    user_id: 1
+
+                }
+            },
+            {
+                ptype: {
+                    id: 2,
+                    title: 'Short-Term Rent',
+                    steps : {
+                        a: 'Visit',
+                        b: 'Apply',
+                        c: 'Sign Contract'
+                    },
+                    dateCreated: '8/10/2019',
+                    company_id: 6,
+                    user_id: 1
+
+                }
+            },
+            {
+                ptype: {
+                    id: 3,
+                    title: 'Long-Term Rent',
+                    steps : {
+                        a: 'Visit',
+                        b: 'Apply',
+                        c: 'Sign Contract'
+                    },
+                    dateCreated: '8/10/2019',
+                    company_id: 6,
+                    user_id: 1
+
+                }
+            },
+        ],
+        customerAccounts: [
+            {
+                customer: {
+                    id: 1,
+                    name: 'Jane Smith',
+                    email: 'jsmith@gmail.com',
+                    phone: '123-456-3454',
+                    status: 'Active',
+                    dateCreated: '8/10/2019',
+                    company_id: 6,
+                    user_id: 1
+                }
+            },
+            {
+                customer: {
+                    id: 2,
+                    name: 'John Smith',
+                    email: 'john.smith@gmail.com',
+                    phone: '456-465-3454',
+                    status: 'Active',
+                    dateCreated: '8/10/2019',
+                    company_id: 6,
+                    user_id: 1
+                }
+            },
+            {
+                customer: {
+                    id: 3,
+                    name: 'Katie Hansen',
+                    email: 'customer@gmail.com',
+                    phone: '789-563-4554',
+                    status: 'Inactive',
+                    dateCreated: '8/10/2019',
+                    company_id: 6,
+                    user_id: 1
+                }
+            },
         ]
 
     }

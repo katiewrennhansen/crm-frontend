@@ -146,7 +146,7 @@ class AdminSidebar extends Component {
                     </li>
                     <li>
                         <Link 
-                            to="/dashboard/reminders" 
+                            to="/dashboard/customer-accounts" 
                             className='dash-nav-link'
                             onClick={() => this.props.handleTitle('Customer Accounts')}                        
                         >

@@ -12,8 +12,14 @@ import CustomerStatus from '../adminViews/CustomerStatus/CustomerStatus'
 import Reminders from '../adminViews/Reminders/Reminders'
 import AccountSettings from '../adminViews/AccountSettings/AccountSettings'
 import EditSettings from '../adminViews/AccountSettings/EditSettings'
-
+import Process from '../adminViews/Process/Process'
 import './AdminHome.css'
+import CustomerAccounts from '../adminViews/CustomerAccounts/CustomerAccounts'
+import CompanySetUp from '../adminViews/CompanySetUp/CompanySetUp'
+import ADMIN_DATA from '../../../../admin-data'
+import Modal from '../pagecomponents/Modal'
+
+
 
 class AdminHome extends Component {
     constructor(props){
@@ -42,6 +48,24 @@ class AdminHome extends Component {
     showDelete = () => {
         this.setState({ delete: true });
     };
+
+    openDelete = (id, data) => {
+        const el = data.find(c => {
+            return c.customer.id === id
+        })
+
+        console.log(`${el.customer.name} clicked`)
+
+        return (
+            <Modal id={el.customer.id} show='show'>
+                <h3>Are you sure you would like to deactivate {el.customer.name}</h3>
+                <button onClick={this.hideDelete}>Cancel</button>
+                <div className='delete'>
+                    <button>Deactivate</button>
+                </div>
+            </Modal>
+        )
+    }
 
     hideDelete = () => {
         this.setState({ delete: false });
@@ -97,6 +121,23 @@ class AdminHome extends Component {
                                 return (
                                   <AdminDash
                                     name={this.props.name}
+                                  />
+                                )
+                              }}
+                        />
+                        <Route 
+                            path='/dashboard/company-setup' 
+                            render={(props) => {
+                                return (
+                                  <CompanySetUp
+                                    name={this.props.name}
+                                    showModal={this.showModal}
+                                    hideModal={this.hideModal}
+                                    showDelete={this.showDelete}
+                                    hideDelete={this.hideDelete}
+                                    show={this.state.show}
+                                    delete={this.state.delete}
+                                    formatDate={this.formatDate}
                                   />
                                 )
                               }}
@@ -186,7 +227,23 @@ class AdminHome extends Component {
                             )
                             }}
                         />
-                        <Route path='/dashboard/customer-status' component={CustomerStatus} />
+                        <Route 
+                        path='/dashboard/customer-status' 
+                        render={(props) => {
+                            return (
+                                <CustomerStatus
+                                    name={this.props.name}
+                                    showModal={this.showModal}
+                                    hideModal={this.hideModal}
+                                    showDelete={this.showDelete}
+                                    hideDelete={this.hideDelete}
+                                    show={this.state.show}
+                                    delete={this.state.delete}
+                                    formatDate={this.formatDate}
+                                />
+                            )
+                            }}
+                        />
                         <Route 
                         path='/dashboard/reminders' 
                         render={(props) => {
@@ -204,6 +261,44 @@ class AdminHome extends Component {
                             )
                             }}
                         />
+                        <Route 
+                        path='/dashboard/process' 
+                        render={(props) => {
+                            return (
+                                <Process
+                                    name={this.props.name}
+                                    showModal={this.showModal}
+                                    hideModal={this.hideModal}
+                                    showDelete={this.showDelete}
+                                    hideDelete={this.hideDelete}
+                                    show={this.state.show}
+                                    delete={this.state.delete}
+                                    formatDate={this.formatDate}
+                                />
+                            )
+                            }}
+                        />
+                        <Route 
+                            path='/dashboard/customer-accounts' 
+                            render={(props) => {
+                                return (
+                                    <CustomerAccounts
+                                        name={this.props.name}
+                                        showModal={this.showModal}
+                                        hideModal={this.hideModal}
+                                        showDelete={this.showDelete}
+                                        hideDelete={this.hideDelete}
+                                        show={this.state.show}
+                                        delete={this.state.delete}
+                                        formatDate={this.formatDate}
+                                        openDelete={this.openDelete}
+                                    />
+                                )
+                                }}
+                        />
+
+                        {/* CUSTOMER ACCOUNTS */}
+
                         <Route path='/dashboard/account-settings' component={AccountSettings} />
                         <Route path='/dashboard/edit-account-settings' component={EditSettings} />                        
                     </Switch>

@@ -5,7 +5,7 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 
-class CustomerStatus extends Component {
+class Process extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,33 +14,34 @@ class CustomerStatus extends Component {
         };
     }
 
-    addCustomerStatus = (e) => {
+    addProcess = (e) => {
         e.preventDefault()
-        console.log('add customer status!!')
-        const newCustomerStatus = {
-            cstatus: {
+        console.log('add property feature!!')
+        const newPropertyStatus = {
+            status: {
                 id: cuuid(),
-                cdesc: e.target.customer_status.value,
+                statusdesc: e.target.feature_status.value,
                 dateCreated: this.props.formatDate(),
+                showInPortal: false,
                 company_id: 6,
                 user_id: 1
             }
         }
-        ADMIN_DATA.customerStatus.push(newCustomerStatus)
+        ADMIN_DATA.propertyStatus.push(newPropertyStatus)
     }
-    
+
     render(){  
         return (
             <>
                 <Modal show={this.props.show} >
-                    <form className= 'add_feature' onSubmit={(e) => {this.addCustomerStatus(e); this.props.hideModal();}}>
-                        <h3>Customer Status</h3>
+                    <form className= 'add_feature' onSubmit={(e) => {this.addProcess(e); this.props.hideModal();}}>
+                        <h3>Add a Process</h3>
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>
                             <TextInput 
-                                id='customer_status'
-                                name='customer_status'
-                                label='Customer Status'
+                                id='process'
+                                name='process'
+                                label='Process'
                                 type='text'
                                 autoComplete='text'
                             />
@@ -50,8 +51,8 @@ class CustomerStatus extends Component {
                     <button onClick={this.props.hideModal}>Cancel</button>
                 </Modal>
                 <div className='promotion-container'>
-                    <h3>Customer Status</h3>
-                    <button className='add_promotion' onClick={this.props.showModal}>Add Customer Status</button>
+                    <h3>Process</h3>
+                    <button className='add_promotion' onClick={this.props.showModal}>Add Process</button>
                     <table className='promotion_table'>
                         <thead>
                             <tr>
@@ -62,14 +63,14 @@ class CustomerStatus extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {ADMIN_DATA.customerStatus.map(c => (
-                            <tr key={c.cstatus.id}>
-                                <td>{c.cstatus.cdesc}</td>
-                                <td>{c.cstatus.dateCreated}</td>
+                            {ADMIN_DATA.process.map(p => (
+                            <tr key={p.ptype.id}>
+                                <td>{p.ptype.title}</td>
+                                <td>{p.ptype.dateCreated}</td>
                                 <td><button>Update</button></td>
                                 <td className='delete'><button onClick={this.props.showDelete}>Delete</button>
                                     <Modal show={this.props.delete}>
-                                        <h3>Are you sure you would like to delete this property feature?</h3>
+                                        <h3>Are you sure you would like to delete this process?</h3>
                                         <button onClick={this.props.hideDelete}>Cancel</button>
                                         <div className='delete'>
                                             <button onClick={this.deletePromotion}>Delete</button>
@@ -86,4 +87,4 @@ class CustomerStatus extends Component {
     }
 }
 
-export default CustomerStatus
+export default Process
