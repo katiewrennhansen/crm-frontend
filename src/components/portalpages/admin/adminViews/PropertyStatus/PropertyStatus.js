@@ -85,16 +85,15 @@ class PropertyStatus extends Component {
 
     addPropertyStatus = (e) => {
         e.preventDefault()
-        console.log('add property feature!!')
         const newPropertyStatus = {
             status: {
                 statusdesc: e.target.feature_status.value,
-                showInPortal: false,
+                showinportal: false,
                 company_id: 6,
                 user_id: 1
             }
         }
-        fetch(config.PROPERTY_STATUS_ENDPOINTT, {
+        fetch(config.PROPERTY_STATUS_ENDPOINT, {
             method: 'POST',
             body: JSON.stringify(newPropertyStatus),
             headers: {
@@ -109,7 +108,7 @@ class PropertyStatus extends Component {
             return res.json()
         })
         .then(data => {
-            this.updateComments(data)
+            this.updateStatuses(data)
             this.props.hideModal()
         })
         .catch(error => {
@@ -123,7 +122,7 @@ class PropertyStatus extends Component {
         return (
             <>
                 <Modal show={this.props.show} >
-                    <form className= 'add_feature' onSubmit={(e) => this.addStatus(e)}>
+                    <form className= 'add_feature' onSubmit={(e) => this.addPropertyStatus(e)}>
                         <h3>Add a Property Status</h3>
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>
