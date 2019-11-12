@@ -1,51 +1,129 @@
 import React, { Component } from 'react'
-// import './AdminComments.css'
-import cuuid from 'cuuid'
-import ADMIN_DATA from '../../../../../admin-data'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
+import config from '../../../../../config'
 
-
-let data = ADMIN_DATA.propertyStatus
+function deleteStatus(id, cb){
+    fetch( `${config.PROPERTY_STATUS_ENDPOINT}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${config.API_KEY}`
+        }
+    })
+    .then((res) => {
+        if(!res.ok){
+            return res.json().then(error => Promise.reject(error))
+        }
+        return res.text()
+    })
+    .then(data => {
+        cb(id)
+    })
+    .catch(error => {
+        console.error(error)
+    })
+}
 
 class PropertyStatus extends Component {
     constructor(props) {
         super(props);
         this.state = {
             show: false,
-            delete: false
+            delete: false,
+            statuses: [],
+            error: null
         };
     }
+
+    removeStatus = id => {
+        const newStatuses = this.state.statuses.filter(s =>
+          s.id !== id
+        )
+        this.setState({
+          statuses: newStatuses
+        })
+      }
+    
+    setStatuses = statuses => {
+        this.setState({
+            statuses: statuses,
+            error: null
+        })
+    }
+    updateStatuses = data => {
+        this.setState({
+            statuses: [...this.state.statuses, data],
+            error: null
+        })
+    }
+
+    componentDidMount(){
+        fetch(config.PROPERTY_STATUS_ENDPOINT, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+            this.setStatuses(data)
+        })
+        .catch(error => {
+            this.setState({ error })
+        })
+    }
+
+
 
     addPropertyStatus = (e) => {
         e.preventDefault()
         console.log('add property feature!!')
         const newPropertyStatus = {
             status: {
-                id: cuuid(),
                 statusdesc: e.target.feature_status.value,
-                dateCreated: this.props.formatDate(),
                 showInPortal: false,
                 company_id: 6,
                 user_id: 1
             }
         }
-        data.push(newPropertyStatus)
+        fetch(config.PROPERTY_STATUS_ENDPOINTT, {
+            method: 'POST',
+            body: JSON.stringify(newPropertyStatus),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+            this.updateComments(data)
+            this.props.hideModal()
+        })
+        .catch(error => {
+            this.setState({ error })
+        })
     }
 
-    deletePropertyStatus = (id) => {
-        data = data.filter(c => {
-            return c.status.id !== id
-        })
-        this.props.hideDelete();
-    }
+
 
     render(){  
         return (
             <>
                 <Modal show={this.props.show} >
-                    <form className= 'add_feature' onSubmit={(e) => {this.addPropertyStatus(e); this.props.hideModal();}}>
+                    <form className= 'add_feature' onSubmit={(e) => this.addStatus(e)}>
                         <h3>Add a Property Status</h3>
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>
@@ -68,18 +146,18 @@ class PropertyStatus extends Component {
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Show In Portal</th>
+                                <th>Date Created</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map(s => (
-                            <tr key={s.status.id}>
-                                <td>{s.status.statusdesc}</td>
-                                <td>{s.status.dateCreated}</td>
+                            {this.state.statuses.map(s => (
+                            <tr key={s.id}>
+                                <td>{s.statusdesc}</td>
+                                <td>{s.created_at}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={() => this.deletePropertyStatus(s.status.id)}>Delete</button>
+                                <td className='delete'><button onClick={() => deleteStatus(s.id, this.removeStatus)}>Delete</button>
                                     {/* <Modal show={this.props.delete}>
                                         <h3>Are you sure you would like to delete this property feature?</h3>
                                         <button onClick={this.props.hideDelete}>Cancel</button>

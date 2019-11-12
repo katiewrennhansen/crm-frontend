@@ -1,44 +1,121 @@
 import React, { Component } from 'react'
-// import './AdminComments.css'
-import cuuid from 'cuuid'
-import ADMIN_DATA from '../../../../../admin-data'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
+import config from '../../../../../config'
 
+function deleteMaintenanceType(id, cb){
+    fetch(`${config.MAINTENANCE_ENDPOINT}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${config.API_KEY}`
+        }
+    })
+    .then((res) => {
+        if(!res.ok){
+            return res.json().then(error => Promise.reject(error))
+        }
+        return res
+    })
+    .then(data => {
+        cb(id)
+    })
+    .catch(error => {
+        console.error(error)
+    })
+}
 
-let data = ADMIN_DATA.maintenanceType
 
 class Maintenance extends Component {
     constructor(props) {
         super(props);
         this.state = {
             show: false,
-            delete: false
+            delete: false,
+            maintenanceTypes: [],
+            error: null
         };
+    }
+
+    removeMaintenanceType = id => {
+        const newMaintType = this.state.maintenanceTypes.filter(m =>
+          m.id !== id
+        )
+        this.setState({
+          maintenanceTypes: newMaintType
+        })
+      }
+    
+    setMaintenanceType = maintenanceTypes => {
+        this.setState({
+            maintenanceTypes: maintenanceTypes,
+            error: null
+        })
+    }
+    updateMaintenanceType = data => {
+        this.setState({
+            maintenanceTypes: [...this.state.maintenanceTypes, data],
+            error: null
+        })
+    }
+
+    componentDidMount(){
+        fetch(config.MAINTENANCE_ENDPOINT, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+            this.setMaintenanceType(data)
+        })
+        .catch(error => {
+            this.setState({ error })
+        })
     }
 
     addMaintenanceType = (e) => {
         e.preventDefault()
         console.log('add maintenance type!!')
         const newMaintenanceType = {
-            mainttype: {
-                id: cuuid(),
-                maintdesc: e.target.promotion_name.value,
-                dateCreated: this.props.formatDate(),
+                maindescr: e.target.promotion_name.value,
                 company_id: 6,
                 user_id: 1
-            }
         }
-        data.push(newMaintenanceType)
+        console.log(newMaintenanceType)
+        fetch(config.MAINTENANCE_ENDPOINT, {
+            method: 'POST',
+            body: JSON.stringify(newMaintenanceType),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+            this.updateMaintenanceType(data)
+            this.props.hideModal()
+        })
+        .catch(error => {
+            this.setState({ error })
+        })
+        
     }
 
-    deleteMaintenanceType = (id) => {
-        data = data.filter(c => {
-            return c.mainttype.id !== id
-        })
-        this.props.hideDelete();
-    }
+
 
     render(){  
         return (
@@ -74,12 +151,12 @@ class Maintenance extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map(m => (
-                            <tr key={m.mainttype.id}>
-                                <td>{m.mainttype.maintdesc}</td>
-                                <td>{m.mainttype.dateCreated}</td>
+                            {this.state.maintenanceTypes.map(m => (
+                            <tr key={m.id}>
+                                <td>{m.maindescr}</td>
+                                <td>{m.created_at}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={() => this.deleteMaintenanceType(m.mainttype.id)}>Delete</button>
+                                <td className='delete'><button onClick={() => deleteMaintenanceType(m.id, this.removeMaintenanceType)}>Delete</button>
                                     {/* <Modal show={this.props.delete}>
                                         <h3>
                                             Are you sure you would like to delete this maintenance type?

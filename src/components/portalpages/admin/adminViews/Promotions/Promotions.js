@@ -1,22 +1,86 @@
 import React, { Component } from 'react'
 import './Promotions.css'
-import cuuid from 'cuuid'
-import ADMIN_DATA from '../../../../../admin-data'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
+import config from '../../../../../config'
 
 
-let data = ADMIN_DATA.promotions;
-
+function deletePromotion(id, cb){
+    fetch(`${config.PROMOTIONS_ENDPOINT}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${config.API_KEY}`
+        }
+    })
+    .then((res) => {
+        if(!res.ok){
+            return res.json().then(error => Promise.reject(error))
+        }
+        return res
+    })
+    .then(data => {
+        cb(id)
+    })
+    .catch(error => {
+        console.error(error)
+    })
+}
 
 class Promotions extends Component {
     constructor(props) {
         super(props);
         this.state = {
             show: false,
-            delete: false
+            delete: false,
+            promotions: [],
+            error: null
         };
+    }
+
+    removePromotion = id => {
+        const newPromotions = this.state.promotions.filter(p =>
+          p.id !== id
+        )
+        this.setState({
+          promotions: newPromotions
+        })
+      }
+    
+    setPromotions = promotions => {
+        this.setState({
+            promotions: promotions,
+            error: null
+        })
+    }
+    updatePromotions = data => {
+        this.setState({
+            promotions: [...this.state.promotions, data],
+            error: null
+        })
+    }
+
+    componentDidMount(){
+        fetch(config.PROMOTIONS_ENDPOINT, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+            this.setPromotions(data)
+        })
+        .catch(error => {
+            this.setState({ error })
+        })
     }
     
     formatDatePicker(date){
@@ -45,29 +109,42 @@ class Promotions extends Component {
         const newPromotion = {
             promotion: {
                 typepromotion: e.target.promotion_name.value,
-                totalcost: `${this.formatPriceUSD(e.target.total_cost.value)}`,
+                totalcost: e.target.total_cost.value,
                 startdate: this.formatDatePicker(e.target.promotion_start.value),
                 duedate: this.formatDatePicker(e.target.promotion_end.value),
                 company_id: 6,
                 user_id: 1,
-                id: cuuid()
             }
         }
-        data.push(newPromotion)
+        fetch(config.PROMOTIONS_ENDPOINT, {
+            method: 'POST',
+            body: JSON.stringify(newPromotion),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+            this.updatePromotions(data)
+            this.props.hideModal()
+        })
+        .catch(error => {
+            this.setState({ error })
+        })
     }
 
-    deletePromotion = (id) => {
-        data = data.filter(c => {
-            return c.promotion.id !== id
-        })
-        this.props.hideDelete();
-    }
 
     render(){  
         return (
             <>
                 <Modal show={this.props.show} >
-                    <form className= 'add_promotions' onSubmit={(e) => {this.addPromotion(e); this.props.hideModal();}}>
+                    <form className= 'add_promotions' onSubmit={(e) => this.addPromotion(e)}>
                         <h3>Add a Promotion</h3>
                         <div className='form-group'>
                             <label htmlFor='promotion_name'></label>
@@ -128,14 +205,14 @@ class Promotions extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map(p => (
-                            <tr key={p.promotion.id}>
-                                <td>{p.promotion.typepromotion}</td>
-                                <td>{p.promotion.startdate}</td>
-                                <td>{p.promotion.duedate}</td>
-                                <td>{p.promotion.totalcost}</td>
+                            {this.state.promotions.promotions.map(p => (
+                            <tr key={p.id}>
+                                <td>{p.data.typepromotion}</td>
+                                <td>{p.startdate}</td>
+                                <td>{p.duedate}</td>
+                                <td>{p.totalcost}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={() => this.deletePromotion(p.promotion.id)}>Delete</button>
+                                <td className='delete'><button onClick={() => deletePromotion(p.id, this.removePromotion)}>Delete</button>
                                     {/* <Modal show={this.props.delete}>
                                         <h3>
                                             Are you sure you would like to delete this promotion?

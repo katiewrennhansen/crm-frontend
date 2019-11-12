@@ -45,8 +45,10 @@ class Login extends Component {
         e.preventDefault();
         //define user data object
         const authUser = {
-            "email": e.target.email.value,
-            "password": e.target.password.value
+            "user": {
+                "email": e.target.email.value,
+                "password": e.target.password.value
+            }
         }
         //call API to post registered users
         const url = 'https://crmmia-api.herokuapp.com/api/users/login'
@@ -55,12 +57,14 @@ class Login extends Component {
             body: JSON.stringify(authUser),
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true
             }
         }
         //fetch data from /users/login enpoint
         fetch(url, options)
         .then(res => {
+            console.log(res)
             //throw error if user is not authenticated
             if(!res.ok){
                 throw new Error('user not authenticated');
@@ -70,6 +74,7 @@ class Login extends Component {
             return res.json();
         })
         .then(resJson => {
+            console.log(resJson)
             //set Login.js authentication state to true
             this.props.handleUserType(resJson.usertype);
             this.setState({

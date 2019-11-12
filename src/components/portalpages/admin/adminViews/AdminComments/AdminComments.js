@@ -1,50 +1,122 @@
 import React, { Component } from 'react'
-import cuuid from 'cuuid'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
-import ADMIN_DATA from '../../../../../admin-data'
+import config from '../../../../../config'
 
-
-let data = ADMIN_DATA.commentsType;
-
+function deleteComment(id, cb){
+    fetch(config.COMMENTS_ENDPOINT + `/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${config.API_KEY}`
+        }
+    })
+    .then((res) => {
+        if(!res.ok){
+            return res.json().then(error => Promise.reject(error))
+        }
+        return res.text()
+    })
+    .then(data => {
+        cb(id)
+    })
+    .catch(error => {
+        console.error(error)
+    })
+}
 
 class AdminComments extends Component {
     constructor(props) {
         super(props);
         this.state = {
             show: false,
-            delete: false
+            delete: false,
+            comments: [],
+            error: null
         };
+    }
+
+    removeComment = id => {
+        const newComments = this.state.comments.filter(c =>
+          c.id !== id
+        )
+        this.setState({
+          comments: newComments
+        })
+      }
+    
+    setComments = comments => {
+        this.setState({
+            comments: comments,
+            error: null
+        })
+    }
+    updateComments = data => {
+        this.setState({
+            comments: [...this.state.comments, data],
+            error: null
+        })
+    }
+
+    componentDidMount(){
+        fetch(config.COMMENTS_ENDPOINT, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+            this.setComments(data)
+        })
+        .catch(error => {
+            this.setState({ error })
+        })
     }
 
     addComment = (e) => {
         e.preventDefault()
-        console.log('add comment!!')
         const newCommentType = {
-            commtype: {
-                commdesc: e.target.comment_type.value,
-                company_id: 6,
-            },
-            user_id: 1,
-            id: cuuid(),
-            dateCreated: this.props.formatDate(),
+            commdesc: e.target.comment_type.value,
+            company_id: 6,
+            user_id: 1
         }
-        data.push(newCommentType)
-    }
-
-    deleteComment = (id) => {
-        data = data.filter(c => {
-            return c.id !== id
+        fetch(config.COMMENTS_ENDPOINT, {
+            method: 'POST',
+            body: JSON.stringify(newCommentType),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
         })
-        this.props.hideDelete();
+        .then(res => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+            this.updateComments(data)
+            this.props.hideModal()
+        })
+        .catch(error => {
+            this.setState({ error })
+        })
+        
     }
 
     render(){  
         return (
             <>
                 <Modal show={this.props.show} >
-                    <form className= 'add_comment_type' onSubmit={(e) => {this.addComment(e); this.props.hideModal();}}>
+                    <form className= 'add_comment_type' onSubmit={(e) => this.addComment(e)}>
                         <h3>Add a Comment Type</h3>
                         <div className='form-group'>
                             <label htmlFor='comment_type'></label>
@@ -73,12 +145,12 @@ class AdminComments extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                        {data.map(c => (
+                        {this.state.comments.map(c => (
                             <tr key={c.id}>
-                                <td>{c.commtype.commdesc}</td>
-                                <td>{c.dateCreated}</td>
+                                <td>{c.commdesc}</td>
+                                <td>{c.created_at}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={() => this.deleteComment(c.id)}>Delete</button>
+                                <td className='delete'><button onClick={() => deleteComment(c.id, this.removeComment)}>Delete</button>
                                     {/* <Modal show={this.props.delete}>
                                         <h3>
                                             Are you sure you would like to delete {c.name}?

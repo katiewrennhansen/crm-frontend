@@ -16,7 +16,6 @@ import Process from '../adminViews/Process/Process'
 import './AdminHome.css'
 import CustomerAccounts from '../adminViews/CustomerAccounts/CustomerAccounts'
 import CompanySetUp from '../adminViews/CompanySetUp/CompanySetUp'
-import ADMIN_DATA from '../../../../admin-data'
 import Modal from '../pagecomponents/Modal'
 
 
@@ -58,6 +57,9 @@ class AdminHome extends Component {
                 </Modal>
             )
     };
+
+
+  
 
     // openDelete = (id) => {
     //     let data = ADMIN_DATA.customerAccounts

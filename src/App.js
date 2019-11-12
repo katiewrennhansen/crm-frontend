@@ -23,7 +23,7 @@ class App extends Component {
       email: ''
     }
     this.isAuthenticated = this.isAuthenticated.bind(this)
-    this.componentWillMount = this.componentWillMount.bind(this)
+    // this.componentDidMount = this.componentDidMount.bind(this)
     this.logout = this.logout.bind(this)
   }
 
@@ -170,7 +170,7 @@ class App extends Component {
 
 
 {/* ******** ADMIN PORTAL ROUTES ******* */}
-          {/* <Route 
+          <Route 
             path='/dashboard'
             render={(props) => {
               if(this.state.authenticated && this.state.usertype === 'admin') {
@@ -184,11 +184,11 @@ class App extends Component {
               } else {
                 return ( <Redirect to='/login' /> )
               }}}
-          /> */}
-          <Route 
+          />
+          {/* <Route 
             path='/dashboard'
             component={AdminHome}
-          />
+          /> */}
         </Switch>
       </div>
     );
