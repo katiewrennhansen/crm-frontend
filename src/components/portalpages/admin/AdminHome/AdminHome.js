@@ -10,15 +10,36 @@ import PropertyFeatures from '../adminViews/PropertyFeatures/PropertyFeatures'
 import PropertyStatus from '../adminViews/PropertyStatus/PropertyStatus'
 import CustomerStatus from '../adminViews/CustomerStatus/CustomerStatus'
 import Reminders from '../adminViews/Reminders/Reminders'
-import AccountSettings from '../adminViews/AccountSettings/AccountSettings'
 import EditSettings from '../adminViews/AccountSettings/EditSettings'
 import Process from '../adminViews/Process/Process'
 import './AdminHome.css'
 import CustomerAccounts from '../adminViews/CustomerAccounts/CustomerAccounts'
 import CompanySetUp from '../adminViews/CompanySetUp/CompanySetUp'
 import Modal from '../pagecomponents/Modal'
+import config from '../../../../config'
 
 
+function deleteData(endpont, id, cb){
+    fetch(endpont + `/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${config.API_KEY}`
+        }
+    })
+    .then((res) => {
+        if(!res.ok){
+            return res.json().then(error => Promise.reject(error))
+        }
+        return res.text()
+    })
+    .then(data => {
+        cb(id)
+    })
+    .catch(error => {
+        console.error(error)
+    })
+}
 
 
 class AdminHome extends Component {
@@ -27,7 +48,11 @@ class AdminHome extends Component {
         this.state = {
             title: '',
             show: false,
-            delete: false
+            delete: false,
+            toDelete: {
+                name: '',
+                id: ''
+            }
         }
     }
 
@@ -45,41 +70,9 @@ class AdminHome extends Component {
         this.setState({ show: false });
     };
 
-    showDelete = (id) => {
+    showDelete = () => {
         this.setState({ delete: true });
-        return (
-                <Modal id={id} show='show'>
-                    <h3>Are you sure you would like to deactivate</h3>
-                    <button onClick={this.hideDelete}>Cancel</button>
-                    <div className='delete'>
-                        <button>Deactivate</button>
-                    </div>
-                </Modal>
-            )
     };
-
-
-  
-
-    // openDelete = (id) => {
-    //     let data = ADMIN_DATA.customerAccounts
-
-    //     const el = data.find(c => {
-    //         return c.customer.id === id
-    //     })
-
-    //     console.log(`${el.customer.name} clicked`)
-
-    //     return (
-    //         <Modal id={el.customer.id} show='show'>
-    //             <h3>Are you sure you would like to deactivate {el.customer.name}</h3>
-    //             <button onClick={this.hideDelete}>Cancel</button>
-    //             <div className='delete'>
-    //                 <button>Deactivate</button>
-    //             </div>
-    //         </Modal>
-    //     )
-    // }
 
     hideDelete = () => {
         this.setState({ delete: false });
@@ -100,6 +93,30 @@ class AdminHome extends Component {
         return today;
     }
 
+    updateDelete = (name, id) => {
+        console.log(name + id + 'clicked')
+        this.showDelete();
+        this.setState({ 
+            toDelete: {
+                name: name,
+                id: id
+            } 
+        }); 
+    };
+
+    deleteModal = (endpoint, removeFn) => {
+        return (
+            <Modal show={this.state.delete}>
+                <h3>
+                    Are you sure you would like to delete {this.state.toDelete.name}?
+                </h3>
+                <button onClick={this.hideDelete}>Cancel</button>
+                <div className='delete'>
+                    <button onClick={() => deleteData(endpoint, this.state.toDelete.id, removeFn)}>Delete</button>
+                </div>
+            </Modal>
+        )
+    }
   
     render(){
         return (
@@ -158,6 +175,8 @@ class AdminHome extends Component {
                                     show={this.state.show}
                                     delete={this.state.delete}
                                     formatDate={this.formatDate}
+                                    deleteModal={this.deleteModal}
+                                    updateDelete={this.updateDelete}
                                   />
                                 )
                               }}
@@ -175,6 +194,8 @@ class AdminHome extends Component {
                                     show={this.state.show}
                                     delete={this.state.delete}
                                     formatDate={this.formatDate}
+                                    deleteModal={this.deleteModal}
+                                    updateDelete={this.updateDelete}
                                 />
                             )
                             }}
@@ -192,6 +213,8 @@ class AdminHome extends Component {
                                     show={this.state.show}
                                     delete={this.state.delete}
                                     formatDate={this.formatDate}
+                                    deleteModal={this.deleteModal}
+                                    updateDelete={this.updateDelete}
                                 />
                             )
                             }}
@@ -299,7 +322,6 @@ class AdminHome extends Component {
                                 )
                                 }}
                         />
-                        {/* <Route path='/dashboard/account-settings' component={AccountSettings} /> */}
                         <Route path='/dashboard/edit-account-settings' component={EditSettings} />                        
                     </Switch>
                 </div>

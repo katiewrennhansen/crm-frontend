@@ -4,27 +4,6 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
-function deleteComment(id, cb){
-    fetch(config.COMMENTS_ENDPOINT + `/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'content-type': 'application/json',
-            'Authorization': `Bearer ${config.API_KEY}`
-        }
-    })
-    .then((res) => {
-        if(!res.ok){
-            return res.json().then(error => Promise.reject(error))
-        }
-        return res.text()
-    })
-    .then(data => {
-        cb(id)
-    })
-    .catch(error => {
-        console.error(error)
-    })
-}
 
 class AdminComments extends Component {
     constructor(props) {
@@ -33,7 +12,8 @@ class AdminComments extends Component {
             show: false,
             delete: false,
             comments: [],
-            error: null
+            error: null,
+            toDelete: []
         };
     }
 
@@ -44,6 +24,7 @@ class AdminComments extends Component {
         this.setState({
           comments: newComments
         })
+        this.props.hideDelete()
       }
     
     setComments = comments => {
@@ -115,7 +96,9 @@ class AdminComments extends Component {
         return (
             <>
                 <Modal show={this.props.show} >
-                    <form className= 'add_comment_type' onSubmit={(e) => this.addComment(e)}>
+                    <form 
+                        className= 'add_comment_type' 
+                        onSubmit={(e) => this.addComment(e)}>
                         <h3>Add a Comment Type</h3>
                         <div className='form-group'>
                             <label htmlFor='comment_type'></label>
@@ -149,16 +132,13 @@ class AdminComments extends Component {
                                 <td>{c.commdesc}</td>
                                 <td>{c.created_at}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={() => deleteComment(c.id, this.removeComment)}>Delete</button>
-                                    {/* <Modal show={this.props.delete}>
-                                        <h3>
-                                            Are you sure you would like to delete {c.name}?
-                                        </h3>
-                                        <button onClick={this.props.hideDelete}>Cancel</button>
-                                        <div className='delete'>
-                                            <button onClick={() => this.deleteComment(c.id)}>Delete</button>
-                                        </div>
-                                    </Modal> */}
+                                <td className='delete'>
+                                    <button 
+                                        onClick={() => this.props.updateDelete(c.commdesc, c.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                    {(this.props.delete) ? this.props.deleteModal(config.COMMENTS_ENDPOINT , this.removeComment) : null}                                    
                                 </td>
                             </tr>
                         ))}

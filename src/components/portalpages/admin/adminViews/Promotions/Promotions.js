@@ -6,28 +6,6 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
 
-function deletePromotion(id, cb){
-    fetch(`${config.PROMOTIONS_ENDPOINT}/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'content-type': 'application/json',
-            'Authorization': `Bearer ${config.API_KEY}`
-        }
-    })
-    .then((res) => {
-        if(!res.ok){
-            return res.json().then(error => Promise.reject(error))
-        }
-        return res
-    })
-    .then(data => {
-        cb(id)
-    })
-    .catch(error => {
-        console.error(error)
-    })
-}
-
 class Promotions extends Component {
     constructor(props) {
         super(props);
@@ -35,17 +13,19 @@ class Promotions extends Component {
             show: false,
             delete: false,
             promotions: [],
-            error: null
+            error: null,
+            pToDelete: []
         };
     }
 
     removePromotion = id => {
         const newPromotions = this.state.promotions.filter(p =>
-          p.id !== id
+          p.data.id !== id
         )
         this.setState({
           promotions: newPromotions
         })
+        this.props.hideDelete()
       }
     
     setPromotions = promotions => {
@@ -54,6 +34,7 @@ class Promotions extends Component {
             error: null
         })
     }
+
     updatePromotions = data => {
         this.setState({
             promotions: [...this.state.promotions, data],
@@ -76,7 +57,7 @@ class Promotions extends Component {
             return res.json()
         })
         .then(data => {
-            this.setPromotions(data)
+            this.setPromotions(data.promotions)
         })
         .catch(error => {
             this.setState({ error })
@@ -96,25 +77,19 @@ class Promotions extends Component {
         const thousands = ","
         let i = parseInt(amount = Math.abs(Number(amount) || 0)).toString();
         let j = (i.length > 3) ? i.length % 3 : 0;
-        console.log(i)
-        console.log(j)
-      
         return "$" + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands);
       }
-
 
     addPromotion = (e) => {
         e.preventDefault()
         console.log('add promotions!!')
         const newPromotion = {
-            promotion: {
-                typepromotion: e.target.promotion_name.value,
-                totalcost: e.target.total_cost.value,
-                startdate: this.formatDatePicker(e.target.promotion_start.value),
-                duedate: this.formatDatePicker(e.target.promotion_end.value),
-                company_id: 6,
-                user_id: 1,
-            }
+            typepromotion: e.target.promotion_name.value,
+            totalcost: e.target.total_cost.value,
+            startdate: this.formatDatePicker(e.target.promotion_start.value),
+            duedate: this.formatDatePicker(e.target.promotion_end.value),
+            company_id: 6,
+            user_id: 1
         }
         fetch(config.PROMOTIONS_ENDPOINT, {
             method: 'POST',
@@ -131,14 +106,16 @@ class Promotions extends Component {
             return res.json()
         })
         .then(data => {
-            this.updatePromotions(data)
+            const promotion = {
+                data
+            }
+            this.updatePromotions(promotion)
             this.props.hideModal()
         })
         .catch(error => {
             this.setState({ error })
         })
     }
-
 
     render(){  
         return (
@@ -205,23 +182,20 @@ class Promotions extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.promotions.promotions.map(p => (
-                            <tr key={p.id}>
+                            {this.state.promotions.map(p => (
+                            <tr key={p.data.id}>
                                 <td>{p.data.typepromotion}</td>
-                                <td>{p.startdate}</td>
-                                <td>{p.duedate}</td>
-                                <td>{p.totalcost}</td>
+                                <td>{p.data.startdate}</td>
+                                <td>{p.data.duedate}</td>
+                                <td>{this.formatPriceUSD(p.data.totalcost)}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={() => deletePromotion(p.id, this.removePromotion)}>Delete</button>
-                                    {/* <Modal show={this.props.delete}>
-                                        <h3>
-                                            Are you sure you would like to delete this promotion?
-                                        </h3>
-                                        <button onClick={this.props.hideDelete}>Cancel</button>
-                                        <div className='delete'>
-                                            <button onClick={() => this.deletePromotion(p.promotion.id)}>Delete</button>
-                                        </div>
-                                    </Modal> */}
+                                <td className='delete'>
+                                    <button 
+                                        onClick={() => this.props.updateDelete(p.data.typepromotion, p.data.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                    {(this.props.delete) ? this.props.deleteModal(config.PROMOTIONS_ENDPOINT, this.removePromotion) : null}
                                 </td>
                             </tr>
                             ))}

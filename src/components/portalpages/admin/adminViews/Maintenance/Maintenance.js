@@ -4,28 +4,6 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import config from '../../../../../config'
 
-function deleteMaintenanceType(id, cb){
-    fetch(`${config.MAINTENANCE_ENDPOINT}/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'content-type': 'application/json',
-            'Authorization': `Bearer ${config.API_KEY}`
-        }
-    })
-    .then((res) => {
-        if(!res.ok){
-            return res.json().then(error => Promise.reject(error))
-        }
-        return res
-    })
-    .then(data => {
-        cb(id)
-    })
-    .catch(error => {
-        console.error(error)
-    })
-}
-
 
 class Maintenance extends Component {
     constructor(props) {
@@ -45,6 +23,7 @@ class Maintenance extends Component {
         this.setState({
           maintenanceTypes: newMaintType
         })
+        this.props.hideDelete()
       }
     
     setMaintenanceType = maintenanceTypes => {
@@ -116,12 +95,14 @@ class Maintenance extends Component {
     }
 
 
-
     render(){  
         return (
             <>
                 <Modal show={this.props.show} >
-                    <form className= 'add_promotions' onSubmit={(e) => {this.addMaintenanceType(e); this.props.hideModal();}}>
+                    <form 
+                        className= 'add_promotions' 
+                        onSubmit={(e) => this.addMaintenanceType(e)}
+                    >
                         <h3>Add a Maintenance Type</h3>
                         <div className='form-group'>
                             <label htmlFor='promotion_name'></label>
@@ -156,16 +137,13 @@ class Maintenance extends Component {
                                 <td>{m.maindescr}</td>
                                 <td>{m.created_at}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={() => deleteMaintenanceType(m.id, this.removeMaintenanceType)}>Delete</button>
-                                    {/* <Modal show={this.props.delete}>
-                                        <h3>
-                                            Are you sure you would like to delete this maintenance type?
-                                        </h3>
-                                        <button onClick={this.props.hideDelete}>Cancel</button>
-                                        <div className='delete'>
-                                            <button onClick={() => this.deleteMaintenanceType(m.mainttype.id)}>Delete</button>
-                                        </div>
-                                    </Modal> */}
+                                <td className='delete'>
+                                    <button 
+                                        onClick={() => this.props.updateDelete(m.maindescr, m.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                    {(this.props.delete) ? this.props.deleteModal(config.MAINTENANCE_ENDPOINT, this.removeMaintenanceType) : null}                                    
                                 </td>
                             </tr>
                             ))}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 
 
@@ -63,6 +64,12 @@ class CompanySetUp extends Component {
                     {`${data.adescription2}, ${data.adescription5} ${data.adescription4}`}<br></br>
                     {data.adescription1}
                 </address>
+
+                <Link 
+                    to='/dashboard/edit-account-settings'
+                >
+                    Edit
+                </Link>
             </>
         )
     }
