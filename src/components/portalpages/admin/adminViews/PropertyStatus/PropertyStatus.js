@@ -86,12 +86,11 @@ class PropertyStatus extends Component {
     addPropertyStatus = (e) => {
         e.preventDefault()
         const newPropertyStatus = {
-            status: {
-                statusdesc: e.target.feature_status.value,
-                showinportal: false,
-                company_id: 6,
-                user_id: 1
-            }
+            statusdesc: e.target.feature_status.value,
+            showinportal: false,
+            company_id: 6,
+            user_id: 1
+   
         }
         fetch(config.PROPERTY_STATUS_ENDPOINT, {
             method: 'POST',

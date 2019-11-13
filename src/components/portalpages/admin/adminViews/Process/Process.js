@@ -1,54 +1,126 @@
 import React, { Component } from 'react'
-import cuuid from 'cuuid'
-import ADMIN_DATA from '../../../../../admin-data'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
+import config from '../../../../../config'
 
-let data = ADMIN_DATA.process
+function deleteProcess(id, cb){
+    fetch(`${config.PROCESS_ENDPOINT}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${config.API_KEY}`
+        }
+    })
+    .then((res) => {
+        if(!res.ok){
+            return res.json().then(error => Promise.reject(error))
+        }
+        return res.text()
+    })
+    .then(data => {
+        cb(id)
+    })
+    .catch(error => {
+        console.error(error)
+    })
+}
 
 class Process extends Component {
     constructor(props) {
         super(props);
         this.state = {
             show: false,
-            delete: false
+            delete: false,
+            process: [],
+            error: null
         };
+    }
+
+    removeProcess = id => {
+        const newProcess = this.state.process.filter(p =>
+          p.id !== id
+        )
+        this.setState({
+          process: newProcess
+        })
+      }
+    
+    setProcess = process => {
+        this.setState({
+            process: process,
+            error: null
+        })
+    }
+    updateProcess = data => {
+        this.setState({
+            process: [...this.state.process, data],
+            error: null
+        })
+    }
+
+    componentDidMount(){
+        fetch(config.PROCESS_ENDPOINT, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+            this.setProcess(data.processts)
+        })
+        .catch(error => {
+            this.setState({ error })
+        })
     }
 
     addProcess = (e) => {
         e.preventDefault()
-        console.log('add property feature!!')
-        const newPropertyStatus = {
-            status: {
-                id: cuuid(),
-                statusdesc: e.target.feature_status.value,
-                dateCreated: this.props.formatDate(),
-                showInPortal: false,
-                company_id: 6,
-                user_id: 1
+        const newProcess = {
+            data: {
+                processdesc: e.target.process.value,
+                steps: []
             }
         }
-        data.push(newPropertyStatus)
+        fetch(config.PROCESS_ENDPOINT, {
+            method: 'POST',
+            body: JSON.stringify(newProcess),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => {
+            console.log(res)
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+            this.updateProcess(data)
+            this.props.hideModal()
+        })
+        .catch(error => {
+            this.setState({ error })
+        }) 
     }
 
-    deleteProcess = (id) => {
-        data = data.filter(c => {
-            return c.ptype.id !== id
-        })
-        // for(let i = 0; i < data.length; i++){
-        //     if(data[i].ptype.id === id)
-        //         data.splice(i, 1)
-        // }
-        
-        this.props.hideDelete();
-    }
+
+    
 
     render(){  
         return (
             <>
                 <Modal show={this.props.show} >
-                    <form className= 'add_feature' onSubmit={(e) => {this.addProcess(e); this.props.hideModal();}}>
+                    <form className= 'add_feature' onSubmit={(e) => this.addProcess(e)}>
                         <h3>Add a Process</h3>
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>
@@ -77,13 +149,13 @@ class Process extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map(p => {
+                            {this.state.process.map(p => {
                                 return (
-                                <tr key={p.ptype.id}>
-                                    <td>{p.ptype.title}</td>
-                                    <td>{p.ptype.dateCreated}</td>
+                                <tr>
+                                    <td>{p.data.processdesc}</td>
+                                    <td>Created</td>
                                     <td><button>Update</button></td>
-                                    <td className='delete'><button onClick={() => this.deleteProcess(p.ptype.id)}>Delete</button>
+                                    <td className='delete'><button onClick={() => deleteProcess(p.data.id, this.removeProcess)}>Delete</button>
                                         {/* <Modal show={this.props.delete}>
                                             <h3>Are you sure you would like to delete this process?</h3>
                                             <button onClick={this.props.hideDelete}>Cancel</button>
