@@ -25,7 +25,7 @@ class Promotions extends Component {
         this.setState({
           promotions: newPromotions
         })
-        this.props.hideDelete()
+        this.props.func.hideDelete()
       }
     
     setPromotions = promotions => {
@@ -82,7 +82,6 @@ class Promotions extends Component {
 
     addPromotion = (e) => {
         e.preventDefault()
-        console.log('add promotions!!')
         const newPromotion = {
             typepromotion: e.target.promotion_name.value,
             totalcost: e.target.total_cost.value,
@@ -110,7 +109,7 @@ class Promotions extends Component {
                 data
             }
             this.updatePromotions(promotion)
-            this.props.hideModal()
+            this.props.func.hideModal()
         })
         .catch(error => {
             this.setState({ error })
@@ -118,9 +117,10 @@ class Promotions extends Component {
     }
 
     render(){  
+        const promo = this.props.func
         return (
             <>
-                <Modal show={this.props.show} >
+                <Modal show={promo.show} >
                     <form className= 'add_promotions' onSubmit={(e) => this.addPromotion(e)}>
                         <h3>Add a Promotion</h3>
                         <div className='form-group'>
@@ -165,11 +165,11 @@ class Promotions extends Component {
                         </div>
                         <SubmitButton className='submit_promotions' text='Save'/>
                     </form>
-                    <button onClick={this.props.hideModal}>Cancel</button>
+                    <button onClick={promo.hideModal}>Cancel</button>
                 </Modal>
                 <div className='promotion-container'>
                     <h3>Promotions</h3>
-                    <button className='add_promotion' onClick={this.props.showModal}>Add Promotion</button>
+                    <button className='add_promotion' onClick={promo.showModal}>Add Promotion</button>
                     <table className='promotion_table'>
                         <thead>
                             <tr>
@@ -191,11 +191,11 @@ class Promotions extends Component {
                                 <td><button>Update</button></td>
                                 <td className='delete'>
                                     <button 
-                                        onClick={() => this.props.updateDelete(p.data.typepromotion, p.data.id)}
+                                        onClick={() => promo.updateDelete(p.data.typepromotion, p.data.id)}
                                     >
                                         Delete
                                     </button>
-                                    {(this.props.delete) ? this.props.deleteModal(config.PROMOTIONS_ENDPOINT, this.removePromotion) : null}
+                                    {(promo.delete) ? promo.deleteModal(config.PROMOTIONS_ENDPOINT, this.removePromotion) : null}
                                 </td>
                             </tr>
                             ))}

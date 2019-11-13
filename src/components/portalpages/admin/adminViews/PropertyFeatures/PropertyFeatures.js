@@ -4,28 +4,6 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
-function deletePropertyFeature(id, cb){
-    fetch(`${config.PROPERTY_FEATURE_ENDPOINT}/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'content-type': 'application/json',
-            'Authorization': `Bearer ${config.API_KEY}`
-        }
-    })
-    .then((res) => {
-        if(!res.ok){
-            return res.json().then(error => Promise.reject(error))
-        }
-        return res.text()
-    })
-    .then(data => {
-        cb(id)
-    })
-    .catch(error => {
-        console.error(error)
-    })
-}
-
 class PropertyFeatures extends Component {
     constructor(props) {
         super(props);
@@ -44,6 +22,7 @@ class PropertyFeatures extends Component {
         this.setState({
           features: newFeatures
         })
+        this.props.func.hideDelete()
       }
     
     setFeature = features => {
@@ -84,13 +63,11 @@ class PropertyFeatures extends Component {
 
     addPropertyFeature = (e) => {
         e.preventDefault()
-        console.log('add property feature!!')
         const newPropertyFeatures = {
             featuredescr: e.target.feature_name.value,
             company_id: 6,
             user_id: 7,
         }
-        console.log(newPropertyFeatures)
         fetch(config.PROPERTY_FEATURE_ENDPOINT, {
             method: 'POST',
             body: JSON.stringify(newPropertyFeatures),
@@ -107,20 +84,23 @@ class PropertyFeatures extends Component {
         })
         .then(data => {
             this.updateFeatures(data)
-            this.props.hideModal()
+            this.props.func.hideModal()
         })
         .catch(error => {
             this.setState({ error })
         })
     }
-
  
     
     render(){  
+        const feature = this.props.func
         return (
             <>
-                <Modal show={this.props.show} >
-                    <form className= 'add_feature' onSubmit={(e) => this.addPropertyFeature(e)}>
+                <Modal show={feature.show} >
+                    <form 
+                        className= 'add_feature' 
+                        onSubmit={(e) => this.addPropertyFeature(e)}
+                    >
                         <h3>Add a Property Feature</h3>
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>
@@ -134,11 +114,11 @@ class PropertyFeatures extends Component {
                         </div>
                         <SubmitButton className='submit_property' text='Save'/>
                     </form>
-                    <button onClick={this.props.hideModal}>Cancel</button>
+                    <button onClick={feature.hideModal}>Cancel</button>
                 </Modal>
                 <div className='promotion-container'>
                     <h3>Property Features</h3>
-                    <button className='add_promotion' onClick={this.props.showModal}>Add Property Feature</button>
+                    <button className='add_promotion' onClick={feature.showModal}>Add Property Feature</button>
                     <table className='promotion_table'>
                         <thead>
                             <tr>
@@ -154,14 +134,14 @@ class PropertyFeatures extends Component {
                                 <td>{f.featuredescr}</td>
                                 <td>{f.created_at}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={() => deletePropertyFeature(f.id, this.removeFeature)}>Delete</button>
-                                    {/* <Modal show={this.props.delete}>
-                                        <h3>Are you sure you would like to delete this property feature?</h3>
-                                        <button onClick={this.props.hideDelete}>Cancel</button>
-                                        <div className='delete'>
-                                            <button onClick={() => this.deletePropertyFeatures(f.featuretype.id)}>Delete</button>
-                                        </div>
-                                    </Modal> */}
+                                <td className='delete'>
+                                    <button 
+                                        onClick={() => feature.updateDelete(f.featuredescr, f.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                    {(feature.delete) ? feature.deleteModal(config.PROPERTY_FEATURE_ENDPOINT, this.removeFeature) : null}                                    
+                                  
                                 </td>
                             </tr>
                             ))}

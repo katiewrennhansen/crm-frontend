@@ -23,7 +23,7 @@ class Maintenance extends Component {
         this.setState({
           maintenanceTypes: newMaintType
         })
-        this.props.hideDelete()
+        this.props.func.hideDelete()
       }
     
     setMaintenanceType = maintenanceTypes => {
@@ -86,7 +86,7 @@ class Maintenance extends Component {
         })
         .then(data => {
             this.updateMaintenanceType(data)
-            this.props.hideModal()
+            this.props.func.hideModal()
         })
         .catch(error => {
             this.setState({ error })
@@ -96,9 +96,10 @@ class Maintenance extends Component {
 
 
     render(){  
+        const maint = this.props.func
         return (
             <>
-                <Modal show={this.props.show} >
+                <Modal show={maint.show} >
                     <form 
                         className= 'add_promotions' 
                         onSubmit={(e) => this.addMaintenanceType(e)}
@@ -116,12 +117,12 @@ class Maintenance extends Component {
                         </div>
                         <SubmitButton className='submit_promotions' text='Save'/>
                     </form>
-                    <button onClick={this.props.hideModal}>Cancel</button>
+                    <button onClick={maint.hideModal}>Cancel</button>
                 </Modal>
 
                 <div className='promotion-container'>
                     <h3>Maintenance</h3>
-                    <button className='add_promotion' onClick={this.props.showModal}>Add Maintenance Type</button>
+                    <button className='add_promotion' onClick={maint.showModal}>Add Maintenance Type</button>
                     <table className='promotion_table'>
                         <thead>
                             <tr>
@@ -139,11 +140,11 @@ class Maintenance extends Component {
                                 <td><button>Update</button></td>
                                 <td className='delete'>
                                     <button 
-                                        onClick={() => this.props.updateDelete(m.maindescr, m.id)}
+                                        onClick={() => maint.updateDelete(m.maindescr, m.id)}
                                     >
                                         Delete
                                     </button>
-                                    {(this.props.delete) ? this.props.deleteModal(config.MAINTENANCE_ENDPOINT, this.removeMaintenanceType) : null}                                    
+                                    {(maint.delete) ? maint.deleteModal(config.MAINTENANCE_ENDPOINT, this.removeMaintenanceType) : null}                                    
                                 </td>
                             </tr>
                             ))}

@@ -12,11 +12,12 @@ import CustomerStatus from '../adminViews/CustomerStatus/CustomerStatus'
 import Reminders from '../adminViews/Reminders/Reminders'
 import EditSettings from '../adminViews/AccountSettings/EditSettings'
 import Process from '../adminViews/Process/Process'
-import './AdminHome.css'
 import CustomerAccounts from '../adminViews/CustomerAccounts/CustomerAccounts'
 import CompanySetUp from '../adminViews/CompanySetUp/CompanySetUp'
 import Modal from '../pagecomponents/Modal'
+import TextInput from '../../../Login/LoginComponents/TextInput'
 import config from '../../../../config'
+import './AdminHome.css'
 
 
 function deleteData(endpont, id, cb){
@@ -49,10 +50,16 @@ class AdminHome extends Component {
             title: '',
             show: false,
             delete: false,
+            update: false,
             toDelete: {
                 name: '',
                 id: ''
-            }
+            },
+            toUpdate: {
+                name: '',
+                id: ''
+            },
+            updatedContent: ''
         }
     }
 
@@ -78,6 +85,14 @@ class AdminHome extends Component {
         this.setState({ delete: false });
     }
 
+    showUpdate = () => {
+        this.setState({ update: true });
+    };
+
+    hideUpdate = () => {
+        this.setState({ update: false });
+    }
+
     formatDate(){
         const newDate = new Date();
         let day = newDate.getDate();
@@ -94,7 +109,6 @@ class AdminHome extends Component {
     }
 
     updateDelete = (name, id) => {
-        console.log(name + id + 'clicked')
         this.showDelete();
         this.setState({ 
             toDelete: {
@@ -103,6 +117,54 @@ class AdminHome extends Component {
             } 
         }); 
     };
+
+    updateUpdate = (name, id) => {
+        this.showUpdate();
+        this.setState({ 
+            toUpdate: {
+                name: name,
+                id: id
+            } 
+        }); 
+    };
+
+    handleCommentChange = e => {
+        this.setState({
+            updatedContent: e.target.value
+        })
+        console.log(this.state.updatedContent)
+    }
+
+    updateData = (e) => {
+        e.preventDefault()
+        const id = this.state.toUpdate.id
+        // const title = e.target.comment_type.value
+        const updatedContent = {
+            commtype: {
+                commdesc: 'Another New Comment'
+            }
+        }
+        console.log(updatedContent, id)
+        fetch(`${config.COMMENTS_ENDPOINT}/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(updatedContent),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then((res) => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+        })
+        .then(data => {
+            this.hideUpdate()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
 
     deleteModal = (endpoint, removeFn) => {
         return (
@@ -117,8 +179,51 @@ class AdminHome extends Component {
             </Modal>
         )
     }
+
+
+    updateModal = () => {
+        return (
+            <Modal show={this.state.update}>
+                <h3>
+                    Update {this.state.toUpdate.name}?
+                </h3>
+                <form>
+                <div className='form-group'>
+                    <label htmlFor='comment_type'></label>
+                    <TextInput
+                        id='comment_type'
+                        name='comment_type'
+                        label='Comment Type'
+                        type='text'
+                        value={this.state.toUpdate.name}
+                        onChange={this.handleCommentChange}
+                    />
+                </div>
+                <div className='update'>
+                    <button onClick={(e) => {this.hideUpdate(); this.updateData(e)}}>Update</button>
+                </div>
+                </form>
+                <button onClick={this.hideUpdate}>Cancel</button>   
+            </Modal>
+        )
+    }
   
     render(){
+        const propFunctions = {
+            name: this.props.name,
+            showModal: this.showModal,
+            hideModal: this.hideModal,
+            showDelete: this.showDelete,
+            hideDelete: this.hideDelete,
+            show: this.state.show,
+            delete: this.state.delete,
+            update: this.state.update,
+            formatDate: this.formatDate,
+            deleteModal: this.deleteModal,
+            updateDelete: this.updateDelete,
+            updateModal: this.updateModal,
+            updateUpdate: this.updateUpdate
+        }
         return (
             <div className='dashboard-container'>
                 <div className='dash-sidebar'>
@@ -139,9 +244,7 @@ class AdminHome extends Component {
                             path='/dashboard/home' 
                             render={(props) => {
                                 return (
-                                  <AdminDash
-                                    name={this.props.name}
-                                  />
+                                  <AdminDash name={this.props.name} />
                                 )
                               }}
                         />
@@ -149,16 +252,7 @@ class AdminHome extends Component {
                             path='/dashboard/company-setup' 
                             render={(props) => {
                                 return (
-                                  <CompanySetUp
-                                    name={this.props.name}
-                                    showModal={this.showModal}
-                                    hideModal={this.hideModal}
-                                    showDelete={this.showDelete}
-                                    hideDelete={this.hideDelete}
-                                    show={this.state.show}
-                                    delete={this.state.delete}
-                                    formatDate={this.formatDate}
-                                  />
+                                  <CompanySetUp func={propFunctions} />
                                 )
                               }}
                         />
@@ -166,18 +260,7 @@ class AdminHome extends Component {
                             path='/dashboard/comments' 
                             render={(props) => {
                                 return (
-                                  <AdminComments
-                                    name={this.props.name}
-                                    showModal={this.showModal}
-                                    hideModal={this.hideModal}
-                                    showDelete={this.showDelete}
-                                    hideDelete={this.hideDelete}
-                                    show={this.state.show}
-                                    delete={this.state.delete}
-                                    formatDate={this.formatDate}
-                                    deleteModal={this.deleteModal}
-                                    updateDelete={this.updateDelete}
-                                  />
+                                  <AdminComments func={propFunctions} />
                                 )
                               }}
                         />
@@ -185,18 +268,7 @@ class AdminHome extends Component {
                         path='/dashboard/promotions' 
                         render={(props) => {
                             return (
-                                <Promotions
-                                    name={this.props.name}
-                                    showModal={this.showModal}
-                                    hideModal={this.hideModal}
-                                    showDelete={this.showDelete}
-                                    hideDelete={this.hideDelete}
-                                    show={this.state.show}
-                                    delete={this.state.delete}
-                                    formatDate={this.formatDate}
-                                    deleteModal={this.deleteModal}
-                                    updateDelete={this.updateDelete}
-                                />
+                                <Promotions func={propFunctions} />
                             )
                             }}
                         />
@@ -204,18 +276,7 @@ class AdminHome extends Component {
                         path='/dashboard/maintenance' 
                         render={(props) => {
                             return (
-                                <Maintenance
-                                    name={this.props.name}
-                                    showModal={this.showModal}
-                                    hideModal={this.hideModal}
-                                    showDelete={this.showDelete}
-                                    hideDelete={this.hideDelete}
-                                    show={this.state.show}
-                                    delete={this.state.delete}
-                                    formatDate={this.formatDate}
-                                    deleteModal={this.deleteModal}
-                                    updateDelete={this.updateDelete}
-                                />
+                                <Maintenance func={propFunctions} />
                             )
                             }}
                         />
@@ -223,16 +284,7 @@ class AdminHome extends Component {
                         path='/dashboard/property-features' 
                         render={(props) => {
                             return (
-                                <PropertyFeatures
-                                    name={this.props.name}
-                                    showModal={this.showModal}
-                                    hideModal={this.hideModal}
-                                    showDelete={this.showDelete}
-                                    hideDelete={this.hideDelete}
-                                    show={this.state.show}
-                                    delete={this.state.delete}
-                                    formatDate={this.formatDate}
-                                />
+                                <PropertyFeatures func={propFunctions} />
                             )
                             }}
                         />
@@ -240,16 +292,7 @@ class AdminHome extends Component {
                         path='/dashboard/property-status' 
                         render={(props) => {
                             return (
-                                <PropertyStatus
-                                    name={this.props.name}
-                                    showModal={this.showModal}
-                                    hideModal={this.hideModal}
-                                    showDelete={this.showDelete}
-                                    hideDelete={this.hideDelete}
-                                    show={this.state.show}
-                                    delete={this.state.delete}
-                                    formatDate={this.formatDate}
-                                />
+                                <PropertyStatus func={propFunctions} />
                             )
                             }}
                         />
@@ -257,16 +300,7 @@ class AdminHome extends Component {
                         path='/dashboard/customer-status' 
                         render={(props) => {
                             return (
-                                <CustomerStatus
-                                    name={this.props.name}
-                                    showModal={this.showModal}
-                                    hideModal={this.hideModal}
-                                    showDelete={this.showDelete}
-                                    hideDelete={this.hideDelete}
-                                    show={this.state.show}
-                                    delete={this.state.delete}
-                                    formatDate={this.formatDate}
-                                />
+                                <CustomerStatus func={propFunctions} />
                             )
                             }}
                         />
@@ -274,16 +308,7 @@ class AdminHome extends Component {
                         path='/dashboard/reminders' 
                         render={(props) => {
                             return (
-                                <Reminders
-                                    name={this.props.name}
-                                    showModal={this.showModal}
-                                    hideModal={this.hideModal}
-                                    showDelete={this.showDelete}
-                                    hideDelete={this.hideDelete}
-                                    show={this.state.show}
-                                    delete={this.state.delete}
-                                    formatDate={this.formatDate}
-                                />
+                                <Reminders func={propFunctions} />
                             )
                             }}
                         />
@@ -291,16 +316,7 @@ class AdminHome extends Component {
                         path='/dashboard/process' 
                         render={(props) => {
                             return (
-                                <Process
-                                    name={this.props.name}
-                                    showModal={this.showModal}
-                                    hideModal={this.hideModal}
-                                    showDelete={this.showDelete}
-                                    hideDelete={this.hideDelete}
-                                    show={this.state.show}
-                                    delete={this.state.delete}
-                                    formatDate={this.formatDate}
-                                />
+                                <Process func={propFunctions} />
                             )
                             }}
                         />
@@ -308,17 +324,7 @@ class AdminHome extends Component {
                             path='/dashboard/customer-accounts' 
                             render={(props) => {
                                 return (
-                                    <CustomerAccounts
-                                        name={this.props.name}
-                                        showModal={this.showModal}
-                                        hideModal={this.hideModal}
-                                        showDelete={this.showDelete}
-                                        hideDelete={this.hideDelete}
-                                        show={this.state.show}
-                                        delete={this.state.delete}
-                                        formatDate={this.formatDate}
-                                        openDelete={this.openDelete}
-                                    />
+                                    <CustomerAccounts func={propFunctions} />
                                 )
                                 }}
                         />

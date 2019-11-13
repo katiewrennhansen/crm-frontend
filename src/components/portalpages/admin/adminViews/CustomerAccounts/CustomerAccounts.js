@@ -19,7 +19,6 @@ class CustomerAccounts extends Component {
 
     addCustomer = (e) => {
         e.preventDefault()
-        console.log('add new customer!!')
         const newCustomer = {
             customer: {
                 id: cuuid(),
@@ -49,15 +48,14 @@ class CustomerAccounts extends Component {
             button.innerHTML = "Deactivate";
             el.customer.status = "Active"  
         }
-
-    
     }
     
     render(){  
+        const account = this.props.func
         return (
             <>
-                <Modal show={this.props.show} >
-                    <form className= 'add_feature' onSubmit={(e) => {this.addCustomer(e); this.props.hideModal();}}>
+                <Modal show={account.show} >
+                    <form className= 'add_feature' onSubmit={(e) => {this.addCustomer(e); account.hideModal();}}>
                         <h3>Customer Accounts</h3>
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>
@@ -85,11 +83,11 @@ class CustomerAccounts extends Component {
                         </div>
                         <SubmitButton className='submit_property' text='Save'/>
                     </form>
-                    <button onClick={this.props.hideModal}>Cancel</button>
+                    <button onClick={account.hideModal}>Cancel</button>
                 </Modal>
                 <div className='promotion-container'>
                     <h3>Customer Accounts</h3>
-                    <button className='add_promotion' onClick={this.props.showModal}>Add Customer</button>
+                    <button className='add_promotion' onClick={account.showModal}>Add Customer</button>
                     <table className='promotion_table'>
                         <thead>
                             <tr>
@@ -111,9 +109,18 @@ class CustomerAccounts extends Component {
                                         <td>{c.customer.phone}</td>
                                         <td>{c.customer.status}</td>
                                         <td><button>View</button></td>
-                                        <td className='delete'><button className='delete' id={`delete${id}`} onClick={() => this.deactivateCustomer(id)}>Deactivate</button></td>
+                                        <td className='delete'>
+                                            <button 
+                                                className='delete' 
+                                                id={`delete${id}`} 
+                                                onClick={() => this.deactivateCustomer(id)}
+                                            >
+                                                Deactivate
+                                            </button>
+                                        </td>
                                     </tr>
-                            )})}
+                                )
+                            })}
                         </tbody>
                     </table>
                 </div>

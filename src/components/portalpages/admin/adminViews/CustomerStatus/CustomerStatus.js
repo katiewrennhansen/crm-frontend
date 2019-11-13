@@ -4,27 +4,6 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
-function deleteStatus(id, cb){
-    fetch(`${config.CUSTOMER_STATUS_ENDPOINT}/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'content-type': 'application/json',
-            'Authorization': `Bearer ${config.API_KEY}`
-        }
-    })
-    .then((res) => {
-        if(!res.ok){
-            return res.json().then(error => Promise.reject(error))
-        }
-        return res.text()
-    })
-    .then(data => {
-        cb(id)
-    })
-    .catch(error => {
-        console.error(error)
-    })
-}
 
 class CustomerStatus extends Component {
     constructor(props) {
@@ -44,6 +23,7 @@ class CustomerStatus extends Component {
         this.setState({
           statuses: newStatuses
         })
+        this.props.func.hideDelete()
       }
     
     setStatuses = statuses => {
@@ -104,7 +84,7 @@ class CustomerStatus extends Component {
         })
         .then(data => {
             this.updateStatuses(data)
-            this.props.hideModal()
+            this.props.func.hideModal()
         })
         .catch(error => {
             this.setState({ error })
@@ -113,9 +93,10 @@ class CustomerStatus extends Component {
 
     
     render(){  
+        const status = this.props.func
         return (
             <>
-                <Modal show={this.props.show} >
+                <Modal show={status.show} >
                     <form className= 'add_feature' onSubmit={(e) => this.addCustomerStatus(e)}>
                         <h3>Customer Status</h3>
                         <div className='form-group'>
@@ -130,11 +111,11 @@ class CustomerStatus extends Component {
                         </div>
                         <SubmitButton className='submit_property' text='Save'/>
                     </form>
-                    <button onClick={this.props.hideModal}>Cancel</button>
+                    <button onClick={status.hideModal}>Cancel</button>
                 </Modal>
                 <div className='promotion-container'>
                     <h3>Customer Status</h3>
-                    <button className='add_promotion' onClick={this.props.showModal}>Add Customer Status</button>
+                    <button className='add_promotion' onClick={status.showModal}>Add Customer Status</button>
                     <table className='promotion_table'>
                         <thead>
                             <tr>
@@ -150,14 +131,13 @@ class CustomerStatus extends Component {
                                 <td>{c.csdesc}</td>
                                 <td>{c.created_at}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={() => deleteStatus(c.id, this.removeStatuses)}>Delete</button>
-                                    {/* <Modal show={this.props.delete}>
-                                        <h3>Are you sure you would like to delete this property feature?</h3>
-                                        <button onClick={this.props.hideDelete}>Cancel</button>
-                                        <div className='delete'>
-                                            <button onClick={() => this.deleteCustomerStatus(c.cstatus.id)}>Delete</button>
-                                        </div>
-                                    </Modal> */}
+                                <td className='delete'>
+                                    <button 
+                                        onClick={() => status.updateDelete(c.csdesc, c.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                    {(status.delete) ? status.deleteModal(config.CUSTOMER_STATUS_ENDPOINT, this.removeStatuses) : null}                            
                                 </td>
                             </tr>
                             ))}

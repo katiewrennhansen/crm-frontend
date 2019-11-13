@@ -4,29 +4,6 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
-
-function deleteReminders(id, cb){
-    fetch(`${config.REMINDERS_ENDPOINT}/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'content-type': 'application/json',
-            'Authorization': `Bearer ${config.API_KEY}`
-        }
-    })
-    .then((res) => {
-        if(!res.ok){
-            return res.json().then(error => Promise.reject(error))
-        }
-        return res.text()
-    })
-    .then(data => {
-        cb(id)
-    })
-    .catch(error => {
-        console.error(error)
-    })
-}
-
 class Reminders extends Component {
     constructor(props) {
         super(props);
@@ -45,6 +22,7 @@ class Reminders extends Component {
         this.setState({
           reminders: newReminders
         })
+        this.props.func.hideDelete()
       }
     
     setReminders = reminders => {
@@ -108,7 +86,7 @@ class Reminders extends Component {
         })
         .then(data => {
             this.updateReminders(data)
-            this.props.hideModal()
+            this.props.func.hideModal()
         })
         .catch(error => {
             this.setState({ error })
@@ -119,9 +97,10 @@ class Reminders extends Component {
 
 
     render(){  
+        const reminder = this.props.func
         return (
             <>
-                <Modal show={this.props.show} >
+                <Modal show={reminder.show} >
                     <form className= 'add_feature' onSubmit={(e) => this.addReminder(e)}>
                         <h3>Add a Reminder</h3>
                         <div className='form-group'>
@@ -150,11 +129,11 @@ class Reminders extends Component {
                         </div>
                         <SubmitButton className='submit_property' text='Save'/>
                     </form>
-                    <button onClick={this.props.hideModal}>Cancel</button>
+                    <button onClick={reminder.hideModal}>Cancel</button>
                 </Modal>
                 <div className='promotion-container'>
                     <h3>Reminders</h3>
-                    <button className='add_promotion' onClick={this.props.showModal}>Add Reminder</button>
+                    <button className='add_promotion' onClick={reminder.showModal}>Add Reminder</button>
                     <table className='promotion_table'>
                         <thead>
                             <tr>
@@ -172,14 +151,13 @@ class Reminders extends Component {
                                 <td>{r.periodmonths}</td>
                                 <td>{r.bodymessage}</td>
                                 <td><button>Update</button></td>
-                                <td className='delete'><button onClick={() => deleteReminders(r.id, this.removeReminder)}>Delete</button>
-                                    {/* <Modal show={this.props.delete}>
-                                        <h3>Are you sure you would like to delete this reminder?</h3>
-                                        <button onClick={this.props.hideDelete}>Cancel</button>
-                                        <div className='delete'>
-                                            <button onClick={() => this.deleteReminders(r.reminder.id)}>Delete</button>
-                                        </div>
-                                    </Modal> */}
+                                <td className='delete'>
+                                    <button 
+                                        onClick={() => reminder.updateDelete(r.rtype, r.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                {(reminder.delete) ? reminder.deleteModal(config.REMINDERS_ENDPOINT, this.removeReminder) : null}
                                 </td>
                             </tr>
                             ))}

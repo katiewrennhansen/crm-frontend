@@ -4,27 +4,6 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
-function deleteProcess(id, cb){
-    fetch(`${config.PROCESS_ENDPOINT}/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'content-type': 'application/json',
-            'Authorization': `Bearer ${config.API_KEY}`
-        }
-    })
-    .then((res) => {
-        if(!res.ok){
-            return res.json().then(error => Promise.reject(error))
-        }
-        return res.text()
-    })
-    .then(data => {
-        cb(id)
-    })
-    .catch(error => {
-        console.error(error)
-    })
-}
 
 class Process extends Component {
     constructor(props) {
@@ -44,6 +23,7 @@ class Process extends Component {
         this.setState({
           process: newProcess
         })
+        this.props.func.hideDelete()
       }
     
     setProcess = process => {
@@ -106,7 +86,7 @@ class Process extends Component {
         })
         .then(data => {
             this.updateProcess(data)
-            this.props.hideModal()
+            this.props.func.hideModal()
         })
         .catch(error => {
             this.setState({ error })
@@ -117,10 +97,14 @@ class Process extends Component {
     
 
     render(){  
+        const process = this.props.func
         return (
             <>
-                <Modal show={this.props.show} >
-                    <form className= 'add_feature' onSubmit={(e) => this.addProcess(e)}>
+                <Modal show={process.show} >
+                    <form 
+                        className= 'add_feature' 
+                        onSubmit={(e) => this.addProcess(e)}
+                    >
                         <h3>Add a Process</h3>
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>
@@ -134,11 +118,11 @@ class Process extends Component {
                         </div>
                         <SubmitButton className='submit_property' text='Save'/>
                     </form>
-                    <button onClick={this.props.hideModal}>Cancel</button>
+                    <button onClick={process.hideModal}>Cancel</button>
                 </Modal>
                 <div className='promotion-container'>
                     <h3>Process</h3>
-                    <button className='add_promotion' onClick={this.props.showModal}>Add Process</button>
+                    <button className='add_promotion' onClick={process.showModal}>Add Process</button>
                     <table className='promotion_table'>
                         <thead>
                             <tr>
@@ -155,14 +139,13 @@ class Process extends Component {
                                     <td>{p.data.processdesc}</td>
                                     <td>Created</td>
                                     <td><button>Update</button></td>
-                                    <td className='delete'><button onClick={() => deleteProcess(p.data.id, this.removeProcess)}>Delete</button>
-                                        {/* <Modal show={this.props.delete}>
-                                            <h3>Are you sure you would like to delete this process?</h3>
-                                            <button onClick={this.props.hideDelete}>Cancel</button>
-                                            <div className='delete'>
-                                                <button onClick={() => this.deleteProcess(p.ptype.id)}>Delete</button>
-                                            </div>
-                                        </Modal> */}
+                                    <td className='delete'>
+                                        <button 
+                                            onClick={() => process.updateDelete(p.data.processdesc, p.data.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                        {(process.delete) ? process.deleteModal(config.PROCESS_ENDPOINT, this.removePromotion) : null}
                                     </td>
                                 </tr>
                             )})}

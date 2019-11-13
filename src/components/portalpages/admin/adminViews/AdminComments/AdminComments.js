@@ -12,8 +12,7 @@ class AdminComments extends Component {
             show: false,
             delete: false,
             comments: [],
-            error: null,
-            toDelete: []
+            error: null
         };
     }
 
@@ -24,7 +23,7 @@ class AdminComments extends Component {
         this.setState({
           comments: newComments
         })
-        this.props.hideDelete()
+        this.props.func.hideDelete()
       }
     
     setComments = comments => {
@@ -33,6 +32,7 @@ class AdminComments extends Component {
             error: null
         })
     }
+    
     updateComments = data => {
         this.setState({
             comments: [...this.state.comments, data],
@@ -85,17 +85,18 @@ class AdminComments extends Component {
         })
         .then(data => {
             this.updateComments(data)
-            this.props.hideModal()
+            this.props.func.hideModal()
         })
         .catch(error => {
             this.setState({ error })
         }) 
     }
 
-    render(){  
+    render(){ 
+        const comment = this.props.func 
         return (
             <>
-                <Modal show={this.props.show} >
+                <Modal show={comment.show} >
                     <form 
                         className= 'add_comment_type' 
                         onSubmit={(e) => this.addComment(e)}>
@@ -111,12 +112,12 @@ class AdminComments extends Component {
                         </div>
                         <SubmitButton className='submit_comment' text='Save'/>
                     </form>
-                    <button onClick={this.props.hideModal}>Cancel</button>
+                    <button onClick={comment.hideModal}>Cancel</button>
                 </Modal>
                 
                 <div className='promotion-container'>
                     <h3>Comments Type</h3>
-                    <button className='add_promotion' onClick={this.props.showModal}>Add Comment Type</button>
+                    <button className='add_promotion' onClick={comment.showModal}>Add Comment Type</button>
                     <table className='promotion_table'>
                         <thead>
                             <tr>
@@ -131,14 +132,21 @@ class AdminComments extends Component {
                             <tr key={c.id}>
                                 <td>{c.commdesc}</td>
                                 <td>{c.created_at}</td>
-                                <td><button>Update</button></td>
+                                <td>
+                                    <button
+                                        onClick={() => comment.updateUpdate(c.commdesc, c.id)}
+                                    >
+                                        Update
+                                    </button>
+                                    {(comment.update) ? comment.updateModal(config.COMMENTS_ENDPOINT , this.updateComment) : null}                                    
+                                </td>
                                 <td className='delete'>
                                     <button 
-                                        onClick={() => this.props.updateDelete(c.commdesc, c.id)}
+                                        onClick={() => comment.updateDelete(c.commdesc, c.id)}
                                     >
                                         Delete
                                     </button>
-                                    {(this.props.delete) ? this.props.deleteModal(config.COMMENTS_ENDPOINT , this.removeComment) : null}                                    
+                                    {(comment.delete) ? comment.deleteModal(config.COMMENTS_ENDPOINT , this.removeComment) : null}                                    
                                 </td>
                             </tr>
                         ))}
