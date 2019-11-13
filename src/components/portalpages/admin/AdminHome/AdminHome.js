@@ -102,18 +102,6 @@ class AdminHome extends Component {
 
   
     render(){
-
-        // const func = {
-        //     name: this.props.name,
-        //     showModal: this.showModal,
-        //     hideModal: this.hideModal,
-        //     showDelete: this.showDelete,
-        //     hideDelete: this.hideDelete,
-        //     show: this.state.show,
-        //     delete: this.state.delete,
-        //     formatDate: this.formatDate
-        // }
-
         return (
             <div className='dashboard-container'>
                 <div className='dash-sidebar'>
@@ -311,10 +299,7 @@ class AdminHome extends Component {
                                 )
                                 }}
                         />
-
-                        {/* CUSTOMER ACCOUNTS */}
-
-                        <Route path='/dashboard/account-settings' component={AccountSettings} />
+                        {/* <Route path='/dashboard/account-settings' component={AccountSettings} /> */}
                         <Route path='/dashboard/edit-account-settings' component={EditSettings} />                        
                     </Switch>
                 </div>

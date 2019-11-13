@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import config from '../../../../../config'
 
 
-
-
 class CompanySetUp extends Component {
     constructor(props) {
         super(props);

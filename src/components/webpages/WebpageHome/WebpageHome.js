@@ -4,6 +4,7 @@ import HomePageSearch from '../HomePageSearch/HomePageSearch'
 import './WebpageHome.css'
 import MainNav from '../../navigation/Headers/MainNav/MainNav'
 import Footer from '../../navigation/Footer/Footer'
+import BusinessIcon from '@material-ui/icons/Business';
 
 class WebpageHome extends Component {
     render(){
@@ -30,6 +31,9 @@ class WebpageHome extends Component {
                                 <p>Asesoramiento integral a empresas. Sabemos que no es tarea sencilla para las compañías encontrar un lugar apropiado para alojar a los ejecutivos que llegan desde el exterior, ayudarles en esta búsqueda es el principal objetivo de ApartmentChile.</p>
                             </div>
                             <div className='tile'>
+                                <BusinessIcon
+                                    fontSize='large'
+                                />
                                 <h3>Servicio de Administración</h3>
                                 <p>Apartmentchile ofrecerá la gestión en el pago de las cuentas de los diferentes servicios que llegan al departamento como también gastos comunes, arriendos. Mensualmente se hará un informe donde se detallara los gastos adjuntando boletas, para el posterior pago.</p>
                             </div>

@@ -25,11 +25,11 @@ class AdminNav extends Component {
                 <nav className='dashboard-nav'>
                     <Link 
                         className='account-nav-link' 
-                        to='/dashboard/account-settings' 
+                        to='/' 
                         style={{textDecoration: 'none'}}
-                        onClick={() => this.props.handleTitle('Account Settings')}                        
+                        // onClick={() => this.props.handleTitle('Account Settings')}                        
                     >
-                        <p className='account'>Account</p>
+                        <p className='account'>Website</p>
                     </Link>
                     <LogoutButton 
                         className='dash-nav-logout' 
