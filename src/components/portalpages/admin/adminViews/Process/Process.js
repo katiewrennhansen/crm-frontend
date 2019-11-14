@@ -100,9 +100,9 @@ class Process extends Component {
         const process = this.props.func
         return (
             <>
-                <Modal show={process.show} >
+                <Modal className='add-modal' show={process.show} >
                     <form 
-                        className= 'add_content' 
+                        className= 'add-content' 
                         onSubmit={(e) => this.addProcess(e)}
                     >
                         <h3>Add a Process</h3>
@@ -116,14 +116,16 @@ class Process extends Component {
                                 autoComplete='text'
                             />
                         </div>
-                        <SubmitButton className='submit_property' text='Save'/>
+                        <SubmitButton className='submit-content' text='Save'/>
                     </form>
-                    <button onClick={process.hideModal}>Cancel</button>
+                    <div className='cancel'>
+                        <button onClick={process.hideModal}>Cancel</button>
+                    </div>
                 </Modal>
-                <div className='promotion-container'>
+                <div className='data-container'>
                     <h3>Process</h3>
-                    <button className='add_promotion' onClick={process.showModal}>Add Process</button>
-                    <table className='promotion_table'>
+                    <button className='add-data' onClick={process.showModal}>Add Process</button>
+                    <table className='data-table'>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -138,7 +140,9 @@ class Process extends Component {
                                 <tr>
                                     <td>{p.data.processdesc}</td>
                                     <td>Created</td>
-                                    <td><button>Update</button></td>
+                                    <td className='update'>
+                                        <button>Update</button>
+                                    </td>
                                     <td className='delete'>
                                         <button 
                                             onClick={() => process.updateDelete(p.data.processdesc, p.data.id)}

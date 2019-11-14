@@ -100,9 +100,9 @@ class Reminders extends Component {
         const reminder = this.props.func
         return (
             <>
-                <Modal show={reminder.show} >
+                <Modal className='add-modal' show={reminder.show} >
                     <form 
-                        className= 'add_content' 
+                        className= 'add-content' 
                         onSubmit={(e) => this.addReminder(e)}
                     >
                         <h3>Add a Reminder</h3>
@@ -130,14 +130,16 @@ class Reminders extends Component {
                                 autoComplete='text'
                             />
                         </div>
-                        <SubmitButton className='submit_property' text='Save'/>
+                        <SubmitButton className='submit-content' text='Save'/>
                     </form>
-                    <button onClick={reminder.hideModal}>Cancel</button>
+                    <div className='cancel'>
+                        <button onClick={reminder.hideModal}>Cancel</button>
+                    </div>
                 </Modal>
-                <div className='promotion-container'>
+                <div className='data-container'>
                     <h3>Reminders</h3>
-                    <button className='add_promotion' onClick={reminder.showModal}>Add Reminder</button>
-                    <table className='promotion_table'>
+                    <button className='add-data' onClick={reminder.showModal}>Add Reminder</button>
+                    <table className='data-table'>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -153,7 +155,9 @@ class Reminders extends Component {
                                 <td>{r.rtype}</td>
                                 <td>{r.periodmonths}</td>
                                 <td>{r.bodymessage}</td>
-                                <td><button>Update</button></td>
+                                <td className='update'>
+                                    <button>Update</button>
+                                </td>
                                 <td className='delete'>
                                     <button 
                                         onClick={() => reminder.updateDelete(r.rtype, r.id)}

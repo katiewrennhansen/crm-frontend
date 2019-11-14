@@ -99,9 +99,9 @@ class Maintenance extends Component {
         const maint = this.props.func
         return (
             <>
-                <Modal show={maint.show} >
+                <Modal className='add-modal' show={maint.show} >
                     <form 
-                        className= 'add_content'
+                        className= 'add-content'
                         onSubmit={(e) => this.addMaintenanceType(e)}
                     >
                         <h3>Add a Maintenance Type</h3>
@@ -115,15 +115,17 @@ class Maintenance extends Component {
                                 autoComplete='text'
                             />
                         </div>
-                        <SubmitButton className='submit_promotions' text='Save'/>
+                        <SubmitButton className='submit-content' text='Save'/>
                     </form>
-                    <button onClick={maint.hideModal}>Cancel</button>
+                    <div className='cancel'>
+                        <button onClick={maint.hideModal}>Cancel</button>
+                    </div>
                 </Modal>
 
-                <div className='promotion-container'>
+                <div className='data-container'>
                     <h3>Maintenance</h3>
-                    <button className='add_promotion' onClick={maint.showModal}>Add Maintenance Type</button>
-                    <table className='promotion_table'>
+                    <button className='add-data' onClick={maint.showModal}>Add Maintenance Type</button>
+                    <table className='data-table'>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -136,8 +138,10 @@ class Maintenance extends Component {
                             {this.state.maintenanceTypes.map(m => (
                             <tr key={m.id}>
                                 <td>{m.maindescr}</td>
-                                <td>{m.created_at}</td>
-                                <td><button>Update</button></td>
+                                <td>{maint.formatDate(m.created_at)}</td>
+                                <td className='update'>
+                                    <button>Update</button>
+                                </td>
                                 <td className='delete'>
                                     <button 
                                         onClick={() => maint.updateDelete(m.maindescr, m.id)}

@@ -96,10 +96,11 @@ class AdminComments extends Component {
         const comment = this.props.func 
         return (
             <>
-                <Modal show={comment.show} >
+                <Modal className='add-modal' show={comment.show} >
                     <form 
-                        className='add_content'
-                        onSubmit={(e) => this.addComment(e)}>
+                        className='add-content'
+                        onSubmit={(e) => this.addComment(e)}
+                    >
                         <h3>Add a Comment Type</h3>
                         <div className='form-group'>
                             <label htmlFor='comment_type'></label>
@@ -110,15 +111,17 @@ class AdminComments extends Component {
                                 type='text'
                             />
                         </div>
-                        <SubmitButton className='submit_comment' text='Save'/>
+                        <SubmitButton className='submit-content' text='Save'/>
                     </form>
-                    <button className='modal-btn' onClick={comment.hideModal}>Cancel</button>
+                    <div className='cancel'>
+                        <button onClick={comment.hideModal}>Cancel</button>
+                    </div>
                 </Modal>
                 
-                <div className='promotion-container'>
+                <div className='data-container'>
                     <h3>Comments Type</h3>
-                    <button className='add_promotion' onClick={comment.showModal}>Add Comment Type</button>
-                    <table className='promotion_table'>
+                    <button className='add-data' onClick={comment.showModal}>Add Comment Type</button>
+                    <table className='data-table'>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -131,9 +134,9 @@ class AdminComments extends Component {
                         {this.state.comments.map(c => (
                             <tr key={c.id}>
                                 <td>{c.commdesc}</td>
-                                <td>{c.created_at}</td>
-                                <td>
-                                    <button
+                                <td>{comment.formatDate(c.created_at)}</td>
+                                <td className='update'>
+                                    <button 
                                         onClick={() => comment.updateUpdate(c.commdesc, c.id)}
                                     >
                                         Update

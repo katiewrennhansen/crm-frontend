@@ -96,9 +96,9 @@ class CustomerStatus extends Component {
         const status = this.props.func
         return (
             <>
-                <Modal show={status.show} >
+                <Modal className='add-modal' show={status.show} >
                     <form 
-                        className= 'add_content' 
+                        className='add-content' 
                         onSubmit={(e) => this.addCustomerStatus(e)}
                     >
                         <h3>Customer Status</h3>
@@ -112,14 +112,16 @@ class CustomerStatus extends Component {
                                 autoComplete='text'
                             />
                         </div>
-                        <SubmitButton className='submit_property' text='Save'/>
+                        <SubmitButton className='submit-content' text='Save'/>
                     </form>
-                    <button onClick={status.hideModal}>Cancel</button>
+                    <div className='cancel'>                    
+                        <button onClick={status.hideModal}>Cancel</button>
+                    </div>
                 </Modal>
-                <div className='promotion-container'>
+                <div className='data-container'>
                     <h3>Customer Status</h3>
-                    <button className='add_promotion' onClick={status.showModal}>Add Customer Status</button>
-                    <table className='promotion_table'>
+                    <button className='add-data' onClick={status.showModal}>Add Customer Status</button>
+                    <table className='data-table'>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -133,7 +135,9 @@ class CustomerStatus extends Component {
                             <tr key={c.id}>
                                 <td>{c.csdesc}</td>
                                 <td>{c.created_at}</td>
-                                <td><button>Update</button></td>
+                                <td className='update'>
+                                    <button>Update</button>
+                                </td>
                                 <td className='delete'>
                                     <button 
                                         onClick={() => status.updateDelete(c.csdesc, c.id)}

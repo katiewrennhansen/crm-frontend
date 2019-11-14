@@ -28,10 +28,19 @@
     display: none;
   }
 
-  .modal-grid {
+  .update-modal-grid {
     display: grid;
-    grid-template-columns: repeat(2, 80px) 1fr;
-    grid-template-rows: 70px 80px 50px;
+    grid-template-columns: 140px 80px;
+    grid-template-rows: 100px 100px 60px;
+    align-items: baseline;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .delete-modal-grid {
+    display: grid;
+    grid-template-rows: 140px 80px;
+    grid-template-columns: 300px 80px;
     align-items: baseline;
     width: 50%;
     margin: 0 auto;
@@ -43,25 +52,27 @@
     grid-row: 1 / 2;
   }
 
-  .update-form-group {
+  .form-group {
     grid-column: 1 / 4;
     grid-row: 2 / 3;
   }
 
-  .modal-btn1 {
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
-  }
-
-  .modal-btn2 {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
-  }
-
-  #cancel {
-    color: gray;
-    border: 1px solid gray;
+  .cancel button,
+  .delete-modal-grid .cancel button {
+    color: rgb(77, 77, 77);
+    border: 1px solid rgb(77, 77, 77);
     margin-right: 10px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 1px 1px 2px rgb(176, 176, 176);
+  }
+
+  .cancel button:hover,
+  .delete-modal-grid .cancel button:hover {
+    box-shadow: 1px 1px 3px gray;
+    cursor: pointer;
+    transition: 200ms linear;
   }
 
   

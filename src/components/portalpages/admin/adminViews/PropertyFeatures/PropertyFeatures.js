@@ -98,7 +98,7 @@ class PropertyFeatures extends Component {
             <>
                 <Modal show={feature.show} >
                     <form 
-                        className= 'add_content' 
+                        className= 'add-content' 
                         onSubmit={(e) => this.addPropertyFeature(e)}
                     >
                         <h3>Add a Property Feature</h3>
@@ -112,14 +112,16 @@ class PropertyFeatures extends Component {
                                 autoComplete='text'
                             />
                         </div>
-                        <SubmitButton className='submit_property' text='Save'/>
+                        <SubmitButton className='submit-content' text='Save'/>
                     </form>
-                    <button onClick={feature.hideModal}>Cancel</button>
+                    <div className='cancel'>
+                        <button onClick={feature.hideModal}>Cancel</button>
+                    </div>
                 </Modal>
-                <div className='promotion-container'>
+                <div className='data-container'>
                     <h3>Property Features</h3>
-                    <button className='add_promotion' onClick={feature.showModal}>Add Property Feature</button>
-                    <table className='promotion_table'>
+                    <button className='add-data' onClick={feature.showModal}>Add Property Feature</button>
+                    <table className='data-table'>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -133,7 +135,9 @@ class PropertyFeatures extends Component {
                             <tr key={f.id}>
                                 <td>{f.featuredescr}</td>
                                 <td>{f.created_at}</td>
-                                <td><button>Update</button></td>
+                                <td className='update'>
+                                    <button>Update</button>
+                                </td>
                                 <td className='delete'>
                                     <button 
                                         onClick={() => feature.updateDelete(f.featuredescr, f.id)}

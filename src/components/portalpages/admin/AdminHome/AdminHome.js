@@ -135,6 +135,14 @@ class AdminHome extends Component {
         console.log(this.state.updatedContent)
     }
 
+    formatPriceUSD(amount) {
+        const thousands = ","
+        let i = parseInt(amount = Math.abs(Number(amount) || 0)).toString();
+        let j = (i.length > 3) ? i.length % 3 : 0;
+        return "$" + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands);
+    }
+
+
     updateData = (e) => {
         e.preventDefault()
         const id = this.state.toUpdate.id
@@ -169,11 +177,13 @@ class AdminHome extends Component {
     deleteModal = (endpoint, removeFn) => {
         return (
             <Modal show={this.state.delete}>
-                <div className='modal-grid'>
+                <div className='delete-modal-grid'>
                     <h3>Are you sure you would like to delete {this.state.toDelete.name}?</h3>
-                    <button className='modal-btn' id='cancel' onClick={this.hideDelete}>Cancel</button>
+                    <div className='cancel'>                    
+                        <button onClick={this.hideDelete}>Cancel</button>
+                    </div>
                     <div className='delete'>
-                        <button className='modal-btn' onClick={() => deleteData(endpoint, this.state.toDelete.id, removeFn)}>Delete</button>
+                        <button onClick={() => deleteData(endpoint, this.state.toDelete.id, removeFn)}>Delete</button>
                     </div>
                 </div>
             </Modal>
@@ -183,10 +193,10 @@ class AdminHome extends Component {
 
     updateModal = () => {
         return (
-            <Modal show={this.state.update}>
-                <div className='modal-grid'>
+            <Modal className='update-modal' show={this.state.update}>
+                <div className='update-modal-grid'>
                     <h3>Update {this.state.toUpdate.name}?</h3>
-                    <form className='update-form-group'>
+                    <form className='form-group'>
                         <div className='form-group'>
                             <label htmlFor='comment_type'></label>
                             <TextInput
@@ -198,13 +208,13 @@ class AdminHome extends Component {
                                 onChange={this.handleCommentChange}
                             />
                         </div>
-                        <div className='modal-btn1 update'>
+                        <div className='cancel'>
+                            <button onClick={this.hideUpdate}>Cancel</button>   
+                        </div>
+                        <div className='update'>
                             <button onClick={(e) => {this.hideUpdate(); this.updateData(e)}}>Update</button>
                         </div>
                     </form>
-                    <div className='modal-btn2'>
-                        <button  onClick={this.hideUpdate}>Cancel</button>   
-                    </div>
                 </div>
             </Modal>
         )
@@ -270,7 +280,10 @@ class AdminHome extends Component {
                         path='/dashboard/promotions' 
                         render={(props) => {
                             return (
-                                <Promotions func={propFunctions} />
+                                <Promotions 
+                                    func={propFunctions}
+                                    formatPrice={this.formatPriceUSD} 
+                                />
                             )
                             }}
                         />

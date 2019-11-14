@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import './Promotions.css'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
-
 
 class Promotions extends Component {
     constructor(props) {
@@ -63,22 +61,6 @@ class Promotions extends Component {
             this.setState({ error })
         })
     }
-    
-    formatDatePicker(date){
-        const dateArr = date.split('-')
-        let newDateArr = []
-        for(let i = 0; i < dateArr.length; i++){
-           newDateArr.push(dateArr[dateArr.length - 1 - i])
-        }
-        return newDateArr.join('/')
-    }
-
-    formatPriceUSD(amount) {
-        const thousands = ","
-        let i = parseInt(amount = Math.abs(Number(amount) || 0)).toString();
-        let j = (i.length > 3) ? i.length % 3 : 0;
-        return "$" + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands);
-      }
 
     addPromotion = (e) => {
         e.preventDefault()
@@ -120,8 +102,11 @@ class Promotions extends Component {
         const promo = this.props.func
         return (
             <>
-                <Modal show={promo.show} >
-                    <form className= 'add_content' onSubmit={(e) => this.addPromotion(e)}>
+                <Modal className='add-modal' show={promo.show} >
+                    <form 
+                        className='add-content' 
+                        onSubmit={(e) => this.addPromotion(e)}
+                    >
                         <h3>Add a Promotion</h3>
                         <div className='form-group'>
                             <label htmlFor='promotion_name'></label>
@@ -163,14 +148,16 @@ class Promotions extends Component {
                                 autoComplete='number'
                             />
                         </div>
-                        <SubmitButton className='submit_promotions' text='Save'/>
+                        <SubmitButton className='submit-content' text='Save'/>
                     </form>
-                    <button onClick={promo.hideModal}>Cancel</button>
+                    <div className='cancel'>
+                        <button onClick={promo.hideModal}>Cancel</button>
+                    </div>
                 </Modal>
-                <div className='promotion-container'>
+                <div className='data-container'>
                     <h3>Promotions</h3>
-                    <button className='add_promotion' onClick={promo.showModal}>Add Promotion</button>
-                    <table className='promotion_table'>
+                    <button className='add-data' onClick={promo.showModal}>Add Promotion</button>
+                    <table className='data-table'>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -185,10 +172,12 @@ class Promotions extends Component {
                             {this.state.promotions.map(p => (
                             <tr key={p.data.id}>
                                 <td>{p.data.typepromotion}</td>
-                                <td>{p.data.startdate}</td>
-                                <td>{p.data.duedate}</td>
-                                <td>{this.formatPriceUSD(p.data.totalcost)}</td>
-                                <td><button>Update</button></td>
+                                <td>{promo.formatDate(p.data.startdate)}</td>
+                                <td>{promo.formatDate(p.data.duedate)}</td>
+                                <td>{this.props.formatPrice(p.data.totalcost)}</td>
+                                <td className='update'>
+                                    <button>Update</button>
+                                </td>
                                 <td className='delete'>
                                     <button 
                                         onClick={() => promo.updateDelete(p.data.typepromotion, p.data.id)}

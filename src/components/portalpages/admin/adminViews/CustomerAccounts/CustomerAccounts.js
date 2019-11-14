@@ -56,7 +56,7 @@ class CustomerAccounts extends Component {
             <>
                 <Modal show={account.show} >
                     <form 
-                        className= 'add_content' 
+                        className= 'add-content' 
                         onSubmit={(e) => {this.addCustomer(e); account.hideModal();}}
                     >
                         <h3>Customer Accounts</h3>
@@ -84,14 +84,16 @@ class CustomerAccounts extends Component {
                                 autoComplete='text'
                             />
                         </div>
-                        <SubmitButton className='submit_property' text='Save'/>
+                        <SubmitButton className='submit-content' text='Save'/>
                     </form>
-                    <button onClick={account.hideModal}>Cancel</button>
+                    <div className='cancel'>
+                        <button onClick={account.hideModal}>Cancel</button>
+                    </div>
                 </Modal>
-                <div className='promotion-container'>
+                <div className='data-container'>
                     <h3>Customer Accounts</h3>
-                    <button className='add_promotion' onClick={account.showModal}>Add Customer</button>
-                    <table className='promotion_table'>
+                    <button className='add-data' onClick={account.showModal}>Add Customer</button>
+                    <table className='data-table'>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -111,7 +113,9 @@ class CustomerAccounts extends Component {
                                         <td>{c.customer.email}</td>
                                         <td>{c.customer.phone}</td>
                                         <td>{c.customer.status}</td>
-                                        <td><button>View</button></td>
+                                        <td className='update'>
+                                            <button>View</button>
+                                        </td>
                                         <td className='delete'>
                                             <button 
                                                 className='delete' 
