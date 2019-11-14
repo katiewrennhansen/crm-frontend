@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import AdminNav from '../AdminNav/AdminNav'
 import AdminSidebar from '../AdminSidebar/AdminSidebar'
 import AdminDash from '../adminViews/AdminDash/AdminDash'
@@ -12,6 +12,7 @@ import CustomerStatus from '../adminViews/CustomerStatus/CustomerStatus'
 import Reminders from '../adminViews/Reminders/Reminders'
 import EditSettings from '../adminViews/AccountSettings/EditSettings'
 import Process from '../adminViews/Process/Process'
+import ProcessSteps from '../adminViews/Process/ProcessSteps'
 import CustomerAccounts from '../adminViews/CustomerAccounts/CustomerAccounts'
 import CompanySetUp from '../adminViews/CompanySetUp/CompanySetUp'
 import AssetType from '../adminViews/AssetType/AssetType'
@@ -335,12 +336,24 @@ class AdminHome extends Component {
                             }}
                         />
                         <Route 
-                        path='/dashboard/process' 
+                        exact path='/dashboard/process' 
                         render={(props) => {
                             return (
                                 <Process func={propFunctions} />
                             )
                             }}
+                        />
+                        <Route 
+                            exact path='/dashboard/process/:id' 
+                            render={(history) => {
+                                const id = history.match.params.id;
+                                return (
+                                    <ProcessSteps 
+                                        func={propFunctions} 
+                                        id={id}
+                                    />
+                                )
+                                }}
                         />
                         <Route 
                             path='/dashboard/customer-accounts' 
@@ -358,4 +371,4 @@ class AdminHome extends Component {
     }
 }
 
-export default AdminHome
+export default withRouter(AdminHome)

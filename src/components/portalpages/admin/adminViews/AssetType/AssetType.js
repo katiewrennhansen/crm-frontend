@@ -96,7 +96,6 @@ class AssetType extends Component {
 
     render(){ 
         const asset = this.props.func 
-        console.log(this.state.assets)
         return (
             <>
                 <Modal className='add-modal' show={asset.show} >

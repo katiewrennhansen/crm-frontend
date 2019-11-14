@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
@@ -129,7 +130,6 @@ class Process extends Component {
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Show In Portal</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -139,9 +139,8 @@ class Process extends Component {
                                 return (
                                 <tr>
                                     <td>{p.data.processdesc}</td>
-                                    <td>Created</td>
                                     <td className='update'>
-                                        <button>Update</button>
+                                        <Link to={`/dashboard/process/${p.data.id}`}>View Steps</Link>
                                     </td>
                                     <td className='delete'>
                                         <button 
