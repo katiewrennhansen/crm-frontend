@@ -97,7 +97,10 @@ class CustomerStatus extends Component {
         return (
             <>
                 <Modal show={status.show} >
-                    <form className= 'add_feature' onSubmit={(e) => this.addCustomerStatus(e)}>
+                    <form 
+                        className= 'add_content' 
+                        onSubmit={(e) => this.addCustomerStatus(e)}
+                    >
                         <h3>Customer Status</h3>
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>

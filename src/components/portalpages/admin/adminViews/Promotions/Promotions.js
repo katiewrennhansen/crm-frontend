@@ -121,7 +121,7 @@ class Promotions extends Component {
         return (
             <>
                 <Modal show={promo.show} >
-                    <form className= 'add_promotions' onSubmit={(e) => this.addPromotion(e)}>
+                    <form className= 'add_content' onSubmit={(e) => this.addPromotion(e)}>
                         <h3>Add a Promotion</h3>
                         <div className='form-group'>
                             <label htmlFor='promotion_name'></label>

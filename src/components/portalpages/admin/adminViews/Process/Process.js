@@ -102,7 +102,7 @@ class Process extends Component {
             <>
                 <Modal show={process.show} >
                     <form 
-                        className= 'add_feature' 
+                        className= 'add_content' 
                         onSubmit={(e) => this.addProcess(e)}
                     >
                         <h3>Add a Process</h3>

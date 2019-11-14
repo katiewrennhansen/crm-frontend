@@ -32,7 +32,7 @@ class AdminComments extends Component {
             error: null
         })
     }
-    
+
     updateComments = data => {
         this.setState({
             comments: [...this.state.comments, data],
@@ -98,7 +98,7 @@ class AdminComments extends Component {
             <>
                 <Modal show={comment.show} >
                     <form 
-                        className= 'add_comment_type' 
+                        className='add_content'
                         onSubmit={(e) => this.addComment(e)}>
                         <h3>Add a Comment Type</h3>
                         <div className='form-group'>
@@ -112,7 +112,7 @@ class AdminComments extends Component {
                         </div>
                         <SubmitButton className='submit_comment' text='Save'/>
                     </form>
-                    <button onClick={comment.hideModal}>Cancel</button>
+                    <button className='modal-btn' onClick={comment.hideModal}>Cancel</button>
                 </Modal>
                 
                 <div className='promotion-container'>

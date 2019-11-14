@@ -101,7 +101,10 @@ class Reminders extends Component {
         return (
             <>
                 <Modal show={reminder.show} >
-                    <form className= 'add_feature' onSubmit={(e) => this.addReminder(e)}>
+                    <form 
+                        className= 'add_content' 
+                        onSubmit={(e) => this.addReminder(e)}
+                    >
                         <h3>Add a Reminder</h3>
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>

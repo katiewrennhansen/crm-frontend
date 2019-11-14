@@ -7,6 +7,8 @@ table {
     border-collapse: collapse;
     border: 1px solid rgb(138, 138, 138);
     grid-column: 1 / -1;   
+    box-shadow: 1px 1px 3px rgb(215, 215, 215);
+    background-color: white;
 }
 
 th {
@@ -24,18 +26,19 @@ td, th {
 
 .promotion-container h3 {
     grid-column: 1 / 4;
-
+    font-size: 25px;
 }
 
 .add_promotion  {
     grid-column: 4 / -1;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin: 15px 0;
     border: 1px solid black;
     font-size: 16px;
+    box-shadow: 1px 1px 3px rgb(215, 215, 215);
 }
 
-.add_promotions {
+.add_content {
     width: 300px;
     margin: 0 auto;
 }

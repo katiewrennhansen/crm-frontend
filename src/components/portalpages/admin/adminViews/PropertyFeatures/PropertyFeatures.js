@@ -98,7 +98,7 @@ class PropertyFeatures extends Component {
             <>
                 <Modal show={feature.show} >
                     <form 
-                        className= 'add_feature' 
+                        className= 'add_content' 
                         onSubmit={(e) => this.addPropertyFeature(e)}
                     >
                         <h3>Add a Property Feature</h3>

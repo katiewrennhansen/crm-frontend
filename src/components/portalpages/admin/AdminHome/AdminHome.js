@@ -169,12 +169,12 @@ class AdminHome extends Component {
     deleteModal = (endpoint, removeFn) => {
         return (
             <Modal show={this.state.delete}>
-                <h3>
-                    Are you sure you would like to delete {this.state.toDelete.name}?
-                </h3>
-                <button onClick={this.hideDelete}>Cancel</button>
-                <div className='delete'>
-                    <button onClick={() => deleteData(endpoint, this.state.toDelete.id, removeFn)}>Delete</button>
+                <div className='modal-grid'>
+                    <h3>Are you sure you would like to delete {this.state.toDelete.name}?</h3>
+                    <button className='modal-btn' id='cancel' onClick={this.hideDelete}>Cancel</button>
+                    <div className='delete'>
+                        <button className='modal-btn' onClick={() => deleteData(endpoint, this.state.toDelete.id, removeFn)}>Delete</button>
+                    </div>
                 </div>
             </Modal>
         )
@@ -184,26 +184,28 @@ class AdminHome extends Component {
     updateModal = () => {
         return (
             <Modal show={this.state.update}>
-                <h3>
-                    Update {this.state.toUpdate.name}?
-                </h3>
-                <form>
-                <div className='form-group'>
-                    <label htmlFor='comment_type'></label>
-                    <TextInput
-                        id='comment_type'
-                        name='comment_type'
-                        label='Comment Type'
-                        type='text'
-                        value={this.state.toUpdate.name}
-                        onChange={this.handleCommentChange}
-                    />
+                <div className='modal-grid'>
+                    <h3>Update {this.state.toUpdate.name}?</h3>
+                    <form className='update-form-group'>
+                        <div className='form-group'>
+                            <label htmlFor='comment_type'></label>
+                            <TextInput
+                                id='comment_type'
+                                name='comment_type'
+                                label='Comment Type'
+                                type='text'
+                                value={this.state.toUpdate.name}
+                                onChange={this.handleCommentChange}
+                            />
+                        </div>
+                        <div className='modal-btn1 update'>
+                            <button onClick={(e) => {this.hideUpdate(); this.updateData(e)}}>Update</button>
+                        </div>
+                    </form>
+                    <div className='modal-btn2'>
+                        <button  onClick={this.hideUpdate}>Cancel</button>   
+                    </div>
                 </div>
-                <div className='update'>
-                    <button onClick={(e) => {this.hideUpdate(); this.updateData(e)}}>Update</button>
-                </div>
-                </form>
-                <button onClick={this.hideUpdate}>Cancel</button>   
             </Modal>
         )
     }

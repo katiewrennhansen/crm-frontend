@@ -6,6 +6,7 @@
 
 .dash-header h1 {
     padding-left: 40px;
+    grid-column: 1 / 4;
 }
 
 .dashboard-nav {

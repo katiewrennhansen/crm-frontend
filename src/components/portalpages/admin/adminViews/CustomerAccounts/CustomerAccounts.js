@@ -55,7 +55,10 @@ class CustomerAccounts extends Component {
         return (
             <>
                 <Modal show={account.show} >
-                    <form className= 'add_feature' onSubmit={(e) => {this.addCustomer(e); account.hideModal();}}>
+                    <form 
+                        className= 'add_content' 
+                        onSubmit={(e) => {this.addCustomer(e); account.hideModal();}}
+                    >
                         <h3>Customer Accounts</h3>
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>

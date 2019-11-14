@@ -103,7 +103,7 @@ class PropertyStatus extends Component {
             <>
                 <Modal show={status.show} >
                     <form 
-                        className= 'add_feature' 
+                        className= 'add_content' 
                         onSubmit={(e) => this.addPropertyStatus(e)}
                     >
                         <h3>Add a Property Status</h3>

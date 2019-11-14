@@ -101,7 +101,7 @@ class Maintenance extends Component {
             <>
                 <Modal show={maint.show} >
                     <form 
-                        className= 'add_promotions' 
+                        className= 'add_content'
                         onSubmit={(e) => this.addMaintenanceType(e)}
                     >
                         <h3>Add a Maintenance Type</h3>
