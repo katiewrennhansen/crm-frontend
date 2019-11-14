@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
@@ -145,6 +146,7 @@ class Reminders extends Component {
                                 <th>Name</th>
                                 <th>Months</th>
                                 <th>Message</th>
+                                <th>Date Created</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -155,6 +157,9 @@ class Reminders extends Component {
                                 <td>{r.rtype}</td>
                                 <td>{r.periodmonths}</td>
                                 <td>{r.bodymessage}</td>
+                                <td>
+                                    <Moment format="YYYY/MM/DD">{r.created_at}</Moment>
+                                </td>
                                 <td className='update'>
                                     <button>Update</button>
                                 </td>

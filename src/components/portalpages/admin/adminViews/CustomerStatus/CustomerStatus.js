@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
@@ -134,7 +135,9 @@ class CustomerStatus extends Component {
                             {this.state.statuses.map(c => (
                             <tr key={c.id}>
                                 <td>{c.csdesc}</td>
-                                <td>{c.created_at}</td>
+                                <td>
+                                    <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
+                                </td>
                                 <td className='update'>
                                     <button>Update</button>
                                 </td>

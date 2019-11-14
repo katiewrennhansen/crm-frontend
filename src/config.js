@@ -8,5 +8,6 @@ export default {
     REMINDERS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/remainders',
     PROCESS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/processts',
     COMPANY_SETUP_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/companies/6',
+    ASSET_TYPE_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/assettypes',
     API_KEY: process.env.REACT_APP_API_KEY
   }

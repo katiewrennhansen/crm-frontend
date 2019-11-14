@@ -14,6 +14,7 @@ import EditSettings from '../adminViews/AccountSettings/EditSettings'
 import Process from '../adminViews/Process/Process'
 import CustomerAccounts from '../adminViews/CustomerAccounts/CustomerAccounts'
 import CompanySetUp from '../adminViews/CompanySetUp/CompanySetUp'
+import AssetType from '../adminViews/AssetType/AssetType'
 import Modal from '../pagecomponents/Modal'
 import TextInput from '../../../Login/LoginComponents/TextInput'
 import config from '../../../../config'
@@ -135,13 +136,12 @@ class AdminHome extends Component {
         console.log(this.state.updatedContent)
     }
 
-    formatPriceUSD(amount) {
+    formatPriceUSD = (amount) => {
         const thousands = ","
         let i = parseInt(amount = Math.abs(Number(amount) || 0)).toString();
         let j = (i.length > 3) ? i.length % 3 : 0;
         return "$" + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands);
     }
-
 
     updateData = (e) => {
         e.preventDefault()
@@ -230,7 +230,6 @@ class AdminHome extends Component {
             show: this.state.show,
             delete: this.state.delete,
             update: this.state.update,
-            formatDate: this.formatDate,
             deleteModal: this.deleteModal,
             updateDelete: this.updateDelete,
             updateModal: this.updateModal,
@@ -324,6 +323,14 @@ class AdminHome extends Component {
                         render={(props) => {
                             return (
                                 <Reminders func={propFunctions} />
+                            )
+                            }}
+                        />
+                        <Route 
+                        path='/dashboard/asset-type' 
+                        render={(props) => {
+                            return (
+                                <AssetType func={propFunctions} />
                             )
                             }}
                         />

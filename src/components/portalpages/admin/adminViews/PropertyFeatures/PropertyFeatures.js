@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
@@ -134,7 +135,9 @@ class PropertyFeatures extends Component {
                             {this.state.features.map(f => (
                             <tr key={f.id}>
                                 <td>{f.featuredescr}</td>
-                                <td>{f.created_at}</td>
+                                <td>
+                                    <Moment format="YYYY/MM/DD">{f.created_at}</Moment>
+                                </td>
                                 <td className='update'>
                                     <button>Update</button>
                                 </td>

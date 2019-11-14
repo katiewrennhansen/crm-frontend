@@ -136,6 +136,16 @@ class AdminSidebar extends Component {
                     </li>
                     <li>
                         <Link 
+                            to="/dashboard/asset-type" 
+                            className='dash-nav-link'
+                            onClick={() => this.props.handleTitle('Assest Type')}                        
+                        >
+                            <NotificationsActiveIcon />
+                            <p>Assest Type</p>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
                             to="/dashboard/process" 
                             className='dash-nav-link'
                             onClick={() => this.props.handleTitle('Process')}                        

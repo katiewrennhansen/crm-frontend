@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Moment from 'react-moment'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
@@ -138,7 +139,9 @@ class Maintenance extends Component {
                             {this.state.maintenanceTypes.map(m => (
                             <tr key={m.id}>
                                 <td>{m.maindescr}</td>
-                                <td>{maint.formatDate(m.created_at)}</td>
+                                <td>
+                                    <Moment format="YYYY/MM/DD">{m.created_at}</Moment>
+                                </td>
                                 <td className='update'>
                                     <button>Update</button>
                                 </td>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
@@ -138,7 +139,9 @@ class PropertyStatus extends Component {
                             {this.state.statuses.map(s => (
                             <tr key={s.id}>
                                 <td>{s.statusdesc}</td>
-                                <td>{s.created_at}</td>
+                                <td>
+                                    <Moment format="YYYY/MM/DD">{s.created_at}</Moment>                                
+                                </td>
                                 <td className='update'>
                                     <button>Update</button>
                                 </td>

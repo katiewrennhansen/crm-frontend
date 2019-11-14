@@ -6,43 +6,43 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
 
-class AdminComments extends Component {
+class AssetType extends Component {
     constructor(props) {
         super(props);
         this.state = {
             show: false,
             delete: false,
-            comments: [],
+            assets: [],
             error: null
         };
     }
 
-    removeComment = id => {
-        const newComments = this.state.comments.filter(c =>
-          c.id !== id
+    removeAsset = id => {
+        const newAssets = this.state.assets.filter(a =>
+          a.id !== id
         )
         this.setState({
-          comments: newComments
+          assets: newAssets
         })
         this.props.func.hideDelete()
       }
     
-    setComments = comments => {
+    setAssets = assets => {
         this.setState({
-            comments: comments,
+            assets: assets,
             error: null
         })
     }
 
-    updateComments = data => {
+    updateAssets = data => {
         this.setState({
-            comments: [...this.state.comments, data],
+            assets: [...this.state.assets, data],
             error: null
         })
     }
 
     componentDidMount(){
-        fetch(config.COMMENTS_ENDPOINT, {
+        fetch(config.ASSET_TYPE_ENDPOINT, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -56,23 +56,24 @@ class AdminComments extends Component {
             return res.json()
         })
         .then(data => {
-            this.setComments(data)
+            this.setAssets(data)
         })
         .catch(error => {
             this.setState({ error })
         })
     }
 
-    addComment = (e) => {
+    addAsset = (e) => {
         e.preventDefault()
-        const newCommentType = {
-            commdesc: e.target.comment_type.value,
+        const newAssetType = {
+            assettdesc: e.target.asset_type.value,
             company_id: 6,
-            user_id: 1
+            user_id: 6,
+            updated_at: new Date()
         }
-        fetch(config.COMMENTS_ENDPOINT, {
+        fetch(config.ASSET_TYPE_ENDPOINT, {
             method: 'POST',
-            body: JSON.stringify(newCommentType),
+            body: JSON.stringify(newAssetType),
             headers: {
                 'content-type': 'application/json',
                 'Authorization': `Bearer ${config.API_KEY}`
@@ -85,7 +86,7 @@ class AdminComments extends Component {
             return res.json()
         })
         .then(data => {
-            this.updateComments(data)
+            this.updateAssets(data)
             this.props.func.hideModal()
         })
         .catch(error => {
@@ -94,34 +95,35 @@ class AdminComments extends Component {
     }
 
     render(){ 
-        const comment = this.props.func 
+        const asset = this.props.func 
+        console.log(this.state.assets)
         return (
             <>
-                <Modal className='add-modal' show={comment.show} >
+                <Modal className='add-modal' show={asset.show} >
                     <form 
                         className='add-content'
-                        onSubmit={(e) => this.addComment(e)}
+                        onSubmit={(e) => this.addAsset(e)}
                     >
-                        <h3>Add a Comment Type</h3>
+                        <h3>Add an Asset Type</h3>
                         <div className='form-group'>
-                            <label htmlFor='comment_type'></label>
+                            <label htmlFor='asset_type'></label>
                             <TextInput 
-                                id='comment_type'
-                                name='comment_type'
-                                label='Comment Type'
+                                id='asset_type'
+                                name='asset_type'
+                                label='Asset Type'
                                 type='text'
                             />
                         </div>
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
                     <div className='cancel'>
-                        <button onClick={comment.hideModal}>Cancel</button>
+                        <button onClick={asset.hideModal}>Cancel</button>
                     </div>
                 </Modal>
                 
                 <div className='data-container'>
-                    <h3>Comments Type</h3>
-                    <button className='add-data' onClick={comment.showModal}>Add Comment Type</button>
+                    <h3>Asset Type</h3>
+                    <button className='add-data' onClick={asset.showModal}>Add Asset Type</button>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -132,30 +134,33 @@ class AdminComments extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                        {this.state.comments.map(c => (
-                            <tr key={c.id}>
-                                <td>{c.commdesc}</td>
+                        {this.state.assets.map(a => {
+                            const formatted = a.created_at
+                            console.log(formatted)
+                            return (
+                            <tr key={a.id}>
+                                <td>{a.assettdesc}</td>
                                 <td>
-                                    <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
+                                    <Moment format="YYYY/MM/DD">{a.created_at}</Moment>
                                 </td>
                                 <td className='update'>
                                     <button 
-                                        onClick={() => comment.updateUpdate(c.commdesc, c.id)}
+                                        onClick={() => asset.updateUpdate(a.assettdesc, a.id)}
                                     >
                                         Update
                                     </button>
-                                    {(comment.update) ? comment.updateModal(config.COMMENTS_ENDPOINT , this.updateComment) : null}                                    
+                                    {(asset.update) ? asset.updateModal(config.COMMENTS_ENDPOINT , this.updateAsset) : null}                                    
                                 </td>
                                 <td className='delete'>
                                     <button 
-                                        onClick={() => comment.updateDelete(c.commdesc, c.id)}
+                                        onClick={() => asset.updateDelete(a.assettdesc, a.id)}
                                     >
                                         Delete
                                     </button>
-                                    {(comment.delete) ? comment.deleteModal(config.COMMENTS_ENDPOINT , this.removeComment) : null}                                    
+                                    {(asset.delete) ? asset.deleteModal(config.COMMENTS_ENDPOINT , this.removeAsset) : null}                                    
                                 </td>
                             </tr>
-                        ))}
+                        )})}
                         </tbody>
                     </table>
                 </div>
@@ -166,4 +171,4 @@ class AdminComments extends Component {
 
 
 
-export default AdminComments
+export default AssetType

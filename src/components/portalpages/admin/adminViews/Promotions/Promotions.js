@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
@@ -172,8 +173,12 @@ class Promotions extends Component {
                             {this.state.promotions.map(p => (
                             <tr key={p.data.id}>
                                 <td>{p.data.typepromotion}</td>
-                                <td>{promo.formatDate(p.data.startdate)}</td>
-                                <td>{promo.formatDate(p.data.duedate)}</td>
+                                <td>
+                                    <Moment format="YYYY/MM/DD">{p.data.startdate}</Moment>
+                                </td>
+                                <td>
+                                    <Moment format="YYYY/MM/DD">{p.data.duedate}</Moment>
+                                </td>
                                 <td>{this.props.formatPrice(p.data.totalcost)}</td>
                                 <td className='update'>
                                     <button>Update</button>

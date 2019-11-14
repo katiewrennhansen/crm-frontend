@@ -9,8 +9,10 @@
     "axios": "^0.19.0",
     "cuuid": "^0.3.0",
     "gh-pages": "^2.1.1",
+    "moment": "^2.24.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-moment": "^0.9.6",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.2.0",
     "semantic-ui-react": "^0.88.1"
