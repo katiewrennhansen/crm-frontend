@@ -27,7 +27,8 @@ class Process extends Component {
         this.props.func.hideDelete()
       }
     
-    setProcess = process => {
+    setProcess = data => {
+        const process = data.processts        
         this.setState({
             process: process,
             error: null
@@ -41,25 +42,7 @@ class Process extends Component {
     }
 
     componentDidMount(){
-        fetch(config.PROCESS_ENDPOINT, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setProcess(data.processts)
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        this.props.func.fetchData(config.PROCESS_ENDPOINT, this.setProcess)
     }
 
     addProcess = (e) => {

@@ -17,7 +17,8 @@ class CustomerAccounts extends Component {
         };
     }
 
-    setCustomers = customers => {
+    setCustomers = data => {
+        const customers = data.customers
         this.setState({
             customers: customers,
             error: null
@@ -25,25 +26,7 @@ class CustomerAccounts extends Component {
     }
 
     componentDidMount(){
-        fetch(config.CUSTOMER_ACCOUNTS_ENDPOINT, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setCustomers(data.customers)
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        this.props.func.fetchData(config.CUSTOMER_ACCOUNTS_ENDPOINT, this.setCustomers)
     }
 
     addCustomer = (e) => {
