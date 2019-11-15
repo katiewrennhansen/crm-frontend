@@ -1,27 +1,55 @@
 import React, { Component } from 'react'
-import cuuid from 'cuuid'
-import ADMIN_DATA from '../../../../../admin-data'
+import { Link } from 'react-router-dom'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
+import config from '../../../../../config'
 import './CustomerAccounts.css'
 
-let data = ADMIN_DATA.customerAccounts
 
 class CustomerAccounts extends Component {
     constructor(props) {
         super(props);
         this.state = {
             show: false,
-            delete: false
+            delete: false,
+            customers: []
         };
+    }
+
+    setCustomers = customers => {
+        this.setState({
+            customers: customers,
+            error: null
+        })
+    }
+
+    componentDidMount(){
+        fetch(config.CUSTOMER_ACCOUNTS_ENDPOINT, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+            this.setCustomers(data.customers)
+        })
+        .catch(error => {
+            this.setState({ error })
+        })
     }
 
     addCustomer = (e) => {
         e.preventDefault()
         const newCustomer = {
             customer: {
-                id: cuuid(),
                 name: e.target.customer.value,
                 email: e.target.customer_email.value,
                 phone: e.target.customer_phone.value,
@@ -30,23 +58,44 @@ class CustomerAccounts extends Component {
                 user_id: 1
             }
         }
-        data.push(newCustomer)
+        console.log(newCustomer)
+        fetch(config.CUSTOMER_ACCOUNTS_ENDPOINT, {
+            method: 'POST',
+            body: JSON.stringify(newCustomer),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+            this.setCustomers(data.customers)
+            this.props.hideModal()
+        })
+        .catch(error => {
+            this.setState({ error })
+        })
     }
 
 
     deactivateCustomer = (id) => {
-        const el = data.find(c => c.customer.id === id)
+        const el = this.state.customers.find(c => c.data.id === id)
         const element = document.getElementById(id)
         const button = document.getElementById(`delete${id}`)
 
-        if(el.customer.status === 'Active') {
+        if(el.data.status === 'On hold') {
             element.classList.add('deactivated')
             button.innerHTML = "Activate";
-            el.customer.status = "Deactive"            
+            el.data.status = "Deactive"            
         } else {
             element.classList.remove('deactivated')
             button.innerHTML = "Deactivate";
-            el.customer.status = "Active"  
+            el.data.status = 'On hold'  
         }
     }
     
@@ -57,7 +106,7 @@ class CustomerAccounts extends Component {
                 <Modal show={account.show} >
                     <form 
                         className= 'add-content' 
-                        onSubmit={(e) => {this.addCustomer(e); account.hideModal();}}
+                        onSubmit={(e) => this.addCustomer(e)}
                     >
                         <h3>Customer Accounts</h3>
                         <div className='form-group'>
@@ -98,23 +147,23 @@ class CustomerAccounts extends Component {
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Phone</th>
+                                <th>Category</th>
                                 <th>Status</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map(c => {
-                                const id = c.customer.id
+                            {this.state.customers.map(c => {
+                                const id = c.data.id
                                 return (
                                     <tr id={id} key={id}>
-                                        <td>{c.customer.name}</td>
-                                        <td>{c.customer.email}</td>
-                                        <td>{c.customer.phone}</td>
-                                        <td>{c.customer.status}</td>
+                                        <td>{c.data.name}</td>
+                                        <td>{c.data.email}</td>
+                                        <td>{c.data.category}</td>
+                                        <td>{c.data.status}</td>
                                         <td className='update'>
-                                            <button>View</button>
+                                            <Link to={`/dashboard/customer-accounts/${id}`}>View</Link>
                                         </td>
                                         <td className='delete'>
                                             <button 

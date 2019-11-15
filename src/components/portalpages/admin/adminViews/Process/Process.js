@@ -137,7 +137,7 @@ class Process extends Component {
                         <tbody>
                             {this.state.process.map(p => {
                                 return (
-                                <tr>
+                                <tr key={p.data.id}>
                                     <td>{p.data.processdesc}</td>
                                     <td className='update'>
                                         <Link to={`/dashboard/process/${p.data.id}`}>View Steps</Link>

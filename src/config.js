@@ -9,5 +9,6 @@ export default {
     PROCESS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/processts',
     COMPANY_SETUP_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/companies/6',
     ASSET_TYPE_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/assettypes',
+    CUSTOMER_ACCOUNTS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/customers',
     API_KEY: process.env.REACT_APP_API_KEY
   }

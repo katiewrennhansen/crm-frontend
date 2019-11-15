@@ -134,8 +134,6 @@ class AssetType extends Component {
                         </thead>
                         <tbody>
                         {this.state.assets.map(a => {
-                            const formatted = a.created_at
-                            console.log(formatted)
                             return (
                             <tr key={a.id}>
                                 <td>{a.assettdesc}</td>

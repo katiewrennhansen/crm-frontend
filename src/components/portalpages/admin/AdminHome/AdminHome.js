@@ -14,6 +14,7 @@ import EditSettings from '../adminViews/AccountSettings/EditSettings'
 import Process from '../adminViews/Process/Process'
 import ProcessSteps from '../adminViews/Process/ProcessSteps'
 import CustomerAccounts from '../adminViews/CustomerAccounts/CustomerAccounts'
+import CustomerPage from '../adminViews/CustomerAccounts/CustomerPage'
 import CompanySetUp from '../adminViews/CompanySetUp/CompanySetUp'
 import AssetType from '../adminViews/AssetType/AssetType'
 import Modal from '../pagecomponents/Modal'
@@ -356,10 +357,22 @@ class AdminHome extends Component {
                                 }}
                         />
                         <Route 
-                            path='/dashboard/customer-accounts' 
+                            exact path='/dashboard/customer-accounts' 
                             render={(props) => {
                                 return (
                                     <CustomerAccounts func={propFunctions} />
+                                )
+                                }}
+                        />
+                        <Route 
+                            exact path='/dashboard/customer-accounts/:id' 
+                            render={(history) => {
+                                const id = history.match.params.id;
+                                return (
+                                    <CustomerPage 
+                                        func={propFunctions} 
+                                        id={id}
+                                    />
                                 )
                                 }}
                         />
