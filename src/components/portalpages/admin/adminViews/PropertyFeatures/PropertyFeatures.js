@@ -116,7 +116,7 @@ class PropertyFeatures extends Component {
             <>
             <Modal className='update-modal' show={feature.update}>
                     <div className='update-modal-grid'>
-                        <h3>Update {this.props.func.updateContent.name}</h3>
+                        <h3>Update {feature.updateContent.name}</h3>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='maint_type'></label>
@@ -186,7 +186,7 @@ class PropertyFeatures extends Component {
                                     >
                                         Delete
                                     </button>
-                                    {(feature.delete) ? feature.deleteModal(config.PROPERTY_FEATURE_ENDPOINT, this.removeFeature) : null}                                    
+                                    {(feature.delete) ? feature.deleteModal(pfEndpoint, this.removeFeature) : null}                                    
                                   
                                 </td>
                             </tr>

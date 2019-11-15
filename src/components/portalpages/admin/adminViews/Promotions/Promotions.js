@@ -133,7 +133,7 @@ class Promotions extends Component {
             <>
                 <Modal className='update-modal' show={promo.update}>
                     <div className='update-modal-grid'>
-                        <h3>Update {this.props.func.updateContent.name}</h3>
+                        <h3>Update {promo.updateContent.name}</h3>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='comment_type'></label>

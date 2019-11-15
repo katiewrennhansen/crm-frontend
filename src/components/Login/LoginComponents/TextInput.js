@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
             margin="normal"
             variant="outlined"
             onChange={props.onChange}
+            value={props.value}
       />
       )
   }

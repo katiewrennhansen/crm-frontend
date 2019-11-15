@@ -65,7 +65,6 @@ class AdminHome extends Component {
             updatedContent: ''
         }
         this.handleCommentChange = this.handleCommentChange.bind(this);
-        this.updateData = this.updateData.bind(this);
     }
 
     handleTitle = (title) => {
@@ -144,34 +143,6 @@ class AdminHome extends Component {
         let i = parseInt(amount = Math.abs(Number(amount) || 0)).toString();
         let j = (i.length > 3) ? i.length % 3 : 0;
         return "$" + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands);
-    }
-
-    updateData = (e) => {
-        e.preventDefault()
-        const id = this.state.toUpdate.id
-        const updatedContent = {
-            commdesc: this.state.updatedContent
-        }
-        fetch(`${config.COMMENTS_ENDPOINT}/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(updatedContent),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then((res) => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return
-        })
-        .then(data => {
-            this.hideUpdate()
-        })
-        .catch(error => {
-            console.error(error)
-        })
     }
 
     fetchData = (endpoint, cb) => {

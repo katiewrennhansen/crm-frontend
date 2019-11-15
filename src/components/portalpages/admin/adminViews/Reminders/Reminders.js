@@ -5,6 +5,8 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
+const remindersEndpoint = config.REMINDERS_ENDPOINT
+
 class Reminders extends Component {
     constructor(props) {
         super(props);
@@ -40,25 +42,11 @@ class Reminders extends Component {
     }
 
     componentDidMount(){
-        fetch(config.REMINDERS_ENDPOINT, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setReminders(data)
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        this.props.func.fetchData(remindersEndpoint, this.setReminders)        
+    }
+
+    componentDidUpdate(){
+        this.props.func.fetchData(remindersEndpoint, this.setReminders)        
     }
 
 
@@ -71,7 +59,7 @@ class Reminders extends Component {
             company_id: 6,
             user_id: 1
         }
-        fetch(config.REMINDERS_ENDPOINT, {
+        fetch(remindersEndpoint, {
             method: 'POST',
             body: JSON.stringify(newReminder),
             headers: {
@@ -94,13 +82,83 @@ class Reminders extends Component {
         })
     }
 
+    updateData = (e) => {
+        e.preventDefault()
+        const id = this.props.func.updateContent.id
+        let updatedContent = {}
 
+        if(e.target.reminder.value !== ''){
+            updatedContent.rtype = e.target.reminder.value
+        }
+        if(e.target.months.value !== ''){
+            updatedContent.periodmonths = e.target.months.value
+        }
+        if(e.target.message.value !== ''){
+            updatedContent.bodymessage = e.target.message.value
+        }
+        fetch(`${remindersEndpoint}/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(updatedContent),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then((res) => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return
+        })
+        .then(data => {
+            this.props.func.hideUpdate()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
 
 
     render(){  
         const reminder = this.props.func
         return (
             <>
+             <Modal className='update-modal' show={reminder.update}>
+                    <div className='update-modal-grid'>
+                        <h3>Update {reminder.updateContent.name}</h3>
+                        <form className='form-group' onSubmit={(e) => this.updateData(e)}>
+                            <div className='form-group'>
+                                <label htmlFor='maint_type'></label>
+                                <TextInput
+                                    id='reminder'
+                                    name='reminder'
+                                    label='Reminder'
+                                    type='text'
+                                />
+                                 <TextInput 
+                                    id='months'
+                                    name='months'
+                                    label='Months'
+                                    type='number'
+                                    autoComplete='number'
+                                />
+                                <TextInput 
+                                    id='message'
+                                    name='message'
+                                    label='Message'
+                                    type='text'
+                                    autoComplete='text'
+                                />
+                            </div>
+                            <div className='update'>
+                                <button type='submit'>Update</button>
+                            </div>
+                        </form>
+                        <div className='cancel'>
+                            <button onClick={reminder.hideUpdate}>Cancel</button>   
+                        </div>
+                    </div>
+                </Modal>
                 <Modal className='add-modal' show={reminder.show} >
                     <form 
                         className= 'add-content' 
@@ -161,7 +219,7 @@ class Reminders extends Component {
                                     <Moment format="YYYY/MM/DD">{r.created_at}</Moment>
                                 </td>
                                 <td className='update'>
-                                    <button>Update</button>
+                                    <button onClick={() => reminder.updateUpdate(r.rtype, r.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 
@@ -169,7 +227,7 @@ class Reminders extends Component {
                                     >
                                         Delete
                                     </button>
-                                {(reminder.delete) ? reminder.deleteModal(config.REMINDERS_ENDPOINT, this.removeReminder) : null}
+                                {(reminder.delete) ? reminder.deleteModal(remindersEndpoint, this.removeReminder) : null}
                                 </td>
                             </tr>
                             ))}

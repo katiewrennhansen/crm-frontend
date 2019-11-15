@@ -81,10 +81,62 @@ class AdminComments extends Component {
         }) 
     }
 
+
+    updateData = (e) => {
+        e.preventDefault()
+        const id = this.props.func.updateContent.id
+        const updatedContent = {
+            commdesc: e.target.comment_type.value
+        }
+        fetch(`${commEndpoint}/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(updatedContent),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then((res) => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return
+        })
+        .then(data => {
+            this.props.func.hideUpdate()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+
+
     render(){ 
         const comment = this.props.func 
         return (
             <>
+            <Modal className='update-modal' show={comment.update}>
+                    <div className='update-modal-grid'>
+                        <h3>Update {comment.updateContent.name}</h3>
+                        <form className='form-group' onSubmit={(e) => this.updateData(e)}>
+                            <div className='form-group'>
+                                <label htmlFor='maint_type'></label>
+                                <TextInput
+                                    id='comment_type'
+                                    name='comment_type'
+                                    label='Comment Type'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='update'>
+                                <button type='submit'>Update</button>
+                            </div>
+                        </form>
+                        <div className='cancel'>
+                            <button onClick={comment.hideUpdate}>Cancel</button>   
+                        </div>
+                    </div>
+                </Modal>
                 <Modal className='add-modal' show={comment.show} >
                     <form 
                         className='add-content'
@@ -127,12 +179,7 @@ class AdminComments extends Component {
                                     <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
                                 </td>
                                 <td className='update'>
-                                    <button 
-                                        onClick={() => comment.updateUpdate(c.commdesc, c.id)}
-                                    >
-                                        Update
-                                    </button>
-                                    {(comment.update) ? comment.updateModal(commEndpoint , this.updateComment) : null}                                    
+                                    <button onClick={() => comment.updateUpdate(c.commdesc, c.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 

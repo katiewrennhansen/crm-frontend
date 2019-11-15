@@ -5,6 +5,7 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
+const psEndpoint = config.PROPERTY_STATUS_ENDPOINT
 
 class PropertyStatus extends Component {
     constructor(props) {
@@ -41,27 +42,12 @@ class PropertyStatus extends Component {
     }
 
     componentDidMount(){
-        fetch(config.PROPERTY_STATUS_ENDPOINT, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setStatuses(data)
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        this.props.func.fetchData(psEndpoint, this.setStatuses)        
     }
 
+    componentDidUpdate() {
+        this.props.func.fetchData(psEndpoint, this.setStatuses)        
+    }
 
 
     addPropertyStatus = (e) => {
@@ -71,9 +57,8 @@ class PropertyStatus extends Component {
             showinportal: false,
             company_id: 6,
             user_id: 1
-   
         }
-        fetch(config.PROPERTY_STATUS_ENDPOINT, {
+        fetch(psEndpoint, {
             method: 'POST',
             body: JSON.stringify(newPropertyStatus),
             headers: {
@@ -96,11 +81,63 @@ class PropertyStatus extends Component {
         })
     }
 
+    updateData = (e) => {
+        e.preventDefault()
+        const id = this.props.func.updateContent.id
+        let updatedContent = {}
+
+        if(e.target.status_type.value !== ''){
+            updatedContent.statusdesc = e.target.status_type.value
+        }
+        fetch(`${psEndpoint}/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(updatedContent),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then((res) => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return
+        })
+        .then(data => {
+            this.props.func.hideUpdate()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+
 
     render(){  
         const status = this.props.func
         return (
             <>
+            <Modal className='update-modal' show={status.update}>
+                    <div className='update-modal-grid'>
+                        <h3>Update {status.updateContent.name}</h3>
+                        <form className='form-group' onSubmit={(e) => this.updateData(e)}>
+                            <div className='form-group'>
+                                <label htmlFor='maint_type'></label>
+                                <TextInput
+                                    id='status_type'
+                                    name='status_type'
+                                    label='Property Status Type'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='update'>
+                                <button type='submit'>Update</button>
+                            </div>
+                        </form>
+                        <div className='cancel'>
+                            <button onClick={status.hideUpdate}>Cancel</button>   
+                        </div>
+                    </div>
+                </Modal>
                 <Modal className='add-modal' show={status.show} >
                     <form 
                         className= 'add-content' 
@@ -143,7 +180,7 @@ class PropertyStatus extends Component {
                                     <Moment format="YYYY/MM/DD">{s.created_at}</Moment>                                
                                 </td>
                                 <td className='update'>
-                                    <button>Update</button>
+                                    <button onClick={() => status.updateUpdate(s.statusdescr, s.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 
@@ -151,7 +188,7 @@ class PropertyStatus extends Component {
                                     >
                                         Delete
                                     </button>
-                                    {(status.delete) ? status.deleteModal(config.PROPERTY_STATUS_ENDPOINT , this.removeStatus) : null}                                                    
+                                    {(status.delete) ? status.deleteModal(psEndpoint , this.removeStatus) : null}                                                    
                                 </td>
                             </tr>
                             ))}

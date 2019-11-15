@@ -5,6 +5,7 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
+const assetEndpoint = config.ASSET_TYPE_ENDPOINT
 
 class AssetType extends Component {
     constructor(props) {
@@ -42,25 +43,11 @@ class AssetType extends Component {
     }
 
     componentDidMount(){
-        fetch(config.ASSET_TYPE_ENDPOINT, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setAssets(data)
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        this.props.func.fetchData(assetEndpoint, this.setAssets)        
+    }
+
+    componentDidUpdate(){
+        this.props.func.fetchData(assetEndpoint, this.setAssets)        
     }
 
     addAsset = (e) => {
@@ -71,7 +58,7 @@ class AssetType extends Component {
             user_id: 6,
             updated_at: new Date()
         }
-        fetch(config.ASSET_TYPE_ENDPOINT, {
+        fetch(assetEndpoint, {
             method: 'POST',
             body: JSON.stringify(newAssetType),
             headers: {
@@ -94,10 +81,61 @@ class AssetType extends Component {
         }) 
     }
 
+    updateData = (e) => {
+        e.preventDefault()
+        const id = this.props.func.updateContent.id
+        let updatedContent = {}
+        if(e.target.asset_type.value !== ''){
+            updatedContent.assettdesc = e.target.asset_type.value
+        }
+        fetch(`${assetEndpoint}/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(updatedContent),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then((res) => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return
+        })
+        .then(data => {
+            this.props.func.hideUpdate()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+
     render(){ 
         const asset = this.props.func 
         return (
             <>
+                <Modal className='update-modal' show={asset.update}>
+                    <div className='update-modal-grid'>
+                        <h3>Update {asset.updateContent.name}</h3>
+                        <form className='form-group' onSubmit={(e) => this.updateData(e)}>
+                            <div className='form-group'>
+                                <label htmlFor='maint_type'></label>
+                                <TextInput
+                                    id='asset_type'
+                                    name='asset_type'
+                                    label='Asset Type'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='update'>
+                                <button type='submit'>Update</button>
+                            </div>
+                        </form>
+                        <div className='cancel'>
+                            <button onClick={asset.hideUpdate}>Cancel</button>   
+                        </div>
+                    </div>
+                </Modal>
                 <Modal className='add-modal' show={asset.show} >
                     <form 
                         className='add-content'
@@ -141,12 +179,7 @@ class AssetType extends Component {
                                     <Moment format="YYYY/MM/DD">{a.created_at}</Moment>
                                 </td>
                                 <td className='update'>
-                                    <button 
-                                        onClick={() => asset.updateUpdate(a.assettdesc, a.id)}
-                                    >
-                                        Update
-                                    </button>
-                                    {(asset.update) ? asset.updateModal(config.COMMENTS_ENDPOINT , this.updateAsset) : null}                                    
+                                    <button onClick={() => asset.updateUpdate(a.assettdesc, a.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 
@@ -154,7 +187,7 @@ class AssetType extends Component {
                                     >
                                         Delete
                                     </button>
-                                    {(asset.delete) ? asset.deleteModal(config.COMMENTS_ENDPOINT , this.removeAsset) : null}                                    
+                                    {(asset.delete) ? asset.deleteModal(assetEndpoint , this.removeAsset) : null}                                    
                                 </td>
                             </tr>
                         )})}

@@ -5,6 +5,7 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
+const csEndpoint = config.CUSTOMER_STATUS_ENDPOINT
 
 class CustomerStatus extends Component {
     constructor(props) {
@@ -41,26 +42,13 @@ class CustomerStatus extends Component {
     }
 
     componentDidMount(){
-        fetch(config.CUSTOMER_STATUS_ENDPOINT, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setStatuses(data)
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        this.props.func.fetchData(csEndpoint, this.setStatuses)        
     }
+
+    componentDidUpdate() {
+        this.props.func.fetchData(csEndpoint, this.setStatuses)        
+    }
+
 
     addCustomerStatus = (e) => {
         e.preventDefault()
@@ -69,7 +57,7 @@ class CustomerStatus extends Component {
             company_id: 6,
             user_id: 1
         }
-        fetch(config.CUSTOMER_STATUS_ENDPOINT, {
+        fetch(csEndpoint, {
             method: 'POST',
             body: JSON.stringify(newCustomerStatus),
             headers: {
@@ -92,11 +80,63 @@ class CustomerStatus extends Component {
         })
     }
 
+    updateData = (e) => {
+        e.preventDefault()
+        const id = this.props.func.updateContent.id
+        let updatedContent = {}
+
+        if(e.target.status_type.value !== ''){
+            updatedContent.csdesc = e.target.status_type.value
+        }
+        fetch(`${csEndpoint}/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(updatedContent),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then((res) => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return
+        })
+        .then(data => {
+            this.props.func.hideUpdate()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+
     
     render(){  
         const status = this.props.func
         return (
             <>
+            <Modal className='update-modal' show={status.update}>
+                    <div className='update-modal-grid'>
+                        <h3>Update {status.updateContent.name}</h3>
+                        <form className='form-group' onSubmit={(e) => this.updateData(e)}>
+                            <div className='form-group'>
+                                <label htmlFor='maint_type'></label>
+                                <TextInput
+                                    id='status_type'
+                                    name='status_type'
+                                    label='Property Status Type'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='update'>
+                                <button type='submit'>Update</button>
+                            </div>
+                        </form>
+                        <div className='cancel'>
+                            <button onClick={status.hideUpdate}>Cancel</button>   
+                        </div>
+                    </div>
+                </Modal>
                 <Modal className='add-modal' show={status.show} >
                     <form 
                         className='add-content' 
@@ -139,7 +179,7 @@ class CustomerStatus extends Component {
                                     <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
                                 </td>
                                 <td className='update'>
-                                    <button>Update</button>
+                                    <button onClick={() => status.updateUpdate(c.csdesc, c.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 
@@ -147,7 +187,7 @@ class CustomerStatus extends Component {
                                     >
                                         Delete
                                     </button>
-                                    {(status.delete) ? status.deleteModal(config.CUSTOMER_STATUS_ENDPOINT, this.removeStatuses) : null}                            
+                                    {(status.delete) ? status.deleteModal(csEndpoint, this.removeStatuses) : null}                            
                                 </td>
                             </tr>
                             ))}
