@@ -5,6 +5,7 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import config from '../../../../../config'
 
+const maintEndpoint = config.MAINTENANCE_ENDPOINT
 
 class Maintenance extends Component {
     constructor(props) {
@@ -41,37 +42,23 @@ class Maintenance extends Component {
     }
 
     componentDidMount(){
-        fetch(config.MAINTENANCE_ENDPOINT, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setMaintenanceType(data)
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        this.props.func.fetchData(maintEndpoint, this.setMaintenanceType)        
     }
+
+    componentDidUpdate(){
+        this.props.func.fetchData(maintEndpoint, this.setMaintenanceType)        
+    }
+    
 
     addMaintenanceType = (e) => {
         e.preventDefault()
-        console.log('add maintenance type!!')
         const newMaintenanceType = {
                 maindescr: e.target.promotion_name.value,
                 company_id: 6,
                 user_id: 1
         }
         console.log(newMaintenanceType)
-        fetch(config.MAINTENANCE_ENDPOINT, {
+        fetch(maintEndpoint, {
             method: 'POST',
             body: JSON.stringify(newMaintenanceType),
             headers: {
@@ -95,11 +82,63 @@ class Maintenance extends Component {
         
     }
 
+    updateData = (e) => {
+        e.preventDefault()
+        const id = this.props.func.updateContent.id
+        let updatedContent = {}
+
+        if(e.target.maint_type.value !== ''){
+            updatedContent.maindescr = e.target.maint_type.value
+        }
+        fetch(`${maintEndpoint}/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(updatedContent),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then((res) => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return
+        })
+        .then(data => {
+            this.props.func.hideUpdate()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+
 
     render(){  
         const maint = this.props.func
         return (
             <>
+            <Modal className='update-modal' show={maint.update}>
+                    <div className='update-modal-grid'>
+                        <h3>Update {this.props.func.updateContent.name}</h3>
+                        <form className='form-group' onSubmit={(e) => this.updateData(e)}>
+                            <div className='form-group'>
+                                <label htmlFor='maint_type'></label>
+                                <TextInput
+                                    id='maint_type'
+                                    name='maint_type'
+                                    label='Maintenance Type'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='update'>
+                                <button type='submit'>Update</button>
+                            </div>
+                        </form>
+                        <div className='cancel'>
+                            <button onClick={maint.hideUpdate}>Cancel</button>   
+                        </div>
+                    </div>
+                </Modal>
                 <Modal className='add-modal' show={maint.show} >
                     <form 
                         className= 'add-content'
@@ -111,7 +150,7 @@ class Maintenance extends Component {
                             <TextInput 
                                 id='promotion_name'
                                 name='promotion_name'
-                                label='Promotion Name'
+                                label='Maintenance Type'
                                 type='text'
                                 autoComplete='text'
                             />
@@ -143,7 +182,7 @@ class Maintenance extends Component {
                                     <Moment format="YYYY/MM/DD">{m.created_at}</Moment>
                                 </td>
                                 <td className='update'>
-                                    <button>Update</button>
+                                    <button onClick={() => maint.updateUpdate(m.maindescr, m.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 

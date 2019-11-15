@@ -5,6 +5,8 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
+const pfEndpoint = config.PROPERTY_FEATURE_ENDPOINT
+
 class PropertyFeatures extends Component {
     constructor(props) {
         super(props);
@@ -40,27 +42,12 @@ class PropertyFeatures extends Component {
     }
 
     componentDidMount(){
-        fetch(config.PROPERTY_FEATURE_ENDPOINT, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setFeature(data)
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        this.props.func.fetchData(pfEndpoint, this.setFeature)        
     }
 
+    componentDidUpdate(){
+        this.props.func.fetchData(pfEndpoint, this.setFeature)        
+    }
 
     addPropertyFeature = (e) => {
         e.preventDefault()
@@ -69,7 +56,7 @@ class PropertyFeatures extends Component {
             company_id: 6,
             user_id: 7,
         }
-        fetch(config.PROPERTY_FEATURE_ENDPOINT, {
+        fetch(pfEndpoint, {
             method: 'POST',
             body: JSON.stringify(newPropertyFeatures),
             headers: {
@@ -91,12 +78,64 @@ class PropertyFeatures extends Component {
             this.setState({ error })
         })
     }
+
+    updateData = (e) => {
+        e.preventDefault()
+        const id = this.props.func.updateContent.id
+        let updatedContent = {}
+
+        if(e.target.feat_type.value !== ''){
+            updatedContent.featuredescr = e.target.feat_type.value
+        }
+        fetch(`${pfEndpoint}/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(updatedContent),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then((res) => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return
+        })
+        .then(data => {
+            this.props.func.hideUpdate()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
  
     
     render(){  
         const feature = this.props.func
         return (
             <>
+            <Modal className='update-modal' show={feature.update}>
+                    <div className='update-modal-grid'>
+                        <h3>Update {this.props.func.updateContent.name}</h3>
+                        <form className='form-group' onSubmit={(e) => this.updateData(e)}>
+                            <div className='form-group'>
+                                <label htmlFor='maint_type'></label>
+                                <TextInput
+                                    id='feat_type'
+                                    name='feat_type'
+                                    label='Feature Name'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='update'>
+                                <button type='submit'>Update</button>
+                            </div>
+                        </form>
+                        <div className='cancel'>
+                            <button onClick={feature.hideUpdate}>Cancel</button>   
+                        </div>
+                    </div>
+                </Modal>
                 <Modal show={feature.show} >
                     <form 
                         className= 'add-content' 
@@ -139,7 +178,7 @@ class PropertyFeatures extends Component {
                                     <Moment format="YYYY/MM/DD">{f.created_at}</Moment>
                                 </td>
                                 <td className='update'>
-                                    <button>Update</button>
+                                    <button onClick={() => feature.updateUpdate(f.featuredescr, f.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 

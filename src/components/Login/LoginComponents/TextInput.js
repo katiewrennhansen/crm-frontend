@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
             autoComplete={props.name}
             margin="normal"
             variant="outlined"
+            onChange={props.onChange}
       />
       )
   }

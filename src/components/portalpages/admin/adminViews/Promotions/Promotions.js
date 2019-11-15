@@ -5,6 +5,8 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
+const promEndpoint = config.PROMOTIONS_ENDPOINT
+
 class Promotions extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +15,7 @@ class Promotions extends Component {
             delete: false,
             promotions: [],
             error: null,
-            pToDelete: []
+            pToDelete: [],
         };
     }
 
@@ -27,7 +29,8 @@ class Promotions extends Component {
         this.props.func.hideDelete()
       }
     
-    setPromotions = promotions => {
+    setPromotions = data => {
+        const promotions = data.promotions
         this.setState({
             promotions: promotions,
             error: null
@@ -42,25 +45,11 @@ class Promotions extends Component {
     }
 
     componentDidMount(){
-        fetch(config.PROMOTIONS_ENDPOINT, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setPromotions(data.promotions)
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        this.props.func.fetchData(promEndpoint, this.setPromotions)
+    }
+
+    componentDidUpdate(){
+        this.props.func.fetchData(promEndpoint, this.setPromotions)
     }
 
     addPromotion = (e) => {
@@ -68,12 +57,12 @@ class Promotions extends Component {
         const newPromotion = {
             typepromotion: e.target.promotion_name.value,
             totalcost: e.target.total_cost.value,
-            startdate: this.formatDatePicker(e.target.promotion_start.value),
-            duedate: this.formatDatePicker(e.target.promotion_end.value),
+            startdate: e.target.promotion_start.value,
+            duedate: e.target.promotion_end.value,
             company_id: 6,
             user_id: 1
         }
-        fetch(config.PROMOTIONS_ENDPOINT, {
+        fetch(promEndpoint, {
             method: 'POST',
             body: JSON.stringify(newPromotion),
             headers: {
@@ -99,10 +88,100 @@ class Promotions extends Component {
         })
     }
 
+    updateData = (e) => {
+        e.preventDefault()
+        const id = this.props.func.updateContent.id
+        let updatedContent = {}
+
+        if(e.target.promotion_name.value !== ''){
+            updatedContent.typepromotion = e.target.promotion_name.value
+        }
+        if(e.target.promotion_start.value !== ''){
+            updatedContent.startdate = e.target.promotion_start.value
+        }
+        if(e.target.promotion_end.value !== ''){
+            updatedContent.duedate = e.target.promotion_end.value
+        }
+        if(e.target.total_cost.value !== ''){
+            updatedContent.totalcost = Number(e.target.total_cost.value)
+        }
+        fetch(`${promEndpoint}/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(updatedContent),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then((res) => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return
+        })
+        .then(data => {
+            this.props.func.hideUpdate()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+
     render(){  
         const promo = this.props.func
         return (
             <>
+                <Modal className='update-modal' show={promo.update}>
+                    <div className='update-modal-grid'>
+                        <h3>Update {this.props.func.updateContent.name}</h3>
+                        <form className='form-group' onSubmit={(e) => this.updateData(e)}>
+                            <div className='form-group'>
+                                <label htmlFor='comment_type'></label>
+                                <TextInput
+                                    id='comment_type'
+                                    name='promotion_name'
+                                    label='Promotion Name'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='dates'>
+                                <div className='form-group'>
+                                    <label htmlFor='promotion_start'></label>
+                                    <TextInput 
+                                        id='promotion_start'
+                                        name='promotion_start'
+                                        label='Start Date'
+                                        type='date'
+                                    />
+                                </div>
+                                <div className='form-group'>
+                                    <label htmlFor='promotion_end'></label>
+                                    <TextInput 
+                                        id='promotion_end'
+                                        name='promotion_end'
+                                        label='End Date'
+                                        type='date'
+                                    />
+                                </div>
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='promotion_cost'></label>
+                                <TextInput 
+                                    id='total_cost'
+                                    name='total_cost'
+                                    label='Total Cost'
+                                    type='number'
+                                />
+                            </div>
+                            <div className='update'>
+                                <button type='submit'>Update</button>
+                            </div>
+                        </form>
+                        <div className='cancel'>
+                            <button onClick={promo.hideUpdate}>Cancel</button>   
+                        </div>
+                    </div>
+                </Modal>
                 <Modal className='add-modal' show={promo.show} >
                     <form 
                         className='add-content' 
@@ -181,7 +260,7 @@ class Promotions extends Component {
                                 </td>
                                 <td>{this.props.formatPrice(p.data.totalcost)}</td>
                                 <td className='update'>
-                                    <button>Update</button>
+                                    <button onClick={() => promo.updateUpdate(p.data.typepromotion, p.data.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 
@@ -189,7 +268,7 @@ class Promotions extends Component {
                                     >
                                         Delete
                                     </button>
-                                    {(promo.delete) ? promo.deleteModal(config.PROMOTIONS_ENDPOINT, this.removePromotion) : null}
+                                    {(promo.delete) ? promo.deleteModal(promEndpoint, this.removePromotion) : null}
                                 </td>
                             </tr>
                             ))}

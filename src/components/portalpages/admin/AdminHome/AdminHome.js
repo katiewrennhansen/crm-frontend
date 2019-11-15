@@ -64,6 +64,8 @@ class AdminHome extends Component {
             },
             updatedContent: ''
         }
+        this.handleCommentChange = this.handleCommentChange.bind(this);
+        this.updateData = this.updateData.bind(this);
     }
 
     handleTitle = (title) => {
@@ -135,7 +137,6 @@ class AdminHome extends Component {
         this.setState({
             updatedContent: e.target.value
         })
-        console.log(this.state.updatedContent)
     }
 
     formatPriceUSD = (amount) => {
@@ -148,13 +149,9 @@ class AdminHome extends Component {
     updateData = (e) => {
         e.preventDefault()
         const id = this.state.toUpdate.id
-        // const title = e.target.comment_type.value
         const updatedContent = {
-            commtype: {
-                commdesc: 'Another New Comment'
-            }
+            commdesc: this.state.updatedContent
         }
-        console.log(updatedContent, id)
         fetch(`${config.COMMENTS_ENDPOINT}/${id}`, {
             method: 'PATCH',
             body: JSON.stringify(updatedContent),
@@ -167,12 +164,35 @@ class AdminHome extends Component {
             if(!res.ok){
                 return res.json().then(error => Promise.reject(error))
             }
+            return
         })
         .then(data => {
             this.hideUpdate()
         })
         .catch(error => {
             console.error(error)
+        })
+    }
+
+    fetchData = (endpoint, cb) => {
+        fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => {
+            if(!res.ok){
+                return res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+            cb(data)
+        })
+        .catch(error => {
+            this.setState({ error })
         })
     }
 
@@ -198,25 +218,25 @@ class AdminHome extends Component {
             <Modal className='update-modal' show={this.state.update}>
                 <div className='update-modal-grid'>
                     <h3>Update {this.state.toUpdate.name}?</h3>
-                    <form className='form-group'>
+                    <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                         <div className='form-group'>
                             <label htmlFor='comment_type'></label>
                             <TextInput
                                 id='comment_type'
-                                name='comment_type'
+                                name='update'
                                 label='Comment Type'
                                 type='text'
-                                value={this.state.toUpdate.name}
-                                onChange={this.handleCommentChange}
+                                value={this.state.updatedContent}
+                                onChange={(e) => this.handleCommentChange(e)}
                             />
                         </div>
-                        <div className='cancel'>
-                            <button onClick={this.hideUpdate}>Cancel</button>   
-                        </div>
                         <div className='update'>
-                            <button onClick={(e) => {this.hideUpdate(); this.updateData(e)}}>Update</button>
+                            <button type='submit'>Update</button>
                         </div>
                     </form>
+                    <div className='cancel'>
+                        <button onClick={this.hideUpdate}>Cancel</button>   
+                    </div>
                 </div>
             </Modal>
         )
@@ -235,7 +255,11 @@ class AdminHome extends Component {
             deleteModal: this.deleteModal,
             updateDelete: this.updateDelete,
             updateModal: this.updateModal,
-            updateUpdate: this.updateUpdate
+            updateUpdate: this.updateUpdate,
+            fetchData: this.fetchData,
+            showUpdate: this.showUpdate,
+            hideUpdate: this.hideUpdate,
+            updateContent: this.state.toUpdate
         }
         return (
             <div className='dashboard-container'>

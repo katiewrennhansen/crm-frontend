@@ -5,6 +5,7 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 
+const commEndpoint = config.COMMENTS_ENDPOINT
 
 class AdminComments extends Component {
     constructor(props) {
@@ -42,26 +43,13 @@ class AdminComments extends Component {
     }
 
     componentDidMount(){
-        fetch(config.COMMENTS_ENDPOINT, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setComments(data)
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        this.props.func.fetchData(commEndpoint, this.setComments)
     }
+
+    componentDidUpdate(){
+        this.props.func.fetchData(commEndpoint, this.setComments)
+    }
+
 
     addComment = (e) => {
         e.preventDefault()
@@ -70,7 +58,7 @@ class AdminComments extends Component {
             company_id: 6,
             user_id: 1
         }
-        fetch(config.COMMENTS_ENDPOINT, {
+        fetch(commEndpoint, {
             method: 'POST',
             body: JSON.stringify(newCommentType),
             headers: {
@@ -144,7 +132,7 @@ class AdminComments extends Component {
                                     >
                                         Update
                                     </button>
-                                    {(comment.update) ? comment.updateModal(config.COMMENTS_ENDPOINT , this.updateComment) : null}                                    
+                                    {(comment.update) ? comment.updateModal(commEndpoint , this.updateComment) : null}                                    
                                 </td>
                                 <td className='delete'>
                                     <button 
@@ -152,7 +140,7 @@ class AdminComments extends Component {
                                     >
                                         Delete
                                     </button>
-                                    {(comment.delete) ? comment.deleteModal(config.COMMENTS_ENDPOINT , this.removeComment) : null}                                    
+                                    {(comment.delete) ? comment.deleteModal(commEndpoint , this.removeComment) : null}                                    
                                 </td>
                             </tr>
                         ))}
