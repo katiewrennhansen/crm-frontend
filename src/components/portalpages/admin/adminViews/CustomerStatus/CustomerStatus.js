@@ -5,16 +5,16 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import AdminContext from '../../../../../AdminContext'
 
 const csEndpoint = config.CUSTOMER_STATUS_ENDPOINT
 
 class CustomerStatus extends Component {
+    static contextType = AdminContext
+
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            delete: false,
-            statuses: [],
             error: null
         };
     }
@@ -28,28 +28,20 @@ class CustomerStatus extends Component {
         })
         this.props.func.hideDelete()
       }
-    
-    setStatuses = statuses => {
-        this.setState({
-            statuses: statuses,
-            error: null
-        })
-    }
-    updateStatuses = data => {
-        this.setState({
-            statuses: [...this.state.statuses, data],
-            error: null
-        })
-    }
 
     componentDidMount(){
-        ApiService.getData(csEndpoint, this.setStatuses)        
+        ApiService.getData(
+            csEndpoint, 
+            this.context.setData
+        )        
     }
 
     componentDidUpdate() {
-        ApiService.getData(csEndpoint, this.setStatuses)        
+        ApiService.getData(
+            csEndpoint, 
+            this.context.setData
+        )        
     }
-
 
     addCustomerStatus = (e) => {
         e.preventDefault()
@@ -61,14 +53,14 @@ class CustomerStatus extends Component {
         ApiService.postData(
             csEndpoint, 
             newCustomerStatus, 
-            this.updateStatuses, 
-            this.props.func.hideModal
+            this.context.updateData, 
+            this.context.hideModal
         )
     }
 
     updateData = (e) => {
         e.preventDefault()
-        const id = this.props.func.updateContent.id
+        const id = this.context.id
         let updatedContent = {}
 
         if(e.target.status_type.value !== ''){
@@ -78,18 +70,19 @@ class CustomerStatus extends Component {
             csEndpoint, 
             id, 
             updatedContent, 
-            this.props.func.hideUpdate
+            this.context.hideUpdate
         )
     }
 
     
     render(){  
         const status = this.props.func
+        const context = this.context
         return (
             <>
-            <Modal className='update-modal' show={status.update}>
+            <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
-                        <h3>Update {status.updateContent.name}</h3>
+                        <h3>Update {context.name}</h3>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='maint_type'></label>
@@ -105,11 +98,11 @@ class CustomerStatus extends Component {
                             </div>
                         </form>
                         <div className='cancel'>
-                            <button onClick={status.hideUpdate}>Cancel</button>   
+                            <button onClick={context.hideUpdate}>Cancel</button>   
                         </div>
                     </div>
                 </Modal>
-                <Modal className='add-modal' show={status.show} >
+                <Modal className='add-modal' show={context.show} >
                     <form 
                         className='add-content' 
                         onSubmit={(e) => this.addCustomerStatus(e)}
@@ -128,12 +121,12 @@ class CustomerStatus extends Component {
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
                     <div className='cancel'>                    
-                        <button onClick={status.hideModal}>Cancel</button>
+                        <button onClick={context.hideModal}>Cancel</button>
                     </div>
                 </Modal>
                 <div className='data-container'>
                     <h3>Customer Status</h3>
-                    <button className='add-data' onClick={status.showModal}>Add Customer Status</button>
+                    <button className='add-data' onClick={context.showModal}>Add Customer Status</button>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -144,14 +137,14 @@ class CustomerStatus extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.statuses.map(c => (
+                            {context.data.map(c => (
                             <tr key={c.id}>
                                 <td>{c.csdesc}</td>
                                 <td>
                                     <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
                                 </td>
                                 <td className='update'>
-                                    <button onClick={() => status.updateUpdate(c.csdesc, c.id)}>Update</button>
+                                    <button onClick={() => context.updateUpdate(c.csdesc, c.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 

@@ -42,7 +42,7 @@ class AdminHome extends Component {
             },
             updatedContent: ''
         }
-        this.handleCommentChange = this.handleCommentChange.bind(this);
+        // this.handleCommentChange = this.handleCommentChange.bind(this);
     }
 
     handleTitle = (title) => {
@@ -84,11 +84,11 @@ class AdminHome extends Component {
         }); 
     };
 
-    handleCommentChange = e => {
-        this.setState({
-            updatedContent: e.target.value
-        })
-    }
+    // handleCommentChange = e => {
+    //     this.setState({
+    //         updatedContent: e.target.value
+    //     })
+    // }
 
     formatPriceUSD = (amount) => {
         const thousands = ","

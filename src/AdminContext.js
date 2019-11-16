@@ -53,7 +53,6 @@ export class AdminProvider extends Component {
     };
 
     showModal = () => {
-        console.log('showing modal!!!')
         this.setState({ show: true });
     };
 
@@ -145,7 +144,7 @@ export class AdminProvider extends Component {
             error: null
         })
     }
-    
+
     render() {
         const value = {
             show: this.state.show,

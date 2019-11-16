@@ -5,16 +5,16 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import AdminContext from '../../../../../AdminContext'
 
 const pfEndpoint = config.PROPERTY_FEATURE_ENDPOINT
 
 class PropertyFeatures extends Component {
+    static contextType = AdminContext
+
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            delete: false,
-            features: [],
             error: null
         };
     }
@@ -26,28 +26,22 @@ class PropertyFeatures extends Component {
         this.setState({
           features: newFeatures
         })
-        this.props.func.hideDelete()
+        this.context.hideDelete()
       }
-    
-    setFeature = features => {
-        this.setState({
-            features: features,
-            error: null
-        })
-    }
-    updateFeatures = data => {
-        this.setState({
-            features: [...this.state.features, data],
-            error: null
-        })
-    }
+
 
     componentDidMount(){
-        ApiService.getData(pfEndpoint, this.setFeature)        
+        ApiService.getData(
+            pfEndpoint, 
+            this.context.setData
+        )        
     }
 
     componentDidUpdate(){
-        ApiService.getData(pfEndpoint, this.setFeature)        
+        ApiService.getData(
+            pfEndpoint, 
+            this.context.setData
+        )        
     }
 
     addPropertyFeature = (e) => {
@@ -60,14 +54,14 @@ class PropertyFeatures extends Component {
         ApiService.postData(
             pfEndpoint, 
             newPropertyFeatures, 
-            this.updateFeatures, 
-            this.props.func.hideModal
+            this.context.updateData, 
+            this.context.hideModal
         )
     }
 
     updateData = (e) => {
         e.preventDefault()
-        const id = this.props.func.updateContent.id
+        const id = this.context.id
         let updatedContent = {}
 
         if(e.target.feat_type.value !== ''){
@@ -77,18 +71,19 @@ class PropertyFeatures extends Component {
             pfEndpoint, 
             id, 
             updatedContent, 
-            this.props.func.hideUpdate
+            this.context.hideUpdate
         )
     }
  
     
     render(){  
         const feature = this.props.func
+        const context = this.context
         return (
             <>
-            <Modal className='update-modal' show={feature.update}>
+            <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
-                        <h3>Update {feature.updateContent.name}</h3>
+                        <h3>Update {context.name}</h3>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='maint_type'></label>
@@ -104,11 +99,11 @@ class PropertyFeatures extends Component {
                             </div>
                         </form>
                         <div className='cancel'>
-                            <button onClick={feature.hideUpdate}>Cancel</button>   
+                            <button onClick={context.hideUpdate}>Cancel</button>   
                         </div>
                     </div>
                 </Modal>
-                <Modal show={feature.show} >
+                <Modal show={context.show} >
                     <form 
                         className= 'add-content' 
                         onSubmit={(e) => this.addPropertyFeature(e)}
@@ -127,12 +122,12 @@ class PropertyFeatures extends Component {
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
                     <div className='cancel'>
-                        <button onClick={feature.hideModal}>Cancel</button>
+                        <button onClick={context.hideModal}>Cancel</button>
                     </div>
                 </Modal>
                 <div className='data-container'>
                     <h3>Property Features</h3>
-                    <button className='add-data' onClick={feature.showModal}>Add Property Feature</button>
+                    <button className='add-data' onClick={context.showModal}>Add Property Feature</button>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -143,14 +138,14 @@ class PropertyFeatures extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.features.map(f => (
+                            {context.data.map(f => (
                             <tr key={f.id}>
                                 <td>{f.featuredescr}</td>
                                 <td>
                                     <Moment format="YYYY/MM/DD">{f.created_at}</Moment>
                                 </td>
                                 <td className='update'>
-                                    <button onClick={() => feature.updateUpdate(f.featuredescr, f.id)}>Update</button>
+                                    <button onClick={() => context.updateUpdate(f.featuredescr, f.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 
