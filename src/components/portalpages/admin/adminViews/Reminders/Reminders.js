@@ -14,8 +14,13 @@ class Reminders extends Component {
         this.state = {
             show: false,
             delete: false,
+            update: false,
             reminders: [],
-            error: null
+            error: null,
+            toUpdate: {
+                name: '',
+                id: ''
+            } 
         };
     }
 
@@ -64,7 +69,7 @@ class Reminders extends Component {
             remindersEndpoint, 
             newReminder, 
             this.updateReminders, 
-            this.props.func.hideModal
+            this.context.hideModal
         )
     }
 
@@ -95,7 +100,7 @@ class Reminders extends Component {
         const reminder = this.props.func
         return (
             <>
-             <Modal className='update-modal' show={reminder.update}>
+             <Modal className='update-modal' show={this.state.update}>
                     <div className='update-modal-grid'>
                         <h3>Update {reminder.updateContent.name}</h3>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
@@ -190,8 +195,11 @@ class Reminders extends Component {
                                 <td>
                                     <Moment format="YYYY/MM/DD">{r.created_at}</Moment>
                                 </td>
-                                <td className='update'>
+                                {/* <td className='update'>
                                     <button onClick={() => reminder.updateUpdate(r.rtype, r.id)}>Update</button>
+                                </td> */}
+                                 <td className='update'>
+                                    <button onClick={() => this.context.updateUpdate(r.rtype, r.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 

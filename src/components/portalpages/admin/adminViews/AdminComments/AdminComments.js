@@ -5,50 +5,32 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import AdminContext from '../../../../../AdminContext'
 
 const commEndpoint = config.COMMENTS_ENDPOINT
 
 class AdminComments extends Component {
+    static contextType = AdminContext
+
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            delete: false,
-            comments: [],
-            error: null
+            error: null,
         };
     }
 
-    removeComment = id => {
-        const newComments = this.state.comments.filter(c =>
-          c.id !== id
-        )
-        this.setState({
-          comments: newComments
-        })
-        this.props.func.hideDelete()
-      }
-    
-    setComments = comments => {
-        this.setState({
-            comments: comments,
-            error: null
-        })
-    }
-
-    updateComments = data => {
-        this.setState({
-            comments: [...this.state.comments, data],
-            error: null
-        })
-    }
-
     componentDidMount(){
-        ApiService.getData(commEndpoint, this.setComments) 
+        ApiService.getData(
+            commEndpoint, 
+            this.context.setData
+        ) 
     }
 
     componentDidUpdate(){
-        ApiService.getData(commEndpoint, this.setComments)
+        ApiService.getData(
+            commEndpoint, 
+            this.context.setData
+        )
     }
 
 
@@ -62,15 +44,14 @@ class AdminComments extends Component {
         ApiService.postData(
             commEndpoint, 
             newCommentType, 
-            this.updateComments, 
-            this.props.func.hideModal
-            )
+            this.context.updateData, 
+            this.context.hideModal
+        )
     }
-
 
     updateData = (e) => {
         e.preventDefault()
-        const id = this.props.func.updateContent.id
+        const id = this.context.id
         const updatedContent = {
             commdesc: e.target.comment_type.value
         }
@@ -78,17 +59,35 @@ class AdminComments extends Component {
             commEndpoint, 
             id, 
             updatedContent, 
-            this.props.func.hideUpdate)
+            this.context.hideUpdate
+        )
     }
 
 
     render(){ 
-        const comment = this.props.func 
+        const context = this.context
         return (
             <>
-            <Modal className='update-modal' show={comment.update}>
+
+            <Modal show={context.delete}>
+                <div className='delete-modal-grid'>
+                    <h3>Are you sure you would like to delete {context.nameDelete}?</h3>
+                    <div className='cancel'>                    
+                        <button onClick={context.hideDelete}>Cancel</button>
+                    </div>
+                    <div className='delete'>
+                        <button 
+                            onClick={() => ApiService.deleteData(commEndpoint, context.idDelete, context.removeData)}
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
-                        <h3>Update {comment.updateContent.name}</h3>
+                        <h3>Update {context.name}</h3>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='maint_type'></label>
@@ -104,11 +103,11 @@ class AdminComments extends Component {
                             </div>
                         </form>
                         <div className='cancel'>
-                            <button onClick={comment.hideUpdate}>Cancel</button>   
+                            <button onClick={context.hideUpdate}>Cancel</button>   
                         </div>
                     </div>
                 </Modal>
-                <Modal className='add-modal' show={comment.show} >
+                <Modal className='add-modal' show={context.show} >
                     <form 
                         className='add-content'
                         onSubmit={(e) => this.addComment(e)}
@@ -126,13 +125,13 @@ class AdminComments extends Component {
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
                     <div className='cancel'>
-                        <button onClick={comment.hideModal}>Cancel</button>
+                        <button onClick={context.hideModal}>Cancel</button>
                     </div>
                 </Modal>
                 
                 <div className='data-container'>
                     <h3>Comments Type</h3>
-                    <button className='add-data' onClick={comment.showModal}>Add Comment Type</button>
+                    <button className='add-data' onClick={context.showModal}>Add Comment Type</button>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -143,22 +142,21 @@ class AdminComments extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                        {this.state.comments.map(c => (
+                        {context.data.map(c => (
                             <tr key={c.id}>
                                 <td>{c.commdesc}</td>
                                 <td>
                                     <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
                                 </td>
                                 <td className='update'>
-                                    <button onClick={() => comment.updateUpdate(c.commdesc, c.id)}>Update</button>
+                                    <button onClick={() => context.updateUpdate(c.commdesc, c.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 
-                                        onClick={() => comment.updateDelete(c.commdesc, c.id)}
+                                        onClick={() => context.updateDelete(c.commdesc, c.id)}
                                     >
                                         Delete
                                     </button>
-                                    {(comment.delete) ? comment.deleteModal(commEndpoint , this.removeComment) : null}                                    
                                 </td>
                             </tr>
                         ))}
@@ -173,3 +171,5 @@ class AdminComments extends Component {
 
 
 export default AdminComments
+
+

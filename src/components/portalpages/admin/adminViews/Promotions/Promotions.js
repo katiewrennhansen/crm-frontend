@@ -5,52 +5,32 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import AdminContext from '../../../../../AdminContext'
 
 const promEndpoint = config.PROMOTIONS_ENDPOINT
 
 class Promotions extends Component {
+    static contextType = AdminContext
+
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            delete: false,
-            promotions: [],
             error: null,
-            pToDelete: [],
         };
     }
 
-    removePromotion = id => {
-        const newPromotions = this.state.promotions.filter(p =>
-          p.data.id !== id
-        )
-        this.setState({
-          promotions: newPromotions
-        })
-        this.props.func.hideDelete()
-      }
-    
-    setPromotions = data => {
-        const promotions = data.promotions
-        this.setState({
-            promotions: promotions,
-            error: null
-        })
-    }
-
-    updatePromotions = data => {
-        this.setState({
-            promotions: [...this.state.promotions, data],
-            error: null
-        })
-    }
-
     componentDidMount(){
-        ApiService.getData(promEndpoint, this.setPromotions)
+        ApiService.getData(
+            promEndpoint, 
+            this.context.setPromotions
+        )
     }
 
     componentDidUpdate(){
-        ApiService.getData(promEndpoint, this.setPromotions)
+        ApiService.getData(
+            promEndpoint, 
+            this.context.setPromotions
+        )
     }
 
     addPromotion = (e) => {
@@ -87,8 +67,8 @@ class Promotions extends Component {
             const promotion = {
                 data
             }
-            this.updatePromotions(promotion)
-            this.props.func.hideModal()
+            this.context.updatePromotions(promotion)
+            this.context.hideModal()
         })
         .catch(error => {
             this.setState({ error })
@@ -97,7 +77,7 @@ class Promotions extends Component {
 
     updateData = (e) => {
         e.preventDefault()
-        const id = this.props.func.updateContent.id
+        const id = this.context.id
         let updatedContent = {}
 
         if(e.target.promotion_name.value !== ''){
@@ -117,17 +97,18 @@ class Promotions extends Component {
             promEndpoint, 
             id, 
             updatedContent, 
-            this.props.func.hideUpdate
+            this.context.hideUpdate
         )
     }
 
     render(){  
+        const context = this.context
         const promo = this.props.func
         return (
             <>
-                <Modal className='update-modal' show={promo.update}>
+                <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
-                        <h3>Update {promo.updateContent.name}</h3>
+                        <h3>Update {context.name}</h3>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='comment_type'></label>
@@ -172,11 +153,11 @@ class Promotions extends Component {
                             </div>
                         </form>
                         <div className='cancel'>
-                            <button onClick={promo.hideUpdate}>Cancel</button>   
+                            <button onClick={context.hideUpdate}>Cancel</button>   
                         </div>
                     </div>
                 </Modal>
-                <Modal className='add-modal' show={promo.show} >
+                <Modal className='add-modal' show={context.show} >
                     <form 
                         className='add-content' 
                         onSubmit={(e) => this.addPromotion(e)}
@@ -225,12 +206,12 @@ class Promotions extends Component {
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
                     <div className='cancel'>
-                        <button onClick={promo.hideModal}>Cancel</button>
+                        <button onClick={context.hideModal}>Cancel</button>
                     </div>
                 </Modal>
                 <div className='data-container'>
                     <h3>Promotions</h3>
-                    <button className='add-data' onClick={promo.showModal}>Add Promotion</button>
+                    <button className='add-data' onClick={context.showModal}>Add Promotion</button>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -243,7 +224,7 @@ class Promotions extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.promotions.map(p => (
+                            {context.promotions.map(p => (
                             <tr key={p.data.id}>
                                 <td>{p.data.typepromotion}</td>
                                 <td>
@@ -254,7 +235,7 @@ class Promotions extends Component {
                                 </td>
                                 <td>{this.props.formatPrice(p.data.totalcost)}</td>
                                 <td className='update'>
-                                    <button onClick={() => promo.updateUpdate(p.data.typepromotion, p.data.id)}>Update</button>
+                                    <button onClick={() => context.updateUpdate(p.data.typepromotion, p.data.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 

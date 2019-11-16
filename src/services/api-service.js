@@ -68,7 +68,7 @@ const ApiService = {
     },
 
     deleteData(ApiEndpont, id, cb){
-        fetch(ApiEndpont + `/${id}`, {
+        fetch(`${ApiEndpont}/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',

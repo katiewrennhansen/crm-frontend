@@ -5,16 +5,17 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import AdminContext from '../../../../../AdminContext'
 
 const maintEndpoint = config.MAINTENANCE_ENDPOINT
 
 class Maintenance extends Component {
+    static contextType = AdminContext
+
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            delete: false,
-            maintenanceTypes: [],
+  
             error: null
         };
     }
@@ -29,25 +30,13 @@ class Maintenance extends Component {
         this.props.func.hideDelete()
       }
     
-    setMaintenanceType = maintenanceTypes => {
-        this.setState({
-            maintenanceTypes: maintenanceTypes,
-            error: null
-        })
-    }
-    updateMaintenanceType = data => {
-        this.setState({
-            maintenanceTypes: [...this.state.maintenanceTypes, data],
-            error: null
-        })
-    }
 
     componentDidMount(){
-        ApiService.getData(maintEndpoint, this.setMaintenanceType)        
+        ApiService.getData(maintEndpoint, this.context.setData)        
     }
 
     componentDidUpdate(){
-        ApiService.getData(maintEndpoint, this.setMaintenanceType)        
+        ApiService.getData(maintEndpoint, this.context.setData)        
     }
     
     addMaintenanceType = (e) => {
@@ -60,13 +49,14 @@ class Maintenance extends Component {
         ApiService.postData(
             maintEndpoint, 
             newMaintenanceType, 
-            this.updateMaintenanceType, 
-            this.props.func.hideModal())   
+            this.context.updateData, 
+            this.context.hideModal
+        )   
     }
 
     updateData = (e) => {
         e.preventDefault()
-        const id = this.props.func.updateContent.id
+        const id = this.context.id
         let updatedContent = {}
 
         if(e.target.maint_type.value !== ''){
@@ -76,17 +66,19 @@ class Maintenance extends Component {
             maintEndpoint, 
             id, 
             updatedContent, 
-            this.props.func.hideUpdate)
+            this.context.hideUpdate
+        )
     }
 
 
     render(){  
         const maint = this.props.func
+        const context = this.context
         return (
             <>
-            <Modal className='update-modal' show={maint.update}>
+            <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
-                        <h3>Update {maint.updateContent.name}</h3>
+                        <h3>Update {context.name}</h3>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='maint_type'></label>
@@ -102,11 +94,11 @@ class Maintenance extends Component {
                             </div>
                         </form>
                         <div className='cancel'>
-                            <button onClick={maint.hideUpdate}>Cancel</button>   
+                            <button onClick={context.hideUpdate}>Cancel</button>   
                         </div>
                     </div>
                 </Modal>
-                <Modal className='add-modal' show={maint.show} >
+                <Modal className='add-modal' show={context.show} >
                     <form 
                         className= 'add-content'
                         onSubmit={(e) => this.addMaintenanceType(e)}
@@ -125,13 +117,13 @@ class Maintenance extends Component {
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
                     <div className='cancel'>
-                        <button onClick={maint.hideModal}>Cancel</button>
+                        <button onClick={context.hideModal}>Cancel</button>
                     </div>
                 </Modal>
 
                 <div className='data-container'>
                     <h3>Maintenance</h3>
-                    <button className='add-data' onClick={maint.showModal}>Add Maintenance Type</button>
+                    <button className='add-data' onClick={context.showModal}>Add Maintenance Type</button>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -142,14 +134,14 @@ class Maintenance extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.maintenanceTypes.map(m => (
+                            {context.data.map(m => (
                             <tr key={m.id}>
                                 <td>{m.maindescr}</td>
                                 <td>
                                     <Moment format="YYYY/MM/DD">{m.created_at}</Moment>
                                 </td>
                                 <td className='update'>
-                                    <button onClick={() => maint.updateUpdate(m.maindescr, m.id)}>Update</button>
+                                    <button onClick={() => context.updateUpdate(m.maindescr, m.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
                                     <button 

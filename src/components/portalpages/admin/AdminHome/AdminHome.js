@@ -18,8 +18,9 @@ import CustomerPage from '../adminViews/CustomerAccounts/CustomerPage'
 import CompanySetUp from '../adminViews/CompanySetUp/CompanySetUp'
 import AssetType from '../adminViews/AssetType/AssetType'
 import Modal from '../pagecomponents/Modal'
-import TextInput from '../../../Login/LoginComponents/TextInput'
+// import TextInput from '../../../Login/LoginComponents/TextInput'
 import ApiService from '../../../../services/api-service'
+import { AdminProvider } from '../../../../AdminContext'
 import './AdminHome.css'
 
 
@@ -50,28 +51,12 @@ class AdminHome extends Component {
         })
     }
 
-    showModal = () => {
-        this.setState({ show: true });
-    };
-
-    hideModal = () => {
-        this.setState({ show: false });
-    };
-
     showDelete = () => {
         this.setState({ delete: true });
     };
 
     hideDelete = () => {
         this.setState({ delete: false });
-    }
-
-    showUpdate = () => {
-        this.setState({ update: true });
-    };
-
-    hideUpdate = () => {
-        this.setState({ update: false });
     }
 
     formatDate(){
@@ -93,16 +78,6 @@ class AdminHome extends Component {
         this.showDelete();
         this.setState({ 
             toDelete: {
-                name: name,
-                id: id
-            } 
-        }); 
-    };
-
-    updateUpdate = (name, id) => {
-        this.showUpdate();
-        this.setState({ 
-            toUpdate: {
                 name: name,
                 id: id
             } 
@@ -140,34 +115,34 @@ class AdminHome extends Component {
     }
 
 
-    updateModal = () => {
-        return (
-            <Modal className='update-modal' show={this.state.update}>
-                <div className='update-modal-grid'>
-                    <h3>Update {this.state.toUpdate.name}?</h3>
-                    <form className='form-group' onSubmit={(e) => this.updateData(e)}>
-                        <div className='form-group'>
-                            <label htmlFor='comment_type'></label>
-                            <TextInput
-                                id='comment_type'
-                                name='update'
-                                label='Comment Type'
-                                type='text'
-                                value={this.state.updatedContent}
-                                onChange={(e) => this.handleCommentChange(e)}
-                            />
-                        </div>
-                        <div className='update'>
-                            <button type='submit'>Update</button>
-                        </div>
-                    </form>
-                    <div className='cancel'>
-                        <button onClick={this.hideUpdate}>Cancel</button>   
-                    </div>
-                </div>
-            </Modal>
-        )
-    }
+    // updateModal = () => {
+    //     return (
+    //         <Modal className='update-modal' show={this.state.update}>
+    //             <div className='update-modal-grid'>
+    //                 <h3>Update {this.state.toUpdate.name}?</h3>
+    //                 <form className='form-group' onSubmit={(e) => this.updateData(e)}>
+    //                     <div className='form-group'>
+    //                         <label htmlFor='comment_type'></label>
+    //                         <TextInput
+    //                             id='comment_type'
+    //                             name='update'
+    //                             label='Comment Type'
+    //                             type='text'
+    //                             value={this.state.updatedContent}
+    //                             onChange={(e) => this.handleCommentChange(e)}
+    //                         />
+    //                     </div>
+    //                     <div className='update'>
+    //                         <button type='submit'>Update</button>
+    //                     </div>
+    //                 </form>
+    //                 <div className='cancel'>
+    //                     <button onClick={this.hideUpdate}>Cancel</button>   
+    //                 </div>
+    //             </div>
+    //         </Modal>
+    //     )
+    // }
   
     render(){
         const propFunctions = {
@@ -188,6 +163,7 @@ class AdminHome extends Component {
             updateContent: this.state.toUpdate
         }
         return (
+            <AdminProvider>
             <div className='dashboard-container'>
                 <div className='dash-sidebar'>
                     <AdminSidebar 
@@ -330,6 +306,7 @@ class AdminHome extends Component {
                     </Switch>
                 </div>
             </div>
+            </AdminProvider>
         )
     }
 }
