@@ -4,6 +4,7 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import config from '../../../../../config'
+import ApiService from '../../../../../services/api-service'
 
 const maintEndpoint = config.MAINTENANCE_ENDPOINT
 
@@ -42,14 +43,13 @@ class Maintenance extends Component {
     }
 
     componentDidMount(){
-        this.props.func.fetchData(maintEndpoint, this.setMaintenanceType)        
+        ApiService.getData(maintEndpoint, this.setMaintenanceType)        
     }
 
     componentDidUpdate(){
-        this.props.func.fetchData(maintEndpoint, this.setMaintenanceType)        
+        ApiService.getData(maintEndpoint, this.setMaintenanceType)        
     }
     
-
     addMaintenanceType = (e) => {
         e.preventDefault()
         const newMaintenanceType = {
@@ -57,29 +57,11 @@ class Maintenance extends Component {
                 company_id: 6,
                 user_id: 1
         }
-        console.log(newMaintenanceType)
-        fetch(maintEndpoint, {
-            method: 'POST',
-            body: JSON.stringify(newMaintenanceType),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.updateMaintenanceType(data)
-            this.props.func.hideModal()
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
-        
+        ApiService.postData(
+            maintEndpoint, 
+            newMaintenanceType, 
+            this.updateMaintenanceType, 
+            this.props.func.hideModal())   
     }
 
     updateData = (e) => {
@@ -90,26 +72,11 @@ class Maintenance extends Component {
         if(e.target.maint_type.value !== ''){
             updatedContent.maindescr = e.target.maint_type.value
         }
-        fetch(`${maintEndpoint}/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(updatedContent),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then((res) => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return
-        })
-        .then(data => {
-            this.props.func.hideUpdate()
-        })
-        .catch(error => {
-            console.error(error)
-        })
+        ApiService.updateData(
+            maintEndpoint, 
+            id, 
+            updatedContent, 
+            this.props.func.hideUpdate)
     }
 
 

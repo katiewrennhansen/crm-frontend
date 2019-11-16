@@ -4,6 +4,7 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
+import ApiService from '../../../../../services/api-service'
 
 const commEndpoint = config.COMMENTS_ENDPOINT
 
@@ -43,11 +44,11 @@ class AdminComments extends Component {
     }
 
     componentDidMount(){
-        this.props.func.fetchData(commEndpoint, this.setComments)
+        ApiService.getData(commEndpoint, this.setComments) 
     }
 
     componentDidUpdate(){
-        this.props.func.fetchData(commEndpoint, this.setComments)
+        ApiService.getData(commEndpoint, this.setComments)
     }
 
 
@@ -58,27 +59,12 @@ class AdminComments extends Component {
             company_id: 6,
             user_id: 1
         }
-        fetch(commEndpoint, {
-            method: 'POST',
-            body: JSON.stringify(newCommentType),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.updateComments(data)
-            this.props.func.hideModal()
-        })
-        .catch(error => {
-            this.setState({ error })
-        }) 
+        ApiService.postData(
+            commEndpoint, 
+            newCommentType, 
+            this.updateComments, 
+            this.props.func.hideModal
+            )
     }
 
 
@@ -88,26 +74,11 @@ class AdminComments extends Component {
         const updatedContent = {
             commdesc: e.target.comment_type.value
         }
-        fetch(`${commEndpoint}/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(updatedContent),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then((res) => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return
-        })
-        .then(data => {
-            this.props.func.hideUpdate()
-        })
-        .catch(error => {
-            console.error(error)
-        })
+        ApiService.updateData(
+            commEndpoint, 
+            id, 
+            updatedContent, 
+            this.props.func.hideUpdate)
     }
 
 

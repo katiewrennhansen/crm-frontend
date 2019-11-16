@@ -4,6 +4,7 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
+import ApiService from '../../../../../services/api-service'
 
 const csEndpoint = config.CUSTOMER_STATUS_ENDPOINT
 
@@ -42,11 +43,11 @@ class CustomerStatus extends Component {
     }
 
     componentDidMount(){
-        this.props.func.fetchData(csEndpoint, this.setStatuses)        
+        ApiService.getData(csEndpoint, this.setStatuses)        
     }
 
     componentDidUpdate() {
-        this.props.func.fetchData(csEndpoint, this.setStatuses)        
+        ApiService.getData(csEndpoint, this.setStatuses)        
     }
 
 
@@ -57,27 +58,12 @@ class CustomerStatus extends Component {
             company_id: 6,
             user_id: 1
         }
-        fetch(csEndpoint, {
-            method: 'POST',
-            body: JSON.stringify(newCustomerStatus),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.updateStatuses(data)
-            this.props.func.hideModal()
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        ApiService.postData(
+            csEndpoint, 
+            newCustomerStatus, 
+            this.updateStatuses, 
+            this.props.func.hideModal
+        )
     }
 
     updateData = (e) => {
@@ -88,26 +74,12 @@ class CustomerStatus extends Component {
         if(e.target.status_type.value !== ''){
             updatedContent.csdesc = e.target.status_type.value
         }
-        fetch(`${csEndpoint}/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(updatedContent),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then((res) => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return
-        })
-        .then(data => {
-            this.props.func.hideUpdate()
-        })
-        .catch(error => {
-            console.error(error)
-        })
+        ApiService.updateData(
+            csEndpoint, 
+            id, 
+            updatedContent, 
+            this.props.func.hideUpdate
+        )
     }
 
     

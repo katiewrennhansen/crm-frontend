@@ -4,6 +4,7 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
+import ApiService from '../../../../../services/api-service'
 
 const assetEndpoint = config.ASSET_TYPE_ENDPOINT
 
@@ -43,11 +44,11 @@ class AssetType extends Component {
     }
 
     componentDidMount(){
-        this.props.func.fetchData(assetEndpoint, this.setAssets)        
+        ApiService.getData(assetEndpoint, this.setAssets)        
     }
 
     componentDidUpdate(){
-        this.props.func.fetchData(assetEndpoint, this.setAssets)        
+        ApiService.getData(assetEndpoint, this.setAssets)        
     }
 
     addAsset = (e) => {
@@ -58,27 +59,12 @@ class AssetType extends Component {
             user_id: 6,
             updated_at: new Date()
         }
-        fetch(assetEndpoint, {
-            method: 'POST',
-            body: JSON.stringify(newAssetType),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.updateAssets(data)
-            this.props.func.hideModal()
-        })
-        .catch(error => {
-            this.setState({ error })
-        }) 
+        ApiService.postData(
+            assetEndpoint, 
+            newAssetType, 
+            this.updateAssets, 
+            this.props.func.hideModal
+        )
     }
 
     updateData = (e) => {
@@ -88,26 +74,12 @@ class AssetType extends Component {
         if(e.target.asset_type.value !== ''){
             updatedContent.assettdesc = e.target.asset_type.value
         }
-        fetch(`${assetEndpoint}/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(updatedContent),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then((res) => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return
-        })
-        .then(data => {
-            this.props.func.hideUpdate()
-        })
-        .catch(error => {
-            console.error(error)
-        })
+        ApiService.updateData(
+            assetEndpoint, 
+            id, 
+            updatedContent, 
+            this.props.func.hideUpdate
+        )
     }
 
     render(){ 

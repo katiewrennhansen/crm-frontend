@@ -4,7 +4,9 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
+import ApiService from '../../../../../services/api-service'
 
+const processEndpoint = config.PROCESS_ENDPOINT
 
 class Process extends Component {
     constructor(props) {
@@ -42,7 +44,7 @@ class Process extends Component {
     }
 
     componentDidMount(){
-        this.props.func.fetchData(config.PROCESS_ENDPOINT, this.setProcess)
+        ApiService.getData(processEndpoint, this.setProcess)
     }
 
     addProcess = (e) => {

@@ -4,6 +4,7 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
+import ApiService from '../../../../../services/api-service'
 
 const promEndpoint = config.PROMOTIONS_ENDPOINT
 
@@ -45,11 +46,11 @@ class Promotions extends Component {
     }
 
     componentDidMount(){
-        this.props.func.fetchData(promEndpoint, this.setPromotions)
+        ApiService.getData(promEndpoint, this.setPromotions)
     }
 
     componentDidUpdate(){
-        this.props.func.fetchData(promEndpoint, this.setPromotions)
+        ApiService.getData(promEndpoint, this.setPromotions)
     }
 
     addPromotion = (e) => {
@@ -62,6 +63,12 @@ class Promotions extends Component {
             company_id: 6,
             user_id: 1
         }
+        // ApiService.postSomeData(
+        //     promEndpoint, 
+        //     newPromotion, 
+        //     this.updatePromotions, 
+        //     this.props.func.hideModal
+        //     )
         fetch(promEndpoint, {
             method: 'POST',
             body: JSON.stringify(newPromotion),
@@ -105,26 +112,13 @@ class Promotions extends Component {
         if(e.target.total_cost.value !== ''){
             updatedContent.totalcost = Number(e.target.total_cost.value)
         }
-        fetch(`${promEndpoint}/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(updatedContent),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then((res) => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return
-        })
-        .then(data => {
-            this.props.func.hideUpdate()
-        })
-        .catch(error => {
-            console.error(error)
-        })
+
+        ApiService.updateData(
+            promEndpoint, 
+            id, 
+            updatedContent, 
+            this.props.func.hideUpdate
+        )
     }
 
     render(){  

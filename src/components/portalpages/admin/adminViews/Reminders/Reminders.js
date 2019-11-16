@@ -4,6 +4,7 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
+import ApiService from '../../../../../services/api-service'
 
 const remindersEndpoint = config.REMINDERS_ENDPOINT
 
@@ -42,11 +43,11 @@ class Reminders extends Component {
     }
 
     componentDidMount(){
-        this.props.func.fetchData(remindersEndpoint, this.setReminders)        
+        ApiService.getData(remindersEndpoint, this.setReminders)        
     }
 
     componentDidUpdate(){
-        this.props.func.fetchData(remindersEndpoint, this.setReminders)        
+        ApiService.getData(remindersEndpoint, this.setReminders)        
     }
 
 
@@ -59,27 +60,12 @@ class Reminders extends Component {
             company_id: 6,
             user_id: 1
         }
-        fetch(remindersEndpoint, {
-            method: 'POST',
-            body: JSON.stringify(newReminder),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.updateReminders(data)
-            this.props.func.hideModal()
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        ApiService.postData(
+            remindersEndpoint, 
+            newReminder, 
+            this.updateReminders, 
+            this.props.func.hideModal
+        )
     }
 
     updateData = (e) => {
@@ -96,26 +82,12 @@ class Reminders extends Component {
         if(e.target.message.value !== ''){
             updatedContent.bodymessage = e.target.message.value
         }
-        fetch(`${remindersEndpoint}/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(updatedContent),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then((res) => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return
-        })
-        .then(data => {
-            this.props.func.hideUpdate()
-        })
-        .catch(error => {
-            console.error(error)
-        })
+        ApiService.updateData(
+            remindersEndpoint, 
+            id, 
+            updatedContent, 
+            this.props.func.hideUpdate
+        )
     }
 
 

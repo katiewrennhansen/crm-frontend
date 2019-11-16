@@ -4,6 +4,7 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
+import ApiService from '../../../../../services/api-service'
 
 const pfEndpoint = config.PROPERTY_FEATURE_ENDPOINT
 
@@ -42,11 +43,11 @@ class PropertyFeatures extends Component {
     }
 
     componentDidMount(){
-        this.props.func.fetchData(pfEndpoint, this.setFeature)        
+        ApiService.getData(pfEndpoint, this.setFeature)        
     }
 
     componentDidUpdate(){
-        this.props.func.fetchData(pfEndpoint, this.setFeature)        
+        ApiService.getData(pfEndpoint, this.setFeature)        
     }
 
     addPropertyFeature = (e) => {
@@ -56,27 +57,12 @@ class PropertyFeatures extends Component {
             company_id: 6,
             user_id: 7,
         }
-        fetch(pfEndpoint, {
-            method: 'POST',
-            body: JSON.stringify(newPropertyFeatures),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.updateFeatures(data)
-            this.props.func.hideModal()
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        ApiService.postData(
+            pfEndpoint, 
+            newPropertyFeatures, 
+            this.updateFeatures, 
+            this.props.func.hideModal
+        )
     }
 
     updateData = (e) => {
@@ -87,26 +73,12 @@ class PropertyFeatures extends Component {
         if(e.target.feat_type.value !== ''){
             updatedContent.featuredescr = e.target.feat_type.value
         }
-        fetch(`${pfEndpoint}/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(updatedContent),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then((res) => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return
-        })
-        .then(data => {
-            this.props.func.hideUpdate()
-        })
-        .catch(error => {
-            console.error(error)
-        })
+        ApiService.updateData(
+            pfEndpoint, 
+            id, 
+            updatedContent, 
+            this.props.func.hideUpdate
+        )
     }
  
     

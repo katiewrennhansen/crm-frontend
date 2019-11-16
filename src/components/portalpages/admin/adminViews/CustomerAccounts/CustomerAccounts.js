@@ -5,7 +5,9 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import './CustomerAccounts.css'
+import ApiService from '../../../../../services/api-service'
 
+const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
 
 class CustomerAccounts extends Component {
     constructor(props) {
@@ -26,7 +28,7 @@ class CustomerAccounts extends Component {
     }
 
     componentDidMount(){
-        this.props.func.fetchData(config.CUSTOMER_ACCOUNTS_ENDPOINT, this.setCustomers)
+        ApiService.getData(caEndpoint, this.setCustomers)
     }
 
     addCustomer = (e) => {
@@ -36,7 +38,7 @@ class CustomerAccounts extends Component {
                 name: e.target.customer.value,
                 email: e.target.customer_email.value,
                 phone: e.target.customer_phone.value,
-                dateCreated: this.props.formatDate(),
+                dateCreated: new Date(),
                 company_id: 6,
                 user_id: 1
             }

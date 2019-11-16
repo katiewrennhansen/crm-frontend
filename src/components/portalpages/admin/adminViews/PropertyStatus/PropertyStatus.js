@@ -4,6 +4,7 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
+import ApiService from '../../../../../services/api-service'
 
 const psEndpoint = config.PROPERTY_STATUS_ENDPOINT
 
@@ -42,13 +43,12 @@ class PropertyStatus extends Component {
     }
 
     componentDidMount(){
-        this.props.func.fetchData(psEndpoint, this.setStatuses)        
+        ApiService.getData(psEndpoint, this.setStatuses)        
     }
 
     componentDidUpdate() {
-        this.props.func.fetchData(psEndpoint, this.setStatuses)        
+        ApiService.getData(psEndpoint, this.setStatuses)        
     }
-
 
     addPropertyStatus = (e) => {
         e.preventDefault()
@@ -58,27 +58,12 @@ class PropertyStatus extends Component {
             company_id: 6,
             user_id: 1
         }
-        fetch(psEndpoint, {
-            method: 'POST',
-            body: JSON.stringify(newPropertyStatus),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.updateStatuses(data)
-            this.props.func.hideModal()
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        ApiService.postData(
+            psEndpoint, 
+            newPropertyStatus, 
+            this.updateStatuses, 
+            this.props.func.hideModal
+        )
     }
 
     updateData = (e) => {
@@ -89,28 +74,13 @@ class PropertyStatus extends Component {
         if(e.target.status_type.value !== ''){
             updatedContent.statusdesc = e.target.status_type.value
         }
-        fetch(`${psEndpoint}/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(updatedContent),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then((res) => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return
-        })
-        .then(data => {
-            this.props.func.hideUpdate()
-        })
-        .catch(error => {
-            console.error(error)
-        })
+        ApiService.updateData(
+            psEndpoint, 
+            id, 
+            updatedContent, 
+            this.props.func.hideUpdate
+        )
     }
-
 
     render(){  
         const status = this.props.func

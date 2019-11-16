@@ -19,31 +19,8 @@ import CompanySetUp from '../adminViews/CompanySetUp/CompanySetUp'
 import AssetType from '../adminViews/AssetType/AssetType'
 import Modal from '../pagecomponents/Modal'
 import TextInput from '../../../Login/LoginComponents/TextInput'
-import config from '../../../../config'
+import ApiService from '../../../../services/api-service'
 import './AdminHome.css'
-
-
-function deleteData(endpont, id, cb){
-    fetch(endpont + `/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'content-type': 'application/json',
-            'Authorization': `Bearer ${config.API_KEY}`
-        }
-    })
-    .then((res) => {
-        if(!res.ok){
-            return res.json().then(error => Promise.reject(error))
-        }
-        return res.text()
-    })
-    .then(data => {
-        cb(id)
-    })
-    .catch(error => {
-        console.error(error)
-    })
-}
 
 
 class AdminHome extends Component {
@@ -145,27 +122,6 @@ class AdminHome extends Component {
         return "$" + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands);
     }
 
-    fetchData = (endpoint, cb) => {
-        fetch(endpoint, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            cb(data)
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
-    }
 
     deleteModal = (endpoint, removeFn) => {
         return (
@@ -176,7 +132,7 @@ class AdminHome extends Component {
                         <button onClick={this.hideDelete}>Cancel</button>
                     </div>
                     <div className='delete'>
-                        <button onClick={() => deleteData(endpoint, this.state.toDelete.id, removeFn)}>Delete</button>
+                        <button onClick={() => ApiService.deleteData(endpoint, this.state.toDelete.id, removeFn)}>Delete</button>
                     </div>
                 </div>
             </Modal>
@@ -227,7 +183,6 @@ class AdminHome extends Component {
             updateDelete: this.updateDelete,
             updateModal: this.updateModal,
             updateUpdate: this.updateUpdate,
-            fetchData: this.fetchData,
             showUpdate: this.showUpdate,
             hideUpdate: this.hideUpdate,
             updateContent: this.state.toUpdate
