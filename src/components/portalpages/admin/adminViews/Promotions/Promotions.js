@@ -6,6 +6,7 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../AdminContext'
+import DeleteModal from '../../pagecomponents/DeleteModal'
 
 const promEndpoint = config.PROMOTIONS_ENDPOINT
 
@@ -26,12 +27,12 @@ class Promotions extends Component {
         )
     }
 
-    componentDidUpdate(){
-        ApiService.getData(
-            promEndpoint, 
-            this.context.setPromotions
-        )
-    }
+    // componentDidUpdate(){
+    //     ApiService.getData(
+    //         promEndpoint, 
+    //         this.context.setPromotions
+    //     )
+    // }
 
     addPromotion = (e) => {
         e.preventDefault()
@@ -103,9 +104,12 @@ class Promotions extends Component {
 
     render(){  
         const context = this.context
-        const promo = this.props.func
         return (
             <>
+            <DeleteModal
+                props={context}
+                endpoint={promEndpoint}
+            />
                 <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
                         <h3>Update {context.name}</h3>
@@ -238,12 +242,7 @@ class Promotions extends Component {
                                     <button onClick={() => context.updateUpdate(p.data.typepromotion, p.data.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
-                                    <button 
-                                        onClick={() => promo.updateDelete(p.data.typepromotion, p.data.id)}
-                                    >
-                                        Delete
-                                    </button>
-                                    {(promo.delete) ? promo.deleteModal(promEndpoint, this.removePromotion) : null}
+                                    <button onClick={() => context.updateDelete(p.data.typepromotion, p.data.id)}>Delete</button>
                                 </td>
                             </tr>
                             ))}

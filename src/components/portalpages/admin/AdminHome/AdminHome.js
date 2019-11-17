@@ -10,7 +10,7 @@ import PropertyFeatures from '../adminViews/PropertyFeatures/PropertyFeatures'
 import PropertyStatus from '../adminViews/PropertyStatus/PropertyStatus'
 import CustomerStatus from '../adminViews/CustomerStatus/CustomerStatus'
 import Reminders from '../adminViews/Reminders/Reminders'
-import EditSettings from '../adminViews/AccountSettings/EditSettings'
+import EditSettings from '../adminViews/CompanySetUp/EditSettings'
 import Process from '../adminViews/Process/Process'
 import ProcessSteps from '../adminViews/Process/ProcessSteps'
 import CustomerAccounts from '../adminViews/CustomerAccounts/CustomerAccounts'
@@ -26,24 +26,13 @@ class AdminHome extends Component {
         super(props);
         this.state = {
             title: '',
-            delete: false,
-            updatedContent: ''
         }
-        // this.handleCommentChange = this.handleCommentChange.bind(this);
     }
 
     handleTitle = (title) => {
         this.setState({
             title: title
         })
-    }
-
-    showDelete = () => {
-        this.setState({ delete: true });
-    };
-
-    hideDelete = () => {
-        this.setState({ delete: false });
     }
 
     formatDate(){
@@ -61,21 +50,6 @@ class AdminHome extends Component {
         return today;
     }
 
-    updateDelete = (name, id) => {
-        this.showDelete();
-        this.setState({ 
-            toDelete: {
-                name: name,
-                id: id
-            } 
-        }); 
-    };
-
-    // handleCommentChange = e => {
-    //     this.setState({
-    //         updatedContent: e.target.value
-    //     })
-    // }
 
     formatPriceUSD = (amount) => {
         const thousands = ","
@@ -87,155 +61,150 @@ class AdminHome extends Component {
     render(){
         const propFunctions = {
             name: this.props.name,
-            showDelete: this.showDelete,
-            hideDelete: this.hideDelete,
-            deleteModal: this.deleteModal,
-            updateDelete: this.updateDelete,
         }
         return (
             <AdminProvider>
-            <div className='dashboard-container'>
-                <div className='dash-sidebar'>
-                    <AdminSidebar 
-                        handleTitle={this.handleTitle}
-                    />
-                </div>
-                <div className='dash-nav'>
-                    <AdminNav 
-                        logout={this.props.logout}
-                        title={this.state.title}
-                        handleTitle={this.handleTitle}
-                    />
-                </div>
-                <div className='dash-home'>
-                    <Switch>
-                        <Route 
-                            path='/dashboard/home' 
+                <div className='dashboard-container'>
+                    <div className='dash-sidebar'>
+                        <AdminSidebar 
+                            handleTitle={this.handleTitle}
+                        />
+                    </div>
+                    <div className='dash-nav'>
+                        <AdminNav 
+                            logout={this.props.logout}
+                            title={this.state.title}
+                            handleTitle={this.handleTitle}
+                        />
+                    </div>
+                    <div className='dash-home'>
+                        <Switch>
+                            <Route 
+                                path='/dashboard/home' 
+                                render={(props) => {
+                                    return (
+                                    <AdminDash name={this.props.name} />
+                                    )
+                                }}
+                            />
+                            <Route 
+                                path='/dashboard/company-setup' 
+                                render={(props) => {
+                                    return (
+                                    <CompanySetUp func={propFunctions} />
+                                    )
+                                }}
+                            />
+                            <Route 
+                                path='/dashboard/comments' 
+                                render={(props) => {
+                                    return (
+                                    <AdminComments />
+                                    )
+                                }}
+                            />
+                            <Route 
+                            path='/dashboard/promotions' 
                             render={(props) => {
                                 return (
-                                  <AdminDash name={this.props.name} />
-                                )
-                              }}
-                        />
-                        <Route 
-                            path='/dashboard/company-setup' 
-                            render={(props) => {
-                                return (
-                                  <CompanySetUp func={propFunctions} />
-                                )
-                              }}
-                        />
-                        <Route 
-                            path='/dashboard/comments' 
-                            render={(props) => {
-                                return (
-                                  <AdminComments />
-                                )
-                              }}
-                        />
-                        <Route 
-                        path='/dashboard/promotions' 
-                        render={(props) => {
-                            return (
-                                <Promotions 
-                                    func={propFunctions}
-                                    formatPrice={this.formatPriceUSD} 
-                                />
-                            )
-                            }}
-                        />
-                        <Route 
-                        path='/dashboard/maintenance' 
-                        render={(props) => {
-                            return (
-                                <Maintenance />
-                            )
-                            }}
-                        />
-                        <Route 
-                        path='/dashboard/property-features' 
-                        render={(props) => {
-                            return (
-                                <PropertyFeatures />
-                            )
-                            }}
-                        />
-                        <Route 
-                        path='/dashboard/property-status' 
-                        render={(props) => {
-                            return (
-                                <PropertyStatus />
-                            )
-                            }}
-                        />
-                        <Route 
-                        path='/dashboard/customer-status' 
-                        render={(props) => {
-                            return (
-                                <CustomerStatus />
-                            )
-                            }}
-                        />
-                        <Route 
-                        path='/dashboard/reminders' 
-                        render={(props) => {
-                            return (
-                                <Reminders />
-                            )
-                            }}
-                        />
-                        <Route 
-                        path='/dashboard/asset-type' 
-                        render={(props) => {
-                            return (
-                                <AssetType />
-                            )
-                            }}
-                        />
-                        <Route 
-                        exact path='/dashboard/process' 
-                        render={(props) => {
-                            return (
-                                <Process func={propFunctions} />
-                            )
-                            }}
-                        />
-                        <Route 
-                            exact path='/dashboard/process/:id' 
-                            render={(history) => {
-                                const id = history.match.params.id;
-                                return (
-                                    <ProcessSteps 
-                                        func={propFunctions} 
-                                        id={id}
+                                    <Promotions 
+                                        formatPrice={this.formatPriceUSD} 
                                     />
                                 )
                                 }}
-                        />
-                        <Route 
-                            exact path='/dashboard/customer-accounts' 
+                            />
+                            <Route 
+                            path='/dashboard/maintenance' 
                             render={(props) => {
                                 return (
-                                    <CustomerAccounts func={propFunctions} />
+                                    <Maintenance />
                                 )
                                 }}
-                        />
-                        <Route 
-                            exact path='/dashboard/customer-accounts/:id' 
-                            render={(history) => {
-                                const id = history.match.params.id;
+                            />
+                            <Route 
+                            path='/dashboard/property-features' 
+                            render={(props) => {
                                 return (
-                                    <CustomerPage 
-                                        func={propFunctions} 
-                                        id={id}
-                                    />
+                                    <PropertyFeatures />
                                 )
                                 }}
-                        />
-                        <Route path='/dashboard/edit-account-settings' component={EditSettings} />                        
-                    </Switch>
+                            />
+                            <Route 
+                            path='/dashboard/property-status' 
+                            render={(props) => {
+                                return (
+                                    <PropertyStatus />
+                                )
+                                }}
+                            />
+                            <Route 
+                            path='/dashboard/customer-status' 
+                            render={(props) => {
+                                return (
+                                    <CustomerStatus />
+                                )
+                                }}
+                            />
+                            <Route 
+                            path='/dashboard/reminders' 
+                            render={(props) => {
+                                return (
+                                    <Reminders />
+                                )
+                                }}
+                            />
+                            <Route 
+                            path='/dashboard/asset-type' 
+                            render={(props) => {
+                                return (
+                                    <AssetType />
+                                )
+                                }}
+                            />
+                            <Route 
+                            exact path='/dashboard/process' 
+                            render={(props) => {
+                                return (
+                                    <Process />
+                                )
+                                }}
+                            />
+                            <Route 
+                                exact path='/dashboard/process/:id' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    return (
+                                        <ProcessSteps 
+                                            func={propFunctions} 
+                                            id={id}
+                                        />
+                                    )
+                                    }}
+                            />
+                            <Route 
+                                exact path='/dashboard/customer-accounts' 
+                                render={(props) => {
+                                    return (
+                                        <CustomerAccounts func={propFunctions} />
+                                    )
+                                    }}
+                            />
+                            <Route 
+                                exact path='/dashboard/customer-accounts/:id' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    return (
+                                        <CustomerPage 
+                                            func={propFunctions} 
+                                            id={id}
+                                        />
+                                    )
+                                    }}
+                            />
+                            <Route path='/dashboard/edit-account-settings' component={EditSettings} />                        
+                        </Switch>
+                    </div>
                 </div>
-            </div>
             </AdminProvider>
         )
     }

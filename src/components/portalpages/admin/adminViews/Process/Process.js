@@ -6,6 +6,7 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../AdminContext'
+import DeleteModal from '../../pagecomponents/DeleteModal'
 
 const processEndpoint = config.PROCESS_ENDPOINT
 
@@ -19,16 +20,6 @@ class Process extends Component {
         };
     }
 
-    removeProcess = id => {
-        const newProcess = this.state.process.filter(p =>
-          p.id !== id
-        )
-        this.setState({
-          process: newProcess
-        })
-        this.props.func.hideDelete()
-    }
-
     componentDidMount(){
         ApiService.getData(
             processEndpoint, 
@@ -36,50 +27,40 @@ class Process extends Component {
         )
     }
 
-    // componentDidUpdate(){
-    //     ApiService.getData(
-    //         processEndpoint, 
-    //         this.context.setData
-    //     )
-    // }
+    componentDidUpdate(){
+        ApiService.getData(
+            processEndpoint, 
+            this.context.setProcess
+        )
+    }
 
     addProcess = (e) => {
         e.preventDefault()
         const newProcess = {
-            data: {
+            processt: {
                 processdesc: e.target.process.value,
-                steps: []
+                steps: [],
+                company_id: 6,
+                user_id: 1
             }
         }
-        fetch(config.PROCESS_ENDPOINT, {
-            method: 'POST',
-            body: JSON.stringify(newProcess),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            console.log(res)
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.context.updateData(data)
-            this.props.func.hideModal()
-        })
-        .catch(error => {
-            this.setState({ error })
-        }) 
+        ApiService.postData(
+            processEndpoint, 
+            newProcess, 
+            this.context.updateData, 
+            this.context.hideModal
+        )
+        
     }
 
     render(){  
-        const process = this.props.func
         const context = this.context
         return (
             <>
+                <DeleteModal
+                    props={context}
+                    endpoint={processEndpoint}
+                />
                 <Modal className='add-modal' show={context.show} >
                     <form 
                         className= 'add-content' 
@@ -122,12 +103,7 @@ class Process extends Component {
                                         <Link to={`/dashboard/process/${p.data.id}`}>View Steps</Link>
                                     </td>
                                     <td className='delete'>
-                                        <button 
-                                            onClick={() => process.updateDelete(p.data.processdesc, p.data.id)}
-                                        >
-                                            Delete
-                                        </button>
-                                        {(process.delete) ? process.deleteModal(processEndpoint, this.removePromotion) : null}
+                                        <button onClick={() => context.updateDelete(p.data.processdesc, p.data.id)}>Delete</button>
                                     </td>
                                 </tr>
                             )})}

@@ -10,8 +10,6 @@ class EditSettings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            delete: false,
             companyInfo: [],
             error: null
         };
@@ -66,7 +64,7 @@ class EditSettings extends Component {
         return (
             <div className='admin-dashboard'>
                 <div className='dash-container'>
-                    <h3>Edit Settings</h3>
+                    <h3>Edit Company Information</h3>
                     <form onSubmit={(e) => this.handleSubmit(e)}>
 
                     <div className='form-group'>
@@ -94,8 +92,6 @@ class EditSettings extends Component {
                             onChange={this.handleChange}
                         />
                     </div>
-
-                    
 
                     <div className='form-group'>
                         <label htmlFor='last'></label>

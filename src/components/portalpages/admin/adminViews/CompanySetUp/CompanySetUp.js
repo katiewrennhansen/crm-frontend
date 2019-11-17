@@ -7,8 +7,6 @@ class CompanySetUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            delete: false,
             companyInfo: [],
             error: null
         };

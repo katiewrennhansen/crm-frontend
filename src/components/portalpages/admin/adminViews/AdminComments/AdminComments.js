@@ -34,7 +34,6 @@ class AdminComments extends Component {
         )
     }
 
-
     addComment = (e) => {
         e.preventDefault()
         const newCommentType = {
