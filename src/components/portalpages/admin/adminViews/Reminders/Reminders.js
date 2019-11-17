@@ -5,56 +5,34 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import AdminContext from '../../../../../AdminContext'
+import DeleteModal from '../../pagecomponents/DeleteModal'
 
 const remindersEndpoint = config.REMINDERS_ENDPOINT
 
 class Reminders extends Component {
+    static contextType = AdminContext
+
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            delete: false,
-            update: false,
-            reminders: [],
             error: null,
-            toUpdate: {
-                name: '',
-                id: ''
-            } 
-        };
-    }
-
-    removeReminder = id => {
-        const newReminders = this.state.reminders.filter(r =>
-          r.id !== id
-        )
-        this.setState({
-          reminders: newReminders
-        })
-        this.props.func.hideDelete()
-      }
-    
-    setReminders = reminders => {
-        this.setState({
-            reminders: reminders,
-            error: null
-        })
-    }
-    updateReminders = data => {
-        this.setState({
-            reminders: [...this.state.reminders, data],
-            error: null
-        })
+        }
     }
 
     componentDidMount(){
-        ApiService.getData(remindersEndpoint, this.setReminders)        
+        ApiService.getData(
+            remindersEndpoint, 
+            this.context.setData
+        )        
     }
 
     componentDidUpdate(){
-        ApiService.getData(remindersEndpoint, this.setReminders)        
+        ApiService.getData(
+            remindersEndpoint, 
+            this.context.setData
+        )        
     }
-
 
     addReminder = (e) => {
         e.preventDefault()
@@ -68,14 +46,14 @@ class Reminders extends Component {
         ApiService.postData(
             remindersEndpoint, 
             newReminder, 
-            this.updateReminders, 
+            this.context.updateData, 
             this.context.hideModal
         )
     }
 
     updateData = (e) => {
         e.preventDefault()
-        const id = this.props.func.updateContent.id
+        const id = this.context.id
         let updatedContent = {}
 
         if(e.target.reminder.value !== ''){
@@ -91,18 +69,22 @@ class Reminders extends Component {
             remindersEndpoint, 
             id, 
             updatedContent, 
-            this.props.func.hideUpdate
+            this.context.hideUpdate
         )
     }
 
 
     render(){  
-        const reminder = this.props.func
+        const context = this.context
         return (
             <>
-             <Modal className='update-modal' show={this.state.update}>
+            <DeleteModal
+                props={context}
+                endpoint={remindersEndpoint}
+            />
+             <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
-                        <h3>Update {reminder.updateContent.name}</h3>
+                        <h3>Update {context.name}</h3>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='maint_type'></label>
@@ -132,11 +114,11 @@ class Reminders extends Component {
                             </div>
                         </form>
                         <div className='cancel'>
-                            <button onClick={reminder.hideUpdate}>Cancel</button>   
+                            <button onClick={context.hideUpdate}>Cancel</button>   
                         </div>
                     </div>
                 </Modal>
-                <Modal className='add-modal' show={reminder.show} >
+                <Modal className='add-modal' show={context.show} >
                     <form 
                         className= 'add-content' 
                         onSubmit={(e) => this.addReminder(e)}
@@ -169,12 +151,12 @@ class Reminders extends Component {
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
                     <div className='cancel'>
-                        <button onClick={reminder.hideModal}>Cancel</button>
+                        <button onClick={context.hideModal}>Cancel</button>
                     </div>
                 </Modal>
                 <div className='data-container'>
                     <h3>Reminders</h3>
-                    <button className='add-data' onClick={reminder.showModal}>Add Reminder</button>
+                    <button className='add-data' onClick={context.showModal}>Add Reminder</button>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -187,7 +169,7 @@ class Reminders extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.reminders.map(r => (
+                            {context.data.map(r => (
                             <tr key={r.id}>
                                 <td>{r.rtype}</td>
                                 <td>{r.periodmonths}</td>
@@ -195,19 +177,11 @@ class Reminders extends Component {
                                 <td>
                                     <Moment format="YYYY/MM/DD">{r.created_at}</Moment>
                                 </td>
-                                {/* <td className='update'>
-                                    <button onClick={() => reminder.updateUpdate(r.rtype, r.id)}>Update</button>
-                                </td> */}
                                  <td className='update'>
                                     <button onClick={() => this.context.updateUpdate(r.rtype, r.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
-                                    <button 
-                                        onClick={() => reminder.updateDelete(r.rtype, r.id)}
-                                    >
-                                        Delete
-                                    </button>
-                                {(reminder.delete) ? reminder.deleteModal(remindersEndpoint, this.removeReminder) : null}
+                                    <button onClick={() => context.updateDelete(r.rtype, r.id)}>Delete</button>
                                 </td>
                             </tr>
                             ))}

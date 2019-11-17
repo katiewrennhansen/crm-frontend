@@ -5,16 +5,16 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import AdminContext from '../../../../../AdminContext'
 
 const processEndpoint = config.PROCESS_ENDPOINT
 
 class Process extends Component {
+    static contextType = AdminContext
+
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            delete: false,
-            process: [],
             error: null
         };
     }
@@ -27,25 +27,21 @@ class Process extends Component {
           process: newProcess
         })
         this.props.func.hideDelete()
-      }
-    
-    setProcess = data => {
-        const process = data.processts        
-        this.setState({
-            process: process,
-            error: null
-        })
-    }
-    updateProcess = data => {
-        this.setState({
-            process: [...this.state.process, data],
-            error: null
-        })
     }
 
     componentDidMount(){
-        ApiService.getData(processEndpoint, this.setProcess)
+        ApiService.getData(
+            processEndpoint, 
+            this.context.setProcess
+        )
     }
+
+    // componentDidUpdate(){
+    //     ApiService.getData(
+    //         processEndpoint, 
+    //         this.context.setData
+    //     )
+    // }
 
     addProcess = (e) => {
         e.preventDefault()
@@ -71,7 +67,7 @@ class Process extends Component {
             return res.json()
         })
         .then(data => {
-            this.updateProcess(data)
+            this.context.updateData(data)
             this.props.func.hideModal()
         })
         .catch(error => {
@@ -79,14 +75,12 @@ class Process extends Component {
         }) 
     }
 
-
-    
-
     render(){  
         const process = this.props.func
+        const context = this.context
         return (
             <>
-                <Modal className='add-modal' show={process.show} >
+                <Modal className='add-modal' show={context.show} >
                     <form 
                         className= 'add-content' 
                         onSubmit={(e) => this.addProcess(e)}
@@ -105,12 +99,12 @@ class Process extends Component {
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
                     <div className='cancel'>
-                        <button onClick={process.hideModal}>Cancel</button>
+                        <button onClick={context.hideModal}>Cancel</button>
                     </div>
                 </Modal>
                 <div className='data-container'>
                     <h3>Process</h3>
-                    <button className='add-data' onClick={process.showModal}>Add Process</button>
+                    <button className='add-data' onClick={context.showModal}>Add Process</button>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -120,7 +114,7 @@ class Process extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.process.map(p => {
+                            {context.process.map(p => {
                                 return (
                                 <tr key={p.data.id}>
                                     <td>{p.data.processdesc}</td>
@@ -133,7 +127,7 @@ class Process extends Component {
                                         >
                                             Delete
                                         </button>
-                                        {(process.delete) ? process.deleteModal(config.PROCESS_ENDPOINT, this.removePromotion) : null}
+                                        {(process.delete) ? process.deleteModal(processEndpoint, this.removePromotion) : null}
                                     </td>
                                 </tr>
                             )})}

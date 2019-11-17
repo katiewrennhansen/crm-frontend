@@ -6,6 +6,7 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../AdminContext'
+import DeleteModal from '../../pagecomponents/DeleteModal'
 
 const pfEndpoint = config.PROPERTY_FEATURE_ENDPOINT
 
@@ -18,17 +19,6 @@ class PropertyFeatures extends Component {
             error: null
         };
     }
-
-    removeFeature = id => {
-        const newFeatures = this.state.features.filter(f =>
-          f.id !== id
-        )
-        this.setState({
-          features: newFeatures
-        })
-        this.context.hideDelete()
-      }
-
 
     componentDidMount(){
         ApiService.getData(
@@ -77,10 +67,13 @@ class PropertyFeatures extends Component {
  
     
     render(){  
-        const feature = this.props.func
         const context = this.context
         return (
             <>
+            <DeleteModal
+                props={context}
+                endpoint={pfEndpoint}
+            />
             <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
                         <h3>Update {context.name}</h3>
@@ -148,13 +141,7 @@ class PropertyFeatures extends Component {
                                     <button onClick={() => context.updateUpdate(f.featuredescr, f.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
-                                    <button 
-                                        onClick={() => feature.updateDelete(f.featuredescr, f.id)}
-                                    >
-                                        Delete
-                                    </button>
-                                    {(feature.delete) ? feature.deleteModal(pfEndpoint, this.removeFeature) : null}                                    
-                                  
+                                    <button onClick={() => context.updateDelete(f.featuredescr, f.id)}>Delete</button>
                                 </td>
                             </tr>
                             ))}

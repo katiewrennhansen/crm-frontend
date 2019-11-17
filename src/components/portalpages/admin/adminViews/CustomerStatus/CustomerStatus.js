@@ -6,6 +6,7 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../AdminContext'
+import DeleteModal from '../../pagecomponents/DeleteModal'
 
 const csEndpoint = config.CUSTOMER_STATUS_ENDPOINT
 
@@ -18,16 +19,6 @@ class CustomerStatus extends Component {
             error: null
         };
     }
-
-    removeStatuses = id => {
-        const newStatuses = this.state.statuses.filter(c =>
-          c.id !== id
-        )
-        this.setState({
-          statuses: newStatuses
-        })
-        this.props.func.hideDelete()
-      }
 
     componentDidMount(){
         ApiService.getData(
@@ -76,10 +67,13 @@ class CustomerStatus extends Component {
 
     
     render(){  
-        const status = this.props.func
         const context = this.context
         return (
             <>
+            <DeleteModal
+                props={context}
+                endpoint={csEndpoint}
+            />
             <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
                         <h3>Update {context.name}</h3>
@@ -147,12 +141,7 @@ class CustomerStatus extends Component {
                                     <button onClick={() => context.updateUpdate(c.csdesc, c.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
-                                    <button 
-                                        onClick={() => status.updateDelete(c.csdesc, c.id)}
-                                    >
-                                        Delete
-                                    </button>
-                                    {(status.delete) ? status.deleteModal(csEndpoint, this.removeStatuses) : null}                            
+                                    <button onClick={() => context.updateDelete(c.csdesc, c.id)}>Delete</button>
                                 </td>
                             </tr>
                             ))}

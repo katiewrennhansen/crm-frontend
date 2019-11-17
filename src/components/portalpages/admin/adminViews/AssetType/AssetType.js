@@ -5,50 +5,33 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import AdminContext from '../../../../../AdminContext'
+import DeleteModal from '../../pagecomponents/DeleteModal'
 
 const assetEndpoint = config.ASSET_TYPE_ENDPOINT
 
 class AssetType extends Component {
+    static contextType = AdminContext
+
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            delete: false,
-            assets: [],
             error: null
         };
     }
 
-    removeAsset = id => {
-        const newAssets = this.state.assets.filter(a =>
-          a.id !== id
-        )
-        this.setState({
-          assets: newAssets
-        })
-        this.props.func.hideDelete()
-      }
-    
-    setAssets = assets => {
-        this.setState({
-            assets: assets,
-            error: null
-        })
-    }
-
-    updateAssets = data => {
-        this.setState({
-            assets: [...this.state.assets, data],
-            error: null
-        })
-    }
-
     componentDidMount(){
-        ApiService.getData(assetEndpoint, this.setAssets)        
+        ApiService.getData(
+            assetEndpoint, 
+            this.context.setData
+        )        
     }
 
     componentDidUpdate(){
-        ApiService.getData(assetEndpoint, this.setAssets)        
+        ApiService.getData(
+            assetEndpoint, 
+            this.context.setData
+            )        
     }
 
     addAsset = (e) => {
@@ -62,14 +45,14 @@ class AssetType extends Component {
         ApiService.postData(
             assetEndpoint, 
             newAssetType, 
-            this.updateAssets, 
-            this.props.func.hideModal
+            this.context.updateData, 
+            this.context.hideModal
         )
     }
 
     updateData = (e) => {
         e.preventDefault()
-        const id = this.props.func.updateContent.id
+        const id = this.context.id
         let updatedContent = {}
         if(e.target.asset_type.value !== ''){
             updatedContent.assettdesc = e.target.asset_type.value
@@ -78,17 +61,21 @@ class AssetType extends Component {
             assetEndpoint, 
             id, 
             updatedContent, 
-            this.props.func.hideUpdate
+            this.context.hideUpdate
         )
     }
 
     render(){ 
-        const asset = this.props.func 
+        const context = this.context
         return (
             <>
-                <Modal className='update-modal' show={asset.update}>
+                <DeleteModal
+                    props={context}
+                    endpoint={assetEndpoint}
+                />
+                <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
-                        <h3>Update {asset.updateContent.name}</h3>
+                        <h3>Update {context.name}</h3>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='maint_type'></label>
@@ -104,11 +91,11 @@ class AssetType extends Component {
                             </div>
                         </form>
                         <div className='cancel'>
-                            <button onClick={asset.hideUpdate}>Cancel</button>   
+                            <button onClick={context.hideUpdate}>Cancel</button>   
                         </div>
                     </div>
                 </Modal>
-                <Modal className='add-modal' show={asset.show} >
+                <Modal className='add-modal' show={context.show} >
                     <form 
                         className='add-content'
                         onSubmit={(e) => this.addAsset(e)}
@@ -126,13 +113,13 @@ class AssetType extends Component {
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
                     <div className='cancel'>
-                        <button onClick={asset.hideModal}>Cancel</button>
+                        <button onClick={context.hideModal}>Cancel</button>
                     </div>
                 </Modal>
                 
                 <div className='data-container'>
                     <h3>Asset Type</h3>
-                    <button className='add-data' onClick={asset.showModal}>Add Asset Type</button>
+                    <button className='add-data' onClick={context.showModal}>Add Asset Type</button>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -143,7 +130,7 @@ class AssetType extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                        {this.state.assets.map(a => {
+                        {context.data.map(a => {
                             return (
                             <tr key={a.id}>
                                 <td>{a.assettdesc}</td>
@@ -151,15 +138,10 @@ class AssetType extends Component {
                                     <Moment format="YYYY/MM/DD">{a.created_at}</Moment>
                                 </td>
                                 <td className='update'>
-                                    <button onClick={() => asset.updateUpdate(a.assettdesc, a.id)}>Update</button>
+                                    <button onClick={() => context.updateUpdate(a.assettdesc, a.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
-                                    <button 
-                                        onClick={() => asset.updateDelete(a.assettdesc, a.id)}
-                                    >
-                                        Delete
-                                    </button>
-                                    {(asset.delete) ? asset.deleteModal(assetEndpoint , this.removeAsset) : null}                                    
+                                    <button onClick={() => context.updateDelete(a.assettdesc, a.id)}>Delete</button>
                                 </td>
                             </tr>
                         )})}

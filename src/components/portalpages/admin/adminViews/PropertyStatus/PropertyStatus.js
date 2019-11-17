@@ -6,6 +6,7 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../AdminContext'
+import DeleteModal from '../../pagecomponents/DeleteModal'
 
 const psEndpoint = config.PROPERTY_STATUS_ENDPOINT
 
@@ -18,16 +19,6 @@ class PropertyStatus extends Component {
             error: null
         };
     }
-
-    removeStatus = id => {
-        const newStatuses = this.state.statuses.filter(s =>
-          s.id !== id
-        )
-        this.setState({
-          statuses: newStatuses
-        })
-        this.props.func.hideDelete()
-      }
 
     componentDidMount(){
         ApiService.getData(
@@ -76,10 +67,13 @@ class PropertyStatus extends Component {
     }
 
     render(){  
-        const status = this.props.func
         const context = this.context
         return (
             <>
+            <DeleteModal
+                props={context}
+                endpoint={psEndpoint}
+            />
             <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
                         <h3>Update {context.name}</h3>
@@ -147,12 +141,7 @@ class PropertyStatus extends Component {
                                     <button onClick={() => context.updateUpdate(s.statusdescr, s.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
-                                    <button 
-                                        onClick={() => status.updateDelete(s.statusdesc, s.id)}
-                                    >
-                                        Delete
-                                    </button>
-                                    {(status.delete) ? status.deleteModal(psEndpoint , this.removeStatus) : null}                                                    
+                                    <button onClick={() => context.updateDelete(s.statusdesc, s.id)}>Delete</button>
                                 </td>
                             </tr>
                             ))}

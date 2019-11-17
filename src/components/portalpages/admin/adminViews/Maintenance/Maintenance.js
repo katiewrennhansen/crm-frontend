@@ -6,6 +6,7 @@ import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../AdminContext'
+import DeleteModal from '../../pagecomponents/DeleteModal'
 
 const maintEndpoint = config.MAINTENANCE_ENDPOINT
 
@@ -15,28 +16,22 @@ class Maintenance extends Component {
     constructor(props) {
         super(props);
         this.state = {
-  
             error: null
         };
     }
 
-    removeMaintenanceType = id => {
-        const newMaintType = this.state.maintenanceTypes.filter(m =>
-          m.id !== id
-        )
-        this.setState({
-          maintenanceTypes: newMaintType
-        })
-        this.props.func.hideDelete()
-      }
-    
-
     componentDidMount(){
-        ApiService.getData(maintEndpoint, this.context.setData)        
+        ApiService.getData(
+            maintEndpoint, 
+            this.context.setData
+        )        
     }
 
     componentDidUpdate(){
-        ApiService.getData(maintEndpoint, this.context.setData)        
+        ApiService.getData(
+            maintEndpoint, 
+            this.context.setData
+        )        
     }
     
     addMaintenanceType = (e) => {
@@ -76,6 +71,10 @@ class Maintenance extends Component {
         const context = this.context
         return (
             <>
+            <DeleteModal
+                props={context}
+                endpoint={maintEndpoint}
+            />
             <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
                         <h3>Update {context.name}</h3>
@@ -144,12 +143,7 @@ class Maintenance extends Component {
                                     <button onClick={() => context.updateUpdate(m.maindescr, m.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
-                                    <button 
-                                        onClick={() => maint.updateDelete(m.maindescr, m.id)}
-                                    >
-                                        Delete
-                                    </button>
-                                    {(maint.delete) ? maint.deleteModal(config.MAINTENANCE_ENDPOINT, this.removeMaintenanceType) : null}                                    
+                                    <button onClick={() => context.updateDelete(m.maindescr, m.id)}>Delete</button>
                                 </td>
                             </tr>
                             ))}

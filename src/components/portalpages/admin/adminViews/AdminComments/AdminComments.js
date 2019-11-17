@@ -6,6 +6,7 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../AdminContext'
+import DeleteModal from '../../pagecomponents/DeleteModal'
 
 const commEndpoint = config.COMMENTS_ENDPOINT
 
@@ -68,23 +69,10 @@ class AdminComments extends Component {
         const context = this.context
         return (
             <>
-
-            <Modal show={context.delete}>
-                <div className='delete-modal-grid'>
-                    <h3>Are you sure you would like to delete {context.nameDelete}?</h3>
-                    <div className='cancel'>                    
-                        <button onClick={context.hideDelete}>Cancel</button>
-                    </div>
-                    <div className='delete'>
-                        <button 
-                            onClick={() => ApiService.deleteData(commEndpoint, context.idDelete, context.removeData)}
-                        >
-                            Delete
-                        </button>
-                    </div>
-                </div>
-            </Modal>
-
+            <DeleteModal
+                props={context}
+                endpoint={commEndpoint}
+            />
             <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
                         <h3>Update {context.name}</h3>
@@ -152,11 +140,7 @@ class AdminComments extends Component {
                                     <button onClick={() => context.updateUpdate(c.commdesc, c.id)}>Update</button>
                                 </td>
                                 <td className='delete'>
-                                    <button 
-                                        onClick={() => context.updateDelete(c.commdesc, c.id)}
-                                    >
-                                        Delete
-                                    </button>
+                                    <button onClick={() => context.updateDelete(c.commdesc, c.id)}>Delete</button>
                                 </td>
                             </tr>
                         ))}

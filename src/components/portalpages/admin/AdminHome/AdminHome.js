@@ -17,10 +17,7 @@ import CustomerAccounts from '../adminViews/CustomerAccounts/CustomerAccounts'
 import CustomerPage from '../adminViews/CustomerAccounts/CustomerPage'
 import CompanySetUp from '../adminViews/CompanySetUp/CompanySetUp'
 import AssetType from '../adminViews/AssetType/AssetType'
-import Modal from '../pagecomponents/Modal'
-// import TextInput from '../../../Login/LoginComponents/TextInput'
-import ApiService from '../../../../services/api-service'
-import { AdminProvider } from '../../../../AdminContext'
+ import { AdminProvider } from '../../../../AdminContext'
 import './AdminHome.css'
 
 
@@ -29,17 +26,7 @@ class AdminHome extends Component {
         super(props);
         this.state = {
             title: '',
-            show: false,
             delete: false,
-            update: false,
-            toDelete: {
-                name: '',
-                id: ''
-            },
-            toUpdate: {
-                name: '',
-                id: ''
-            },
             updatedContent: ''
         }
         // this.handleCommentChange = this.handleCommentChange.bind(this);
@@ -96,71 +83,14 @@ class AdminHome extends Component {
         let j = (i.length > 3) ? i.length % 3 : 0;
         return "$" + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands);
     }
-
-
-    deleteModal = (endpoint, removeFn) => {
-        return (
-            <Modal show={this.state.delete}>
-                <div className='delete-modal-grid'>
-                    <h3>Are you sure you would like to delete {this.state.toDelete.name}?</h3>
-                    <div className='cancel'>                    
-                        <button onClick={this.hideDelete}>Cancel</button>
-                    </div>
-                    <div className='delete'>
-                        <button onClick={() => ApiService.deleteData(endpoint, this.state.toDelete.id, removeFn)}>Delete</button>
-                    </div>
-                </div>
-            </Modal>
-        )
-    }
-
-
-    // updateModal = () => {
-    //     return (
-    //         <Modal className='update-modal' show={this.state.update}>
-    //             <div className='update-modal-grid'>
-    //                 <h3>Update {this.state.toUpdate.name}?</h3>
-    //                 <form className='form-group' onSubmit={(e) => this.updateData(e)}>
-    //                     <div className='form-group'>
-    //                         <label htmlFor='comment_type'></label>
-    //                         <TextInput
-    //                             id='comment_type'
-    //                             name='update'
-    //                             label='Comment Type'
-    //                             type='text'
-    //                             value={this.state.updatedContent}
-    //                             onChange={(e) => this.handleCommentChange(e)}
-    //                         />
-    //                     </div>
-    //                     <div className='update'>
-    //                         <button type='submit'>Update</button>
-    //                     </div>
-    //                 </form>
-    //                 <div className='cancel'>
-    //                     <button onClick={this.hideUpdate}>Cancel</button>   
-    //                 </div>
-    //             </div>
-    //         </Modal>
-    //     )
-    // }
   
     render(){
         const propFunctions = {
             name: this.props.name,
-            showModal: this.showModal,
-            hideModal: this.hideModal,
             showDelete: this.showDelete,
             hideDelete: this.hideDelete,
-            show: this.state.show,
-            delete: this.state.delete,
-            update: this.state.update,
             deleteModal: this.deleteModal,
             updateDelete: this.updateDelete,
-            updateModal: this.updateModal,
-            updateUpdate: this.updateUpdate,
-            showUpdate: this.showUpdate,
-            hideUpdate: this.hideUpdate,
-            updateContent: this.state.toUpdate
         }
         return (
             <AdminProvider>
@@ -199,7 +129,7 @@ class AdminHome extends Component {
                             path='/dashboard/comments' 
                             render={(props) => {
                                 return (
-                                  <AdminComments func={propFunctions} />
+                                  <AdminComments />
                                 )
                               }}
                         />
@@ -218,7 +148,7 @@ class AdminHome extends Component {
                         path='/dashboard/maintenance' 
                         render={(props) => {
                             return (
-                                <Maintenance func={propFunctions} />
+                                <Maintenance />
                             )
                             }}
                         />
@@ -226,7 +156,7 @@ class AdminHome extends Component {
                         path='/dashboard/property-features' 
                         render={(props) => {
                             return (
-                                <PropertyFeatures func={propFunctions} />
+                                <PropertyFeatures />
                             )
                             }}
                         />
@@ -234,7 +164,7 @@ class AdminHome extends Component {
                         path='/dashboard/property-status' 
                         render={(props) => {
                             return (
-                                <PropertyStatus func={propFunctions} />
+                                <PropertyStatus />
                             )
                             }}
                         />
@@ -242,7 +172,7 @@ class AdminHome extends Component {
                         path='/dashboard/customer-status' 
                         render={(props) => {
                             return (
-                                <CustomerStatus func={propFunctions} />
+                                <CustomerStatus />
                             )
                             }}
                         />
@@ -250,7 +180,7 @@ class AdminHome extends Component {
                         path='/dashboard/reminders' 
                         render={(props) => {
                             return (
-                                <Reminders func={propFunctions} />
+                                <Reminders />
                             )
                             }}
                         />
@@ -258,7 +188,7 @@ class AdminHome extends Component {
                         path='/dashboard/asset-type' 
                         render={(props) => {
                             return (
-                                <AssetType func={propFunctions} />
+                                <AssetType />
                             )
                             }}
                         />

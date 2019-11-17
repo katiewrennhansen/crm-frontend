@@ -6,6 +6,7 @@ const AdminContext = React.createContext({
     update: false,
     data: [],
     promotions: [],
+    process: [],
     error: null,
     toUpdate: {
         name: '',
@@ -28,7 +29,8 @@ const AdminContext = React.createContext({
     removeData: () => {},
     setPromotions: () => {},
     removePromotion: () => {},
-    updatePromotions: () => {}
+    updatePromotions: () => {},
+    setProcess: () => {}
 })
 
 export default AdminContext
@@ -41,6 +43,7 @@ export class AdminProvider extends Component {
         update: false,
         data: [],
         promotions: [],
+        process: [],
         error: null,
         toUpdate: {
             name: '',
@@ -136,11 +139,19 @@ export class AdminProvider extends Component {
           promotions: newPromotions
         })
         this.props.func.hideDelete()
-      }
+    }
     
     updatePromotions = data => {
         this.setState({
             promotions: [...this.state.promotions, data],
+            error: null
+        })
+    }
+
+    setProcess = data => {
+        const process = data.processts        
+        this.setState({
+            process: process,
             error: null
         })
     }
@@ -152,6 +163,7 @@ export class AdminProvider extends Component {
             update: this.state.update,
             data: this.state.data,
             promotions: this.state.promotions,
+            process: this.state.process,
             name: this.state.toUpdate.name,
             id: this.state.toUpdate.id,
             nameDelete: this.state.toDelete.name,
@@ -169,7 +181,9 @@ export class AdminProvider extends Component {
             removeData: this.removeData,
             setPromotions: this.setPromotions,
             removePromotion: this.removePromotion,
-            updatePromotions: this.updatePromotions
+            updatePromotions: this.updatePromotions,
+            setProcess: this.setProcess,
+
         }
         return (
           <AdminContext.Provider value={value}>

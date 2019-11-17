@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import config from '../../../../../config'
+import AdminContext from '../../../../../AdminContext'
 
+const processEndpoint = config.PROCESS_ENDPOINT
 
 class ProcessSteps extends Component {
     constructor(props) {
@@ -39,7 +41,7 @@ class ProcessSteps extends Component {
     }
 
     componentDidMount(){
-        fetch(`${config.PROCESS_ENDPOINT}/${this.props.id}`, {
+        fetch(`${processEndpoint}/${this.props.id}`, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -68,7 +70,7 @@ class ProcessSteps extends Component {
                 steps: []
             }
         }
-        fetch(config.PROCESS_ENDPOINT, {
+        fetch(processEndpoint, {
             method: 'POST',
             body: JSON.stringify(newProcess),
             headers: {
