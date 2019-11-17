@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import config from '../../../../../config'
+import TextInput from '../../../../Login/LoginComponents/TextInput'
 import AdminContext from '../../../../../AdminContext'
 import ApiService from '../../../../../services/api-service'
+import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 
 const processEndpoint = config.PROCESS_ENDPOINT
 
@@ -36,37 +38,58 @@ class ProcessSteps extends Component {
         )
     }
 
-    addProcess = (e) => {
+    addStep = (e) => {
         e.preventDefault()
         const stepsEndpoint = `${processEndpoint}/${this.props.id}/steps`
         const newProcess = {
-            data: {
-                processdesc: e.target.process.value,
-                steps: []
-            }
+                sequence: e.target.sequence.value,
+                stepdesc: e.target.process.value,
+                processt_id: this.props.id
         }
         ApiService.postData(
             stepsEndpoint,
             newProcess, 
-            this.context.updateData, 
-            this.context.hideModal
+            this.context.updateData,
         )
     }
+
+    deleteStep = (id) => {
+        // const stepsEndpoint = `${processEndpoint}/${this.props.id}/steps`
+        // ApiService.deleteData(
+        //     stepsEndpoint,
+        //     id,
+        //     this.context.updateData
+        // )
+        console.log(id)
+    }
+
+    
 
     render(){ 
         const context = this.context
         return (
             <div className='data-container'>
                 <h3>Process For: {this.state.name.processdesc}</h3>
-                <button className='add-data'>Edit Steps</button>
                 <div>
                     {context.data.map(s => (
                         <div key={s.id}>
                             <span>{s.sequence}. &nbsp;</span>
                             <span>{s.stepdesc}</span>
+                            {/* <button onClick={this.deleteStep(s.id)}>&#10005;</button> */}
                         </div>
                     ))}
-                </div>      
+                </div>
+                <form onSubmit={(e) => this.addStep(e)}>
+                    <TextInput 
+                        type='number'
+                        name='sequence'
+                    />
+                    <TextInput 
+                        type='text'
+                        name='process'
+                    />
+                    <SubmitButton text='Add Step'/>
+                </form>      
             </div>
         )
     }

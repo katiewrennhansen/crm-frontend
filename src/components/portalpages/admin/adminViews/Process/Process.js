@@ -49,8 +49,25 @@ class Process extends Component {
             newProcess, 
             this.context.updateData, 
             this.context.hideModal
+        ) 
+    }
+
+    updateData = (e) => {
+        e.preventDefault()
+        const id = this.context.id
+        const updatedContent = {
+            processt: {
+                processdesc: e.target.process.value,
+                company_id: 6,
+                user_id: 1
+            }
+        }
+        ApiService.updateData(
+            processEndpoint, 
+            id, 
+            updatedContent, 
+            this.context.hideUpdate
         )
-        
     }
 
     render(){  
@@ -61,6 +78,28 @@ class Process extends Component {
                     props={context}
                     endpoint={processEndpoint}
                 />
+                <Modal className='update-modal' show={context.update}>
+                    <div className='update-modal-grid'>
+                        <h3>Update {context.name}</h3>
+                        <form className='form-group' onSubmit={(e) => this.updateData(e)}>
+                            <div className='form-group'>
+                                <label htmlFor='maint_type'></label>
+                                <TextInput
+                                    id='process'
+                                    name='process'
+                                    label='Process Name'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='update'>
+                                <button type='submit'>Update</button>
+                            </div>
+                        </form>
+                        <div className='cancel'>
+                            <button onClick={context.hideUpdate}>Cancel</button>   
+                        </div>
+                    </div>
+                </Modal>
                 <Modal className='add-modal' show={context.show} >
                     <form 
                         className= 'add-content' 
@@ -90,6 +129,7 @@ class Process extends Component {
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Steps</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -101,6 +141,9 @@ class Process extends Component {
                                     <td>{p.data.processdesc}</td>
                                     <td className='update'>
                                         <Link to={`/dashboard/process/${p.data.id}`}>View Steps</Link>
+                                    </td>
+                                    <td className='update'>
+                                        <button onClick={() => context.updateUpdate(p.data.processdesc, p.data.id)}>Update</button>
                                     </td>
                                     <td className='delete'>
                                         <button onClick={() => context.updateDelete(p.data.processdesc, p.data.id)}>Delete</button>

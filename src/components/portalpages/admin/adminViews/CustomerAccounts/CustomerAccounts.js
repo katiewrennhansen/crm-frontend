@@ -5,16 +5,17 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import './CustomerAccounts.css'
+import AdminContext from '../../../../../AdminContext'
 import ApiService from '../../../../../services/api-service'
 
 const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
 
 class CustomerAccounts extends Component {
+    static contextType = AdminContext
+
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            delete: false,
             customers: []
         };
     }
@@ -60,7 +61,7 @@ class CustomerAccounts extends Component {
         })
         .then(data => {
             this.setCustomers(data.customers)
-            this.props.hideModal()
+            this.context.hideModal()
         })
         .catch(error => {
             this.setState({ error })
@@ -85,10 +86,10 @@ class CustomerAccounts extends Component {
     }
     
     render(){  
-        const account = this.props.func
+        const context = this.context
         return (
             <>
-                <Modal show={account.show} >
+                <Modal show={context.show} >
                     <form 
                         className= 'add-content' 
                         onSubmit={(e) => this.addCustomer(e)}
@@ -121,12 +122,12 @@ class CustomerAccounts extends Component {
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
                     <div className='cancel'>
-                        <button onClick={account.hideModal}>Cancel</button>
+                        <button onClick={context.hideModal}>Cancel</button>
                     </div>
                 </Modal>
                 <div className='data-container'>
                     <h3>Customer Accounts</h3>
-                    <button className='add-data' onClick={account.showModal}>Add Customer</button>
+                    <button className='add-data' onClick={context.showModal}>Add Customer</button>
                     <table className='data-table'>
                         <thead>
                             <tr>

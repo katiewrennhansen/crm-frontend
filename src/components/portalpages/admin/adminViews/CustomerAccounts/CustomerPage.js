@@ -84,7 +84,7 @@ class CustomerAccounts extends Component {
             <>
                 <div className='data-container'>
                     <h3>FirstName Last Name</h3>
-                    <button className='add-data'>Add Customer</button>
+                    <button className='add-data'>Edit Customer</button>
                     <div>
                         <p>{data.email}</p>
                         <br></br>
