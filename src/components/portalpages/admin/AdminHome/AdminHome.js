@@ -17,7 +17,7 @@ import CustomerAccounts from '../adminViews/CustomerAccounts/CustomerAccounts'
 import CustomerPage from '../adminViews/CustomerAccounts/CustomerPage'
 import CompanySetUp from '../adminViews/CompanySetUp/CompanySetUp'
 import AssetType from '../adminViews/AssetType/AssetType'
- import { AdminProvider } from '../../../../AdminContext'
+ import { AdminProvider } from '../../../../contexts/AdminContext'
 import './AdminHome.css'
 
 

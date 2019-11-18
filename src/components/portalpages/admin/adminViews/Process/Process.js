@@ -5,7 +5,7 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
-import AdminContext from '../../../../../AdminContext'
+import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../pagecomponents/DeleteModal'
 
 const processEndpoint = config.PROCESS_ENDPOINT

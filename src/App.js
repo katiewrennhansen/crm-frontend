@@ -188,7 +188,7 @@ class App extends Component {
               }}}
           />
           <Route 
-            path='/broker-home'
+            path='/broker'
             component={BrokerHome}
           />
         </Switch>

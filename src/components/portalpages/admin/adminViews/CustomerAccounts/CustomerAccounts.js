@@ -5,7 +5,7 @@ import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import './CustomerAccounts.css'
-import AdminContext from '../../../../../AdminContext'
+import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
 
 const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT

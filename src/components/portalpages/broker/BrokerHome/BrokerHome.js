@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { Route, Switch, withRouter } from 'react-router-dom'
+import AdminNav from '../../admin/AdminNav/AdminNav'
+import BrokerSidebar from '../BrokerSidebar/BrokerSidebar'
 
 class BrokerHome extends Component {
     constructor(props){
@@ -10,9 +13,21 @@ class BrokerHome extends Component {
     
     render(){
         return (
-            <div>Broker Home</div>
+            <>
+             <div className='dashboard-container'>
+                    <div className='dash-sidebar'>
+                        <BrokerSidebar />
+                    </div>
+                    <div className='dash-nav'>
+                        <AdminNav />
+                    </div>
+                    <div className='dash-home'>
+                        <div>Broker Home</div>
+                    </div>
+                </div>
+            </>
         )
     }
 }
 
-export default BrokerHome
+export default withRouter(BrokerHome)

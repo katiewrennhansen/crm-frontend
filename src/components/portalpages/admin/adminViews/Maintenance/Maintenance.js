@@ -5,7 +5,7 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
-import AdminContext from '../../../../../AdminContext'
+import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../pagecomponents/DeleteModal'
 
 const maintEndpoint = config.MAINTENANCE_ENDPOINT

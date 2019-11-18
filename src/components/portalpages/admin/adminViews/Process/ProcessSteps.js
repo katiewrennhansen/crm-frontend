@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import config from '../../../../../config'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
-import AdminContext from '../../../../../AdminContext'
+import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import './Process.css'
