@@ -4,6 +4,7 @@ import TextInput from '../../../../Login/LoginComponents/TextInput'
 import AdminContext from '../../../../../AdminContext'
 import ApiService from '../../../../../services/api-service'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
+import './Process.css'
 
 const processEndpoint = config.PROCESS_ENDPOINT
 
@@ -38,6 +39,14 @@ class ProcessSteps extends Component {
         )
     }
 
+    componentDidUpdate(){
+        const stepsEndpoint = `${processEndpoint}/${this.props.id}/steps`
+        ApiService.getData(
+            stepsEndpoint, 
+            this.context.setData
+        )
+    }
+
     addStep = (e) => {
         e.preventDefault()
         const stepsEndpoint = `${processEndpoint}/${this.props.id}/steps`
@@ -51,16 +60,29 @@ class ProcessSteps extends Component {
             newProcess, 
             this.context.updateData,
         )
+        document.getElementById('add-steps').reset()
     }
 
     deleteStep = (id) => {
-        // const stepsEndpoint = `${processEndpoint}/${this.props.id}/steps`
-        // ApiService.deleteData(
-        //     stepsEndpoint,
-        //     id,
-        //     this.context.updateData
-        // )
-        console.log(id)
+        const stepsEndpoint = `${processEndpoint}/${this.props.id}/steps/${id}`
+        fetch(`${stepsEndpoint}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => 
+            (!res.ok)
+                ? res.json().then(error => Promise.reject(error))
+                : res.json()
+        )
+        .then(data => {
+            this.context.updateData(id)
+        })
+        .catch(error => {
+            console.error(error)
+        })
     }
 
     
@@ -68,26 +90,37 @@ class ProcessSteps extends Component {
     render(){ 
         const context = this.context
         return (
-            <div className='data-container'>
+            <div className='process-container'>
                 <h3>Process For: {this.state.name.processdesc}</h3>
                 <div>
                     {context.data.map(s => (
-                        <div key={s.id}>
-                            <span>{s.sequence}. &nbsp;</span>
+                        <div className='steps-grid' key={s.id}>
+                            <span>{s.sequence}.</span>
                             <span>{s.stepdesc}</span>
-                            {/* <button onClick={this.deleteStep(s.id)}>&#10005;</button> */}
+                            <button className='delete-icon' onClick={() => this.deleteStep(s.id)}>&#10005;</button>
                         </div>
                     ))}
                 </div>
-                <form onSubmit={(e) => this.addStep(e)}>
-                    <TextInput 
-                        type='number'
-                        name='sequence'
-                    />
-                    <TextInput 
-                        type='text'
-                        name='process'
-                    />
+                <form id='add-steps' onSubmit={(e) => this.addStep(e)}>
+                    <h4>Add Steps to {this.state.name.processdesc}</h4>
+                    <div className='form-group'>
+                        <label htmlFor='sequence'></label>
+                        <TextInput 
+                            class='process-input'
+                            type='number'
+                            name='sequence'
+                            label='Sequence Number'
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor='process'></label>
+                        <TextInput 
+                            class='process-input'
+                            type='text'
+                            name='process'
+                            label='Step Name'
+                        />
+                    </div>
                     <SubmitButton text='Add Step'/>
                 </form>      
             </div>

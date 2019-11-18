@@ -11,6 +11,7 @@ import ChangePassword from './components/ResetPassword/ChangePassword/ChangePass
 import UserRegistration from './components/RegistrationAccountTypes/UserRegistration/UserRegistration'
 import UserHome from './components/portalpages/user/UserHome/UserHome'
 import AdminHome from './components/portalpages/admin/AdminHome/AdminHome'
+import BrokerHome from './components/portalpages/broker/BrokerHome/BrokerHome'
 import './App.css'
 
 
@@ -186,10 +187,10 @@ class App extends Component {
                 return ( <Redirect to='/login' /> )
               }}}
           />
-          {/* <Route 
-            path='/dashboard'
-            component={AdminHome}
-          /> */}
+          <Route 
+            path='/broker-home'
+            component={BrokerHome}
+          />
         </Switch>
       </div>
     );
