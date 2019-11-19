@@ -7,11 +7,8 @@ import HomeWorkIcon from '@material-ui/icons/HomeWork';
 import HomeIcon from '@material-ui/icons/Home';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import BuildIcon from '@material-ui/icons/Build';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
-import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import WorkIcon from '@material-ui/icons/Work';
-import DescriptionIcon from '@material-ui/icons/Description';
 
 
 
@@ -20,6 +17,7 @@ class BrokerSidebar extends Component {
         super(props);
         this.state = {
             active: false,
+            title: ''
         };
     }
 
@@ -31,7 +29,6 @@ class BrokerSidebar extends Component {
     }
 
     render(){
-
         return (
             <div className='dash-sidebar-container'>
                 <div className='admin-info'>
@@ -56,39 +53,29 @@ class BrokerSidebar extends Component {
                         <Link 
                             to="/broker/properties" 
                             className='dash-nav-link'
-                            onClick={() => {this.props.handleTitle('Company Set Up'); this.toggleAccordion();}}
+                            onClick={() => this.props.handleTitle('Properties')}
                         >
                             <WorkIcon />
-                            <p>Company Set Up</p>
+                            <p>Properties</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/broker/promotions" 
                             className='dash-nav-link'
-                            onClick={() => this.props.handleTitle('Comments Type')}
+                            onClick={() => this.props.handleTitle('Promotions')}
                         >
                             <ChatBubbleOutlineIcon />
-                            <p>Comments Type</p>
+                            <p>Promotions</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/broker/maintenance" 
                             className='dash-nav-link'
-                            onClick={() => this.props.handleTitle('Promotions')}
-                        >
-                            <CardGiftcardIcon />
-                            <p>Promotions</p>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link 
-                            to="/dashboard/maintenance" 
-                            className='dash-nav-link'
                             onClick={() => this.props.handleTitle('Maintenance')}
                         >
-                            <BuildIcon />
+                            <CardGiftcardIcon />
                             <p>Maintenance</p>
                         </Link>
                     </li>
@@ -96,70 +83,40 @@ class BrokerSidebar extends Component {
                         <Link 
                             to="/broker/reminders" 
                             className='dash-nav-link'
-                            onClick={() => this.props.handleTitle('Property Features')}                        
+                            onClick={() => this.props.handleTitle('Reminders')}                        
                         >
                             <HomeIcon />
-                            <p>Property Features</p>
+                            <p>Reminders</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/broker/network" 
                             className='dash-nav-link'
-                            onClick={() => this.props.handleTitle('Property Status')}                                                    
+                            onClick={() => this.props.handleTitle('Network')}                                                    
                         >
                             <HomeWorkIcon />
-                            <p>Property Status</p>
+                            <p>Network</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/broker/contacts" 
                             className='dash-nav-link'
-                            onClick={() => this.props.handleTitle('Customer Status')}                        
+                            onClick={() => this.props.handleTitle('Contacts')}                        
                         >
                             <AccountBoxIcon />
-                            <p>Customer Status</p>
+                            <p>Contacts</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
-                            to="/broker" 
+                            to="/broker/alerts" 
                             className='dash-nav-link'
-                            onClick={() => this.props.handleTitle('Reminders')}                        
+                            onClick={() => this.props.handleTitle('Alerts')}                        
                         >
                             <NotificationsActiveIcon />
-                            <p>Reminders</p>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link 
-                            to="/dashboard/asset-type" 
-                            className='dash-nav-link'
-                            onClick={() => this.props.handleTitle('Assest Type')}                        
-                        >
-                            <NotificationsActiveIcon />
-                            <p>Assest Type</p>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link 
-                            to="/dashboard/process" 
-                            className='dash-nav-link'
-                            onClick={() => this.props.handleTitle('Process')}                        
-                        >
-                            <DescriptionIcon />
-                            <p>Process</p>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link 
-                            to="/dashboard/customer-accounts" 
-                            className='dash-nav-link'
-                            onClick={() => this.props.handleTitle('Customer Accounts')}                        
-                        >
-                            <EmojiPeopleIcon />
-                            <p>Customer Accounts</p>
+                            <p>Alerts</p>
                         </Link>
                     </li>
                 </ul>

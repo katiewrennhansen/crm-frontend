@@ -45,7 +45,7 @@ const ApiService = {
         }) 
     },
 
-    updateData(ApiEndpoint, id, dataObj, hideModal){
+    updateData(ApiEndpoint, id, dataObj, set, hideModal){
         fetch(`${ApiEndpoint}/${id}`, {
             method: 'PATCH',
             body: JSON.stringify(dataObj),
@@ -60,6 +60,7 @@ const ApiService = {
                 : res.json()
         )
         .then(data => {
+            this.getData(ApiEndpoint, set)
             hideModal()
         })
         .catch(error => {
@@ -67,8 +68,8 @@ const ApiService = {
         })
     },
 
-    deleteData(ApiEndpont, id, cb){
-        fetch(`${ApiEndpont}/${id}`, {
+    deleteData(ApiEndpoint, id, set){
+        fetch(`${ApiEndpoint}/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
@@ -80,12 +81,14 @@ const ApiService = {
                 ? res.json().then(error => Promise.reject(error))
                 : res.json()
         )
-        .then(data => {
-            cb(id)
+        .then((data) => {
+            console.log(data)
+            this.getData(ApiEndpoint, set)            
         })
         .catch(error => {
             console.error(error)
         })
+        
     }
 }
 

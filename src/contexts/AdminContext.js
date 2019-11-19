@@ -101,8 +101,7 @@ export class AdminProvider extends Component {
 
     setData = data => {
         this.setState({
-            data: data,
-            error: null
+            data: data
         })
     }
 
@@ -113,15 +112,14 @@ export class AdminProvider extends Component {
         })
     }
 
-    removeData = id => {
-        this.hideDelete();
-        const newData = this.state.data.filter(d =>
-          d.id !== id
-        )
-        this.setState({
-          data: newData
-        })
-    }
+    // removeData = id => {
+    //     const newData = this.state.data.filter(d =>
+    //       d.id !== id
+    //     )
+    //     this.setState({
+    //       data: newData
+    //     })
+    // }
 
     setPromotions = data => {
         const promotions = data.promotions

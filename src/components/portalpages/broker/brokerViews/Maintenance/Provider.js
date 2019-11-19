@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import config from '../../../../../config'
-import './CustomerAccounts.css'
 
 
-class CustomerAccounts extends Component {
+class Provider extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,7 +20,7 @@ class CustomerAccounts extends Component {
     }
 
     componentDidMount(){
-        fetch(`${config.CUSTOMER_ACCOUNTS_ENDPOINT}/${this.props.id}`, {
+        fetch(`${config.MAINTENANCE_PROVIDERS_ENDPOINT}/${this.props.id}`, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -83,11 +82,14 @@ class CustomerAccounts extends Component {
         return (
             <>
                 <div className='data-container'>
-                    <h3>{data.name}</h3>
-                    <button className='add-data'>Edit Customer</button>
+                    <h3>{data.contact}</h3>
+                    <button className='add-data'>Edit Provider</button>
                     <div>
+                        <p>{data.typeservice}</p>
                         <p>{data.email}</p>
+                        <p>{data.phone}</p>
                         <br></br>
+                        <h4>{data.name}</h4>
                         <p>{data.adescription4}</p>
                         <p>{`${data.adescription2}, ${data.adescription3}`}</p>
                         <p>{data.adescription1}</p>
@@ -95,8 +97,9 @@ class CustomerAccounts extends Component {
                         <p>Category: {data.category}</p>
                         <p>Status: {data.status}</p>
                         <p>Tax ID: {data.taxid}</p>
-                        <p>Broker: {data.broker}</p>
-                        <p>Reminder: {data.remainder}</p>
+                        <br></br>
+                        <h4>Comments</h4>
+                        <p>{data.comment}</p>
                     </div>
                 </div>
             </>
@@ -104,4 +107,4 @@ class CustomerAccounts extends Component {
     }
 }
 
-export default CustomerAccounts
+export default Provider

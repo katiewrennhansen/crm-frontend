@@ -20,18 +20,12 @@ class AdminComments extends Component {
         };
     }
 
+    
     componentDidMount(){
         ApiService.getData(
             commEndpoint, 
             this.context.setData
         ) 
-    }
-
-    componentDidUpdate(){
-        ApiService.getData(
-            commEndpoint, 
-            this.context.setData
-        )
     }
 
     addComment = (e) => {
@@ -59,13 +53,14 @@ class AdminComments extends Component {
             commEndpoint, 
             id, 
             updatedContent, 
+            this.context.setData, 
             this.context.hideUpdate
         )
     }
 
-
     render(){ 
         const context = this.context
+
         return (
             <>
             <DeleteModal
@@ -75,7 +70,11 @@ class AdminComments extends Component {
             <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
                         <h3>Update {context.name}</h3>
-                        <form className='form-group' onSubmit={(e) => this.updateData(e)}>
+                        <form 
+                            className='form-group' 
+                            onSubmit={(e) => {
+                                this.updateData(e);  
+                            }}>
                             <div className='form-group'>
                                 <label htmlFor='maint_type'></label>
                                 <TextInput

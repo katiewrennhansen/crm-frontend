@@ -14,7 +14,11 @@ const DeleteModal = ({props, endpoint}) => {
             <div className='delete'>
                 <button 
                     onClick={() => {
-                        ApiService.deleteData(endpoint, props.idDelete, props.removeData); 
+                        ApiService.deleteData(
+                            endpoint, 
+                            props.idDelete, 
+                            props.setData
+                        );
                         props.hideDelete()
                     }}
                 >
