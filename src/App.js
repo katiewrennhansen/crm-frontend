@@ -33,137 +33,121 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        <Switch>
-{/* ******** MAIN WEBPAGE ROUTES ******* */}
-           <Route
-              exact path='/'
+      return (
+        <div className="App">
+          <Switch>
+  {/* ******** MAIN WEBPAGE ROUTES ******* */}
+            <Route
+                exact path='/'
+                render={(props) => {
+                  return (
+                    <WebpageHome
+                      logout={this.logout} 
+                    />
+                  )
+                }}
+              />
+              <Route
+                exact path='/about'
+                render={(props) => {
+                  return (
+                    <AboutPage
+                      logout={this.logout} 
+                    />
+                  )
+                }}
+              />
+              <Route
+                exact path='/services'
+                render={(props) => {
+                  return (
+                    <ServicesPage
+                      logout={this.logout} 
+                    />
+                  )
+                }}
+              />
+              <Route
+                exact path='/search'
+                render={(props) => {
+                  return (
+                    <SearchPage
+                      logout={this.logout} 
+                    />
+                  )
+                }}
+              />
+              <Route
+                exact path='/contact'
+                render={(props) => {
+                  return (
+                    <Contact
+                      logout={this.logout} 
+                    />
+                  )
+                }}
+              />
+
+    {/* ******** LOGIN AND AUTH ROUTES ******* */}
+            <Route 
+              path='/login'
               render={(props) => {
                 return (
-                  <WebpageHome
-                    authenticated={this.state.authenticated} 
-                    logout={this.logout} 
+                  <Login 
+                    history={props.history}
+                    handleUserType={this.handleUserType} 
                   />
                 )
               }}
             />
-            <Route
-              exact path='/about'
-              render={(props) => {
-                return (
-                  <AboutPage
-                    authenticated={this.state.authenticated} 
-                    logout={this.logout} 
-                  />
-                )
-              }}
+            <PublicRoute 
+              path='/forgot-password'
+              component={ForgotPassword}
             />
-            <Route
-              exact path='/services'
-              render={(props) => {
-                return (
-                  <ServicesPage
-                    authenticated={this.state.authenticated} 
-                    logout={this.logout} 
-                  />
-                )
-              }}
+            <PublicRoute 
+              path='/change-password'
+              component={ChangePassword}
             />
-            <Route
-              exact path='/search'
-              render={(props) => {
-                return (
-                  <SearchPage
-                    authenticated={this.state.authenticated} 
-                    logout={this.logout} 
-                  />
-                )
-              }}
-            />
-            <Route
-              exact path='/contact'
-              render={(props) => {
-                return (
-                  <Contact
-                    authenticated={this.state.authenticated} 
-                    logout={this.logout} 
-                  />
-                )
-              }}
+            <PublicRoute 
+              path='/register'
+              component={UserRegistration}
             />
 
-{/* ******** LOGIN AND AUTH ROUTES ******* */}
-          <Route 
-            path='/login'
-            render={(props) => {
-              return (
-                <Login 
-                  history={props.history}
-                  isAuthenticated={this.isAuthenticated} 
-                  handleUserType={this.handleUserType} 
-                />
-              )
-            }}
-          />
-          <PublicRoute 
-            path='/forgot-password'
-            component={ForgotPassword}
-          />
-          <PublicRoute 
-            path='/change-password'
-            component={ChangePassword}
-          />
-          <PublicRoute 
-            path='/register'
-            component={UserRegistration}
-          />
-
-{/* ******** USER PORTAL ROUTES ******* */}
-          <Route 
-            path='/user-home'
-            render={(props) => {
-              if(this.state.authenticated && this.state.usertype === 'user') {
-                return ( 
-                <UserHome 
-                  authenticated={this.state.authenticated}
-                  logout={this.logout}
-                />
-                )
-              } else {
-                return ( <Redirect to='/login' /> )
-              }}}
-          />
-
-
-{/* ******** ADMIN PORTAL ROUTES ******* */}
-          {/* <Route 
-            path='/dashboard'
-            render={(props) => {
-              if(this.state.authenticated && this.state.usertype === 'admin') {
-                return ( 
-                <AdminHome 
-                  authenticated={this.state.authenticated}
-                  logout={this.logout}
-                  name={this.state.email}
-                />
-                )
-              } else {
-                return ( <Redirect to='/login' /> )
-              }}}
-          /> */}
-          <PrivateRoute 
-            to='/dashboard'
-            component={AdminHome}
-          />
-          <Route 
-            path='/broker'
-            component={BrokerHome}
-          />
-        </Switch>
-      </div>
-    );
-  }
+    {/* ******** USER PORTAL ROUTES ******* */}
+            <Route 
+              path='/user-home'
+              render={(props) => {
+                if(this.state.usertype === 'user') {
+                  return ( 
+                  <UserHome 
+                    authenticated={this.state.authenticated}
+                    logout={this.logout}
+                  />
+                  )
+                } else {
+                  return ( <Redirect to='/login' /> )
+                }}}
+            />
+    {/* ******** ADMIN PORTAL ROUTES ******* */}
+          {(this.state.usertype === 'admin')
+            ? (<PrivateRoute 
+              to='/dashboard'
+              component={AdminHome}
+              />
+            ) : null
+          })}
+            <PrivateRoute 
+              to='/dashboard'
+              component={AdminHome}
+            />
+            <Route 
+              path='/broker'
+              component={BrokerHome}
+            />
+          </Switch>
+        </div>
+      );
+    }
 }
 
 export default withRouter(App);
