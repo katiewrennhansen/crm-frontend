@@ -32,8 +32,6 @@ class AdminComments extends Component {
         e.preventDefault()
         const newCommentType = {
             commdesc: e.target.comment_type.value,
-            company_id: 6,
-            user_id: 1
         }
         ApiService.postData(
             commEndpoint, 

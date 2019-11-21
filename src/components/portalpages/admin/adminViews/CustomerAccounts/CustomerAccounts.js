@@ -40,8 +40,6 @@ class CustomerAccounts extends Component {
                 email: e.target.customer_email.value,
                 phone: e.target.customer_phone.value,
                 dateCreated: new Date(),
-                company_id: 6,
-                user_id: 1
             }
         }
         console.log(newCustomer)

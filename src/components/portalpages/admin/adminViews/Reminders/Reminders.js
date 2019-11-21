@@ -40,8 +40,6 @@ class Reminders extends Component {
             rtype: e.target.reminder.value,
             periodmonths: e.target.months.value,
             bodymessage: e.target.message.value,
-            company_id: 6,
-            user_id: 1
         }
         ApiService.postData(
             remindersEndpoint, 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import WebpageHome from './components/webpages/WebpageHome/WebpageHome'
 import AboutPage from './components/webpages/AboutPage/AboutPage'
 import ServicesPage from './components/webpages/ServicesPage/ServicesPage'
@@ -12,6 +12,8 @@ import UserRegistration from './components/RegistrationAccountTypes/UserRegistra
 import UserHome from './components/portalpages/user/UserHome/UserHome'
 import AdminHome from './components/portalpages/admin/AdminHome/AdminHome'
 import BrokerHome from './components/portalpages/broker/BrokerHome/BrokerHome'
+import PrivateRoute from './components/utilities/PrivateRoute'
+import PublicRoute from './components/utilities/PublicRoute'
 import './App.css'
 
 
@@ -21,54 +23,17 @@ class App extends Component {
     this.state = {
       usertype: '',
       authenticated: false,
-      email: ''
     }
-    this.isAuthenticated = this.isAuthenticated.bind(this)
-    // this.componentDidMount = this.componentDidMount.bind(this)
-    this.logout = this.logout.bind(this)
   }
 
   handleUserType = (user) => {
     this.setState({
       usertype: user
     })
-    console.log(this.state.usertype)
   }
-
-  isAuthenticated = (value) => {
-    this.setState({
-      authenticated: value
-    })
-  }
-
-  logout(){
-    console.log('logged out');
-    localStorage.clear()
-    this.isAuthenticated(false);
-    return ( <Redirect to='/login' /> )
-}
-
- componentWillMount(){
-    const email = localStorage.getItem('email');
-    const usertype = localStorage.getItem('usertype');
-    console.log(email)
-    if(email){
-      this.setState({
-        authenticated: true,
-        usertype: usertype,
-        email: email
-      })
-    } else {
-      this.setState({
-        authenticated: false
-      })
-    }
-  }
-
 
   render() {
     return (
-      
       <div className="App">
         <Switch>
 {/* ******** MAIN WEBPAGE ROUTES ******* */}
@@ -141,15 +106,15 @@ class App extends Component {
               )
             }}
           />
-          <Route 
+          <PublicRoute 
             path='/forgot-password'
             component={ForgotPassword}
           />
-          <Route 
+          <PublicRoute 
             path='/change-password'
             component={ChangePassword}
           />
-          <Route 
+          <PublicRoute 
             path='/register'
             component={UserRegistration}
           />
@@ -172,7 +137,7 @@ class App extends Component {
 
 
 {/* ******** ADMIN PORTAL ROUTES ******* */}
-          <Route 
+          {/* <Route 
             path='/dashboard'
             render={(props) => {
               if(this.state.authenticated && this.state.usertype === 'admin') {
@@ -186,6 +151,10 @@ class App extends Component {
               } else {
                 return ( <Redirect to='/login' /> )
               }}}
+          /> */}
+          <PrivateRoute 
+            to='/dashboard'
+            component={AdminHome}
           />
           <Route 
             path='/broker'
@@ -197,5 +166,5 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
 

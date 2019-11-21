@@ -38,8 +38,6 @@ class AssetType extends Component {
         e.preventDefault()
         const newAssetType = {
             assettdesc: e.target.asset_type.value,
-            company_id: 6,
-            user_id: 6,
             updated_at: new Date()
         }
         ApiService.postData(

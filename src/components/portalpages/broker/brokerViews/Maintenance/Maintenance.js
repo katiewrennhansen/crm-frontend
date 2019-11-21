@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
-import Modal from '../../../admin/pagecomponents/Modal'
+// import Modal from '../../../admin/pagecomponents/Modal'
 
 const endpoint = config.MAINTENANCE_PROVIDERS_ENDPOINT
 

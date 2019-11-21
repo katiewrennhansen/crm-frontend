@@ -17,7 +17,7 @@ import CustomerAccounts from '../adminViews/CustomerAccounts/CustomerAccounts'
 import CustomerPage from '../adminViews/CustomerAccounts/CustomerPage'
 import CompanySetUp from '../adminViews/CompanySetUp/CompanySetUp'
 import AssetType from '../adminViews/AssetType/AssetType'
- import { AdminProvider } from '../../../../contexts/AdminContext'
+import { AdminProvider } from '../../../../contexts/AdminContext'
 import './AdminHome.css'
 
 
@@ -72,9 +72,10 @@ class AdminHome extends Component {
                     </div>
                     <div className='dash-nav'>
                         <AdminNav 
-                            logout={this.props.logout}
+                            logout={this.logout}
                             title={this.state.title}
                             handleTitle={this.handleTitle}
+                            history={this.props.history}
                         />
                     </div>
                     <div className='dash-home'>

@@ -38,9 +38,6 @@ class PropertyStatus extends Component {
         e.preventDefault()
         const newPropertyStatus = {
             statusdesc: e.target.feature_status.value,
-            showinportal: false,
-            company_id: 6,
-            user_id: 1
         }
         ApiService.postData(
             psEndpoint, 

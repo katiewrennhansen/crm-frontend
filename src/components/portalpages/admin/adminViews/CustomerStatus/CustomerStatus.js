@@ -38,8 +38,6 @@ class CustomerStatus extends Component {
         e.preventDefault()
         const newCustomerStatus = {
             csdesc: e.target.customer_status.value,
-            company_id: 6,
-            user_id: 1
         }
         ApiService.postData(
             csEndpoint, 

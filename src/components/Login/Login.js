@@ -3,27 +3,16 @@ import { Link } from 'react-router-dom'
 import './Login.css'
 import SubmitButton from './LoginComponents/SubmitButton'
 import TextInput from './LoginComponents/TextInput'
-
-
+import TokenService from '../../services/token-service'
+import AuthApiService from '../../services/auth-api-service'
 
 
 class Login extends Component {
     constructor(props){
         super(props)
         this.state = {
-            email: '',
-            usertype: 'user',
-            authenticated: false
+            usertype: '',
         }
-        this.updateEmail = this.updateEmail.bind(this)
-
-    }
-
-    updateEmail(email){
-        this.setState({
-            email: email,
-        })
-        console.log(email);
     }
 
     selectUserAccount(usertype){
@@ -34,64 +23,24 @@ class Login extends Component {
         }
     }
 
-    setLocalStorage(email, usertype){
-        if (this.state.authenticated){
-            localStorage.setItem('email', email)
-            localStorage.setItem('usertype', usertype)
-        }
-    }
-
     handleSubmit = (e) => {
         e.preventDefault();
-        //define user data object
         const authUser = {
-            "user": {
-                "email": e.target.email.value,
-                "password": e.target.password.value
+            user: {
+                email: e.target.email.value,
+                password: e.target.password.value
             }
         }
-        //call API to post registered users
-        const url = 'https://crmmia-api.herokuapp.com/api/users/login'
-        const options = {
-            method: 'POST',
-            body: JSON.stringify(authUser),
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': true
-            }
-        }
-        //fetch data from /users/login enpoint
-        fetch(url, options)
-        .then(res => {
-            console.log(res)
-            //throw error if user is not authenticated
-            if(!res.ok){
-                throw new Error('user not authenticated');
-            }
-            //set App.js authentication state to true
-            this.props.isAuthenticated(true);
-            return res.json();
-        })
-        .then(resJson => {
-            console.log(resJson)
-            //set Login.js authentication state to true
-            this.props.handleUserType(resJson.usertype);
-            this.setState({
-                email: resJson.email,
-                usertype: resJson.usertype,
-                authenticated: true
+        AuthApiService.postLogin(authUser)
+            .then(resJson => {
+                TokenService.saveAuthToken(resJson.token)
+                this.props.handleUserType(resJson.usertype);
+                this.selectUserAccount(resJson.usertype);
             })
-            this.setLocalStorage(resJson.email, resJson.usertype)
-            this.selectUserAccount(resJson.usertype);
-        })
-        .catch(err => {
-            console.log(err)
-        })
-      
+            .catch(err => {
+                console.log(err)
+            })
     }
-
-   
 
     render(){
         return (
@@ -108,7 +57,6 @@ class Login extends Component {
                                 label='Email'
                                 type='email'
                                 autoComplete='email'
-                                updateEmail={(e) => this.updateEmail(e.target.value)}
                             />
                         </div>
                         
@@ -143,7 +91,6 @@ class Login extends Component {
                         </p>
                     </div>
                 </div>
-                
             </div>
         )
     }

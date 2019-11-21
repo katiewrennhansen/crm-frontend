@@ -13,6 +13,7 @@ class WebpageHome extends Component {
                 <MainNav 
                     authenticated={this.props.authenticated} 
                     logout={this.props.logout} 
+                    history={this.props.history}
                 />
                 <div className='webpage-home'>
                     <div className='background-image'>

@@ -41,8 +41,6 @@ class Promotions extends Component {
             totalcost: e.target.total_cost.value,
             startdate: e.target.promotion_start.value,
             duedate: e.target.promotion_end.value,
-            company_id: 6,
-            user_id: 1
         }
         // ApiService.postSomeData(
         //     promEndpoint, 

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './AdminNav.css'
 import LogoutButton from '../../../Login/LoginComponents/LogoutButton'
+import TokenService from '../../../../services/token-service'
  
 class AdminNav extends Component {
     constructor(props){
@@ -15,6 +16,10 @@ class AdminNav extends Component {
 
     }
 
+    logout = () => {
+        TokenService.clearAuthToken();
+        this.props.history.push('/')
+    }
 
     render() {
         return (
@@ -34,7 +39,7 @@ class AdminNav extends Component {
                     <LogoutButton 
                         className='dash-nav-logout' 
                         text='logout'
-                        handleLogout={this.props.logout}
+                        handleLogout={this.logout}
                     />               
                 </nav>
             </div>

@@ -38,8 +38,6 @@ class PropertyFeatures extends Component {
         e.preventDefault()
         const newPropertyFeatures = {
             featuredescr: e.target.feature_name.value,
-            company_id: 6,
-            user_id: 7,
         }
         ApiService.postData(
             pfEndpoint, 

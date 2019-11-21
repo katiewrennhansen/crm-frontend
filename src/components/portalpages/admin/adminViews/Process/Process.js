@@ -58,8 +58,6 @@ class Process extends Component {
         const updatedContent = {
             processt: {
                 processdesc: e.target.process.value,
-                company_id: 6,
-                user_id: 1
             }
         }
         ApiService.updateData(

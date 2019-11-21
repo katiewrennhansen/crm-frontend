@@ -1,4 +1,5 @@
 export default {
+    LOGIN_ENDPOINT: 'https://crmmia-api.herokuapp.com/api/users/',
     COMMENTS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/commtypes',
     PROMOTIONS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/promotions',
     MAINTENANCE_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/mainttypes',
@@ -12,5 +13,6 @@ export default {
     CUSTOMER_ACCOUNTS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/customers',
     MAINTENANCE_PROVIDERS_ENDPOINT: 'https://crmmia-api.herokuapp.com/api/providers',
     ASSIGN_PROMOTIONS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/assignedproms',
-    API_KEY: process.env.REACT_APP_API_KEY
+    API_KEY: process.env.REACT_APP_API_KEY,
+    TOKEN_KEY: 'client-auth-token',
   }

@@ -2,19 +2,20 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './MainNav.css'
 import NavLinks from '../../NavLinks/NavLinks'
+import TokenService from '../../../../services/token-service'
  
 class MainNav extends Component {
     constructor(props){
         super(props)
         this.state = {
-            email: '',
             usertype: '',
-            redirect: false,
-            authenticated: false
         }
-
     }
 
+    logout = () => {
+        console.log('logged out');
+        TokenService.clearAuthToken()
+    }
     
     render() {
         return (
@@ -28,17 +29,18 @@ class MainNav extends Component {
                     <NavLinks />
                 </div>
                 <div className='login-nav'>
-                    {(this.props.authenticated) 
+                    {(TokenService.hasAuthToken()) 
                         ?
                         <>
                             <Link to='/dashboard' style={{textDecoration: 'none'}}>
                                 <p className='account'>Account</p>
                             </Link>
-                            <button 
+                            <Link to='/' 
                                 className='logout' 
-                                onClick={this.props.logout}
+                                style={{textDecoration: 'none'}}
+                                onClick={this.logout}
                                 >Logout
-                            </button>
+                            </Link>
                         </>
                         :
                         <>

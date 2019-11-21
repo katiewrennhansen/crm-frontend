@@ -37,16 +37,15 @@ class Maintenance extends Component {
     addMaintenanceType = (e) => {
         e.preventDefault()
         const newMaintenanceType = {
-                maindescr: e.target.promotion_name.value,
-                company_id: 6,
-                user_id: 1
+                maindescr: e.target.add_maint_type.value,
         }
         ApiService.postData(
             maintEndpoint, 
             newMaintenanceType, 
             this.context.updateData, 
             this.context.hideModal
-        )   
+        )  
+        e.target.add_maint_type.value = '' 
     }
 
     updateData = (e) => {
@@ -67,7 +66,6 @@ class Maintenance extends Component {
 
 
     render(){  
-        const maint = this.props.func
         const context = this.context
         return (
             <>
@@ -106,8 +104,8 @@ class Maintenance extends Component {
                         <div className='form-group'>
                             <label htmlFor='promotion_name'></label>
                             <TextInput 
-                                id='promotion_name'
-                                name='promotion_name'
+                                id='add_maint_type'
+                                name='add_main_type'
                                 label='Maintenance Type'
                                 type='text'
                                 autoComplete='text'
