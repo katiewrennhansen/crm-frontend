@@ -12,6 +12,7 @@ class Login extends Component {
         super(props)
         this.state = {
             usertype: '',
+            error: null
         }
     }
 
@@ -38,7 +39,7 @@ class Login extends Component {
                 this.selectUserAccount(resJson.usertype);
             })
             .catch(err => {
-                console.log(err)
+                this.setState({ error: err.error })
             })
     }
 
@@ -47,8 +48,11 @@ class Login extends Component {
             <div className='login-container'>
                 <h1>Enter your Login information</h1>
                 <div className='margin-container'>
-                    <div className='error-message'></div>
-                    <form onSubmit={(e) => this.handleSubmit(e)}>
+                    {(this.state.error) 
+                        ? (<div className='error-message'>{this.state.error}</div>)
+                        : null
+                    }
+                    <form className='login-form' onSubmit={(e) => this.handleSubmit(e)}>
                         <div className='form-group'>
                             <label htmlFor='email'></label>
                             <TextInput

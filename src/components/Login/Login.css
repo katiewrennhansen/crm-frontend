@@ -14,6 +14,10 @@
     font-family: 'Work Sans', sans-serif;
 }
 
+.login-form {
+    padding: 0;
+}
+
 .margin-container {
     width: 310px;
     margin: 0 auto;
@@ -29,4 +33,10 @@
 
 .password-controls p:first-child {
     margin-top: 30px;
+}
+
+.error-message {
+    background: rgba(255, 0, 0, 0.29);
+    border-radius: 5px;
+    padding: 15px 20px;
 }
