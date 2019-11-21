@@ -17,6 +17,8 @@ import CustomerAccounts from '../adminViews/CustomerAccounts/CustomerAccounts'
 import CustomerPage from '../adminViews/CustomerAccounts/CustomerPage'
 import CompanySetUp from '../adminViews/CompanySetUp/CompanySetUp'
 import AssetType from '../adminViews/AssetType/AssetType'
+import AddCustomer from '../adminViews/CustomerAccounts/AddCustomer'
+import Categories from '../adminViews/Categories/Categories'
 import { AdminProvider } from '../../../../contexts/AdminContext'
 import './AdminHome.css'
 
@@ -81,7 +83,7 @@ class AdminHome extends Component {
                     <div className='dash-home'>
                         <Switch>
                             <Route 
-                                path='/dashboard/home' 
+                                exact path='/dashboard' 
                                 render={(props) => {
                                     return (
                                     <AdminDash name={this.props.name} />
@@ -89,7 +91,7 @@ class AdminHome extends Component {
                                 }}
                             />
                             <Route 
-                                path='/dashboard/company-setup' 
+                                exact path='/dashboard/company-setup' 
                                 render={(props) => {
                                     return (
                                     <CompanySetUp func={propFunctions} />
@@ -105,6 +107,14 @@ class AdminHome extends Component {
                                 }}
                             />
                             <Route 
+                                path='/dashboard/categories' 
+                                render={(props) => {
+                                    return (
+                                    <Categories />
+                                    )
+                                }}
+                            />
+                            <Route 
                             path='/dashboard/promotions' 
                             render={(props) => {
                                 return (
@@ -115,7 +125,7 @@ class AdminHome extends Component {
                                 }}
                             />
                             <Route 
-                            path='/dashboard/maintenance' 
+                            exact path='/dashboard/maintenance' 
                             render={(props) => {
                                 return (
                                     <Maintenance />
@@ -187,6 +197,14 @@ class AdminHome extends Component {
                                 render={(props) => {
                                     return (
                                         <CustomerAccounts func={propFunctions} />
+                                    )
+                                    }}
+                            />
+                            <Route 
+                                path='/dashboard/add-customer' 
+                                render={(props) => {
+                                    return (
+                                        <AddCustomer func={propFunctions} />
                                     )
                                     }}
                             />

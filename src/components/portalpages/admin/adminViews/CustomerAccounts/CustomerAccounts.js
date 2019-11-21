@@ -167,7 +167,9 @@ class CustomerAccounts extends Component {
                 </Modal>
                 <div className='data-container'>
                     <h3>Customer Accounts</h3>
-                    <button className='add-data' onClick={context.showModal}>Add Customer</button>
+                    <button className='add-data'>
+                        <Link to='/dashboard/add-customer'>Add Customer</Link>
+                    </button>
                     <table className='data-table'>
                         <thead>
                             <tr>

@@ -64,28 +64,13 @@ class ProcessSteps extends Component {
     }
 
     deleteStep = (id) => {
-        const stepsEndpoint = `${processEndpoint}/${this.props.id}/steps/${id}`
-        fetch(`${stepsEndpoint}`, {
-            method: 'DELETE',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => 
-            (!res.ok)
-                ? res.json().then(error => Promise.reject(error))
-                : res.json()
+        const stepsEndpoint = `${processEndpoint}/${this.props.id}/steps`
+        ApiService.deleteData(
+            stepsEndpoint, 
+            id, 
+            this.context.setData
         )
-        .then(data => {
-            this.context.updateData(id)
-        })
-        .catch(error => {
-            console.error(error)
-        })
     }
-
-    
 
     render(){ 
         const context = this.context

@@ -98,7 +98,6 @@ const ApiService = {
                 : res.json()
         )
         .then((data) => {
-            console.log(data)
             this.getData(ApiEndpoint, set)            
         })
         .catch(error => {

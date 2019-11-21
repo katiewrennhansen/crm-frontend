@@ -7,6 +7,7 @@ export default {
     PROPERTY_STATUS_ENDPOINT:'http://crmmia-api.herokuapp.com/api/statuses',
     CUSTOMER_STATUS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/cstatuses',
     REMINDERS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/remainders',
+    CATEGORIES_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/categories',
     PROCESS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/processts',
     COMPANY_SETUP_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/companies/6',
     ASSET_TYPE_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/assettypes',

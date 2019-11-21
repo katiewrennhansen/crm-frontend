@@ -46,7 +46,7 @@ class AdminSidebar extends Component {
                 <ul className='dash-nav-ul'>
                     <li>
                         <Link 
-                            to="/dashboard/home" 
+                            to="/dashboard" 
                             className='dash-nav-link'
                             onClick={() => this.props.handleTitle('Dashboard')}
                         >
@@ -72,6 +72,16 @@ class AdminSidebar extends Component {
                         >
                             <ChatBubbleOutlineIcon />
                             <p>Comments Type</p>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to="/dashboard/categories" 
+                            className='dash-nav-link'
+                            onClick={() => this.props.handleTitle('Categories')}
+                        >
+                            <ChatBubbleOutlineIcon />
+                            <p>Categories</p>
                         </Link>
                     </li>
                     <li>

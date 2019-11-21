@@ -13,7 +13,6 @@ import UserHome from './components/portalpages/user/UserHome/UserHome'
 import AdminHome from './components/portalpages/admin/AdminHome/AdminHome'
 import BrokerHome from './components/portalpages/broker/BrokerHome/BrokerHome'
 import PrivateRoute from './components/utilities/PrivateRoute'
-import PublicRoute from './components/utilities/PublicRoute'
 import './App.css'
 
 
@@ -100,15 +99,15 @@ class App extends Component {
                 )
               }}
             />
-            <PublicRoute 
+            <Route 
               path='/forgot-password'
               component={ForgotPassword}
             />
-            <PublicRoute 
+            <Route 
               path='/change-password'
               component={ChangePassword}
             />
-            <PublicRoute 
+            <Route 
               path='/register'
               component={UserRegistration}
             />
@@ -129,21 +128,17 @@ class App extends Component {
                 }}}
             />
     {/* ******** ADMIN PORTAL ROUTES ******* */}
-          {(this.state.usertype === 'admin')
-            ? (<PrivateRoute 
-              to='/dashboard'
-              component={AdminHome}
-              />
-            ) : null
-          })}
-            <PrivateRoute 
-              to='/dashboard'
-              component={AdminHome}
-            />
+            
             <Route 
               path='/broker'
               component={BrokerHome}
             />
+
+            <PrivateRoute 
+              path='/dashboard'
+              component={AdminHome}
+            />
+            
           </Switch>
         </div>
       );
