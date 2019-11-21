@@ -9,6 +9,7 @@ import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
 
 const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
+const brokerEndpoint = config.BROKER_ENDPOINT
 
 class CustomerAccounts extends Component {
     static contextType = AdminContext
@@ -16,7 +17,8 @@ class CustomerAccounts extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            customers: []
+            customers: [],
+            brokers: []
         };
     }
 
@@ -28,8 +30,22 @@ class CustomerAccounts extends Component {
         })
     }
 
+    setBrokers = data => {
+        this.setState({
+            brokers: data.brokers,
+            error: null
+        })
+    }
+
     componentDidMount(){
-        ApiService.getData(caEndpoint, this.setCustomers)
+        ApiService.getData(
+            caEndpoint, 
+            this.setCustomers
+        )
+        ApiService.getData(
+            brokerEndpoint,
+            this.setBrokers
+        )
     }
 
     addCustomer = (e) => {
@@ -42,28 +58,14 @@ class CustomerAccounts extends Component {
                 dateCreated: new Date(),
             }
         }
-        console.log(newCustomer)
-        fetch(config.CUSTOMER_ACCOUNTS_ENDPOINT, {
-            method: 'POST',
-            body: JSON.stringify(newCustomer),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setCustomers(data.customers)
-            this.context.hideModal()
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        ApiService.postDataHalf(caEndpoint, newCustomer)
+            .then(data => {
+                this.setCustomers(data.customers)
+                this.context.hideModal()
+            })
+            .catch(error => {
+                this.setState({ error })
+            })
     }
 
 
@@ -96,9 +98,16 @@ class CustomerAccounts extends Component {
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>
                             <TextInput 
-                                id='customer'
-                                name='customer'
-                                label='Customer'
+                                id='first_name'
+                                name='first_name'
+                                label='First Name'
+                                type='text'
+                                autoComplete='text'
+                            />
+                            <TextInput 
+                                id='last_name'
+                                name='last_name'
+                                label='Last Name'
                                 type='text'
                                 autoComplete='text'
                             />
@@ -116,6 +125,39 @@ class CustomerAccounts extends Component {
                                 type='text'
                                 autoComplete='text'
                             />
+                            <TextInput 
+                                id='address1'
+                                name='address1'
+                                label='Address Line 1'
+                                type='text'
+                                autoComplete='text'
+                            />
+                            <TextInput 
+                                id='address2'
+                                name='address2'
+                                label='Address Line 2'
+                                type='text'
+                                autoComplete='text'
+                            />
+                            <TextInput 
+                                id='country'
+                                name='country'
+                                label='Country'
+                                type='text'
+                                autoComplete='text'
+                            />
+                            <select>
+                                <option>Select a Broker</option>
+                                {this.state.brokers.map(broker => 
+                                        (<option 
+                                            key={broker.data.id} 
+                                            value={broker.data.id}
+                                        >
+                                            {broker.data.name}
+                                        </option>)
+                                    )
+                                }
+                            </select>
                         </div>
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>

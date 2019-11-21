@@ -20,7 +20,7 @@ const ApiService = {
         .catch(err => {
             console.log(err)
         })
-      },
+    },
 
     postData(ApiEndpoint, dataObj, update, hideModal){
         fetch(ApiEndpoint, {
@@ -43,6 +43,22 @@ const ApiService = {
         .catch(error => {
             console.log(error)
         }) 
+    },
+
+    postDataHalf(ApiEndpoint, dataObj){
+        fetch(ApiEndpoint, {
+            method: 'POST',
+            body: JSON.stringify(dataObj),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => 
+            (!res.ok)
+                ? res.json().then(error => Promise.reject(error))
+                : res.json()
+        )
     },
 
     updateData(ApiEndpoint, id, dataObj, set, hideModal){

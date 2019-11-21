@@ -26,9 +26,7 @@ const AdminContext = React.createContext({
     updateDelete: () => {},
     setData: () => {},
     updateData: () => {},
-    removeData: () => {},
     setPromotions: () => {},
-    removePromotion: () => {},
     updatePromotions: () => {},
     setProcess: () => {}
 })
@@ -111,32 +109,12 @@ export class AdminProvider extends Component {
             error: null
         })
     }
-
-    // removeData = id => {
-    //     const newData = this.state.data.filter(d =>
-    //       d.id !== id
-    //     )
-    //     this.setState({
-    //       data: newData
-    //     })
-    // }
-
+    
     setPromotions = data => {
-        const promotions = data.promotions
         this.setState({
-            promotions: promotions,
+            promotions: data.promotions,
             error: null
         })
-    }
-
-    removePromotion = id => {
-        const newPromotions = this.state.promotions.filter(p =>
-          p.data.id !== id
-        )
-        this.setState({
-          promotions: newPromotions
-        })
-        this.props.func.hideDelete()
     }
     
     updatePromotions = data => {
@@ -176,9 +154,7 @@ export class AdminProvider extends Component {
             updateDelete: this.updateDelete,
             setData: this.setData,
             updateData: this.updateData,
-            removeData: this.removeData,
             setPromotions: this.setPromotions,
-            removePromotion: this.removePromotion,
             updatePromotions: this.updatePromotions,
             setProcess: this.setProcess,
 

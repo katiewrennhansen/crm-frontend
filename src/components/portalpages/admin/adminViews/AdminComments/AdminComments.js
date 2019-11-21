@@ -19,13 +19,19 @@ class AdminComments extends Component {
             error: null,
         };
     }
-
     
     componentDidMount(){
         ApiService.getData(
             commEndpoint, 
             this.context.setData
-        ) 
+        )
+    }
+
+    componentDidUpdate(){
+        ApiService.getData(
+            commEndpoint, 
+            this.context.setData
+        )
     }
 
     addComment = (e) => {
@@ -35,8 +41,8 @@ class AdminComments extends Component {
         }
         ApiService.postData(
             commEndpoint, 
-            newCommentType, 
-            this.context.updateData, 
+            newCommentType,
+            this.context.updateData,
             this.context.hideModal
         )
     }

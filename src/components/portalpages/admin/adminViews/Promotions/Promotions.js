@@ -27,12 +27,12 @@ class Promotions extends Component {
         )
     }
 
-    // componentDidUpdate(){
-    //     ApiService.getData(
-    //         promEndpoint, 
-    //         this.context.setPromotions
-    //     )
-    // }
+    componentDidUpdate(){
+        ApiService.getData(
+            promEndpoint, 
+            this.context.setPromotions
+        )
+    }
 
     addPromotion = (e) => {
         e.preventDefault()
@@ -42,12 +42,6 @@ class Promotions extends Component {
             startdate: e.target.promotion_start.value,
             duedate: e.target.promotion_end.value,
         }
-        // ApiService.postSomeData(
-        //     promEndpoint, 
-        //     newPromotion, 
-        //     this.updatePromotions, 
-        //     this.props.func.hideModal
-        //     )
         fetch(promEndpoint, {
             method: 'POST',
             body: JSON.stringify(newPromotion),
@@ -56,12 +50,11 @@ class Promotions extends Component {
                 'Authorization': `Bearer ${config.API_KEY}`
             }
         })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
+        .then(res => 
+            (!res.ok)
+                ? res.json().then(error => Promise.reject(error))
+                : res.json()
+        )
         .then(data => {
             const promotion = {
                 data
