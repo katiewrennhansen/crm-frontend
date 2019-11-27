@@ -55,13 +55,6 @@ class Promotion extends Component {
         )
     }
 
-    handleError = (error) => {
-        // this.setState({
-        //     error: error
-        // })
-        console.log(error)
-    }
-
     assignPromotion = (e) => {
         e.preventDefault()
         const assignUser = {
@@ -70,6 +63,7 @@ class Promotion extends Component {
             promotion_id: this.state.id
         }
         console.log(assignUser)
+
             fetch(assignPromsEndpoint, {
                 method: 'POST',
                 body: JSON.stringify(assignUser),

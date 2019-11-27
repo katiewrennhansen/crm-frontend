@@ -93,7 +93,7 @@ class Process extends Component {
                 <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
                         <h3>Update {context.name}</h3>
-                        <form className='form-group' onSubmit={(e) => this.updateData(e)}>
+                        <form className='form-group-form' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='maint_type'></label>
                                 <TextInput

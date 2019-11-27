@@ -1,45 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans:300&display=swap');
 
-
-.dashboard-container {
-    display: grid;
-    grid-template-rows: 105px repeat(11, 1fr);
-    grid-template-columns: repeat(12, 1fr);
-    height: 100vh;
-    font-family: 'Open Sans', sans-serif;
-}
-
-.dashboard-container h1,
-.dashboard-container h2,
-.dashboard-container h3 {
-    font-family: 'Work Sans', sans-serif;
-}
-
-.dash-nav {
-    grid-column: 4 / -1;
-    grid-row: 1 / 2;
-    padding: 15px;
-}
-
-.dash-sidebar {
-    grid-column: 1 / 4;
-    grid-row: 1 / -1;
-}
-
-.dash-home {
-    grid-column: 4 / -1;
-    grid-row: 2 / -1;
-    padding: 0 60px;
-    background-color: rgb(240, 240, 240);
-    padding-top: 50px;
-}
-
-.promotion-container,
-.data-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-}
-
 table {
     border-collapse: collapse;
     border: 1px solid rgb(138, 138, 138);
@@ -60,6 +20,13 @@ td {
 
 td, th {
     padding: 6px 30px;
+}
+
+
+.dashboard-container h1,
+.dashboard-container h2,
+.dashboard-container h3 {
+    font-family: 'Work Sans', sans-serif;
 }
 
 /* .promotion-container h3, */
@@ -112,5 +79,37 @@ td button:hover,
     border: 1px solid red;
     color: red;
 }
+.promotion-container,
+.data-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
 
+.dashboard-container {
+    font-family: 'Open Sans', sans-serif;
+}
 
+@media (min-width: 900px){
+    .dashboard-container {
+        display: grid;
+        grid-template-rows: 105px repeat(11, 1fr);
+        grid-template-columns: repeat(12, 1fr);
+        height: 100vh;
+    }
+    .dash-nav {
+        grid-column: 4 / -1;
+        grid-row: 1 / 2;
+        padding: 15px;
+    }
+    .dash-sidebar {
+        grid-column: 1 / 4;
+        grid-row: 1 / -1;
+    }
+    .dash-home {
+        grid-column: 4 / -1;
+        grid-row: 2 / -1;
+        padding: 0 60px;
+        background-color: rgb(240, 240, 240);
+        padding-top: 50px;
+    }
+}

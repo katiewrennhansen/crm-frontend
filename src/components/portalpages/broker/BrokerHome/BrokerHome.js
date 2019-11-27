@@ -11,7 +11,7 @@ import Network from '../brokerViews/Network/Network'
 import Contacts from '../brokerViews/Contacts/Contacts'
 import Provider from '../brokerViews/Maintenance/Provider'
 import Alerts from '../brokerViews/Alerts/Alerts'
-
+import BrokerContext from '../../../../contexts/BrokerContext'
 
 class BrokerHome extends Component {
     constructor(props){
@@ -28,8 +28,11 @@ class BrokerHome extends Component {
     }
     
     render(){
+        const value = {
+
+        }
         return (
-            <>
+            <BrokerContext.Provider value={value}>
              <div className='dashboard-container'>
                     <div className='dash-sidebar'>
                         <BrokerSidebar 
@@ -122,7 +125,7 @@ class BrokerHome extends Component {
                         </Switch>
                     </div>
                 </div>
-            </>
+            </BrokerContext.Provider>
         )
     }
 }
