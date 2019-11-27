@@ -27,6 +27,10 @@ class AdminComments extends Component {
         )
     }
 
+    componentWillUnmount(){
+        this.context.setData([])
+    }
+
     addComment = (e) => {
         e.preventDefault()
         const newCommentType = {
@@ -57,13 +61,11 @@ class AdminComments extends Component {
 
     deleteComment = (id) => {
         this.context.deleteData(id)
-
         ApiService.deleteData(
             commEndpoint, 
             id, 
             this.context.setData
         )
-        
         this.context.hideDelete()
     }
 
@@ -74,7 +76,7 @@ class AdminComments extends Component {
             <DeleteModal
                 props={context}
                 endpoint={commEndpoint}
-                deleteComment={this.deleteComment}
+                deleteFn={this.deleteComment}
             />
             <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>

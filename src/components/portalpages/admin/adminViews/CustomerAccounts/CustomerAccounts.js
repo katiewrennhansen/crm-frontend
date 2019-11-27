@@ -48,6 +48,11 @@ class CustomerAccounts extends Component {
         )
     }
 
+    componentWillUnmount(){
+        this.setCustomers([])
+    }
+
+
     addCustomer = (e) => {
         e.preventDefault()
         const newCustomer = {
@@ -62,6 +67,20 @@ class CustomerAccounts extends Component {
             .then(data => {
                 this.setCustomers(data.customers)
                 this.context.hideModal()
+            })
+            .catch(error => {
+                this.setState({ error })
+            })
+    }
+
+    deactivateCustomerStatus = (id) => {
+        const newStatus = {
+            status: 'On hold'
+        }
+        ApiService.updateDataHalf(caEndpoint, id, newStatus)
+            .then(data => {
+                this.setCustomers(data.customers)
+                this.props.hideModal()
             })
             .catch(error => {
                 this.setState({ error })

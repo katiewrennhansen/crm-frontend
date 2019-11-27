@@ -39,14 +39,6 @@ class ProcessSteps extends Component {
         )
     }
 
-    componentDidUpdate(){
-        const stepsEndpoint = `${processEndpoint}/${this.props.id}/steps`
-        ApiService.getData(
-            stepsEndpoint, 
-            this.context.setData
-        )
-    }
-
     addStep = (e) => {
         e.preventDefault()
         const stepsEndpoint = `${processEndpoint}/${this.props.id}/steps`

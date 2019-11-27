@@ -27,11 +27,8 @@ class CustomerStatus extends Component {
         )        
     }
 
-    componentDidUpdate() {
-        ApiService.getData(
-            csEndpoint, 
-            this.context.setData
-        )        
+    componentWillUnmount(){
+        this.context.setData([])
     }
 
     addCustomerStatus = (e) => {
@@ -55,12 +52,28 @@ class CustomerStatus extends Component {
         if(e.target.status_type.value !== ''){
             updatedContent.csdesc = e.target.status_type.value
         }
-        ApiService.updateData(
+
+        ApiService.updateDataHalf(csEndpoint, id, updatedContent)
+        .then(res => {
+            ApiService.getDataHalf(csEndpoint)
+                .then(data => {
+                    this.context.setData(data)
+                    this.context.hideUpdate()
+                })
+        })
+        .catch(error => {
+            console.log(error)
+        }) 
+    }
+
+    deleteStatus = (id) => {
+        this.context.deleteData(id)
+        ApiService.deleteData(
             csEndpoint, 
             id, 
-            updatedContent, 
-            this.context.hideUpdate
+            this.context.setData
         )
+        this.context.hideDelete()
     }
 
     
@@ -71,6 +84,7 @@ class CustomerStatus extends Component {
             <DeleteModal
                 props={context}
                 endpoint={csEndpoint}
+                deleteFn={this.deleteStatus}
             />
             <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>

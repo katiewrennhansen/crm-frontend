@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Moment from 'react-moment'
+// import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
 import TextInput from '../../../../Login/LoginComponents/TextInput'
@@ -27,13 +27,6 @@ class Promotions extends Component {
         )
     }
 
-    componentDidUpdate(){
-        ApiService.getData(
-            promEndpoint, 
-            this.context.setPromotions
-        )
-    }
-
     addPromotion = (e) => {
         e.preventDefault()
         const newPromotion = {
@@ -42,35 +35,23 @@ class Promotions extends Component {
             startdate: e.target.promotion_start.value,
             duedate: e.target.promotion_end.value,
         }
-        fetch(promEndpoint, {
-            method: 'POST',
-            body: JSON.stringify(newPromotion),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => 
-            (!res.ok)
-                ? res.json().then(error => Promise.reject(error))
-                : res.json()
-        )
-        .then(data => {
-            const promotion = {
-                data
-            }
-            this.context.updatePromotions(promotion)
-            this.context.hideModal()
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        ApiService.postDataHalf(promEndpoint, newPromotion)
+            .then(data => {
+                ApiService.getDataHalf(promEndpoint)
+                    .then(data => {
+                        this.context.setPromotions(data)
+                        this.context.hideModal()
+                    })
+            })
+            .catch(error => {
+                this.setState({ error })
+            })
     }
 
     updateData = (e) => {
         e.preventDefault()
         const id = this.context.id
-        let updatedContent = {}
+        const updatedContent = {}
 
         if(e.target.promotion_name.value !== ''){
             updatedContent.typepromotion = e.target.promotion_name.value
@@ -84,13 +65,27 @@ class Promotions extends Component {
         if(e.target.total_cost.value !== ''){
             updatedContent.totalcost = Number(e.target.total_cost.value)
         }
+        ApiService.updateDataHalf(promEndpoint, id, updatedContent)
+            .then(data => {
+                ApiService.getDataHalf(promEndpoint)
+                    .then(data => {
+                        this.context.setPromotions(data)
+                        this.context.hideUpdate()
+                    })
+            })
+            .catch(error => {
+                this.setState({ error })
+            })
+    }
 
-        ApiService.updateData(
+    deletePromotion = (id) => {
+        this.context.deletePromotions(id)
+        ApiService.deleteData(
             promEndpoint, 
             id, 
-            updatedContent, 
-            this.context.hideUpdate
+            this.context.setPromotions
         )
+        this.context.hideDelete()
     }
 
     render(){  
@@ -100,6 +95,7 @@ class Promotions extends Component {
             <DeleteModal
                 props={context}
                 endpoint={promEndpoint}
+                deleteFn={this.deletePromotion}
             />
                 <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
@@ -112,6 +108,7 @@ class Promotions extends Component {
                                     name='promotion_name'
                                     label='Promotion Name'
                                     type='text'
+                                    defaultValue={context.name}
                                 />
                             </div>
                             <div className='dates'>
@@ -223,10 +220,10 @@ class Promotions extends Component {
                             <tr key={p.data.id}>
                                 <td>{p.data.typepromotion}</td>
                                 <td>
-                                    <Moment format="YYYY/MM/DD">{p.data.startdate}</Moment>
+                                    {p.data.startdate}
                                 </td>
                                 <td>
-                                    <Moment format="YYYY/MM/DD">{p.data.duedate}</Moment>
+                                    {p.data.duedate}
                                 </td>
                                 <td>{this.props.formatPrice(p.data.totalcost)}</td>
                                 <td className='update'>

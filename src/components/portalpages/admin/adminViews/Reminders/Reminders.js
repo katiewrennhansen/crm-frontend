@@ -27,11 +27,8 @@ class Reminders extends Component {
         )        
     }
 
-    componentDidUpdate(){
-        ApiService.getData(
-            remindersEndpoint, 
-            this.context.setData
-        )        
+    componentWillUnmount(){
+        this.context.setData([])
     }
 
     addReminder = (e) => {
@@ -63,14 +60,29 @@ class Reminders extends Component {
         if(e.target.message.value !== ''){
             updatedContent.bodymessage = e.target.message.value
         }
-        ApiService.updateData(
-            remindersEndpoint, 
-            id, 
-            updatedContent, 
-            this.context.hideUpdate
-        )
+
+        ApiService.updateDataHalf(remindersEndpoint, id, updatedContent)
+        .then(res => {
+            ApiService.getDataHalf(remindersEndpoint)
+                .then(data => {
+                    this.context.setData(data)
+                    this.context.hideUpdate()
+                })
+        })
+        .catch(error => {
+            console.log(error)
+        }) 
     }
 
+    deleteReminder = (id) => {
+        this.context.deleteData(id)
+        ApiService.deleteData(
+            remindersEndpoint, 
+            id, 
+            this.context.setData
+        )
+        this.context.hideDelete()
+    }
 
     render(){  
         const context = this.context
@@ -79,6 +91,7 @@ class Reminders extends Component {
             <DeleteModal
                 props={context}
                 endpoint={remindersEndpoint}
+                deleteFn={this.deleteReminder}
             />
              <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>

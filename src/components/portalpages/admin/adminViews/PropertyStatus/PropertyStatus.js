@@ -27,11 +27,8 @@ class PropertyStatus extends Component {
         )        
     }
 
-    componentDidUpdate() {
-        ApiService.getData(
-            psEndpoint, 
-            this.context.setData
-        )        
+    componentWillUnmount(){
+        this.context.setData([])
     }
 
     addPropertyStatus = (e) => {
@@ -55,12 +52,28 @@ class PropertyStatus extends Component {
         if(e.target.status_type.value !== ''){
             updatedContent.statusdesc = e.target.status_type.value
         }
-        ApiService.updateData(
+
+        ApiService.updateDataHalf(psEndpoint, id, updatedContent)
+        .then(res => {
+            ApiService.getDataHalf(psEndpoint)
+                .then(data => {
+                    this.context.setData(data)
+                    this.context.hideUpdate()
+                })
+        })
+        .catch(error => {
+            console.log(error)
+        }) 
+    }
+
+    deleteStatus = (id) => {
+        this.context.deleteData(id)
+        ApiService.deleteData(
             psEndpoint, 
             id, 
-            updatedContent, 
-            this.context.hideUpdate
+            this.context.setData
         )
+        this.context.hideDelete()
     }
 
     render(){  
@@ -70,6 +83,7 @@ class PropertyStatus extends Component {
             <DeleteModal
                 props={context}
                 endpoint={psEndpoint}
+                deleteFn={this.deleteStatus}
             />
             <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>

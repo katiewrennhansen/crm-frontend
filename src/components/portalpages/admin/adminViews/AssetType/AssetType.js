@@ -27,11 +27,8 @@ class AssetType extends Component {
         )        
     }
 
-    componentDidUpdate(){
-        ApiService.getData(
-            assetEndpoint, 
-            this.context.setData
-            )        
+    componentWillUnmount(){
+        this.context.setData([])
     }
 
     addAsset = (e) => {
@@ -55,12 +52,27 @@ class AssetType extends Component {
         if(e.target.asset_type.value !== ''){
             updatedContent.assettdesc = e.target.asset_type.value
         }
-        ApiService.updateData(
+        ApiService.updateDataHalf(assetEndpoint, id, updatedContent)
+        .then(res => {
+            ApiService.getDataHalf(assetEndpoint)
+                .then(data => {
+                    this.context.setData(data)
+                    this.context.hideUpdate()
+                })
+        })
+        .catch(error => {
+            console.log(error)
+        }) 
+    }
+
+    deleteAsset = (id) => {
+        this.context.deleteData(id)
+        ApiService.deleteData(
             assetEndpoint, 
             id, 
-            updatedContent, 
-            this.context.hideUpdate
+            this.context.setData
         )
+        this.context.hideDelete()
     }
 
     render(){ 
@@ -70,6 +82,7 @@ class AssetType extends Component {
                 <DeleteModal
                     props={context}
                     endpoint={assetEndpoint}
+                    deleteFn={this.deleteAsset}
                 />
                 <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>

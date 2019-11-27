@@ -27,11 +27,8 @@ class PropertyFeatures extends Component {
         )        
     }
 
-    componentDidUpdate(){
-        ApiService.getData(
-            pfEndpoint, 
-            this.context.setData
-        )        
+    componentWillUnmount(){
+        this.context.setData([])
     }
 
     addPropertyFeature = (e) => {
@@ -55,14 +52,28 @@ class PropertyFeatures extends Component {
         if(e.target.feat_type.value !== ''){
             updatedContent.featuredescr = e.target.feat_type.value
         }
-        ApiService.updateData(
+        ApiService.updateDataHalf(pfEndpoint, id, updatedContent)
+            .then(res => {
+                ApiService.getDataHalf(pfEndpoint)
+                    .then(data => {
+                        this.context.setData(data)
+                        this.context.hideUpdate()
+                    })
+            })
+            .catch(error => {
+                console.log(error)
+            })   
+    }
+
+    deleteFeature = (id) => {
+        this.context.deleteData(id)
+        ApiService.deleteData(
             pfEndpoint, 
             id, 
-            updatedContent, 
-            this.context.hideUpdate
+            this.context.setData
         )
+        this.context.hideDelete()
     }
- 
     
     render(){  
         const context = this.context
@@ -71,6 +82,7 @@ class PropertyFeatures extends Component {
             <DeleteModal
                 props={context}
                 endpoint={pfEndpoint}
+                deleteFn={this.deleteFeature}
             />
             <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>

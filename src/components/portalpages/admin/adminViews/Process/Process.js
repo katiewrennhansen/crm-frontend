@@ -27,11 +27,8 @@ class Process extends Component {
         )
     }
 
-    componentDidUpdate(){
-        ApiService.getData(
-            processEndpoint, 
-            this.context.setProcess
-        )
+    componentWillUnmount(){
+        this.context.setData([])
     }
 
     addProcess = (e) => {
@@ -60,12 +57,28 @@ class Process extends Component {
                 processdesc: e.target.process.value,
             }
         }
-        ApiService.updateData(
+        ApiService.updateDataHalf(processEndpoint, id, updatedContent)
+        .then(res => {
+            ApiService.getDataHalf(processEndpoint)
+                .then(data => {
+                    this.context.setProcess(data)
+                    this.context.hideUpdate()
+                })
+        })
+        .catch(error => {
+            console.log(error)
+        }) 
+    }
+
+
+    deleteProcess = (id) => {
+        this.context.deleteProcess(id)
+        ApiService.deleteData(
             processEndpoint, 
             id, 
-            updatedContent, 
-            this.context.hideUpdate
+            this.context.setProcess
         )
+        this.context.hideDelete()
     }
 
     render(){  
@@ -75,6 +88,7 @@ class Process extends Component {
                 <DeleteModal
                     props={context}
                     endpoint={processEndpoint}
+                    deleteFn={this.deleteProcess}
                 />
                 <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>

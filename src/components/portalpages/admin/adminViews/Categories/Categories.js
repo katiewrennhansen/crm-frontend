@@ -27,11 +27,8 @@ class Categories extends Component {
         )
     }
 
-    componentDidUpdate(){
-        ApiService.getData(
-            catEndpoint, 
-            this.context.setData
-        )
+    componentWillUnmount(){
+        this.context.setData([])
     }
 
     addCategory = (e) => {
@@ -62,6 +59,18 @@ class Categories extends Component {
         )
     }
 
+    deleteCategory = (id) => {
+        this.context.deleteData(id)
+
+        ApiService.deleteData(
+            catEndpoint, 
+            id, 
+            this.context.setData
+        )
+        
+        this.context.hideDelete()
+    }
+
     render(){ 
         const context = this.context
 
@@ -70,6 +79,7 @@ class Categories extends Component {
             <DeleteModal
                 props={context}
                 endpoint={catEndpoint}
+                deleteFn={this.deleteCategory}
             />
             <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>
@@ -120,7 +130,7 @@ class Categories extends Component {
                 </Modal>
                 
                 <div className='data-container'>
-                    <h3>Comments Type</h3>
+                    <h3>Categories</h3>
                     <button className='add-data' onClick={context.showModal}>Add Category</button>
                     <table className='data-table'>
                         <thead>

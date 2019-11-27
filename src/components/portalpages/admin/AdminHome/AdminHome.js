@@ -126,6 +126,24 @@ class AdminHome extends Component {
         })
     }
 
+    deletePromotions = (id) => {
+        const newPromotions = this.state.promotions.filter(d => {
+            return d.data.id !== id
+        })
+        this.setState({
+            promotions: newPromotions
+        })
+    }
+
+    deleteProcess = (id) => {
+        const newProcess = this.state.process.filter(d => {
+            return d.data.id !== id
+        })
+        this.setState({
+            process: newProcess
+        })
+    }
+
     setProcess = data => {
         const process = data.processts        
         this.setState({
@@ -191,7 +209,9 @@ class AdminHome extends Component {
             setPromotions: this.setPromotions,
             updatePromotions: this.updatePromotions,
             setProcess: this.setProcess,
-            deleteData: this.deleteData
+            deleteData: this.deleteData,
+            deletePromotions: this.deletePromotions,
+            deleteProcess: this.deleteProcess
         }
         return (
             <AdminContext.Provider value={value}>

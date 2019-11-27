@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from './Modal'
 
 
-const DeleteModal = ({props, deleteComment}) => {
+const DeleteModal = ({props, deleteFn}) => {
     return (
         <Modal show={props.delete}>
         <div className='delete-modal-grid'>
@@ -11,7 +11,7 @@ const DeleteModal = ({props, deleteComment}) => {
                 <button onClick={props.hideDelete}>Cancel</button>
             </div>
             <div className='delete'>
-                <button onClick={() => deleteComment(props.idDelete)}>
+                <button onClick={() => deleteFn(props.idDelete)}>
                     Delete
                 </button>
             </div>

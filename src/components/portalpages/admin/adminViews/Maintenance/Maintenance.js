@@ -27,11 +27,8 @@ class Maintenance extends Component {
         )        
     }
 
-    componentDidUpdate(){
-        ApiService.getData(
-            maintEndpoint, 
-            this.context.setData
-        )        
+    componentWillUnmount(){
+        this.context.setData([])
     }
     
     addMaintenanceType = (e) => {
@@ -56,14 +53,29 @@ class Maintenance extends Component {
         if(e.target.maint_type.value !== ''){
             updatedContent.maindescr = e.target.maint_type.value
         }
-        ApiService.updateData(
-            maintEndpoint, 
-            id, 
-            updatedContent, 
-            this.context.hideUpdate
-        )
+
+        ApiService.updateDataHalf(maintEndpoint, id, updatedContent)
+            .then(res => {
+                ApiService.getDataHalf(maintEndpoint)
+                    .then(data => {
+                        this.context.setData(data)
+                        this.context.hideUpdate()
+                    })
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
+    deleteMaintenance = (id) => {
+        this.context.deleteData(id)
+        ApiService.deleteData(
+            maintEndpoint, 
+            id, 
+            this.context.setData
+        )
+        this.context.hideDelete()
+    }
 
     render(){  
         const context = this.context
@@ -72,6 +84,7 @@ class Maintenance extends Component {
             <DeleteModal
                 props={context}
                 endpoint={maintEndpoint}
+                deleteFn={this.deleteMaintenance}
             />
             <Modal className='update-modal' show={context.update}>
                     <div className='update-modal-grid'>

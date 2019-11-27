@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import config from '../../../../../config'
 import './CustomerAccounts.css'
+import ApiService from '../../../../../services/api-service';
 
+const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
 
 class CustomerAccounts extends Component {
     constructor(props) {
@@ -21,25 +23,18 @@ class CustomerAccounts extends Component {
     }
 
     componentDidMount(){
-        fetch(`${config.CUSTOMER_ACCOUNTS_ENDPOINT}/${this.props.id}`, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setCustomer(data.data)
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        const id = this.props.id
+        ApiService.getById(caEndpoint, id)
+            .then(data => {
+                this.setCustomer(data.data)
+            })
+            .catch(error => {
+                this.setState({ error })
+            })
+    }
+
+    componentWillUnmount(){
+        this.setCustomer([])
     }
 
     addCustomer = (e) => {
@@ -54,21 +49,7 @@ class CustomerAccounts extends Component {
                 user_id: 1
             }
         }
-        console.log(newCustomer)
-        fetch(config.CUSTOMER_ACCOUNTS_ENDPOINT, {
-            method: 'POST',
-            body: JSON.stringify(newCustomer),
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
+        ApiService.postDataHalf(caEndpoint, newCustomer)
         .then(data => {
             this.setCustomers(data.customers)
             this.props.hideModal()
