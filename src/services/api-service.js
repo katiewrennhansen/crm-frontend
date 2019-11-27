@@ -21,7 +21,20 @@ const ApiService = {
             console.log(err)
         })
     },
-
+    getDataHalf(ApiEndpoint,) {
+        return fetch(ApiEndpoint, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => 
+            (!res.ok)
+                ? res.json().then(error => Promise.reject(error))
+                : res.json()
+        )
+    },
     postData(ApiEndpoint, dataObj, update, hideModal){
         fetch(ApiEndpoint, {
             method: 'POST',
@@ -95,16 +108,15 @@ const ApiService = {
         .then(res => 
             (!res.ok)
                 ? res.json().then(error => Promise.reject(error))
-                : res.json()
+                : res
         )
         .then((data) => {
             this.getData(ApiEndpoint, set)            
         })
         .catch(error => {
             console.error(error)
-        })
-        
-    }
+        })  
+    },
 }
 
 export default ApiService

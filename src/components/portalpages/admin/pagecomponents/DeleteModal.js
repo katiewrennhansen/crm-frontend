@@ -1,9 +1,8 @@
 import React from 'react'
-import ApiService from '../../../../services/api-service'
 import Modal from './Modal'
 
 
-const DeleteModal = ({props, endpoint}) => {
+const DeleteModal = ({props, deleteComment}) => {
     return (
         <Modal show={props.delete}>
         <div className='delete-modal-grid'>
@@ -12,16 +11,7 @@ const DeleteModal = ({props, endpoint}) => {
                 <button onClick={props.hideDelete}>Cancel</button>
             </div>
             <div className='delete'>
-                <button 
-                    onClick={() => {
-                        ApiService.deleteData(
-                            endpoint, 
-                            props.idDelete, 
-                            props.setData
-                        );
-                        props.hideDelete()
-                    }}
-                >
+                <button onClick={() => deleteComment(props.idDelete)}>
                     Delete
                 </button>
             </div>

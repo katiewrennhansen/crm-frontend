@@ -103,7 +103,6 @@ class AddCustomer extends Component {
     }
 
     render(){  
-        const context = this.context
         return (
             <>
                 <h2>Add Customer</h2>
