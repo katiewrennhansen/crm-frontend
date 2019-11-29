@@ -7,7 +7,7 @@ import './CustomerAccounts.css'
 import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
 
-const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
+// const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
 const brokerEndpoint = config.BROKER_ENDPOINT
 const csEndpoint = config.CUSTOMER_STATUS_ENDPOINT
 const remindersEndpoint = config.REMINDERS_ENDPOINT

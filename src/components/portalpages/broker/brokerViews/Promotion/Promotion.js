@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Moment from 'react-moment'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import Modal from '../../../admin/pagecomponents/Modal'
@@ -7,6 +6,8 @@ import SubmitButtom from '../../../../Login/LoginComponents/SubmitButton'
 
 const promotionsEndpoint = config.PROMOTIONS_ENDPOINT
 const assignPromsEndpoint = config.ASSIGN_PROMOTIONS_ENDPOINT
+// const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
+
 
 class Promotion extends Component {
     constructor(props) {
@@ -59,31 +60,20 @@ class Promotion extends Component {
         e.preventDefault()
         const assignUser = {
             unitcost: e.target.cost.value,
-            email: this.state.user,
+            email: e.target.user.value,
             promotion_id: this.state.id
         }
         console.log(assignUser)
 
-            fetch(assignPromsEndpoint, {
-                method: 'POST',
-                body: JSON.stringify(assignUser),
-                headers: {
-                    'content-type': 'application/json',
-                    'Authorization': `Bearer ${config.API_KEY}`
-                }
-            })
-            .then(res => 
-                (!res.ok)
-                    ? res.json().then(error => Promise.reject(error))
-                    : res.json()
-            )
-            .then(data => {
-                console.log(data)
-            })
-            .catch(error => {
-                console.log(error)
-                this.handleError(error)
-            }) 
+        // ApiService.postDataHalf(assignPromsEndpoint, assignUser)
+        //     .then(data => {
+        //         console.log(data)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //         this.handleError(error)
+        //     }) 
+        this.setState({ assign: false })
         
     }
 
@@ -101,8 +91,8 @@ class Promotion extends Component {
                     <h3>Assign user to {this.state.name}</h3>
                     <form onSubmit={(e) => this.assignPromotion(e)}>
                         <div className='form-group'>
-                            <select onChange={(e) => this.changeUser(e.target.value)}>
-                                <option>Select a User</option>
+                            <select name="user" onChange={(e) => this.changeUser(e.target.value)}>
+                                <option value="">Select a User</option>
                             {this.state.users.map(user => (
                                 <option 
                                     key={user.customer.id} 
@@ -125,9 +115,6 @@ class Promotion extends Component {
                 </Modal>
                 <div className='data-container'>
                     <h3>Promotions</h3>
-                    <button className='add-data' 
-                    // onClick={context.showModal}
-                    >Add Promotion</button>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -142,12 +129,8 @@ class Promotion extends Component {
                             {this.state.data.map(p => (
                             <tr key={p.data.id}>
                                 <td>{p.data.typepromotion}</td>
-                                <td>
-                                    <Moment format="YYYY/MM/DD">{p.data.startdate}</Moment>
-                                </td>
-                                <td>
-                                    <Moment format="YYYY/MM/DD">{p.data.duedate}</Moment>
-                                </td>
+                                <td>{p.data.startdate}</td>
+                                <td>{p.data.duedate}</td>
                                 <td>{p.data.totalcost}</td>
                                 <td className='update'>
                                     <button onClick={() => this.setAssign(true, p.data.id, p.data.typepromotion)}>Assign to User</button>

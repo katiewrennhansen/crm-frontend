@@ -11,14 +11,31 @@ import Network from '../brokerViews/Network/Network'
 import Contacts from '../brokerViews/Contacts/Contacts'
 import Provider from '../brokerViews/Maintenance/Provider'
 import Alerts from '../brokerViews/Alerts/Alerts'
+import SinglePropertyPage from '../brokerViews/Properties/SinglePropertyPage'
 import BrokerContext from '../../../../contexts/BrokerContext'
+import './BrokerHome.css'
+
 
 class BrokerHome extends Component {
     constructor(props){
         super(props);
         this.state = {
             title: '',
+            assets: [],
+            singleAsset: []
         }
+    }
+
+    setAssets = (assets) => {
+        this.setState({
+            assets: assets
+        })
+    }
+
+    setSingleAsset = (asset) => {
+        this.setState({
+            singleAsset: asset
+        })
     }
 
     handleTitle = (title) => {
@@ -29,7 +46,10 @@ class BrokerHome extends Component {
     
     render(){
         const value = {
-
+            assets: this.state.assets,
+            singleAsset: this.state.singleAsset,
+            setAssets: this.setAssets,
+            setSingleAsset: this.setSingleAsset
         }
         return (
             <BrokerContext.Provider value={value}>
@@ -56,10 +76,21 @@ class BrokerHome extends Component {
                                 }}
                             />
                             <Route 
-                                path='/broker/properties' 
+                                exact path='/broker/properties' 
                                 render={(props) => {
                                     return (
                                     <Properties />
+                                    )
+                                }}
+                            />
+                            <Route 
+                                path='/broker/properties/:id' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    return (
+                                    <SinglePropertyPage 
+                                        id={id}
+                                    />
                                     )
                                 }}
                             />

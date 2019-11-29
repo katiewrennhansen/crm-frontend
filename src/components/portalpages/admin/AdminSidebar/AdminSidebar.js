@@ -151,7 +151,7 @@ class AdminSidebar extends Component {
                             onClick={() => this.props.handleTitle('Assest Type')}                        
                         >
                             <NotificationsActiveIcon />
-                            <p>Assest Type</p>
+                            <p>Asset Type</p>
                         </Link>
                     </li>
                     <li>
