@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
-import Modal from '../../pagecomponents/Modal'
-import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import './CustomerAccounts.css'
 import AdminContext from '../../../../../contexts/AdminContext'
@@ -53,26 +50,6 @@ class CustomerAccounts extends Component {
     }
 
 
-    addCustomer = (e) => {
-        e.preventDefault()
-        const newCustomer = {
-            customer: {
-                name: e.target.customer.value,
-                email: e.target.customer_email.value,
-                phone: e.target.customer_phone.value,
-                dateCreated: new Date(),
-            }
-        }
-        ApiService.postDataHalf(caEndpoint, newCustomer)
-            .then(data => {
-                this.setCustomers(data.customers)
-                this.context.hideModal()
-            })
-            .catch(error => {
-                this.setState({ error })
-            })
-    }
-
     deactivateCustomerStatus = (id) => {
         const newStatus = {
             status: 'On hold'
@@ -105,85 +82,8 @@ class CustomerAccounts extends Component {
     }
     
     render(){  
-        const context = this.context
         return (
             <>
-                <Modal show={context.show} >
-                    <form 
-                        className= 'add-content' 
-                        onSubmit={(e) => this.addCustomer(e)}
-                    >
-                        <h3>Customer Accounts</h3>
-                        <div className='form-group'>
-                            <label htmlFor='feature_name'></label>
-                            <TextInput 
-                                id='first_name'
-                                name='first_name'
-                                label='First Name'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='last_name'
-                                name='last_name'
-                                label='Last Name'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='customer_email'
-                                name='customer_email'
-                                label='Email'
-                                type='email'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='customer_phone'
-                                name='customer_phone'
-                                label='Phone'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='address1'
-                                name='address1'
-                                label='Address Line 1'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='address2'
-                                name='address2'
-                                label='Address Line 2'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='country'
-                                name='country'
-                                label='Country'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <select>
-                                <option>Select a Broker</option>
-                                {this.state.brokers.map(broker => 
-                                        (<option 
-                                            key={broker.data.id} 
-                                            value={broker.data.id}
-                                        >
-                                            {broker.data.name}
-                                        </option>)
-                                    )
-                                }
-                            </select>
-                        </div>
-                        <SubmitButton className='submit-content' text='Save'/>
-                    </form>
-                    <div className='cancel'>
-                        <button onClick={context.hideModal}>Cancel</button>
-                    </div>
-                </Modal>
                 <div className='data-container'>
                     <h3>Customer Accounts</h3>
                     <button className='add-data'>

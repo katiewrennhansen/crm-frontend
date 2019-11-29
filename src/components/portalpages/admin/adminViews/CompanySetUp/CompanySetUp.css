@@ -1,0 +1,59 @@
+div.edit-company {
+    width: 60%;
+    margin: 0 auto;
+    display: grid;
+    grid-column: 1 / -1;
+}
+
+.company-btn {
+    border: 1px solid rgb(63, 63, 63);
+    text-decoration: none;
+    color: rgb(63, 63, 63);
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 15px;
+    box-shadow: 1px 1px 2px gray;
+}
+
+.company-info-container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.company-info {
+    grid-column: 1 / 7;
+}
+
+.edit {
+    display: grid;
+    grid-column: 6 / -1;
+    width: 150px;
+    max-height: 25px;
+    text-align: center;
+}
+
+.edit:hover,
+.company-btn.cancel:hover {
+    box-shadow: 2px 2px 3px gray;    
+    transition: 300ms linear;
+}
+
+.edit-company-form {
+    background: white;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgb(174, 174, 174);    
+    text-align: center;
+}
+
+.edit-company-form-btn {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    align-items: center;
+}
+
+.company-btn.cancel {
+    padding: 13px 30px;
+    margin-right: 20px;
+}

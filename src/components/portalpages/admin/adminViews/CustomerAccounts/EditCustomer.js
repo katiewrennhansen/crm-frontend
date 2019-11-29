@@ -13,7 +13,7 @@ const csEndpoint = config.CUSTOMER_STATUS_ENDPOINT
 const remindersEndpoint = config.REMINDERS_ENDPOINT
 const catEndpoint = config.CATEGORIES_ENDPOINT
 
-class AddCustomer extends Component {
+class EditCustomer extends Component {
     static contextType = AdminContext
 
     constructor(props) {
@@ -82,9 +82,11 @@ class AddCustomer extends Component {
         )
     }
 
-    addCustomer = (e) => {
+    editCustomer = (e) => {
         e.preventDefault()
-        const newCustomer = {
+        const id = this.props.id
+        let updatedCustomer = {}
+        const updatedCustomerFields = {
             firstname: e.target.first_name.value,
             lastname: e.target.last_name.value,
             cemail: e.target.email.value,
@@ -101,29 +103,34 @@ class AddCustomer extends Component {
             ccomment: e.target.comment.value
         }
 
-        console.log(newCustomer)
+        for (const key in updatedCustomerFields) {
+            if (updatedCustomerFields[key] !== '')
+                updatedCustomer[key] = updatedCustomerFields[key]
+            }
 
-        ApiService.postDataHalf(caEndpoint, newCustomer)
-            .then(data => {
-                console.log(data)
-                ApiService.getDataHalf(caEndpoint)
-                    .then(data => {
-                        this.setCustomers(data.customers)
-                    })
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        this.props.func.history.push('/dashboard/customer-accounts')
+        console.log(updatedCustomer, id)
+
+        // ApiService.postDataHalf(caEndpoint, updatedCustomer)
+        //     .then(data => {
+        //         console.log(data)
+        //         ApiService.getDataHalf(caEndpoint)
+        //             .then(data => {
+        //                 this.setCustomers(data.customers)
+        //             })
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+        this.props.func.history.push(`/dashboard/customer-accounts/${id}`)
     }
 
     render(){  
         return (
             <div className='add-customer'>
-                <h2>Add Customer</h2>
+                <h2>Edit Customer</h2>
                     <form 
                         className= 'add-customer-form' 
-                        onSubmit={(e) => this.addCustomer(e)}
+                        onSubmit={(e) => this.editCustomer(e)}
                     >
                         <div className='add-customer-form-group'>
                             <TextInput 
@@ -184,7 +191,7 @@ class AddCustomer extends Component {
                             />
                             <div className='select-container'>
                                 <select name='broker'>
-                                    <option>Select a Broker</option>
+                                    <option value="">Select a Broker</option>
                                     {this.state.brokers.map(broker => 
                                             (<option 
                                                 key={broker.data.id} 
@@ -198,7 +205,7 @@ class AddCustomer extends Component {
                             </div>
                             <div className='select-container'>
                                 <select name='status'>
-                                    <option>Select a Status</option>
+                                    <option value="">Select a Status</option>
                                     {this.state.status.map(s => 
                                             (<option 
                                                 key={s.id} 
@@ -212,7 +219,7 @@ class AddCustomer extends Component {
                             </div>
                             <div className='select-container'>
                                 <select name='reminder'>
-                                    <option>Select a Reminder</option>
+                                    <option value="">Select a Reminder</option>
                                     {this.state.reminders.map(r => 
                                             (<option 
                                                 key={r.id} 
@@ -226,7 +233,7 @@ class AddCustomer extends Component {
                             </div>
                             <div className='select-container'>
                                 <select name="category">
-                                    <option>Select a Category</option>
+                                    <option value="">Select a Category</option>
                                     {this.state.categories.map(c => 
                                             (<option 
                                                 key={c.id} 
@@ -264,4 +271,4 @@ class AddCustomer extends Component {
     }
 }
 
-export default AddCustomer
+export default EditCustomer

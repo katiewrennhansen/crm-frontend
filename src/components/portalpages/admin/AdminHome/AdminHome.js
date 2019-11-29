@@ -20,6 +20,7 @@ import AssetType from '../adminViews/AssetType/AssetType'
 import AddCustomer from '../adminViews/CustomerAccounts/AddCustomer'
 import Categories from '../adminViews/Categories/Categories'
 import AdminContext from '../../../../contexts/AdminContext'
+import EditCustomer from '../adminViews/CustomerAccounts/EditCustomer'
 import './AdminHome.css'
 
 
@@ -184,6 +185,7 @@ class AdminHome extends Component {
     render(){
         const propFunctions = {
             name: this.props.name,
+            history: this.props.history
         }
         const value = {
             show: this.state.show,
@@ -363,6 +365,18 @@ class AdminHome extends Component {
                                     const id = history.match.params.id;
                                     return (
                                         <CustomerPage 
+                                            func={propFunctions} 
+                                            id={id}
+                                        />
+                                    )
+                                    }}
+                            />
+                            <Route 
+                                path='/dashboard/customer-accounts/:id/edit' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    return (
+                                        <EditCustomer 
                                             func={propFunctions} 
                                             id={id}
                                         />

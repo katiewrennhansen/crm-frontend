@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import './CustomerAccounts.css'
 import ApiService from '../../../../../services/api-service';
@@ -65,7 +66,11 @@ class CustomerAccounts extends Component {
             <>
                 <div className='data-container'>
                     <h3>{data.name}</h3>
-                    <button className='add-data'>Edit Customer</button>
+                    <Link 
+                        to={`/dashboard/customer-accounts/${data.id}/edit`}
+                        className='add-data'
+                    >Edit Customer
+                    </Link>
                     <div>
                         <p>{data.email}</p>
                         <br></br>

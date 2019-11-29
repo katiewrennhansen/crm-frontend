@@ -10,8 +10,9 @@
 .add-customer-form-group {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    width: 75%;
+    width: 100%;
     align-items: flex-start;
+    justify-items: center;
 }
 
 .add-customer-form-group input {
@@ -32,4 +33,26 @@
     align-self: center;
     margin-top: 16px;
     margin-bottom: 8px;
+}
+
+.add-customer-form {
+    background: white;
+    border-radius: 5px;
+    padding: 30px 60px;
+}
+
+.cancel-btn {
+    border: 1px solid rgb(63, 63, 63);
+    text-decoration: none;
+    color: rgb(63, 63, 63);
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 15px;
+    box-shadow: 1px 1px 2px gray;
+}
+
+.cancel {
+    align-self: center;
+    margin-top: 15px;
+    justify-self: flex-end;
 }
