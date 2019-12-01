@@ -19,11 +19,13 @@ class Properties extends Component {
             })
     }
 
-
     render(){
         return (
             <div className='broker-properties'>
-                <h2>Properties</h2>
+                <div className='header-grid'>
+                    <h2>Properties</h2>
+                    <Link className="add" to='/broker/properties/add'>Add Property</Link>
+                </div>
                 <div className='broker-properties-grid'>
                     {this.context.assets.map(a => {
                         return (

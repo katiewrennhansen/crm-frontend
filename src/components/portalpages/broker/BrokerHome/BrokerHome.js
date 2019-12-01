@@ -13,6 +13,8 @@ import Provider from '../brokerViews/Maintenance/Provider'
 import Alerts from '../brokerViews/Alerts/Alerts'
 import SinglePropertyPage from '../brokerViews/Properties/SinglePropertyPage'
 import BrokerContext from '../../../../contexts/BrokerContext'
+import EditProperty from '../brokerViews/Properties/EditProperty'
+import AddProperty from '../brokerViews/Properties/AddProperty'
 import './BrokerHome.css'
 
 
@@ -84,11 +86,30 @@ class BrokerHome extends Component {
                                 }}
                             />
                             <Route 
-                                path='/broker/properties/:id' 
+                                exact path='/broker/properties/add' 
+                                render={(props) => {
+                                    return (
+                                    <AddProperty />
+                                    )
+                                }}
+                            />
+                            <Route 
+                                exact path='/broker/properties/:id' 
                                 render={(history) => {
                                     const id = history.match.params.id;
                                     return (
                                     <SinglePropertyPage 
+                                        id={id}
+                                    />
+                                    )
+                                }}
+                            />
+                            <Route 
+                                path='/broker/properties/:id/edit' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    return (
+                                    <EditProperty 
                                         id={id}
                                     />
                                     )

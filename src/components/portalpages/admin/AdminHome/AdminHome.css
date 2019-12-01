@@ -110,6 +110,7 @@ td button:hover,
         grid-row: 2 / -1;
         padding: 0 60px;
         background-color: rgb(240, 240, 240);
+        height: 200%;
         padding-top: 50px;
     }
 }

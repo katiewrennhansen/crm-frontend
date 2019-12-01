@@ -3,6 +3,36 @@
     grid-template-columns: repeat(2, 1fr);
 }
 
+.header-grid {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    align-items: baseline;
+}
+
+.add,
+.submit {
+    border: 1px solid gray;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+    justify-self: flex-end;
+    padding: 10px 30px;
+    box-shadow: 1px 1px 2px gray;
+}
+
+.submit {
+    border: 1px solid green;
+    font-size: 16px;
+    color: green;
+
+}
+
+.submit:hover,
+.add:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 3px gray;
+    transition: 300ms linear;
+}
 
 .asset-card {
     background: white;
@@ -12,6 +42,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 2fr 1fr;
+    margin: 10px;
 }
 
 .asset-card div {
@@ -39,4 +70,40 @@
 
 .single-property-container {
     padding-bottom: 100px;
+}
+
+
+.add-property-form {
+    padding: 30px 40px;
+    background: white;
+    border-radius: 5px;
+    margin-bottom: 100px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+.add-property-form select,
+.add-property-form option,
+textarea {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    width: 70%;
+    font-size: 14px;
+}
+
+.add-property-form select {
+    margin: 0;
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    margin: 10px 0;
+}
+
+.price-type {
+    display: grid;
+    grid-template-columns: repeat(2, 80px);
 }
