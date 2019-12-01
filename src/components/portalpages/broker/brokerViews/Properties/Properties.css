@@ -113,3 +113,26 @@ textarea {
     display: grid;
     grid-template-columns: repeat(2, 80px);
 }
+
+.hidden {
+    display: none;
+}
+
+button.add {
+    font-size: 20px;
+    padding: 5px 20px;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.sp-form {
+    background: white;
+    max-width: 100%;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 1px 1px 2px rgb(174, 174, 174);
+}
