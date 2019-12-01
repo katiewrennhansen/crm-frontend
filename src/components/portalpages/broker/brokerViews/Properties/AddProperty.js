@@ -115,15 +115,39 @@ class AddProperty extends Component {
     }
 
     submitProperty = (e) => {
+        e.preventDefault()
         console.log('property submitted')
-        // const endpoint = `${config.API_ENDPOINT}/assets`
-        // ApiService.postDataHalf(endpoint)
-        //     .then(data => {
-        //         console.log(data)
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
+        const newProperty = {
+            adescription4: e.target.street_name.value,
+            adescription5: e.target.city.value,
+            adescription2: e.target.state.value,
+            adescription3: e.target.zip_code.value,
+            adescription1: e.target.country.value,
+            assetdesc: e.target.description.value,
+            assetprice: e.target.price.value,
+            futureprice: e.target.future_price.value,
+            assettype_id: e.target.asset_type.value,
+            customer_id: "1",
+            tcustomer_id: e.target.tenant.value,
+            broker_id: e.target.brokers.value,
+            processt_id: e.target.process.value,
+            step_id: e.target.steps.value,
+            stepdate: e.target.step_date.value,
+            category_id: e.target.categories.value,
+            status_id: e.target.status.value,
+            assetinsurance: e.target.insurance.value,
+            insurancedued : e.target.insurance_due.value
+        }
+
+        const endpoint = `${config.API_ENDPOINT}/assets`
+
+        ApiService.postDataHalf(endpoint, newProperty)
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     render(){
@@ -137,8 +161,8 @@ class AddProperty extends Component {
                     <form className="add-property-form"onSubmit={(e) => {this.submitProperty(e)}}>
                         <h3>Address</h3>
                         <div className="form-group">
-                            <label htmlFor="street-name">Street Name: </label>
-                            <input type="text" name="street-name"></input>
+                            <label htmlFor="street_name">Street Name: </label>
+                            <input type="text" name="street_name"></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor="city">City: </label>
@@ -149,8 +173,8 @@ class AddProperty extends Component {
                             <input type="text" name="state"></input>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="zip-code">Zip Code: </label>
-                            <input type="text" name="zip-code"></input>
+                            <label htmlFor="zip_code">Zip Code: </label>
+                            <input type="text" name="zip_code"></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor="country">Country: </label>
@@ -180,12 +204,12 @@ class AddProperty extends Component {
                             <input type="number" name="price"></input>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="future-price">Future Price: </label>
-                            <input type="number" name="future-price"></input>
+                            <label htmlFor="future_price">Future Price: </label>
+                            <input type="number" name="future_price"></input>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="asset-type">Asset Type: </label>
-                            <select name="asset-type">
+                            <label htmlFor="asset_type">Asset Type: </label>
+                            <select name="asset_type">
                                 <option value="">Select an Asset Type</option>
                                 {this.state.assets.map(a => {
                                     return (
@@ -250,8 +274,8 @@ class AddProperty extends Component {
                             </select>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="step-date">Step Date: </label>
-                            <input type="date" name="step-date"></input>
+                            <label htmlFor="step_date">Step Date: </label>
+                            <input type="date" name="step_date"></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor="categories">Category: </label>
@@ -279,11 +303,11 @@ class AddProperty extends Component {
                         <h3>Insurance Information</h3>
                         <div className="form-group">
                             <label htmlFor="insurance">Insurance Provider: </label>
-                            <input type="number" name="insurance"></input>
+                            <input type="text" name="insurance"></input>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="insurance-due">Insurance Due: </label>
-                            <input type="date" name="insurance-due"></input>
+                            <label htmlFor="insurance_due">Insurance Due: </label>
+                            <input type="date" name="insurance_due"></input>
                         </div>
                         
                         

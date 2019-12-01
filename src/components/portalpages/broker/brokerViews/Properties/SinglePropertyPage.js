@@ -13,7 +13,8 @@ class SinglePageProperty extends Component {
             features: [],
             messages: [],
             maintenance: [],
-            costs: []
+            costs: [],
+            featuretypes: []
         }
     }
 
@@ -41,6 +42,12 @@ class SinglePageProperty extends Component {
         })
     }
 
+    setFeatureTypes = (featuretypes) => {
+        this.setState({
+            featuretypes
+        })
+    }
+
     componentDidMount(){
         const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
         ApiService.getDataHalf(endpoint)
@@ -50,6 +57,47 @@ class SinglePageProperty extends Component {
                 this.setMessages(data.data.messages)
                 this.setMaintenance(data.data.maintenances)
                 this.setCosts(data.data.costs)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/featuretypes`)
+            .then(data => {
+                this.setFeatureTypes(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    addFeature = (e) => {
+        e.preventDefault()
+        const newFeature = {
+            featuredesc: e.target.description.value,
+            featuretype_id: e.target.feature_type.value
+        }
+
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/features`
+        ApiService.postDataHalf(endpoint, newFeature)
+            .then(data => {
+                ApiService.getDataHalf(endpoint)
+                    .then(data => {
+                        this.setFeatures(data)
+                    })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    deleteFeature = (id) => {
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/features`
+        ApiService.deleteDataHalf(endpoint, id)
+            .then(data => {
+                ApiService.getDataHalf(endpoint)
+                    .then(data => {
+                        this.setFeatures(data)
+                    })
             })
             .catch(error => {
                 console.log(error)
@@ -70,14 +118,15 @@ class SinglePageProperty extends Component {
         const id = this.props.id
         return (
             <div className="single-property-container">
-                <div>
-                    <Link to={`/broker/properties/${id}/edit`}>Edit Property</Link>
-                </div>
-                <div className='broker-properties'>
+                <div className='header-grid'>
                     <address>
                         <h2>{asset.adescription4}</h2>
                         <h3>{asset.adescription2}, {asset.adescription3}</h3>
-                    </address>
+                    </address>                    
+                    <Link className="edit" to={`/broker/properties/${id}/edit`}>Edit Property</Link>
+                </div>
+                <div className='broker-properties'>
+                    
                     <p>{asset.assettype}</p>
                     <p>{asset.assetdesc}</p>
                     <p>{asset.status}</p>
@@ -94,6 +143,7 @@ class SinglePageProperty extends Component {
                             <tr>
                                 <th>Type</th>
                                 <th>Description</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -102,11 +152,28 @@ class SinglePageProperty extends Component {
                                     <tr key={f.id}>
                                         <td>{f.type}</td>
                                         <td>{f.description}</td>
+                                        <td><button onClick={() => {this.deleteFeature(f.id)}}>Delete</button></td>
                                     </tr>
                                 )
                             })}
                         </tbody>
                     </table>
+                    <form onSubmit={(e) => {this.addFeature(e)}}>
+                        <div className="form-group">
+                            <label htmlFor="feature_type">Feature Type: </label>
+                            <select name="feature_type">
+                                <option value="">Select a Feature</option>
+                                {this.state.featuretypes.map(f => {
+                                    return (
+                                    <option key={f.id} value={f.id}>{f.featuredescr}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
+                        <label htmlFor="description">Description: </label>
+                        <input type="text" name="description"></input>
+                        <input type="submit" className="submit" value="Add Feature"></input>
+                    </form>
                 </div>
                 <div>
                     <h2>Messages</h2>

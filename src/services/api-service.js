@@ -150,6 +150,21 @@ const ApiService = {
             console.error(error)
         })  
     },
+
+    deleteDataHalf(ApiEndpoint, id){
+        return fetch(`${ApiEndpoint}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+        })
+        .then(res => 
+            (!res.ok)
+                ? res.json().then(error => Promise.reject(error))
+                : res
+        )
+    },
 }
 
 export default ApiService

@@ -5,12 +5,14 @@
 
 .header-grid {
     display: grid;
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 3fr 1fr;
     align-items: baseline;
 }
 
 .add,
-.submit {
+.submit,
+.edit,
+.btn {
     border: 1px solid gray;
     border-radius: 5px;
     text-decoration: none;
@@ -85,6 +87,8 @@ input[type="number"],
 input[type="date"],
 .add-property-form select,
 .add-property-form option,
+.edit-property-form select,
+.edit-property-form option,
 textarea {
     padding: 10px 15px;
     border-radius: 5px;
@@ -93,7 +97,9 @@ textarea {
     font-size: 14px;
 }
 
-.add-property-form select {
+.add-property-form select,
+.edit-property-form select,
+.single-property-container select {
     margin: 0;
 }
 
