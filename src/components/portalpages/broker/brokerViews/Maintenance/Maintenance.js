@@ -30,39 +30,41 @@ class Maintenance extends Component {
 
     render(){
         return (
-            <>
-            <div className='data-container'>
-            <h3>Maintenance</h3>
-            <Link to='/broker/maintenance/add-provider' className='add'>Add Provider</Link>
-            <table className='data-table'>
-                <thead>
-                    <tr>
-                        <th>Provider</th>
-                        <th>Type</th>
-                        <th>Company</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.data.map(p => (
-                    
-                    <tr key={p.data.id}>
-                        <td>
-                            <Link to={`/broker/maintenance/${p.data.id}`}>
-                                {p.data.contact}
-                            </Link>
-                        </td>
-                        <td>{p.data.typeservice}</td>
-                        <td>{p.data.name}</td>
-                        <td>{p.data.email}</td>
-                        <td>{p.data.phone}</td>
-                    </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-        </>
+            <div className='container'>
+                <div className='header-grid'>
+                    <h3>Maintenance</h3>
+                    <Link to='/broker/maintenance/add-provider' className='add'>Add Provider</Link>
+                </div>
+                <div>
+                    <table className='data-table'>
+                        <thead>
+                            <tr>
+                                <th>Provider</th>
+                                <th>Type</th>
+                                <th>Company</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.data.map(p => (
+                            
+                            <tr key={p.data.id}>
+                                <td>
+                                    <Link to={`/broker/maintenance/${p.data.id}`}>
+                                        {p.data.contact}
+                                    </Link>
+                                </td>
+                                <td>{p.data.typeservice}</td>
+                                <td>{p.data.name}</td>
+                                <td>{p.data.email}</td>
+                                <td>{p.data.phone}</td>
+                            </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         )
     }
 }
