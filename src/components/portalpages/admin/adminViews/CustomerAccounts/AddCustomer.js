@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
-import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import './CustomerAccounts.css'
 import AdminContext from '../../../../../contexts/AdminContext'
@@ -88,9 +86,12 @@ class AddCustomer extends Component {
             firstname: e.target.first_name.value,
             lastname: e.target.last_name.value,
             cemail: e.target.email.value,
+            cemail2: e.target.email_alt.value,
             phone: e.target.phone.value,
-            adescription1: e.target.address1.value,
-            adescription2: e.target.address2.value,
+            adescription4: e.target.address.value,
+            adescription3: e.target.city.value,
+            adescription2: e.target.state.value,
+            adescription1: e.target.zip_code.value,
             country: e.target.country.value,
             ctax: e.target.tax_id.value,
             broker_id: e.target.broker.value,
@@ -120,69 +121,106 @@ class AddCustomer extends Component {
     render(){  
         return (
             <div className='add-customer'>
-                <h2>Add Customer</h2>
+                <div className='header-grid'>
+                    <h2>Add Customer</h2>
+                    <Link className='cancel-btn' to='/dashboard/customer-accounts'>Cancel</Link>
+                </div>
                     <form 
                         className= 'add-customer-form' 
                         onSubmit={(e) => this.addCustomer(e)}
                     >
                         <div className='add-customer-form-group'>
-                            <TextInput 
-                                id='first_name'
-                                name='first_name'
-                                label='First Name'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='last_name'
-                                name='last_name'
-                                label='Last Name'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='customer_email'
-                                name='email'
-                                label='Email'
-                                type='email'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='customer_phone'
-                                name='phone'
-                                label='Phone'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='address1'
-                                name='address1'
-                                label='Address Line 1'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='address2'
-                                name='address2'
-                                label='Address Line 2'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='country'
-                                name='country'
-                                label='Country'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='tax_id'
-                                name='tax_id'
-                                label='Tax ID'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <div className='select-container'>
+                            <div className='form-group'>
+                                <label htmlFor='first_name'>First Name:</label>
+                                <input
+                                    id='first_name'
+                                    name='first_name'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='last_name'>Last Name:</label>
+                                <input
+                                    id='last_name'
+                                    name='last_name'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='email'>Email:</label>
+                                <input
+                                    id='email'
+                                    name='email'
+                                    type='email'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='email_alt'>Alternate Email:</label>
+                                <input
+                                    id='email_alt'
+                                    name='email_alt'
+                                    type='email'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='phone'>Phone:</label>
+                                <input
+                                    id='phone'
+                                    name='phone'
+                                    type='number'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='address'>Address:</label>
+                                <input
+                                    id='address'
+                                    name='address'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='city'>City:</label>
+                                <input
+                                    id='city'
+                                    name='city'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='state'>State:</label>
+                                <input
+                                    id='state'
+                                    name='state'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='zip_code'>Zip Code:</label>
+                                <input
+                                    id='zip_code'
+                                    name='zip_code'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='country'>Country:</label>
+                                <input
+                                    id='country'
+                                    name='country'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='tax_id'>Tax ID:</label>
+                                <input
+                                    id='tax_id'
+                                    name='tax_id'
+                                    type='number'
+                                />
+                            </div>
+
+                            <div className='form-group'>
+                                <label htmlFor='broker'>Broker:</label>
                                 <select name='broker'>
                                     <option>Select a Broker</option>
                                     {this.state.brokers.map(broker => 
@@ -196,7 +234,8 @@ class AddCustomer extends Component {
                                     }
                                 </select>
                             </div>
-                            <div className='select-container'>
+                            <div className='form-group'>
+                                <label htmlFor='status'>Status:</label>
                                 <select name='status'>
                                     <option>Select a Status</option>
                                     {this.state.status.map(s => 
@@ -210,7 +249,8 @@ class AddCustomer extends Component {
                                     }
                                 </select>
                             </div>
-                            <div className='select-container'>
+                            <div className='form-group'>
+                            <label htmlFor='reminder'>Reminder:</label>
                                 <select name='reminder'>
                                     <option>Select a Reminder</option>
                                     {this.state.reminders.map(r => 
@@ -224,7 +264,8 @@ class AddCustomer extends Component {
                                     }
                                 </select>
                             </div>
-                            <div className='select-container'>
+                            <div className='form-group'>
+                                <label htmlFor='category'>Category:</label>
                                 <select name="category">
                                     <option>Select a Category</option>
                                     {this.state.categories.map(c => 
@@ -238,24 +279,24 @@ class AddCustomer extends Component {
                                     }
                                 </select>
                             </div>
-                            <TextInput 
-                                id='anniversary'
-                                name='anniversary'
-                                label='Anniversary'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='comment'
-                                name='comment'
-                                label='Comment'
-                                type='text'
-                                autoComplete='text'
-                            />
-                        <div className='cancel'>
-                            <Link className='cancel-btn' to='/dashboard/customer-accounts'>Cancel</Link>
-                        </div>
-                        <SubmitButton className='submit-content' type='submit' text='Save'/>
+                            <div className='form-group'>
+                                <label htmlFor='anniversary'>Anniversary:</label>
+                                <input
+                                    id='anniversary'
+                                    name='anniversary'
+                                    type='date'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='comment'>Comment:</label>
+                                <textarea
+                                    id='comment'
+                                    name='comment'
+                                >
+                                </textarea>
+                            </div>
+                        
+                        <input type='submit' className='submit' text='Save'/>
                         </div>
                     </form>
                     

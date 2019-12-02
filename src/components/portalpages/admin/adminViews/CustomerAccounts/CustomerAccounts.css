@@ -7,13 +7,6 @@
     border: 1px solid gray;
 }
 
-.add-customer-form-group {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    width: 100%;
-    align-items: flex-start;
-    justify-items: center;
-}
 
 .add-customer-form-group input {
     margin: 0;
@@ -21,24 +14,14 @@
 
 .add-customer-form-group select {
     margin: 0;
-    padding: 18px 14px;
-    width: 310px;
-    height: 56px;
-    background-color: rgba(255, 255, 255, 0);
-    font-size: 15px;
-    color: rgb(92, 92, 92);
-}
-
-.select-container {
-    align-self: center;
-    margin-top: 16px;
-    margin-bottom: 8px;
+    width: 75%;
 }
 
 .add-customer-form {
     background: white;
     border-radius: 5px;
     padding: 30px 60px;
+    box-shadow: 1px 1px 3px rgb(186, 186, 186);
 }
 
 .cancel-btn {
@@ -49,10 +32,5 @@
     padding: 10px 20px;
     margin-top: 15px;
     box-shadow: 1px 1px 2px gray;
-}
-
-.cancel {
-    align-self: center;
-    margin-top: 15px;
     justify-self: flex-end;
 }

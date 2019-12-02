@@ -64,13 +64,11 @@ class CustomerAccounts extends Component {
         const data = this.state.customer
         return (
             <>
-                <div className='data-container'>
-                    <h3>{data.name}</h3>
-                    <Link 
-                        to={`/dashboard/customer-accounts/${data.id}/edit`}
-                        className='add-data'
-                    >Edit Customer
-                    </Link>
+                <div className='container'>
+                    <div className='header-grid'>
+                        <h3>{data.name}</h3>
+                        <Link to={`/dashboard/customer-accounts/${data.id}/edit`} className='btn'>Edit Customer</Link>
+                    </div>
                     <div>
                         <p>{data.email}</p>
                         <br></br>

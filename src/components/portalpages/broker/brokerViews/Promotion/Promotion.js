@@ -65,16 +65,14 @@ class Promotion extends Component {
         }
         console.log(assignUser)
 
-        // ApiService.postDataHalf(assignPromsEndpoint, assignUser)
-        //     .then(data => {
-        //         console.log(data)
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //         this.handleError(error)
-        //     }) 
+        ApiService.postDataHalf(assignPromsEndpoint, assignUser)
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log(error)
+            }) 
         this.setState({ assign: false })
-        
     }
 
     changeUser = (user) => {

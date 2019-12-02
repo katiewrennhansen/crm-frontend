@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import TextInput from '../../../../Login/LoginComponents/TextInput'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import config from '../../../../../config'
 import './CompanySetUp.css'
@@ -67,80 +66,100 @@ class EditSettings extends Component {
 
 
     render(){
+        const info = this.state.companyInfo
         return (
             <div className='edit-company'>
                 <h3>Edit Company Information</h3>
                 <form className="edit-company-form" onSubmit={(e) => this.handleSubmit(e)}>
 
                 <div className='form-group'>
-                    <label htmlFor='last'></label>
-                    <TextInput
+                    <label htmlFor='company_name'>Company Name</label>
+                    <input
+                        type="text"
                         id="company_name"
-                        label='Company Name'
                         name='company_name'
-                        margin="normal"
-                        variant="outlined"
-                        />
+                        defaultValue={info.company}
+                    />
                 </div>
 
                 <div className='form-group'>
-                    <label htmlFor='first'></label>
-                    <TextInput 
+                    <label htmlFor='contact'>Contact</label>
+                    <input 
                         id='contact'
                         type='text'
-                        label='Contact'
                         name='contact'
-                        defaultValue="text"
+                        defaultValue={info.contact}
                     />
                 </div>            
 
                 <div className='form-group'>
-                    <label htmlFor='address'></label>
-                    <TextInput 
+                    <label htmlFor='address'>Address</label>
+                    <input 
                         id='address'
-                        type='address' 
+                        type='text' 
                         name='address'
-                        label='Company Address'
+                        defaultValue={info.adescription3}
                     />
                 </div>
 
                 <div className='form-group'>
-                    <label htmlFor='email'></label>
-                    <TextInput 
-                        id='email'
-                        type='email' 
-                        name='email'
-                        label='Company Email'
+                    <label htmlFor='city'>City</label>
+                    <input 
+                        id='city'
+                        type='text' 
+                        name='city'
+                        defaultValue={info.adescription2}
                     />
                 </div>
 
                 <div className='form-group'>
-                    <label htmlFor='phone'></label>
-                    <TextInput 
-                        id='phone'
+                    <label htmlFor='zip_code'>Zip Code</label>
+                    <input 
+                        id='zip_code'
                         type='number' 
-                        name='phone'
-                        label='Company Phone'
+                        name='zip_code'
+                        defaultValue={info.adescription4}
                     />
                 </div>
 
                 <div className='form-group'>
-                    <label htmlFor='country'></label>
-                    <TextInput
+                    <label htmlFor='country'>Country</label>
+                    <input
                         id='country'
                         type='text' 
                         name='country'
-                        label='Country'
+                        defaultValue={info.adescription1}
                     />
                 </div>
 
                 <div className='form-group'>
-                    <label htmlFor='tax_id'></label>
-                    <TextInput
+                    <label htmlFor='email'>Email</label>
+                    <input 
+                        id='email'
+                        type='email' 
+                        name='email'
+                        defaultValue={info.email}
+                    />
+                </div>
+
+                <div className='form-group'>
+                    <label htmlFor='phone'>Phone</label>
+                    <input 
+                        id='phone'
+                        type='number' 
+                        name='phone'
+                        defaultValue={info.phone}
+                    />
+                </div>
+
+
+                <div className='form-group'>
+                    <label htmlFor='tax_id'>Tax ID</label>
+                    <input
                         id='tax_id'
                         type='number' 
                         name='tax_id'
-                        label='Tax ID'
+                        defaultValue={info.ctax_id}
                     />
                 </div>
                 <div className='edit-company-form-btn'>

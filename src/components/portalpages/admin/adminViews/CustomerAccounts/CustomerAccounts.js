@@ -50,22 +50,22 @@ class CustomerAccounts extends Component {
     }
 
 
-    deactivateCustomerStatus = (id) => {
-        const newStatus = {
-            status: 'On hold'
-        }
-        ApiService.updateDataHalf(caEndpoint, id, newStatus)
-            .then(data => {
-                this.setCustomers(data.customers)
-                this.props.hideModal()
-            })
-            .catch(error => {
-                this.setState({ error })
-            })
-    }
-
-
     deactivateCustomer = (id) => {
+        // const updatedStatus = {
+        //     cstatus_id: 35
+        // }
+
+        // ApiService.updateDataHalf(caEndpoint, id, updatedStatus)
+        //     .then(data => {
+        //         ApiService.getDataHalf(caEndpoint)
+        //             .then(data => {
+        //                 this.setCustomers(data.customers)
+        //             })
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+
         const el = this.state.customers.find(c => c.data.id === id)
         const element = document.getElementById(id)
         const button = document.getElementById(`delete${id}`)
@@ -83,12 +83,11 @@ class CustomerAccounts extends Component {
     
     render(){  
         return (
-            <>
-                <div className='data-container'>
-                    <h3>Customer Accounts</h3>
-                    <button className='add-data'>
-                        <Link to='/dashboard/add-customer'>Add Customer</Link>
-                    </button>
+                <div className='container'>
+                    <div className='header-grid'>
+                        <h3>Customer Accounts</h3>
+                        <Link to='/dashboard/add-customer' className='btn'>Add Customer</Link>
+                    </div>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -127,7 +126,6 @@ class CustomerAccounts extends Component {
                         </tbody>
                     </table>
                 </div>
-            </>
         )
     }
 }

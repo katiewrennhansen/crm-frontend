@@ -82,9 +82,11 @@ class Provider extends Component {
         const data = this.state.customer
         return (
             <>
-                <div className='data-container'>
-                    <h3>{data.contact}</h3>
-                    <Link to={`/broker/maintenance/${this.props.id}/edit`} className='add-data'>Edit Provider</Link>
+                <div className='container'>
+                    <div className='header-grid'>
+                        <h3>{data.contact}</h3>
+                        <Link to={`/broker/maintenance/${this.props.id}/edit`} className='add'>Edit Provider</Link>
+                    </div>
                     <div>
                         <p>{data.typeservice}</p>
                         <p>{data.email}</p>

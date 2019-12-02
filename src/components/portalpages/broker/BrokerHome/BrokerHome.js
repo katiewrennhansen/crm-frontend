@@ -136,6 +136,7 @@ class BrokerHome extends Component {
                                     return (
                                         <EditProvider
                                             id={id}
+                                            history={history}
                                         />
                                     )
                                 }}

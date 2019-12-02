@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
-import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import './CustomerAccounts.css'
 import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
 
-// const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
+const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
 const brokerEndpoint = config.BROKER_ENDPOINT
 const csEndpoint = config.CUSTOMER_STATUS_ENDPOINT
 const remindersEndpoint = config.REMINDERS_ENDPOINT
@@ -27,11 +25,9 @@ class EditCustomer extends Component {
         };
     }
 
-    setCustomers = data => {
-        const customers = data.customers
+    setCustomer = customers => {
         this.setState({
-            customers: customers,
-            error: null
+            customers
         })
     }
 
@@ -64,6 +60,14 @@ class EditCustomer extends Component {
     }
 
     componentDidMount(){
+        const id = this.props.id
+        ApiService.getById(caEndpoint, id)
+            .then(data => {
+                this.setCustomer(data.data)
+            })
+            .catch(error => {
+                this.setState({ error })
+            })
         ApiService.getData(
             brokerEndpoint,
             this.setBrokers
@@ -90,9 +94,12 @@ class EditCustomer extends Component {
             firstname: e.target.first_name.value,
             lastname: e.target.last_name.value,
             cemail: e.target.email.value,
+            cemail2: e.target.email_alt.value,
             phone: e.target.phone.value,
-            adescription1: e.target.address1.value,
-            adescription2: e.target.address2.value,
+            adescription4: e.target.address.value,
+            adescription3: e.target.city.value,
+            adescription2: e.target.state.value,
+            adescription1: e.target.zip_code.value,
             country: e.target.country.value,
             ctax: e.target.tax_id.value,
             broker_id: e.target.broker.value,
@@ -124,74 +131,123 @@ class EditCustomer extends Component {
         this.props.func.history.push(`/dashboard/customer-accounts/${id}`)
     }
 
-    render(){  
+    render(){ 
+        const cust = this.state.customers 
         return (
             <div className='add-customer'>
-                <h2>Edit Customer</h2>
-                    <form 
+                <div className='header-grid'>
+                    <h2>Edit Customer</h2>
+                    <Link className='cancel-btn' to={`/dashboard/customer-accounts/${this.props.id}`}>Cancel</Link>
+                </div>
+
+                <form 
                         className= 'add-customer-form' 
                         onSubmit={(e) => this.editCustomer(e)}
                     >
                         <div className='add-customer-form-group'>
-                            <TextInput 
-                                id='first_name'
-                                name='first_name'
-                                label='First Name'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='last_name'
-                                name='last_name'
-                                label='Last Name'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='customer_email'
-                                name='email'
-                                label='Email'
-                                type='email'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='customer_phone'
-                                name='phone'
-                                label='Phone'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='address1'
-                                name='address1'
-                                label='Address Line 1'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='address2'
-                                name='address2'
-                                label='Address Line 2'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='country'
-                                name='country'
-                                label='Country'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='tax_id'
-                                name='tax_id'
-                                label='Tax ID'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <div className='select-container'>
+                            <div className='form-group'>
+                                <label htmlFor='first_name'>First Name:</label>
+                                <input
+                                    id='first_name'
+                                    name='first_name'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='last_name'>Last Name:</label>
+                                <input
+                                    id='last_name'
+                                    name='last_name'
+                                    type='text'
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='email'>Email:</label>
+                                <input
+                                    id='email'
+                                    name='email'
+                                    type='email'
+                                    defaultValue={cust.email}
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='email_alt'>Alternate Email:</label>
+                                <input
+                                    id='email_alt'
+                                    name='email_alt'
+                                    type='email'
+                                    defaultValue={cust.secondemail}
+
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='phone'>Phone:</label>
+                                <input
+                                    id='phone'
+                                    name='phone'
+                                    type='number'
+                                    defaultValue={cust.phone}
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='address'>Address:</label>
+                                <input
+                                    id='address'
+                                    name='address'
+                                    type='text'
+                                    defaultValue={cust.adescription4}
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='city'>City:</label>
+                                <input
+                                    id='city'
+                                    name='city'
+                                    type='text'
+                                    defaultValue={cust.adescription3}
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='state'>State:</label>
+                                <input
+                                    id='state'
+                                    name='state'
+                                    type='text'
+                                    defaultValue={cust.adescription2}
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='zip_code'>Zip Code:</label>
+                                <input
+                                    id='zip_code'
+                                    name='zip_code'
+                                    type='text'
+                                    defaultValue={cust.adescription1}
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='country'>Country:</label>
+                                <input
+                                    id='country'
+                                    name='country'
+                                    type='text'
+                                    defaultValue={cust.country}
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='tax_id'>Tax ID:</label>
+                                <input
+                                    id='tax_id'
+                                    name='tax_id'
+                                    type='number'
+                                    defaultValue={cust.taxid}
+                                />
+                            </div>
+
+                            <div className='form-group'>
+                                <label htmlFor='broker'>Broker:</label>
                                 <select name='broker'>
-                                    <option value="">Select a Broker</option>
+                                    <option>Select a Broker</option>
                                     {this.state.brokers.map(broker => 
                                             (<option 
                                                 key={broker.data.id} 
@@ -203,9 +259,10 @@ class EditCustomer extends Component {
                                     }
                                 </select>
                             </div>
-                            <div className='select-container'>
+                            <div className='form-group'>
+                                <label htmlFor='status'>Status:</label>
                                 <select name='status'>
-                                    <option value="">Select a Status</option>
+                                    <option>Select a Status</option>
                                     {this.state.status.map(s => 
                                             (<option 
                                                 key={s.id} 
@@ -217,9 +274,10 @@ class EditCustomer extends Component {
                                     }
                                 </select>
                             </div>
-                            <div className='select-container'>
+                            <div className='form-group'>
+                            <label htmlFor='reminder'>Reminder:</label>
                                 <select name='reminder'>
-                                    <option value="">Select a Reminder</option>
+                                    <option>Select a Reminder</option>
                                     {this.state.reminders.map(r => 
                                             (<option 
                                                 key={r.id} 
@@ -231,9 +289,10 @@ class EditCustomer extends Component {
                                     }
                                 </select>
                             </div>
-                            <div className='select-container'>
+                            <div className='form-group'>
+                                <label htmlFor='category'>Category:</label>
                                 <select name="category">
-                                    <option value="">Select a Category</option>
+                                    <option>Select a Category</option>
                                     {this.state.categories.map(c => 
                                             (<option 
                                                 key={c.id} 
@@ -245,27 +304,28 @@ class EditCustomer extends Component {
                                     }
                                 </select>
                             </div>
-                            <TextInput 
-                                id='anniversary'
-                                name='anniversary'
-                                label='Anniversary'
-                                type='text'
-                                autoComplete='text'
-                            />
-                            <TextInput 
-                                id='comment'
-                                name='comment'
-                                label='Comment'
-                                type='text'
-                                autoComplete='text'
-                            />
-                        <div className='cancel'>
-                            <Link className='cancel-btn' to='/dashboard/customer-accounts'>Cancel</Link>
+                            <div className='form-group'>
+                                <label htmlFor='anniversary'>Anniversary:</label>
+                                <input
+                                    id='anniversary'
+                                    name='anniversary'
+                                    type='date'
+                                    defaultValue={cust.anniversary}
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='comment'>Comment:</label>
+                                <textarea
+                                    id='comment'
+                                    name='comment'
+                                    defaultValue={cust.comment}
+                                >
+                                </textarea>
+                            </div>
+                        
+                        <input type='submit' className='submit' text='Save'/>
                         </div>
-                        <SubmitButton className='submit-content' type='submit' text='Save'/>
-                        </div>
-                    </form>
-                    
+                    </form>   
                 </div>
         )
     }

@@ -12,7 +12,8 @@ class EditProvider extends Component {
         this.state = {
             categories: [],
             status: [],
-            mainttype: []
+            mainttype: [],
+            provider: []
         }
     }
 
@@ -34,9 +35,22 @@ class EditProvider extends Component {
         })
     }
 
+    setProvider= (provider) => {
+        this.setState({
+            provider
+        })
+    }
+
 
 
     componentDidMount(){
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/providers/${this.props.id}`)
+            .then(data => {
+                this.setProvider(data.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         ApiService.getDataHalf(`${config.API_ENDPOINT}/categories`)
             .then(data => {
                 this.setCategories(data)
@@ -60,9 +74,10 @@ class EditProvider extends Component {
             })
     }
 
-    editProperty = (e) => {
+    editProvider = (e) => {
         e.preventDefault()
-        const newProvider = {
+        const id = this.props.id
+        const updatedProvider = {
             pemail: e.target.email.value,
             pemail2: e.target.email_alt.value,
             pcompany: e.target.company.value,
@@ -80,23 +95,26 @@ class EditProvider extends Component {
             mainttype_id: e.target.mainttype.value
         }
 
-        const endpoint = `${config.API_ENDPOINT}/providers`
+        console.log(updatedProvider)
 
-        ApiService.postDataHalf(endpoint, newProvider)
-            .then(data => {
-                console.log(data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        this.props.history.push('/broker/maintenance')
+        // const endpoint = `${config.API_ENDPOINT}/providers`
+
+        // ApiService.postDataHalf(endpoint, id, updatedProvider)
+        //     .then(data => {
+        //         console.log(data)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+        this.props.history.history.push('/broker/maintenance')
     }
 
     render(){
+        const info = this.state.provider
         return (
             <div className='add-property'>
                 <div className='header-grid'>
-                    <h2>Add New Provider</h2>
+                    <h2>Edit Provider</h2>
                     <Link className="add" to='/broker/maintenance'>Cancel</Link>
                 </div>
                 <div>
@@ -105,48 +123,53 @@ class EditProvider extends Component {
                     <h3>Company Information</h3>
                         <div className="form-group">
                             <label htmlFor="company">Company: </label>
-                            <input type="text" name="company"></input>
+                            <input 
+                                type="text" 
+                                name="company" 
+                                defaultValue={info.name}
+                            >
+                            </input>
                         </div>
                         <div className="form-group">
                             <label htmlFor="contact">Contact Name: </label>
-                            <input type="text" name="contact"></input>
+                            <input type="text" name="contact" defaultValue={info.contact}></input>
                         </div>
                       
                         <div className="form-group">
                             <label htmlFor="phone">Phone: </label>
-                            <input type="number" name="phone"></input>
+                            <input type="number" name="phone" defaultValue={info.phone}></input>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="email">Email: </label>
-                            <input type="text" name="email"></input>
+                            <input type="text" name="email" defaultValue={info.email}></input>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="email_alt">Alternate Email: </label>
-                            <input type="text" name="email_alt"></input>
+                            <input type="text" name="email_alt" defaultValue={info.secondemail}></input>
                         </div>
                      
                         <h3>Address</h3>
                         <div className="form-group">
                             <label htmlFor="street_name">Street Name: </label>
-                            <input type="text" name="street_name"></input>
+                            <input type="text" name="street_name" defaultValue={info.adescription4}></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor="city">City: </label>
-                            <input type="text" name="city"></input>
+                            <input type="text" name="city" defaultValue={info.adescription5}></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor="state">State: </label>
-                            <input type="text" name="state"></input>
+                            <input type="text" name="state" defaultValue={info.adescription2}></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor="zip_code">Zip Code: </label>
-                            <input type="text" name="zip_code"></input>
+                            <input type="text" name="zip_code" defaultValue={info.adescription3}></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor="country">Country: </label>
-                            <input type="text" name="country"></input>
+                            <input type="text" name="country" defaultValue={info.adescription1}></input>
                         </div>
 
                         <h3>Other Information</h3>
@@ -155,6 +178,11 @@ class EditProvider extends Component {
                             <select name="status">
                                 <option value="">Select a Status</option>
                                 {this.state.status.map(s => {
+                                    if(s.csdesc === info.status){
+                                        return (
+                                            <option key={s.id} value={s.id} selected>{s.csdesc}</option>
+                                        )
+                                    }
                                     return (
                                     <option key={s.id} value={s.id}>{s.csdesc}</option>
                                     )
@@ -167,6 +195,11 @@ class EditProvider extends Component {
                             <select name="categories">
                                 <option value="">Select a Category</option>
                                 {this.state.categories.map(s => {
+                                    if(s.ccategdesc === info.category){
+                                        return (
+                                            <option key={s.id} value={s.id} selected>{s.ccategdesc}</option>
+                                        )
+                                    }
                                     return (
                                     <option key={s.id} value={s.id}>{s.ccategdesc}</option>
                                     )
@@ -179,6 +212,11 @@ class EditProvider extends Component {
                             <select name="mainttype">
                                 <option value="">Select a Type</option>
                                 {this.state.mainttype.map(m => {
+                                    if(m.maindescr === info.typeservice){
+                                        return (
+                                            <option key={m.id} value={m.id} selected>{m.maindescr}</option>
+                                            )
+                                    }
                                     return (
                                     <option key={m.id} value={m.id}>{m.maindescr}</option>
                                     )
@@ -187,14 +225,14 @@ class EditProvider extends Component {
                         </div> 
                         <div className="form-group">
                             <label htmlFor="comment">Comment: </label>
-                            <textarea name="comment"></textarea>
+                            <textarea name="comment" defaultValue={info.comment}></textarea>
                         </div>
                         <div className="form-group">
                             <label htmlFor="provider_id">Provider ID: </label>
-                            <input type="number" name="provider_id"></input>
+                            <input type="number" name="provider_id" defaultValue={info.taxid}></input>
                         </div>
 
-                        <input type="submit" className="submit" value="Add Provider"></input>
+                        <input type="submit" className="submit" value="Edit Provider"></input>
                     </form>
                 </div>
             </div>

@@ -85,6 +85,7 @@
 input[type="text"],
 input[type="number"],
 input[type="date"],
+input[type="email"],
 .add-property-form select,
 .add-property-form option,
 .edit-property-form select,
