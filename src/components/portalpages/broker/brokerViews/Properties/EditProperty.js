@@ -109,6 +109,53 @@ class EditProperty extends Component {
             })
     }
 
+    getSteps = (e) => {
+        const id = e.target.value
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/processts/${id}/steps`)
+            .then(data => {
+                this.setSteps(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    editProperty = (e) => {
+        e.preventDefault()
+        const id = this.props.id
+
+        const updatedProperty = {
+            adescription4: e.target.street_name.value,
+            adescription5: e.target.city.value,
+            adescription2: e.target.state.value,
+            adescription3: e.target.zip_code.value,
+            adescription1: e.target.country.value,
+            assetdesc: e.target.description.value,
+            assetprice: e.target.price.value,
+            futureprice: e.target.future_price.value,
+            assettype_id: e.target.asset_type.value,
+            customer_id: "1",
+            tcustomer_id: e.target.tenant.value,
+            broker_id: e.target.brokers.value,
+            processt_id: e.target.process.value,
+            step_id: e.target.steps.value,
+            stepdate: e.target.step_date.value,
+            category_id: e.target.categories.value,
+            status_id: e.target.status.value,
+            assetinsurance: e.target.insurance.value,
+            insurancedued : e.target.insurance_due.value
+        }
+        const endpoint = `${config.API_ENDPOINT}/assets`
+        ApiService.updateDataHalf(endpoint, id, updatedProperty)
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        this.props.history.history.push('/broker/properties')
+    }
+
     render(){
         const asset = this.context.singleAsset
         const id = this.props.id
@@ -118,7 +165,7 @@ class EditProperty extends Component {
                     <h2>Edit {asset.adescription4}</h2>
                     <Link className="btn" to={`/broker/properties/${id}`}>Cancel</Link>
                 </div>
-                <form className="edit-property-form"onSubmit={(e) => {this.submitProperty(e)}}>
+                <form className="edit-property-form"onSubmit={(e) => {this.editProperty(e)}}>
                         <h3>Address</h3>
                         <div className="form-group">
                             <label htmlFor="street_name">Street Name: </label>

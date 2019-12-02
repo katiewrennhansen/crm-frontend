@@ -16,6 +16,8 @@ import BrokerContext from '../../../../contexts/BrokerContext'
 import EditProperty from '../brokerViews/Properties/EditProperty'
 import AddProperty from '../brokerViews/Properties/AddProperty'
 import './BrokerHome.css'
+import AddProvider from '../brokerViews/Maintenance/AddProvider'
+import EditProvider from '../brokerViews/Maintenance/EditProvider'
 
 
 class BrokerHome extends Component {
@@ -71,27 +73,15 @@ class BrokerHome extends Component {
                         <Switch>
                             <Route 
                                 exact path='/broker' 
-                                render={(props) => {
-                                    return (
-                                    <Dashboard />
-                                    )
-                                }}
+                                component={Dashboard}
                             />
                             <Route 
                                 exact path='/broker/properties' 
-                                render={(props) => {
-                                    return (
-                                    <Properties />
-                                    )
-                                }}
+                                component={Properties}
                             />
                             <Route 
                                 exact path='/broker/properties/add' 
-                                render={(props) => {
-                                    return (
-                                    <AddProperty />
-                                    )
-                                }}
+                                component={AddProperty}
                             />
                             <Route 
                                 exact path='/broker/properties/:id' 
@@ -111,25 +101,22 @@ class BrokerHome extends Component {
                                     return (
                                     <EditProperty 
                                         id={id}
+                                        history={history}
                                     />
                                     )
                                 }}
                             />
                             <Route 
                                 path='/broker/promotions' 
-                                render={(props) => {
-                                    return (
-                                    <Promotion />
-                                    )
-                                }}
+                                component={Promotion}
                             />
                             <Route 
                                 exact path='/broker/maintenance' 
-                                render={(props) => {
-                                    return (
-                                    <Maintenance />
-                                    )
-                                }}
+                                component={Maintenance}
+                            />
+                            <Route 
+                                exact path='/broker/maintenance/add-provider' 
+                                component={AddProvider}
                             />
                             <Route 
                                 exact path='/broker/maintenance/:id' 
@@ -143,36 +130,31 @@ class BrokerHome extends Component {
                                 }}
                             />
                             <Route 
-                                path='/broker/reminders' 
-                                render={(props) => {
+                                exact path='/broker/maintenance/:id/edit' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
                                     return (
-                                    <Reminders />
+                                        <EditProvider
+                                            id={id}
+                                        />
                                     )
                                 }}
+                            />
+                            <Route 
+                                path='/broker/reminders' 
+                                component={Reminders}
                             />
                             <Route 
                                 path='/broker/network' 
-                                render={(props) => {
-                                    return (
-                                    <Network />
-                                    )
-                                }}
+                                component={Network}
                             />
                             <Route 
                                 path='/broker/contacts' 
-                                render={(props) => {
-                                    return (
-                                    <Contacts />
-                                    )
-                                }}
+                                component={Contacts}
                             />
                             <Route 
                                 path='/broker/alerts' 
-                                render={(props) => {
-                                    return (
-                                    <Alerts />
-                                    )
-                                }}
+                                component={Alerts}
                             />
                         </Switch>
                     </div>

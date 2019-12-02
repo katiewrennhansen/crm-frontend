@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 
 
@@ -83,7 +84,7 @@ class Provider extends Component {
             <>
                 <div className='data-container'>
                     <h3>{data.contact}</h3>
-                    <button className='add-data'>Edit Provider</button>
+                    <Link to={`/broker/maintenance/${this.props.id}/edit`} className='add-data'>Edit Provider</Link>
                     <div>
                         <p>{data.typeservice}</p>
                         <p>{data.email}</p>

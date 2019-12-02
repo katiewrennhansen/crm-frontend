@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
-// import Modal from '../../../admin/pagecomponents/Modal'
 
 const endpoint = config.MAINTENANCE_PROVIDERS_ENDPOINT
 
@@ -34,9 +33,7 @@ class Maintenance extends Component {
             <>
             <div className='data-container'>
             <h3>Maintenance</h3>
-            <button className='add-data' 
-            // onClick={context.showModal}
-            >Add Provider</button>
+            <Link to='/broker/maintenance/add-provider' className='add'>Add Provider</Link>
             <table className='data-table'>
                 <thead>
                     <tr>

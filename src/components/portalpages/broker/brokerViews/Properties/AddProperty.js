@@ -104,7 +104,6 @@ class AddProperty extends Component {
 
     getSteps = (e) => {
         const id = e.target.value
-        console.log(id)
         ApiService.getDataHalf(`${config.API_ENDPOINT}/processts/${id}/steps`)
             .then(data => {
                 this.setSteps(data)
@@ -148,6 +147,7 @@ class AddProperty extends Component {
             .catch(error => {
                 console.log(error)
             })
+        this.props.history.push('/broker/properties')
     }
 
     render(){
