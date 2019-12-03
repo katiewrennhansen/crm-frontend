@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import Modal from '../../../../utilities/Modal/Modal'
-import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
+import SubmitButton from '../../../../utilities/Login/LoginComponents/SubmitButton'
 
 const promotionsEndpoint = config.PROMOTIONS_ENDPOINT
 const assignPromsEndpoint = config.ASSIGN_PROMOTIONS_ENDPOINT
