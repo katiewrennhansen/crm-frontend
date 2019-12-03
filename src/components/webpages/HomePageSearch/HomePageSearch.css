@@ -21,7 +21,7 @@
 
 .home-page-search input[type='text'],
 .home-page-search input[type='number'],
-.home-page-search input[type='submit'],
+.home-page-search input[type='submit']
 .home-page-search select {
     margin: 0 2px;
     padding: 10px 12px;
@@ -31,14 +31,16 @@
 
 }
 
-select {
-    margin: 50px;
+.home-page-search select {
+    margin: 2px;
     width: 160px;
     padding: 5px 35px 5px 5px;
     height: 38px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    border: none;
+    border-radius: 2px;
     background: url(https://image.flaticon.com/icons/svg/32/32195.svg) 94% / 10% no-repeat #fff;
 }
 
