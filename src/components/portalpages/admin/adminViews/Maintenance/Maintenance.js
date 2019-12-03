@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Moment from 'react-moment'
 import Modal from '../../../../utilities/Modal/Modal'
-import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
+import SubmitButton from '../../../../utilities/Login/LoginComponents/SubmitButton'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'

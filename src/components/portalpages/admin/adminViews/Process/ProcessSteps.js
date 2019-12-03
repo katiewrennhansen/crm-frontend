@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
-import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
+import SubmitButton from '../../../../utilities/Login/LoginComponents/SubmitButton'
 
 const processEndpoint = config.PROCESS_ENDPOINT
 
