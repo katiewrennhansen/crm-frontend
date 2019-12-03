@@ -80,12 +80,13 @@
     background: white;
     border-radius: 5px;
     margin-bottom: 100px;
+    box-shadow: 1px 1px 2px rgb(174, 174, 174);
 }
 
-input[type="text"],
-input[type="number"],
-input[type="date"],
-input[type="email"],
+.dashboard-container input[type="text"],
+.dashboard-container input[type="number"],
+.dashboard-container input[type="date"],
+.dashboard-container input[type="email"],
 .add-property-form select,
 .add-property-form option,
 .edit-property-form select,

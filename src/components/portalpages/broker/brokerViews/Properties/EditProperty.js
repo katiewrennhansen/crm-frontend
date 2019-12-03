@@ -165,7 +165,7 @@ class EditProperty extends Component {
                     <h2>Edit {asset.adescription4}</h2>
                     <Link className="btn" to={`/broker/properties/${id}`}>Cancel</Link>
                 </div>
-                <form className="edit-property-form"onSubmit={(e) => {this.editProperty(e)}}>
+                <form className="add-property-form" onSubmit={(e) => {this.editProperty(e)}}>
                         <h3>Address</h3>
                         <div className="form-group">
                             <label htmlFor="street_name">Street Name: </label>

@@ -89,11 +89,10 @@ class AssetType extends Component {
                         <h3>Update {context.name}</h3>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
-                                <label htmlFor='maint_type'></label>
-                                <TextInput
+                                <label htmlFor='asset_type'>Asset Type</label>
+                                <input
                                     id='asset_type'
                                     name='asset_type'
-                                    label='Asset Type'
                                     type='text'
                                 />
                             </div>
@@ -114,11 +113,11 @@ class AssetType extends Component {
                         <h3>Add an Asset Type</h3>
                         <div className='form-group'>
                             <label htmlFor='asset_type'></label>
-                            <TextInput 
+                            <input 
                                 id='asset_type'
                                 name='asset_type'
-                                label='Asset Type'
                                 type='text'
+                                placeholder="Asset Type"
                             />
                         </div>
                         <SubmitButton className='submit-content' text='Save'/>

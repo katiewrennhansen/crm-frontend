@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
-import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
@@ -91,10 +90,10 @@ class PropertyStatus extends Component {
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='maint_type'></label>
-                                <TextInput
+                                <input
                                     id='status_type'
                                     name='status_type'
-                                    label='Property Status Type'
+                                    placeholder='Property Status Type'
                                     type='text'
                                 />
                             </div>
@@ -115,12 +114,11 @@ class PropertyStatus extends Component {
                         <h3>Add a Property Status</h3>
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>
-                            <TextInput 
+                            <input 
                                 id='feature_status'
                                 name='feature_status'
-                                label='Feature Status'
+                                placeholder='Update Property Status'
                                 type='text'
-                                autoComplete='text'
                             />
                         </div>
                         <SubmitButton className='submit-content' text='Save'/>

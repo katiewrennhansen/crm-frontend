@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
-import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
@@ -87,12 +86,12 @@ class AdminComments extends Component {
                                 this.updateData(e);  
                             }}>
                             <div className='form-group'>
-                                <label htmlFor='maint_type'></label>
-                                <TextInput
+                                <label htmlFor='comment_type'>Update Type: </label>
+                                <input
                                     id='comment_type'
                                     name='comment_type'
-                                    label='Comment Type'
                                     type='text'
+                                    placeholder="Comment Type"
                                 />
                             </div>
                             <div className='update'>
@@ -109,14 +108,13 @@ class AdminComments extends Component {
                         className='add-content'
                         onSubmit={(e) => this.addComment(e)}
                     >
-                        <h3>Add a Comment Type</h3>
+                        <label htmlFor='comment_type'><h3>Add a Comment Type</h3></label>
                         <div className='form-group'>
-                            <label htmlFor='comment_type'></label>
-                            <TextInput 
+                            <input
                                 id='comment_type'
                                 name='comment_type'
-                                label='Comment Type'
                                 type='text'
+                                placeholder="Update Comment"
                             />
                         </div>
                         <SubmitButton className='submit-content' text='Save'/>

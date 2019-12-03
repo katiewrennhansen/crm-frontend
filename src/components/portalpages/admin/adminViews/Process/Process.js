@@ -95,11 +95,10 @@ class Process extends Component {
                         <h3>Update {context.name}</h3>
                         <form className='form-group-form' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
-                                <label htmlFor='maint_type'></label>
-                                <TextInput
+                                <label htmlFor='process'>Process Name</label>
+                                <input
                                     id='process'
                                     name='process'
-                                    label='Process Name'
                                     type='text'
                                 />
                             </div>
@@ -120,12 +119,11 @@ class Process extends Component {
                         <h3>Add a Process</h3>
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>
-                            <TextInput 
+                            <input 
                                 id='process'
                                 name='process'
-                                label='Process'
+                                placeholder='Process'
                                 type='text'
-                                autoComplete='text'
                             />
                         </div>
                         <SubmitButton className='submit-content' text='Save'/>

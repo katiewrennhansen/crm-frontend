@@ -103,10 +103,9 @@ class Promotions extends Component {
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='comment_type'></label>
-                                <TextInput
+                                <input
                                     id='comment_type'
                                     name='promotion_name'
-                                    label='Promotion Name'
                                     type='text'
                                     defaultValue={context.name}
                                 />
@@ -114,29 +113,26 @@ class Promotions extends Component {
                             <div className='dates'>
                                 <div className='form-group'>
                                     <label htmlFor='promotion_start'></label>
-                                    <TextInput 
+                                    <input 
                                         id='promotion_start'
                                         name='promotion_start'
-                                        label='Start Date'
                                         type='date'
                                     />
                                 </div>
                                 <div className='form-group'>
                                     <label htmlFor='promotion_end'></label>
-                                    <TextInput 
+                                    <input 
                                         id='promotion_end'
                                         name='promotion_end'
-                                        label='End Date'
                                         type='date'
                                     />
                                 </div>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='promotion_cost'></label>
-                                <TextInput 
+                                <input 
                                     id='total_cost'
                                     name='total_cost'
-                                    label='Total Cost'
                                     type='number'
                                 />
                             </div>
@@ -156,43 +152,36 @@ class Promotions extends Component {
                     >
                         <h3>Add a Promotion</h3>
                         <div className='form-group'>
-                            <label htmlFor='promotion_name'></label>
-                            <TextInput 
+                            <label htmlFor='promotion_name'>Name</label>
+                            <input 
                                 id='promotion_name'
                                 name='promotion_name'
-                                label='Promotion Name'
                                 type='text'
-                                autoComplete='text'
                             />
                         </div>
-                        <div className='dates'>
-                            <div className='form-group'>
-                                <label htmlFor='promotion_start'></label>
-                                <TextInput 
-                                    id='promotion_start'
-                                    name='promotion_start'
-                                    label='Start Date'
-                                    type='date'
-                                />
-                            </div>
-                            <div className='form-group'>
-                                <label htmlFor='promotion_end'></label>
-                                <TextInput 
-                                    id='promotion_end'
-                                    name='promotion_end'
-                                    label='End Date'
-                                    type='date'
-                                />
-                            </div>
+                        <div className='form-group'>
+                            <label htmlFor='promotion_start'>Start Date</label>
+                            <input 
+                                id='promotion_start'
+                                name='promotion_start'
+                                type='date'
+
+                            />
                         </div>
                         <div className='form-group'>
-                            <label htmlFor='promotion_cost'></label>
-                            <TextInput 
+                            <label htmlFor='promotion_end'>End Date</label>
+                            <input 
+                                id='promotion_end'
+                                name='promotion_end'
+                                type='date'
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='promotion_cost'>Total Cost</label>
+                            <input 
                                 id='total_cost'
                                 name='total_cost'
-                                label='Total Cost'
                                 type='number'
-                                autoComplete='number'
                             />
                         </div>
                         <SubmitButton className='submit-content' text='Save'/>

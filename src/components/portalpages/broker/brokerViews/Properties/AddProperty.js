@@ -158,7 +158,7 @@ class AddProperty extends Component {
                     <Link className="add" to='/broker/properties'>Cancel</Link>
                 </div>
                 <div>
-                    <form className="add-property-form"onSubmit={(e) => {this.submitProperty(e)}}>
+                    <form className="add-property-form" onSubmit={(e) => {this.submitProperty(e)}}>
                         <h3>Address</h3>
                         <div className="form-group">
                             <label htmlFor="street_name">Street Name: </label>

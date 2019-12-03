@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
-import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
@@ -85,16 +84,16 @@ class Categories extends Component {
                     <div className='update-modal-grid'>
                         <h3>Update {context.name}</h3>
                         <form 
-                            className='form-group' 
+                            className='update-content' 
                             onSubmit={(e) => {
                                 this.updateData(e);  
                             }}>
                             <div className='form-group'>
-                                <label htmlFor='category'></label>
-                                <TextInput
+                                <label htmlFor='category'>Update Category: </label>
+                                <input
                                     id='category'
                                     name='category'
-                                    label='Category'
+                                    placeholder='Update Category'
                                     type='text'
                                 />
                             </div>
@@ -115,10 +114,10 @@ class Categories extends Component {
                         <h3>Add a Comment Type</h3>
                         <div className='form-group'>
                             <label htmlFor='comment_type'></label>
-                            <TextInput 
+                            <input 
                                 id='category'
                                 name='category'
-                                label='Category'
+                                placeholder='New Category'
                                 type='text'
                             />
                         </div>

@@ -7,9 +7,9 @@ ul {
 .dash-sidebar-container {
     background-image: linear-gradient( to right, #343434 85%, #292929);
     color: white;
-    position: fixed;
-    height: 100vh;
-    width: 25%;
+    /* position: fixed; */
+    height: 1470px;
+    width: 100%;
     font-family: 'Open Sans',sans-serif;
 }
 
@@ -23,7 +23,6 @@ ul {
 .admin-info:first-child{
     grid-column: 1 / 2;
 }
-
 
 .dash-sidebar-container h2 {
     margin: 0;

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
-import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
@@ -90,10 +89,10 @@ class PropertyFeatures extends Component {
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='maint_type'></label>
-                                <TextInput
+                                <input
                                     id='feat_type'
                                     name='feat_type'
-                                    label='Feature Name'
+                                    placeholder='Update Feature Name'
                                     type='text'
                                 />
                             </div>
@@ -114,12 +113,11 @@ class PropertyFeatures extends Component {
                         <h3>Add a Property Feature</h3>
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>
-                            <TextInput 
+                            <input 
                                 id='feature_name'
                                 name='feature_name'
-                                label='Feature Name'
+                                placeholder='Update Feature Name'
                                 type='text'
-                                autoComplete='text'
                             />
                         </div>
                         <SubmitButton className='submit-content' text='Save'/>

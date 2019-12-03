@@ -29,13 +29,11 @@ td, th {
     font-family: 'Work Sans', sans-serif;
 }
 
-/* .promotion-container h3, */
 .data-container h3 {
     grid-column: 1 / 4;
     font-size: 25px;
 }
 
-/* .add_promotion, */
 .add-data  {
     grid-column: 4 / -1;
     border-radius: 5px;
@@ -60,7 +58,6 @@ td button {
 }
 
 td button:hover,
-/* .add_promotion:hover, */
 .add-data:hover {
     box-shadow: 1px 1px 3px gray;
     cursor: pointer;

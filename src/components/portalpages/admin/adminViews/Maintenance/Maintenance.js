@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Moment from 'react-moment'
 import Modal from '../../pagecomponents/Modal'
-import TextInput from '../../../../Login/LoginComponents/TextInput'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
@@ -92,10 +91,10 @@ class Maintenance extends Component {
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='maint_type'></label>
-                                <TextInput
+                                <input
                                     id='maint_type'
                                     name='maint_type'
-                                    label='Maintenance Type'
+                                    placeholder='Update Maintenance Type'
                                     type='text'
                                 />
                             </div>
@@ -116,12 +115,11 @@ class Maintenance extends Component {
                         <h3>Add a Maintenance Type</h3>
                         <div className='form-group'>
                             <label htmlFor='promotion_name'></label>
-                            <TextInput 
+                            <input 
                                 id='add_maint_type'
                                 name='add_main_type'
-                                label='Maintenance Type'
+                                placeholder='Maintenance Type'
                                 type='text'
-                                autoComplete='text'
                             />
                         </div>
                         <SubmitButton className='submit-content' text='Save'/>

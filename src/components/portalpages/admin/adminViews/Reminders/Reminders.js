@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import Modal from '../../pagecomponents/Modal'
-import TextInput from '../../../../Login/LoginComponents/TextInput'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
@@ -98,26 +97,26 @@ class Reminders extends Component {
                         <h3>Update {context.name}</h3>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
-                                <label htmlFor='maint_type'></label>
-                                <TextInput
+                                <label htmlFor='reminder'>Reminder</label>
+                                <input
                                     id='reminder'
                                     name='reminder'
-                                    label='Reminder'
+                                    placeholder='Reminder'
                                     type='text'
                                 />
-                                 <TextInput 
+                                <label htmlFor='months'>Months</label>
+                                <input 
                                     id='months'
                                     name='months'
-                                    label='Months'
+                                    placeholder='Months'
                                     type='number'
-                                    autoComplete='number'
                                 />
-                                <TextInput 
+                                <label htmlFor='message'>Message</label>
+                                <input 
                                     id='message'
                                     name='message'
-                                    label='Message'
+                                    placeholder='Message'
                                     type='text'
-                                    autoComplete='text'
                                 />
                             </div>
                             <div className='update'>
@@ -136,27 +135,27 @@ class Reminders extends Component {
                     >
                         <h3>Add a Reminder</h3>
                         <div className='form-group'>
-                            <label htmlFor='feature_name'></label>
-                            <TextInput 
+                            <label htmlFor='reminder'>Reminder</label>
+                            <input
                                 id='reminder'
                                 name='reminder'
-                                label='Reminder'
                                 type='text'
-                                autoComplete='text'
                             />
-                            <TextInput 
+                        </div>
+                        <div className='form-group'> 
+                            <label htmlFor='months'>Months</label>
+                            <input 
                                 id='months'
                                 name='months'
-                                label='Months'
                                 type='number'
-                                autoComplete='number'
                             />
-                            <TextInput 
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='message'>Message</label>
+                            <input 
                                 id='message'
                                 name='message'
-                                label='Message'
                                 type='text'
-                                autoComplete='text'
                             />
                         </div>
                         <SubmitButton className='submit-content' text='Save'/>
