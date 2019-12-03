@@ -84,21 +84,22 @@ class AssetType extends Component {
                     deleteFn={this.deleteAsset}
                 />
                 <Modal className='update-modal' show={context.update}>
-                    <div className='update-modal-grid'>
-                        <h3>Update {context.name}</h3>
+                    <div className='update-content'>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
-                                <label htmlFor='asset_type'>Asset Type</label>
+                                <label htmlFor='asset_type'>
+                                    <h3>Update {context.name}</h3>
+                                </label>
                                 <input
                                     id='asset_type'
                                     name='asset_type'
                                     type='text'
                                 />
                             </div>
-                            <input className='update-btn' type='submit' value="Update"></input>
+                            <SubmitButton className='submit-content' text='Update'/>
                         </form>
-                        <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button> 
                     </div>
+                    <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button> 
                 </Modal>
                 <Modal className='add-modal' show={context.show} >
                     <form 

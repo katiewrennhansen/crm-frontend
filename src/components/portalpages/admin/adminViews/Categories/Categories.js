@@ -75,33 +75,34 @@ class Categories extends Component {
 
         return (
             <>
-            <DeleteModal
-                props={context}
-                endpoint={catEndpoint}
-                deleteFn={this.deleteCategory}
-            />
-            <Modal className='update-modal' show={context.update}>
-                    <div className='update-modal-grid'>
-                        <h3>Update {context.name}</h3>
-                        <form 
-                            className='update-content' 
-                            onSubmit={(e) => {
-                                this.updateData(e);  
-                            }}>
-                            <div className='form-group'>
-                                <label htmlFor='category'>Update Category: </label>
-                                <input
-                                    id='category'
-                                    name='category'
-                                    placeholder='Update Category'
-                                    type='text'
-                                />
-                            </div>
-                            <input className='update-btn' type='submit'value="Update"></input>
-                        </form>
-                        <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button>   
-                    </div>
+                <DeleteModal
+                    props={context}
+                    endpoint={catEndpoint}
+                    deleteFn={this.deleteCategory}
+                />
+                
+                <Modal className='update-modal' show={context.update}>
+                    <form 
+                        className='update-content' 
+                        onSubmit={(e) => {
+                            this.updateData(e);  
+                        }}>
+                        <div className='form-group'>
+                            <label htmlFor='category'>
+                                <h3>Update {context.name}</h3>
+                            </label>
+                            <input
+                                id='category'
+                                name='category'
+                                placeholder='Update Category'
+                                type='text'
+                            />
+                        </div>
+                        <SubmitButton className='submit-content' text='Update'/>
+                    </form>
+                    <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button>   
                 </Modal>
+
                 <Modal className='add-modal' show={context.show} >
                     <form 
                         className='add-content'

@@ -7,8 +7,8 @@ const DeleteModal = ({props, deleteFn}) => {
         <Modal show={props.delete}>
         <div className='delete-modal-grid'>
             <h3>Are you sure you would like to delete {props.nameDelete}?</h3>
-            <div className='cancel'>                    
-                <button onClick={props.hideDelete}>Cancel</button>
+            <div>                    
+                <button className='cancel-btn' onClick={props.hideDelete}>Cancel</button>
             </div>
             <div >
                 <button className='delete-btn' onClick={() => deleteFn(props.idDelete)}>

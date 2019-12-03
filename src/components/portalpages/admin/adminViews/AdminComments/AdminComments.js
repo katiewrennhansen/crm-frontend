@@ -72,33 +72,34 @@ class AdminComments extends Component {
         const context = this.context
         return (
             <>
-            <DeleteModal
-                props={context}
-                endpoint={commEndpoint}
-                deleteFn={this.deleteComment}
-            />
-            <Modal className='update-modal' show={context.update}>
-                    <div className='update-modal-grid'>
-                        <h3>Update {context.name}</h3>
-                        <form 
-                            className='form-group' 
-                            onSubmit={(e) => {
-                                this.updateData(e);  
-                            }}>
-                            <div className='form-group'>
-                                <label htmlFor='comment_type'>Update Type: </label>
-                                <input
-                                    id='comment_type'
-                                    name='comment_type'
-                                    type='text'
-                                    placeholder="Comment Type"
-                                />
-                            </div>
-                            <input className='update-btn' type='submit' value="pdate"></input>
-                        </form>
-                        <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button>   
-                    </div>
+                <DeleteModal
+                    props={context}
+                    endpoint={commEndpoint}
+                    deleteFn={this.deleteComment}
+                />
+
+                <Modal className='update-modal' show={context.update}>
+                    <form 
+                        className='update-content' 
+                        onSubmit={(e) => {
+                            this.updateData(e);  
+                        }}>
+                        <div className='form-group'>
+                            <label htmlFor='comment_type'>
+                                <h3>Update {context.name}</h3>
+                                </label>
+                            <input
+                                id='comment_type'
+                                name='comment_type'
+                                type='text'
+                                placeholder="Comment Type"
+                            />
+                        </div>
+                        <SubmitButton className='submit-content' text='Update'/>
+                    </form>
+                    <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button>   
                 </Modal>
+                
                 <Modal className='add-modal' show={context.show} >
                     <form 
                         className='add-content'

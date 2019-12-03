@@ -86,11 +86,12 @@ class Maintenance extends Component {
                 deleteFn={this.deleteMaintenance}
             />
             <Modal className='update-modal' show={context.update}>
-                    <div className='update-modal-grid'>
-                        <h3>Update {context.name}</h3>
+                    <div className='update-content'>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
-                                <label htmlFor='maint_type'></label>
+                                <label htmlFor='maint_type'>
+                                    <h3>Update {context.name}</h3>
+                                </label>
                                 <input
                                     id='maint_type'
                                     name='maint_type'
@@ -98,10 +99,11 @@ class Maintenance extends Component {
                                     type='text'
                                 />
                             </div>
-                            <input className='update-btn' type='submit' value="Update"></input>
+                            <SubmitButton className='submit-content' text='Update'/>
                         </form>
-                        <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button> 
                     </div>
+                    <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button> 
+
                 </Modal>
                 <Modal className='add-modal' show={context.show} >
                     <form 

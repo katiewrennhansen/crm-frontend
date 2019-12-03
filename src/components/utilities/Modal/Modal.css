@@ -28,32 +28,6 @@
     display: none;
   }
 
-  .update-modal-grid {
-    display: grid;
-    grid-template-columns: 150px 150px;
-    grid-template-rows: 50px 100px 60px;
-    align-items: baseline;
-    width: 50%;
-    margin: 0 auto;
-  }
-
-  .update-modal-grid h3 {
-    margin: 0;
-    grid-column: 1 / -1;
-    grid-row: 1 / 2;
-  }
-
-
-  .update-modal-grid .cancel{
-    grid-column: 2 / -1;
-    grid-row: 3 / -1;
-    align-self: center;
-  }
-
-  .update-modal-grid .form-group {
-    grid-column: 1 / -1;
-  }
-
   .delete-modal-grid {
     display: grid;
     grid-template-rows: repeat(2, 1fr);
@@ -76,48 +50,30 @@
     align-self: flex-end;
   }
 
-  .delete-modal-grid .delete {
+  .delete-modal-grid .delete-btn {
     grid-column: 2 / -1;
     grid-row: 2 / -1;
     align-self: flex-end;    
   }
 
-.add-content .form-group {
+.add-content .form-group,
+.update-content .form-group {
     display: block;
   }
-  
 
-  .add-content .form-group input[type="text"] ,
-  .add-content .form-group input[type="date"],
-  .add-content .form-group input[type="number"]{
-    width: 92%;
-    height: 30px;
-  }
+.add-content,
+.update-content {
+  width: 300px;
+  margin: 0 auto;
+}
 
+.add-content .form-group input[type="text"],
+.add-content .form-group input[type="date"],
+.add-content .form-group input[type="number"],
+.update-content .form-group input[type="text"],
+.update-content .form-group input[type="date"],
+.update-content .form-group input[type="number"]{
+  width: 92%;
+  height: 30px;
+}
 
-  .cancel button,
-  .delete-modal-grid .cancel button {
-    color: rgb(77, 77, 77);
-    border: 1px solid rgb(77, 77, 77);
-    margin-right: 10px;
-    padding: 8px 10px;
-    border-radius: 5px;
-    font-size: 16px;
-    box-shadow: 1px 1px 2px rgb(176, 176, 176);
-  }
-
-  .cancel button:hover,
-  .delete button:hover,
-  .delete-modal-grid .cancel button:hover {
-    box-shadow: 1px 1px 3px gray;
-    cursor: pointer;
-    transition: 200ms linear;
-  }
-
-  .delete button {
-    padding: 8px 10px;
-    border-radius: 5px;
-    font-size: 16px;
-    box-shadow: 1px 1px 2px rgb(205, 152, 152);
-
-  }

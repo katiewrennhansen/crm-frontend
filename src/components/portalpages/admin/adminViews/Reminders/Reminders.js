@@ -87,15 +87,16 @@ class Reminders extends Component {
         const context = this.context
         return (
             <>
-            <DeleteModal
-                props={context}
-                endpoint={remindersEndpoint}
-                deleteFn={this.deleteReminder}
-            />
-             <Modal className='update-modal' show={context.update}>
-                    <div className='update-modal-grid'>
-                        <h3>Update {context.name}</h3>
+                <DeleteModal
+                    props={context}
+                    endpoint={remindersEndpoint}
+                    deleteFn={this.deleteReminder}
+                />
+
+                <Modal className='update-modal' show={context.update}>
+                    <div className='update-content'>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
+                            <h3>Update {context.name}</h3>
                             <div className='form-group'>
                                 <label htmlFor='reminder'>Reminder</label>
                                 <input
@@ -104,6 +105,8 @@ class Reminders extends Component {
                                     placeholder='Reminder'
                                     type='text'
                                 />
+                            </div>
+                            <div className='form-group'>
                                 <label htmlFor='months'>Months</label>
                                 <input 
                                     id='months'
@@ -111,6 +114,8 @@ class Reminders extends Component {
                                     placeholder='Months'
                                     type='number'
                                 />
+                            </div>
+                            <div className='form-group'>
                                 <label htmlFor='message'>Message</label>
                                 <input 
                                     id='message'
@@ -118,12 +123,13 @@ class Reminders extends Component {
                                     placeholder='Message'
                                     type='text'
                                 />
-                             </div>
-                            <input className='update-btn' type='submit' value="Update"></input>
+                            </div>
+                            <SubmitButton className='submit-content' text='Update'/>
                         </form>
-                        <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button> 
                     </div>
+                    <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button>     
                 </Modal>
+
                 <Modal className='add-modal' show={context.show} >
                     <form 
                         className= 'add-content' 
@@ -158,6 +164,7 @@ class Reminders extends Component {
                     </form>
                     <button className='cancel-btn' onClick={context.hideModal}>Cancel</button>
                 </Modal>
+
                 <div className='data-container'>
                     <h3>Reminders</h3>
                     <button className='add-btn' onClick={context.showModal}>Add Reminder</button>

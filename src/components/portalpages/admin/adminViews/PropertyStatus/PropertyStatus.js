@@ -79,17 +79,19 @@ class PropertyStatus extends Component {
         const context = this.context
         return (
             <>
-            <DeleteModal
-                props={context}
-                endpoint={psEndpoint}
-                deleteFn={this.deleteStatus}
-            />
-            <Modal className='update-modal' show={context.update}>
-                    <div className='update-modal-grid'>
-                        <h3>Update {context.name}</h3>
+                <DeleteModal
+                    props={context}
+                    endpoint={psEndpoint}
+                    deleteFn={this.deleteStatus}
+                />
+
+                <Modal className='update-modal' show={context.update}>
+                    <div className='update-content'>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
-                                <label htmlFor='maint_type'></label>
+                                <label htmlFor='maint_type'>
+                                    <h3>Update {context.name}</h3>
+                                </label>
                                 <input
                                     id='status_type'
                                     name='status_type'
@@ -97,11 +99,12 @@ class PropertyStatus extends Component {
                                     type='text'
                                 />
                             </div>
-                            <input className='update-btn' type='submit' value="Update"></input>
+                            <SubmitButton className='submit-content' text='Update'/>
                         </form>
-                        <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button> 
                     </div>
+                    <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button> 
                 </Modal>
+
                 <Modal className='add-modal' show={context.show} >
                     <form 
                         className= 'add-content' 
@@ -116,11 +119,12 @@ class PropertyStatus extends Component {
                                 placeholder='Update Property Status'
                                 type='text'
                             />
-                         </div>
+                        </div>
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
                     <button className='cancel-btn' onClick={context.hideModal}>Cancel</button>
                 </Modal>
+
                 <div className='data-container'>
                     <h3>Property Status</h3>
                     <button className='add-btn' onClick={context.showModal}>Add Property Status</button>

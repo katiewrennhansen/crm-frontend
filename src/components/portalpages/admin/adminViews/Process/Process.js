@@ -89,23 +89,26 @@ class Process extends Component {
                     endpoint={processEndpoint}
                     deleteFn={this.deleteProcess}
                 />
+
                 <Modal className='update-modal' show={context.update}>
-                    <div className='update-modal-grid'>
-                        <h3>Update {context.name}</h3>
+                    <div className='update-content'>
                         <form className='form-group-form' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
-                                <label htmlFor='process'>Process Name</label>
+                                <label htmlFor='process'>
+                                    <h3>Update {context.name}</h3>
+                                </label>
                                 <input
                                     id='process'
                                     name='process'
                                     type='text'
                                 />
                             </div>
-                            <input className='update-btn' type='submit' value="Update"></input>
+                            <SubmitButton className='submit-content' text='Update'/>
                         </form>
-                        <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button>
                     </div>
+                    <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button>
                 </Modal>
+
                 <Modal className='add-modal' show={context.show} >
                     <form 
                         className= 'add-content' 
@@ -125,6 +128,7 @@ class Process extends Component {
                     </form>
                     <button className='cancel-btn' onClick={context.hideModal}>Cancel</button>
                 </Modal>
+                
                 <div className='data-container'>
                     <h3>Process</h3>
                     <button className='add-btn' onClick={context.showModal}>Add Process</button>
