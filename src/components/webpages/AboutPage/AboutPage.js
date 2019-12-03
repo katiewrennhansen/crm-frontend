@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './AboutPage.css'
-import MainNav from '../../navigation/Headers/MainNav/MainNav'
-import Footer from '../../navigation/Footer/Footer'
+import MainNav from '../navigation/Headers/MainNav/MainNav'
+import Footer from '../navigation/Footer/Footer'
 
 class AboutPage extends Component {
     render(){

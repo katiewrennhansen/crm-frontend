@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './MainNav.css'
 import NavLinks from '../../NavLinks/NavLinks'
-import TokenService from '../../../../services/token-service'
+import TokenService from '../../../../../services/token-service'
  
 class MainNav extends Component {
     constructor(props){

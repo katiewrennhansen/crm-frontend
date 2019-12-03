@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom' 
 import HomePageSearch from '../HomePageSearch/HomePageSearch'
 import './WebpageHome.css'
-import MainNav from '../../navigation/Headers/MainNav/MainNav'
-import Footer from '../../navigation/Footer/Footer'
+import MainNav from '../navigation/Headers/MainNav/MainNav'
+import Footer from '../navigation/Footer/Footer'
 import BusinessIcon from '@material-ui/icons/Business';
 
 class WebpageHome extends Component {
