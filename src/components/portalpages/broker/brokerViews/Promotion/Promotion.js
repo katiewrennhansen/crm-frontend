@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import Modal from '../../../../utilities/Modal/Modal'
-import SubmitButtom from '../../../../Login/LoginComponents/SubmitButton'
+import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 
 const promotionsEndpoint = config.PROMOTIONS_ENDPOINT
 const assignPromsEndpoint = config.ASSIGN_PROMOTIONS_ENDPOINT
@@ -85,32 +85,35 @@ class Promotion extends Component {
         return (
             <>
                 <Modal className='add-modal' show={this.state.assign}>
-                    <div className='add-modal-grid'>
-                    <h3>Assign user to {this.state.name}</h3>
-                    <form onSubmit={(e) => this.assignPromotion(e)}>
+                    <form className='add-content' onSubmit={(e) => this.assignPromotion(e)}>
+                        <h3>Assign user to {this.state.name}</h3>
                         <div className='form-group'>
                             <select name="user" onChange={(e) => this.changeUser(e.target.value)}>
                                 <option value="">Select a User</option>
-                            {this.state.users.map(user => (
-                                <option 
-                                    key={user.customer.id} 
-                                    value={user.customer.email}
-                                >
-                                    {user.customer.name}
-                                </option>
-                            ))}  
+                                {this.state.users.map(user => (
+                                    <option 
+                                        key={user.customer.id} 
+                                        value={user.customer.email}
+                                    >
+                                        {user.customer.name}
+                                    </option>
+                                ))}  
                             </select>
                         </div>
-                        <input type='number' name='cost' placeholder="cost"></input>
-                        <div>
-                            <SubmitButtom text='Submit' />
+                        <div className='form-group'>
+                            <label htmlFor="cost">Cost</label>
+                            <input 
+                                id="cost"
+                                type='number' 
+                                name='cost' 
+                                placeholder="Cost"
+                            />
                         </div>
+                        <SubmitButton className='submit-content' text='Save'/>
                     </form>
-                    <div className='update'>
-                        <button onClick={() => this.setAssign(false)}>Cancel</button>
-                    </div>
-                    </div>
+                    <button className='cancel-btn' onClick={() => this.setAssign(false)}>Cancel</button>
                 </Modal>
+
                 <div className='data-container'>
                     <h3>Promotions</h3>
                     <table className='data-table'>
@@ -130,8 +133,8 @@ class Promotion extends Component {
                                 <td>{p.data.startdate}</td>
                                 <td>{p.data.duedate}</td>
                                 <td>{p.data.totalcost}</td>
-                                <td className='update'>
-                                    <button onClick={() => this.setAssign(true, p.data.id, p.data.typepromotion)}>Assign to User</button>
+                                <td>
+                                    <button className='update-btn' onClick={() => this.setAssign(true, p.data.id, p.data.typepromotion)}>Assign to User</button>
                                 </td>
                             </tr>
                             ))}
