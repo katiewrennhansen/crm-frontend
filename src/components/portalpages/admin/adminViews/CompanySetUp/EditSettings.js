@@ -60,6 +60,8 @@ class EditSettings extends Component {
 
         console.log(updatedInfo)
 
+        
+
         this.props.history.push('/dashboard/company-setup')
     }
 

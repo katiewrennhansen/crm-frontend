@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './ChangePassword.css'
-import TextInput from '../../Login/LoginComponents/TextInput'
-import SubmitButton from '../../Login/LoginComponents/SubmitButton'
+import TextInput from '../../LoginComponents/TextInput'
+import SubmitButton from '../../LoginComponents/SubmitButton'
 
 class ChangePassword extends Component {
     constructor(props){

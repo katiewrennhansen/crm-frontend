@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './ForgotPassword.css'
-import SubmitButton from '../../Login/LoginComponents/SubmitButton'
-import TextInput from '../../Login/LoginComponents/TextInput'
+import SubmitButton from '../../LoginComponents/SubmitButton'
+import TextInput from '../../LoginComponents/TextInput'
 
 class ForgotPassword extends Component {
     constructor(props){

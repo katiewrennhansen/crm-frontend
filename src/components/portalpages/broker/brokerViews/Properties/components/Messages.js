@@ -135,7 +135,7 @@ class Messages extends Component {
                                 <tr key={f.id}>
                                     <td>{f.type}</td>
                                     <td>{f.description}</td>
-                                    <td><button onClick={() => {this.deleteMessage(f.id)}}>Delete</button></td>
+                                    <td><button className="delete-btn" onClick={() => {this.deleteMessage(f.id)}}>Delete</button></td>
                                 </tr>
                             )
                         })}

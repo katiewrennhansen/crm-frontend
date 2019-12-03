@@ -6,9 +6,9 @@ import ServicesPage from './components/webpages/ServicesPage/ServicesPage'
 import SearchPage from './components/webpages/SearchPage/SearchPage'
 import Contact from './components/webpages/Contact/Contact'
 import Login from './components/utilities/Login/Login'
-import ForgotPassword from './components/ResetPassword/ForgotPassword/ForgotPassword'
-import ChangePassword from './components/ResetPassword/ChangePassword/ChangePassword'
-import UserRegistration from './components/RegistrationAccountTypes/UserRegistration/UserRegistration'
+import ForgotPassword from './components/utilities/Login/ResetPassword/ForgotPassword/ForgotPassword'
+import ChangePassword from './components/utilities/Login/ResetPassword/ChangePassword/ChangePassword'
+// import UserRegistration from './components/utilities/Login/RegistrationAccountTypes/UserRegistration'
 import UserHome from './components/portalpages/user/UserHome/UserHome'
 import AdminHome from './components/portalpages/admin/AdminHome/AdminHome'
 import BrokerHome from './components/portalpages/broker/BrokerHome/BrokerHome'
@@ -107,10 +107,10 @@ class App extends Component {
               path='/change-password'
               component={ChangePassword}
             />
-            <Route 
+            {/* <Route 
               path='/register'
               component={UserRegistration}
-            />
+            /> */}
 
     {/* ******** USER PORTAL ROUTES ******* */}
             <Route 
@@ -118,17 +118,16 @@ class App extends Component {
               render={(props) => {
                 if(this.state.usertype === 'user') {
                   return ( 
-                  <UserHome 
-                    authenticated={this.state.authenticated}
-                    logout={this.logout}
-                  />
+                    <UserHome 
+                      authenticated={this.state.authenticated}
+                      logout={this.logout}
+                    />
                   )
                 } else {
                   return ( <Redirect to='/login' /> )
                 }}}
             />
     {/* ******** ADMIN PORTAL ROUTES ******* */}
-            
             <Route 
               path='/broker'
               component={BrokerHome}

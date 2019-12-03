@@ -116,17 +116,17 @@ class EditCustomer extends Component {
 
         console.log(updatedCustomer, id)
 
-        // ApiService.postDataHalf(caEndpoint, updatedCustomer)
-        //     .then(data => {
-        //         console.log(data)
-        //         ApiService.getDataHalf(caEndpoint)
-        //             .then(data => {
-        //                 this.setCustomers(data.customers)
-        //             })
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
+        ApiService.updateDataHalf(caEndpoint, id, updatedCustomer)
+            .then(data => {
+                console.log(data)
+                ApiService.getDataHalf(caEndpoint)
+                    .then(data => {
+                        this.setCustomer(data.customers)
+                    })
+            })
+            .catch(error => {
+                console.log(error)
+            })
         this.props.func.history.push(`/dashboard/customer-accounts/${id}`)
     }
 

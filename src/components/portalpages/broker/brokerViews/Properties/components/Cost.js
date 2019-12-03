@@ -124,7 +124,7 @@ class Cost extends Component {
                                     <td>{f.concept}</td>
                                     <td>{f.amount}</td>
                                     <td>{f.year}</td>
-                                    <td><button onClick={() => {this.deleteCost(f.id)}}>Delete</button></td>
+                                    <td><button className="delete-btn" onClick={() => {this.deleteCost(f.id)}}>Delete</button></td>
                                 </tr>
                             )
                         })}
