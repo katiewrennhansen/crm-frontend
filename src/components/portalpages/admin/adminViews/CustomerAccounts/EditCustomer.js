@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
-import './CustomerAccounts.css'
 import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
 
@@ -141,7 +140,7 @@ class EditCustomer extends Component {
                 </div>
 
                 <form 
-                        className= 'add-customer-form' 
+                        className= 'edit-form' 
                         onSubmit={(e) => this.editCustomer(e)}
                     >
                         <div className='add-customer-form-group'>

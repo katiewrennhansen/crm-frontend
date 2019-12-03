@@ -65,12 +65,3 @@ ul {
 ul {
     padding-left: 20px;
 }
-
-.bg-dark.active {
-    background: black;
-}
-
-.active {
-    height: 0px;
-    opacity: 0;
-}

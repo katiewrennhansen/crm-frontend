@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
-import Modal from '../../pagecomponents/Modal'
+import Modal from '../../../../utilities/Modal/Modal'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
-import DeleteModal from '../../pagecomponents/DeleteModal'
+import DeleteModal from '../../../../utilities/Modal/DeleteModal'
 
 const psEndpoint = config.PROPERTY_STATUS_ENDPOINT
 
@@ -97,13 +97,9 @@ class PropertyStatus extends Component {
                                     type='text'
                                 />
                             </div>
-                            <div className='update'>
-                                <button type='submit'>Update</button>
-                            </div>
+                            <input className='update-btn' type='submit' value="Update"></input>
                         </form>
-                        <div className='cancel'>
-                            <button onClick={context.hideUpdate}>Cancel</button>   
-                        </div>
+                        <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button> 
                     </div>
                 </Modal>
                 <Modal className='add-modal' show={context.show} >
@@ -120,16 +116,14 @@ class PropertyStatus extends Component {
                                 placeholder='Update Property Status'
                                 type='text'
                             />
-                        </div>
+                         </div>
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
-                    <div className='cancel'>                    
-                        <button onClick={context.hideModal}>Cancel</button>
-                    </div>
+                    <button className='cancel-btn' onClick={context.hideModal}>Cancel</button>
                 </Modal>
                 <div className='data-container'>
                     <h3>Property Status</h3>
-                    <button className='add-data' onClick={context.showModal}>Add Property Status</button>
+                    <button className='add-btn' onClick={context.showModal}>Add Property Status</button>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -146,11 +140,11 @@ class PropertyStatus extends Component {
                                 <td>
                                     <Moment format="YYYY/MM/DD">{s.created_at}</Moment>                                
                                 </td>
-                                <td className='update'>
-                                    <button onClick={() => context.updateUpdate(s.statusdescr, s.id)}>Update</button>
+                                <td>
+                                    <button className='update-btn' onClick={() => context.updateUpdate(s.statusdescr, s.id)}>Update</button>
                                 </td>
-                                <td className='delete'>
-                                    <button onClick={() => context.updateDelete(s.statusdesc, s.id)}>Delete</button>
+                                <td>
+                                    <button className='delete-btn' onClick={() => context.updateDelete(s.statusdesc, s.id)}>Delete</button>
                                 </td>
                             </tr>
                             ))}

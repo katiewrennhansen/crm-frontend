@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import './Login.css'
 import SubmitButton from './LoginComponents/SubmitButton'
 import TextInput from './LoginComponents/TextInput'
-import TokenService from '../../services/token-service'
-import AuthApiService from '../../services/auth-api-service'
+import TokenService from '../../../services/token-service'
+import AuthApiService from '../../../services/auth-api-service'
 
 
 class Login extends Component {

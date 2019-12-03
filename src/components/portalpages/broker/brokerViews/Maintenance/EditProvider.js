@@ -76,7 +76,7 @@ class EditProvider extends Component {
 
     editProvider = (e) => {
         e.preventDefault()
-        const id = this.props.id
+        // const id = this.props.id
         const updatedProvider = {
             pemail: e.target.email.value,
             pemail2: e.target.email_alt.value,

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
-import './CustomerAccounts.css'
 import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
 
@@ -111,9 +110,9 @@ class CustomerAccounts extends Component {
                                         <td className='update'>
                                             <Link to={`/dashboard/customer-accounts/${id}`}>View</Link>
                                         </td>
-                                        <td className='delete'>
+                                        <td>
                                             <button 
-                                                className='delete' 
+                                                className='delete-btn' 
                                                 id={`delete${id}`} 
                                                 onClick={() => this.deactivateCustomer(id)}
                                             >

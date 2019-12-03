@@ -7,17 +7,27 @@
 
 .dash-header h1 {
     padding-left: 40px;
-    grid-column: 1 / 4;
+    grid-column: 1 / 5;
 }
 
 .dashboard-nav {
-    grid-column: 5 / -1;
-    display: grid;
-    grid-template-columns: repeat(2, 80px);
-    align-content: center;
-    justify-content: center;
+    grid-column: 6 / 7;
+    align-self: center;
+    justify-self: flex-start;
+    padding-right: 50px;
 }
+
+.admin-logout {
+    grid-column: 6 / 7;
+    align-self: center;
+}
+
+.admin-logout:hover {
+    cursor: pointer;
+}
+
 .account {
     color: #343434;
     padding-right: 20px;
 }
+

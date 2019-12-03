@@ -2,7 +2,6 @@
 
 nav {
     display: grid;
-    /* grid-template-columns: repeat(4, 1fr), 100px, repeat(19, 1fr); */
 }
 
 .link,
@@ -84,8 +83,8 @@ nav {
     color: rgb(77, 154, 77);
     border: 2px solid rgb(77, 154, 77);
     transition: 300ms linear 10ms;
+    cursor: pointer;
 }
-
 
 .logout {
     margin: 5px 0;

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
-import Modal from '../../pagecomponents/Modal'
+import Modal from '../../../../utilities/Modal/Modal'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
-import DeleteModal from '../../pagecomponents/DeleteModal'
+import DeleteModal from '../../../../utilities/Modal/DeleteModal'
 
 const commEndpoint = config.COMMENTS_ENDPOINT
 
@@ -94,13 +94,9 @@ class AdminComments extends Component {
                                     placeholder="Comment Type"
                                 />
                             </div>
-                            <div className='update'>
-                                <button type='submit'>Update</button>
-                            </div>
+                            <input className='update-btn' type='submit' value="pdate"></input>
                         </form>
-                        <div className='cancel'>
-                            <button onClick={context.hideUpdate}>Cancel</button>   
-                        </div>
+                        <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button>   
                     </div>
                 </Modal>
                 <Modal className='add-modal' show={context.show} >
@@ -119,14 +115,12 @@ class AdminComments extends Component {
                         </div>
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
-                    <div className='cancel'>
-                        <button onClick={context.hideModal}>Cancel</button>
-                    </div>
+                    <button className='cancel-btn' onClick={context.hideModal}>Cancel</button>
                 </Modal>
                 
                 <div className='data-container'>
                     <h3>Comments Type</h3>
-                    <button className='add-data' onClick={context.showModal}>Add Comment Type</button>
+                    <button className='add-btn' onClick={context.showModal}>Add Comment Type</button>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -143,11 +137,11 @@ class AdminComments extends Component {
                                 <td>
                                     <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
                                 </td>
-                                <td className='update'>
-                                    <button onClick={() => context.updateUpdate(c.commdesc, c.id)}>Update</button>
+                                <td>
+                                    <button className='update-btn' onClick={() => context.updateUpdate(c.commdesc, c.id)}>Update</button>
                                 </td>
-                                <td className='delete'>
-                                    <button onClick={() => context.updateDelete(c.commdesc, c.id)}>Delete</button>
+                                <td>
+                                    <button  className='delete-btn' onClick={() => context.updateDelete(c.commdesc, c.id)}>Delete</button>
                                 </td>
                             </tr>
                         ))}

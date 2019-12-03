@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans:300&display=swap');
 
+
+
+/* =============
+GLOBAL STYLES
+============= */
+
+/* FONT STYLES */
+.dashboard-container h1,
+.dashboard-container h2,
+.dashboard-container h3 {
+    font-family: 'Work Sans', sans-serif;
+}
+
+.dashboard-container {
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+/* GLOBAL ELEMENT STYLES */
 table {
     border-collapse: collapse;
     border: 1px solid rgb(138, 138, 138);
@@ -29,16 +48,18 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border: none;
-    border-radius: 2px;
+    border: 1px sold gray;
+    border-radius: 5px;
+    width: 75%;
     background: url(https://image.flaticon.com/icons/svg/32/32195.svg) 95% / 5% no-repeat #fff;
 }
 
 
-.dashboard-container h1,
-.dashboard-container h2,
-.dashboard-container h3 {
-    font-family: 'Work Sans', sans-serif;
+/* ================
+CONTAINER STYLES
+================ */
+.dash-home {
+    padding: 30px;
 }
 
 .data-container h3 {
@@ -46,58 +67,148 @@ select {
     font-size: 25px;
 }
 
-.add-data  {
-    grid-column: 4 / -1;
-    border-radius: 5px;
-    margin: 15px 0;
-    border: 1px solid rgb(87, 87, 87);
-    font-size: 16px;
-    box-shadow: 1px 1px 2px rgb(176, 176, 176);
+.data-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 
 
+
+/* ================
+COMPONENT STYLES
+================ */
+
+/* BUTTONS */
+
+.edit,
+.cancel-btn,
+.add-btn,
+.update-btn,
+.delete-btn {
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.edit,
+.cancel-btn,
+.add-btn,
+.update-btn {
+    color: rgb(63, 63, 63);
+    border: 1px solid rgb(63, 63, 63);
+    box-shadow: 1px 1px 2px gray;
+}
+
+.update-btn {
+    padding: 8px 10px;
+}
+
+.edit {
+    display: grid;
+    grid-column: 6 / -1;
+    width: 150px;
+    text-align: center;
+}
+
+.cancel-btn {
+    padding: 10px 20px;
+    margin-top: 15px;
+    justify-self: flex-end;
+}
+
+.add-btn  {
+    grid-column: 4 / -1;
+    margin: 15px 0;
+}
+
+.delete-btn {
+    border: 1px solid red;
+    color: red;
+    padding: 8px 10px;
+    box-shadow: 1px 1px 2px rgb(225, 125, 125);
+}
+
+.edit:hover,
+.cancel-btn:hover,
+.add-btn:hover,
+.update-btn:hover,
+.delete-btn:hover {
+    box-shadow: 2px 2px 3px gray;    
+    transition: 300ms linear;
+    cursor: pointer;
+}
+
+
+
+/* FORMS */
+.edit-form,
+.add-form {
+    background: white;
+    padding: 30px 60px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgb(174, 174, 174);  
+    margin: 20px 0;  
+}
+
+
+
+/* MODAL STYLES */
 .add-content {
     width: 300px;
     margin: 0 auto;
 }
 
 
-td button {
-    border-radius: 5px;
-    font-size: 16px;
-    padding: 8px 10px;
-    box-shadow: 1px 1px 2px rgb(176, 176, 176);
-}
 
-td button:hover,
-.add-data:hover {
-    box-shadow: 1px 1px 3px gray;
-    cursor: pointer;
-    transition: 200ms linear;
-}
-
-.update button {
-    border: 1px solid rgb(87, 87, 87);
-    border-radius: 5px;
-    font-size: 16px;
-    padding: 8px 10px;
-    box-shadow: 1px 1px 2px rgb(176, 176, 176);
-}
-
-.delete button {
-    border: 1px solid red;
-    color: red;
-}
-.promotion-container,
-.data-container {
+/* COMPANY SETUP STYLES */
+div.edit-company {
+    width: 60%;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-column: 1 / -1;
 }
 
-.dashboard-container {
-    font-family: 'Open Sans', sans-serif;
+.company-info-container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
 }
 
+.company-info {
+    grid-column: 1 / 8;
+}
+
+
+
+/* PROCESS STEPS PAGE STYLES */
+.steps-grid {
+    display: grid;
+    grid-template-columns: 20px 300px 50px;
+    align-items: center;
+}
+
+.steps-grid button {
+    background: none;
+    border: none;
+    font-size: 25px;
+    padding: 0;
+}
+
+
+/* CUSTOMER ACCOUNTS STYLES */
+.deactivated {
+    color: gray;
+}
+
+.deactivated button {
+    color: gray;
+    border: 1px solid gray;
+}
+
+
+
+/* =============
+MEDIA QUERIES
+============= */
 @media (min-width: 900px){
     .dashboard-container {
         display: grid;

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
 import config from '../../../../../config'
-import './CompanySetUp.css'
 import ApiService from '../../../../../services/api-service'
 
 
@@ -69,8 +68,11 @@ class EditSettings extends Component {
         const info = this.state.companyInfo
         return (
             <div className='edit-company'>
-                <h3>Edit Company Information</h3>
-                <form className="edit-company-form" onSubmit={(e) => this.handleSubmit(e)}>
+                <div className="header-grid">
+                    <h3>Edit Company Information</h3>
+                    <Link className='company-btn cancel-btn'to='/dashboard/company-setup'>Back</Link>
+                </div>
+                <form className="edit-company-form edit-form" onSubmit={(e) => this.handleSubmit(e)}>
 
                 <div className='form-group'>
                     <label htmlFor='company_name'>Company Name</label>
@@ -162,18 +164,18 @@ class EditSettings extends Component {
                         defaultValue={info.ctax_id}
                     />
                 </div>
-                <div className='edit-company-form-btn'>
-                    <Link 
+                {/* <div className='edit-company-form-btn'> */}
+                    {/* <Link 
                         className='company-btn cancel'
                         to='/dashboard/company-setup'
                     >
                         Back
-                    </Link>
+                    </Link> */}
                     <SubmitButton 
                         className='save'
                         text='save'
                     />
-                </div>
+                {/* </div> */}
             </form>
         </div>
           

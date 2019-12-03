@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import Moment from 'react-moment'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
-import Modal from '../../pagecomponents/Modal'
+import Modal from '../../../../utilities/Modal/Modal'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
-import DeleteModal from '../../pagecomponents/DeleteModal'
+import DeleteModal from '../../../../utilities/Modal/DeleteModal'
 
 const catEndpoint = config.CATEGORIES_ENDPOINT
 
@@ -97,13 +97,9 @@ class Categories extends Component {
                                     type='text'
                                 />
                             </div>
-                            <div className='update'>
-                                <button type='submit'>Update</button>
-                            </div>
+                            <input className='update-btn' type='submit'value="Update"></input>
                         </form>
-                        <div className='cancel'>
-                            <button onClick={context.hideUpdate}>Cancel</button>   
-                        </div>
+                        <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button>   
                     </div>
                 </Modal>
                 <Modal className='add-modal' show={context.show} >
@@ -123,14 +119,12 @@ class Categories extends Component {
                         </div>
                         <SubmitButton className='submit-content' text='Save'/>
                     </form>
-                    <div className='cancel'>
-                        <button onClick={context.hideModal}>Cancel</button>
-                    </div>
+                    <button className='cancel-btn' onClick={context.hideModal}>Cancel</button>
                 </Modal>
                 
                 <div className='data-container'>
                     <h3>Categories</h3>
-                    <button className='add-data' onClick={context.showModal}>Add Category</button>
+                    <button className='add-btn' onClick={context.showModal}>Add Category</button>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -147,11 +141,11 @@ class Categories extends Component {
                                 <td>
                                     <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
                                 </td>
-                                <td className='update'>
-                                    <button onClick={() => context.updateUpdate(c.ccategdesc, c.id)}>Update</button>
+                                <td>
+                                    <button className='update-btn' onClick={() => context.updateUpdate(c.ccategdesc, c.id)}>Update</button>
                                 </td>
-                                <td className='delete'>
-                                    <button onClick={() => context.updateDelete(c.ccategdesc, c.id)}>Delete</button>
+                                <td>
+                                    <button className='delete-btn' onClick={() => context.updateDelete(c.ccategdesc, c.id)}>Delete</button>
                                 </td>
                             </tr>
                         ))}

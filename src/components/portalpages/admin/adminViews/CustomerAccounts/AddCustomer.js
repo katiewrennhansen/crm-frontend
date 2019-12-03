@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
-import './CustomerAccounts.css'
 import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
 
@@ -126,7 +125,7 @@ class AddCustomer extends Component {
                     <Link className='cancel-btn' to='/dashboard/customer-accounts'>Cancel</Link>
                 </div>
                     <form 
-                        className= 'add-customer-form' 
+                        className= 'add-form' 
                         onSubmit={(e) => this.addCustomer(e)}
                     >
                         <div className='add-customer-form-group'>

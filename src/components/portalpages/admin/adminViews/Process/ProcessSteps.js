@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import config from '../../../../../config'
-import TextInput from '../../../../Login/LoginComponents/TextInput'
 import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
 import SubmitButton from '../../../../Login/LoginComponents/SubmitButton'
-import './Process.css'
 
 const processEndpoint = config.PROCESS_ENDPOINT
 
@@ -68,7 +67,10 @@ class ProcessSteps extends Component {
         const context = this.context
         return (
             <div className='process-container'>
-                <h3>Process For: {this.state.name.processdesc}</h3>
+                <div className="header-grid">
+                    <h3>Process For: {this.state.name.processdesc}</h3>
+                    <Link className="cancel-btn" to='/dashboard/process'>Back</Link>
+                </div>
                 <div>
                     {context.data.map(s => (
                         <div className='steps-grid' key={s.id}>
@@ -78,24 +80,22 @@ class ProcessSteps extends Component {
                         </div>
                     ))}
                 </div>
-                <form id='add-steps' onSubmit={(e) => this.addStep(e)}>
+                <form id='add-steps' className="add-form" onSubmit={(e) => this.addStep(e)}>
                     <h4>Add Steps to {this.state.name.processdesc}</h4>
                     <div className='form-group'>
-                        <label htmlFor='sequence'></label>
-                        <TextInput 
-                            class='process-input'
+                        <label htmlFor='sequence'>Sequence Number</label>
+                        <input 
                             type='number'
                             name='sequence'
-                            label='Sequence Number'
+                            placeholder='Sequence Number'
                         />
                     </div>
                     <div className='form-group'>
-                        <label htmlFor='process'></label>
-                        <TextInput 
-                            class='process-input'
+                        <label htmlFor='process'>Step Name</label>
+                        <input 
                             type='text'
                             name='process'
-                            label='Step Name'
+                            placeholder='Step Name'
                         />
                     </div>
                     <SubmitButton text='Add Step'/>

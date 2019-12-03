@@ -70,7 +70,7 @@
     margin-bottom: 10px;
   }
 
-  .delete-modal-grid .cancel {
+  .delete-modal-grid .cancel-btn {
     grid-column: 1 / 2;
     grid-row: 2 / -1;
     align-self: flex-end;

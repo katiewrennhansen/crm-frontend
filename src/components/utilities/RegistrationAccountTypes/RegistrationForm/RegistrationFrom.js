@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './RegistrationForm.css'
-import SubmitButton from '../../Login/LoginComponents/SubmitButton'
-import TextInput from '../../Login/LoginComponents/TextInput'
+import SubmitButton from '../../LoginComponents/SubmitButton'
+import TextInput from '../../LoginComponents/TextInput'
 
 class RegistrationForm extends Component {
 

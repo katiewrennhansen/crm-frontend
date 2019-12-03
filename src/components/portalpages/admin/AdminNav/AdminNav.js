@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './AdminNav.css'
-import LogoutButton from '../../../Login/LoginComponents/LogoutButton'
 import TokenService from '../../../../services/token-service'
  
 class AdminNav extends Component {
@@ -32,15 +31,13 @@ class AdminNav extends Component {
                         className='account-nav-link' 
                         to='/' 
                         style={{textDecoration: 'none'}}
-                        // onClick={() => this.props.handleTitle('Account Settings')}                        
                     >
                         <p className='account'>Website</p>
                     </Link>
-                    <LogoutButton 
-                        className='dash-nav-logout' 
-                        text='logout'
-                        handleLogout={this.logout}
-                    />               
+                    <button 
+                        className='logout admin-logout' 
+                        onClick={this.logout}
+                    >Logout</button>             
                 </nav>
             </div>
         )

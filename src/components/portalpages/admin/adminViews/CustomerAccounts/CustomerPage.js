@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
-import './CustomerAccounts.css'
 import ApiService from '../../../../../services/api-service';
 
 const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT

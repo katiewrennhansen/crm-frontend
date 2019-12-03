@@ -10,8 +10,8 @@ const DeleteModal = ({props, deleteFn}) => {
             <div className='cancel'>                    
                 <button onClick={props.hideDelete}>Cancel</button>
             </div>
-            <div className='delete'>
-                <button onClick={() => deleteFn(props.idDelete)}>
+            <div >
+                <button className='delete-btn' onClick={() => deleteFn(props.idDelete)}>
                     Delete
                 </button>
             </div>
