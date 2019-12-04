@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import BrokerContext from '../../../../../contexts/BrokerContext'
 import ApiService from '../../../../../services/api-service'
 import config from '../../../../../config'
@@ -9,7 +10,8 @@ class Network extends Component {
     constructor(props){
         super(props)
         this.state = {
-            network: []
+            network: [],
+            error: null
         }
     }
 
@@ -20,37 +22,41 @@ class Network extends Component {
     }
 
     componentDidMount(){
-        const endpoint = `${config.API_ENDPOINT}/customers/1/networks`
+        const endpoint = `${config.API_ENDPOINT}/customers/10/networks`
         ApiService.getDataHalf(endpoint)
             .then(data => {
-
+                this.setNetwork(data.networks)
+            })
+            .catch(error => {
+                console.log(error)
             })
     }
 
     render(){
         return (  
-            <div className='data-container'>
-            <h3>Promotions</h3>
+            <div className='container'>
+                <div className='header-grid'>
+                    <h3>Network</h3>
+                    <Link to='broker/network/add' className='add'>Add Network</Link>
+                </div>
                 <table className='data-table'>
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Total Cost</th>
-                            <th></th>
+                            <th>Contact</th>
+                            <th>Reference</th>
+                            <th>Special Event</th>
+                            <th>Event Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.data.map(p => (
+                        {this.state.network.map(p => (
                         <tr key={p.data.id}>
-                            <td>{p.data.typepromotion}</td>
-                            <td>{p.data.startdate}</td>
-                            <td>{p.data.duedate}</td>
-                            <td>{p.data.totalcost}</td>
-                            <td>
-                                <button className='update-btn' onClick={() => this.setAssign(true, p.data.id, p.data.typepromotion)}>Assign to User</button>
-                            </td>
+                            <td>{p.data.customer}</td>
+                            <td>{p.data.contact}</td>
+                            <td>{p.data.reference}</td>
+                            <td>{p.data.specialevent}</td>
+                            <td>{p.data.eventdate}</td>
                         </tr>
                         ))}
                     </tbody>
