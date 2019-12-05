@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import Modal from '../../../../utilities/Modal/Modal'
@@ -134,7 +135,10 @@ class Promotion extends Component {
                                 <td>{p.data.duedate}</td>
                                 <td>{p.data.totalcost}</td>
                                 <td>
-                                    <button className='update-btn' onClick={() => this.setAssign(true, p.data.id, p.data.typepromotion)}>Assign to User</button>
+                                    {/* <button className='update-btn' onClick={() => this.setAssign(true, p.data.id, p.data.typepromotion)}>Assign to User</button> */}
+                                    <Link to={`/broker/promotions/${p.data.id}`}>
+                                        <button className='update-btn'>Assign to User</button>
+                                    </Link>
                                 </td>
                             </tr>
                             ))}

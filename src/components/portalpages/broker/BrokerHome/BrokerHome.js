@@ -18,6 +18,7 @@ import AddProperty from '../brokerViews/Properties/AddProperty'
 import './BrokerHome.css'
 import AddProvider from '../brokerViews/Maintenance/AddProvider'
 import EditProvider from '../brokerViews/Maintenance/EditProvider'
+import PromotionPage from '../brokerViews/Promotion/PromotionPage'
 
 
 class BrokerHome extends Component {
@@ -107,8 +108,20 @@ class BrokerHome extends Component {
                                 }}
                             />
                             <Route 
-                                path='/broker/promotions' 
+                                exact path='/broker/promotions' 
                                 component={Promotion}
+                            />
+                            <Route 
+                                path='/broker/promotions/:id' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    return (
+                                    <PromotionPage 
+                                        id={id}
+                                        history={history}
+                                    />
+                                    )
+                                }}
                             />
                             <Route 
                                 exact path='/broker/maintenance' 
