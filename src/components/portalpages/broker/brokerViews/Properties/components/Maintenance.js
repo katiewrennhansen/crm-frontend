@@ -74,12 +74,14 @@ class Maintenance extends Component {
             }
         }
 
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
-        ApiService.postDataHalf(endpoint, newMaintenance)
+        const maintEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+        
+        ApiService.postDataHalf(maintEndpoint, newMaintenance)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setMaintenance(data)
+                        this.setMaintenance(data.data.maintenance)
                     })
             })
             .catch(error => {
@@ -88,12 +90,14 @@ class Maintenance extends Component {
     }
 
     deleteMaintenance = (id) => {
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
-        ApiService.deleteDataHalf(endpoint, id)
+        const maintEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+
+        ApiService.deleteDataHalf(maintEndpoint, id)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setMaintenance(data)
+                        this.setMaintenance(data.data.maintenance)
                     })
             })
             .catch(error => {

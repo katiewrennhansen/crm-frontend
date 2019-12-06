@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 
-const promotionsEndpoint = config.PROMOTIONS_ENDPOINT
 const assignPromsEndpoint = config.ASSIGN_PROMOTIONS_ENDPOINT
 
 
@@ -41,7 +40,6 @@ class PromotionPage extends Component {
         const singlePromoEndpoint = `${config.API_ENDPOINT}/promotions/${this.props.id}`
         ApiService.getDataHalf(singlePromoEndpoint)
             .then(data => {
-                console.log(data)
                 this.setPromotion(data)
                 this.setAssigned(data.data.assigned)
             })
@@ -55,17 +53,21 @@ class PromotionPage extends Component {
     }
 
     assignPromotion = (e) => {
+        const singlePromoEndpoint = `${config.API_ENDPOINT}/promotions/${this.props.id}`
+
         e.preventDefault()
         const assignUser = {
             unitcost: e.target.cost.value,
             email: e.target.customer.value,
             promotion_id: this.props.id,
         }
-        console.log(assignUser)
 
         ApiService.postDataHalf(assignPromsEndpoint, assignUser)
             .then(data => {
-                console.log(data)
+                ApiService.getDataHalf(singlePromoEndpoint)
+                    .then(data => {
+                        this.setAssigned(data.data.assigned)  
+                    })
             })
             .catch(error => {
                 console.log(error)
@@ -73,6 +75,11 @@ class PromotionPage extends Component {
         e.target.cost.value = ""
         e.target.customer.value = ""
         e.target.date.value = ""
+    }
+
+    
+    unassignPromo = (id) => {
+        console.log(`deleting promotion ${id}`)
     }
 
 
@@ -105,7 +112,34 @@ class PromotionPage extends Component {
                         <h3>Assigned Users</h3>
                         <button className='add' id="c-btn" onClick={this.toggleForm}>+</button>
                     </div>
+                    
+                    <table className='data-table'>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Cost</th>
+                                <th>Assigned</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.assigned.map(a => {
+                                return (
+                                <tr key={a.id}>
+                                    <td>{a.customer}</td>
+                                    <td>{a.cost}</td>
+                                    <td>{a.assigned}</td>
+                                    <td>
+                                        <button className='update-btn' onClick={() => this.unassignPromo(a.id)}>Unassign</button>
+                                    </td>
+                                </tr>
+                                )
+                            })}
+                            
+                        </tbody>
+                    </table>
                     <form className="sp-form hidden" id="costs-form" onSubmit={(e) => {this.assignPromotion(e)}}>
+                        <h3>Assign User to {data.typepromotion}</h3>
                         <div className="form-group">
                             <label htmlFor="customer">Customer: </label>
                             <select name="customer">
@@ -130,32 +164,6 @@ class PromotionPage extends Component {
                         </div>
                         <input type="submit" className="submit" value="Assign Promotion"></input>
                     </form>
-                    <table className='data-table'>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Cost</th>
-                                <th>Assigned</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.assigned.map(a => {
-                                return (
-                                <tr key={a.id}>
-                                    <td>{a.customer}</td>
-                                    <td>{a.cost}</td>
-                                    <td>{a.assigned}</td>
-                                    <td>
-                                        <button className='update-btn' onClick={() => this.setAssign(true, data.id, data.typepromotion)}>Unassign</button>
-                                    </td>
-                                </tr>
-                                )
-                            })}
-                            
-                        </tbody>
-                    </table>
-                        
                     <p>{(this.state.error) ? this.state.error : null}</p>
                 </div>
             </>

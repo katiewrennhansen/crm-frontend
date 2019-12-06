@@ -14,8 +14,16 @@ class SinglePageProperty extends Component {
     constructor(props){
         super(props)
         this.state = {
-            error: null
+            error: null,
+            costs: []
+
         }
+    }
+
+    setCosts = (costs) => {
+        this.setState({
+            costs
+        })
     }
 
    
@@ -70,6 +78,7 @@ class SinglePageProperty extends Component {
                 />
                <Cost
                     id={this.props.id}
+                    setCosts={this.setCosts}
                 />
             </div>
         )

@@ -54,12 +54,14 @@ class Messages extends Component {
             }
         }
 
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/assetcomments`
-        ApiService.postDataHalf(endpoint, newMessage)
+        const messEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/assetcomments`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+
+        ApiService.postDataHalf(messEndpoint, newMessage)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setMessages(data)
+                        this.setMessages(data.data.messages)
                     })
             })
             .catch(error => {
@@ -71,12 +73,14 @@ class Messages extends Component {
     }
 
     deleteMessage = (id) => {
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/assetcomments`
-        ApiService.deleteDataHalf(endpoint, id)
+        const messEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/assetcomments`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+
+        ApiService.deleteDataHalf(messEndpoint, id)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setMessages(data)
+                        this.setMessages(data.data.messages)
                     })
             })
             .catch(error => {

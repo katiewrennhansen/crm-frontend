@@ -39,12 +39,13 @@ class Cost extends Component {
             }
         }
 
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
-        ApiService.postDataHalf(endpoint, newCost)
+        const costEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+        ApiService.postDataHalf(costEndpoint, newCost)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setCosts(data)
+                        this.setCosts(data.data.costs)
                     })
             })
             .catch(error => {
@@ -58,12 +59,13 @@ class Cost extends Component {
     }
 
     deleteCost = (id) => {
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
-        ApiService.deleteDataHalf(endpoint, id)
+        const costEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+        ApiService.deleteDataHalf(costEndpoint, id)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setCosts(data)
+                        this.setCosts(data.data.costs)
                     })
             })
             .catch(error => {

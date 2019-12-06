@@ -50,12 +50,14 @@ class Features extends Component {
             featuretype_id: e.target.feature_type.value
         }
 
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/features`
-        ApiService.postDataHalf(endpoint, newFeature)
+        const featEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/features`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+
+        ApiService.postDataHalf(featEndpoint, newFeature)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setFeatures(data)
+                        this.setFeatures(data.data.features)
                     })
             })
             .catch(error => {
@@ -67,12 +69,14 @@ class Features extends Component {
     }
 
     deleteFeature = (id) => {
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/features`
-        ApiService.deleteDataHalf(endpoint, id)
+        const featEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/features`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+
+        ApiService.deleteDataHalf(featEndpoint, id)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setFeatures(data)
+                        this.setFeatures(data.data.features)
                     })
             })
             .catch(error => {

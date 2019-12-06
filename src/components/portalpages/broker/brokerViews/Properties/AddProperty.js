@@ -17,7 +17,8 @@ class AddProperty extends Component {
             categories: [],
             status: [],
             assets: [],
-            customers: []
+            customers: [],
+            file: []
         }
     }
 
@@ -60,6 +61,12 @@ class AddProperty extends Component {
     setCustomers = (customers) => {
         this.setState({
             customers
+        })
+    }
+
+    updateFiles = (file) => {
+        this.setState({
+            file: [...file]
         })
     }
 
@@ -113,9 +120,12 @@ class AddProperty extends Component {
             })
     }
 
+    fileSelectedHandler = (e) => {
+        this.updateFiles(e.target.files)
+    }
+
     submitProperty = (e) => {
         e.preventDefault()
-        console.log('property submitted')
         const newProperty = {
             adescription4: e.target.street_name.value,
             adescription5: e.target.city.value,
@@ -138,16 +148,20 @@ class AddProperty extends Component {
             insurancedued : e.target.insurance_due.value
         }
 
-        const endpoint = `${config.API_ENDPOINT}/assets`
+        console.log(this.state.file)
+        console.log(e.target.images.value)
 
-        ApiService.postDataHalf(endpoint, newProperty)
-            .then(data => {
-                console.log(data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        this.props.history.push('/broker/properties')
+
+        // const endpoint = `${config.API_ENDPOINT}/assets`
+
+        // ApiService.postDataHalf(endpoint, newProperty)
+        //     .then(data => {
+        //         console.log(data)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+        // this.props.history.push('/broker/properties')
     }
 
     render(){
@@ -309,9 +323,19 @@ class AddProperty extends Component {
                             <label htmlFor="insurance_due">Insurance Due: </label>
                             <input type="date" name="insurance_due"></input>
                         </div>
-                        
-                        
 
+
+                        <h3>Upload Images</h3>
+                        <div className="form-group">
+                            <label htmlFor="images">Images: </label>
+                            <div>
+                                {this.state.file.map(f => {
+                                    return (<p key={f.name}>{f.name}</p>)
+                                })}
+                                <input type="file" name="images" onChange={this.fileSelectedHandler} multiple></input>
+                            </div>
+                        </div>
+                        
                         <input type="submit" className="submit" value="Add Property"></input>
                     </form>
                 </div>

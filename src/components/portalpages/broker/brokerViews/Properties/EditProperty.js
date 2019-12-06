@@ -17,7 +17,8 @@ class EditProperty extends Component {
             categories: [],
             status: [],
             assets: [],
-            customers: []
+            customers: [],
+            file: []
         }
     }
 
@@ -60,6 +61,12 @@ class EditProperty extends Component {
     setCustomers = (customers) => {
         this.setState({
             customers
+        })
+    }
+    
+    updateFiles = (file) => {
+        this.setState({
+            file: [...file]
         })
     }
 
@@ -118,6 +125,10 @@ class EditProperty extends Component {
             .catch(error => {
                 console.log(error)
             })
+    }
+
+    fileSelectedHandler = (e) => {
+        this.updateFiles(e.target.files)
     }
 
     editProperty = (e) => {
@@ -317,7 +328,16 @@ class EditProperty extends Component {
                             <input type="date" name="insurance_due"defaultValue={asset.insurancedued}></input>
                         </div>
                         
-                        
+                        <h3>Upload Images</h3>
+                        <div className="form-group">
+                            <label htmlFor="images">Images: </label>
+                            <div>
+                                {this.state.file.map(f => {
+                                    return (<p key={f.name}>{f.name}</p>)
+                                })}
+                                <input type="file" name="images" onChange={this.fileSelectedHandler} multiple></input>
+                            </div>
+                        </div>
 
                         <input type="submit" className="submit" value="Edit Property"></input>
                     </form>
