@@ -1,19 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
-import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
-import ContactForm from '../../../../utilities/Forms/ContactForm'
+import ContactFrom from '../../../../utilities/Forms/ContactForm'
 
-const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
-
-class EditCustomer extends Component {
-    static contextType = AdminContext
+class EditContact extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            customers: [],
+            customers: []
         };
     }
 
@@ -23,9 +19,11 @@ class EditCustomer extends Component {
         })
     }
 
+
     componentDidMount(){
         const id = this.props.id
-        ApiService.getById(caEndpoint, id)
+        const endpoint = `${config.API_ENDPOINT}/customers`
+        ApiService.getById(endpoint, id)
             .then(data => {
                 this.setCustomer(data.data)
             })
@@ -65,18 +63,18 @@ class EditCustomer extends Component {
 
         console.log(updatedCustomer, id)
 
-        ApiService.updateDataHalf(caEndpoint, id, updatedCustomer)
-            .then(data => {
-                console.log(data)
-                ApiService.getDataHalf(caEndpoint)
-                    .then(data => {
-                        this.setCustomer(data.customers)
-                    })
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        this.props.func.history.push(`/dashboard/customer-accounts/${id}`)
+        // ApiService.updateDataHalf(caEndpoint, id, updatedCustomer)
+        //     .then(data => {
+        //         console.log(data)
+        //         ApiService.getDataHalf(caEndpoint)
+        //             .then(data => {
+        //                 this.setCustomer(data.customers)
+        //             })
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+        // this.props.func.history.push(`/broker/contacts/${id}`)
     }
 
     render(){ 
@@ -84,16 +82,16 @@ class EditCustomer extends Component {
             <div className='add-customer'>
                 <div className='header-grid'>
                     <h2>Edit Customer</h2>
-                    <Link className='cancel-btn' to={`/dashboard/customer-accounts/${this.props.id}`}>Cancel</Link>
+                    <Link className='cancel-btn' to={`/broker/contacts/${this.props.id}`}>Cancel</Link>
                 </div>
 
-                <ContactForm
-                    cust={this.state.customers}
+                <ContactFrom 
                     handleSubmit={this.editCustomer}
+                    cust={this.state.customers}
                 />
             </div>
         )
     }
 }
 
-export default EditCustomer
+export default EditContact

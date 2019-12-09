@@ -20,6 +20,8 @@ import EditProvider from '../brokerViews/Maintenance/EditProvider'
 import PromotionPage from '../brokerViews/Promotion/PromotionPage'
 import ContactPage from '../brokerViews/Contacts/ContactPage'
 import './BrokerHome.css'
+import EditContact from '../brokerViews/Contacts/EditContact'
+import AddContact from '../brokerViews/Contacts/AddContact'
 
 
 class BrokerHome extends Component {
@@ -169,11 +171,27 @@ class BrokerHome extends Component {
                                 component={Contacts}
                             />
                             <Route 
+                                exact path='/broker/contacts/add' 
+                                component={AddContact}
+                            />
+                            <Route 
                                 exact path='/broker/contacts/:id' 
                                 render={(history) => {
                                     const id = history.match.params.id;
                                     return (
                                         <ContactPage
+                                            id={id}
+                                            history={history}
+                                        />
+                                    )
+                                }}
+                            />
+                            <Route 
+                                path='/broker/contacts/:id/edit' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    return (
+                                        <EditContact
                                             id={id}
                                             history={history}
                                         />

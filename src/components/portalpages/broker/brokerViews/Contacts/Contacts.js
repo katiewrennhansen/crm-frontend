@@ -36,8 +36,8 @@ class Contacts extends Component {
         return (
                 <div className='container'>
                     <div className='header-grid'>
-                        <h3>Customer Accounts</h3>
-                        <Link to='/broker/contacts/add' className='btn'>Add Customer</Link>
+                        <h3>Contacts</h3>
+                        <Link to='/broker/contacts/add' className='btn'>Add Contact</Link>
                     </div>
                     <table className='data-table'>
                         <thead>

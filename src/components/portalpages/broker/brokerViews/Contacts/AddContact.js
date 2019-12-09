@@ -1,23 +1,37 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
-import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
 import ContactFrom from '../../../../utilities/Forms/ContactForm'
 
-const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
-
-class AddCustomer extends Component {
-    static contextType = AdminContext
+class AddContact extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            error: null
+            customers: []
         };
     }
 
-    addCustomer = (e) => {
+    setCustomer = customers => {
+        this.setState({
+            customers
+        })
+    }
+
+    componentDidMount(){
+        const id = this.props.id
+        const endpoint = `${config.API_ENDPOINT}/customers`
+        ApiService.getById(endpoint, id)
+            .then(data => {
+                this.setCustomer(data.data)
+            })
+            .catch(error => {
+                this.setState({ error })
+            })
+    }
+
+    addContact = (e) => {
         e.preventDefault()
         const newCustomer = {
             firstname: e.target.first_name.value,
@@ -40,37 +54,36 @@ class AddCustomer extends Component {
         }
 
         console.log(newCustomer)
-
-        ApiService.postDataHalf(caEndpoint, newCustomer)
-            .then(data => {
-                console.log(data)
-                ApiService.getDataHalf(caEndpoint)
-                    .then(data => {
-                        this.setCustomers(data.customers)
-                    })
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        this.props.func.history.push('/dashboard/customer-accounts')
+        // const endpoint = `${config.API_ENDPOINT}/customers`
+        // ApiService.updateDataHalf(endpoint, newCustomer)
+        //     .then(data => {
+        //         console.log(data)
+        //         ApiService.getDataHalf(caEndpoint)
+        //             .then(data => {
+        //                 this.setCustomer(data.customers)
+        //             })
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+        // this.props.func.history.push(`/broker/contacts`)
     }
 
-    render(){  
+    render(){ 
         return (
             <div className='add-customer'>
                 <div className='header-grid'>
-                    <h2>Add Customer</h2>
-                    <Link className='cancel-btn' to='/dashboard/customer-accounts'>Cancel</Link>
+                    <h2>Add Contact</h2>
+                    <Link className='cancel-btn' to={`/broker/contacts`}>Cancel</Link>
                 </div>
-
+                
                 <ContactFrom 
-                    handleSubmit={this.addCustomer}
+                    handleSubmit={this.addContact}
                     cust={[]}
                 />
-                    
             </div>
         )
     }
 }
 
-export default AddCustomer
+export default AddContact
