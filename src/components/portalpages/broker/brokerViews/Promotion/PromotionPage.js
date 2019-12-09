@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 
-const assignPromsEndpoint = config.ASSIGN_PROMOTIONS_ENDPOINT
-
+const endpoint = `${config.API_ENDPOINT}/assignedproms`
 
 class PromotionPage extends Component {
     constructor(props) {
@@ -47,7 +46,7 @@ class PromotionPage extends Component {
                 console.log(error)
             })
         ApiService.getData(
-            assignPromsEndpoint,
+            endpoint,
             this.setUsers
         )
     }
@@ -62,7 +61,7 @@ class PromotionPage extends Component {
             promotion_id: this.props.id,
         }
 
-        ApiService.postDataHalf(assignPromsEndpoint, assignUser)
+        ApiService.postDataHalf(endpoint, assignUser)
             .then(data => {
                 ApiService.getDataHalf(singlePromoEndpoint)
                     .then(data => {
@@ -79,7 +78,17 @@ class PromotionPage extends Component {
 
     
     unassignPromo = (id) => {
-        console.log(`deleting promotion ${id}`)
+        const singlePromoEndpoint = `${config.API_ENDPOINT}/promotions/${this.props.id}`
+        ApiService.deleteDataHalf(endpoint, id)
+            .then(data => {
+                ApiService.getDataHalf(singlePromoEndpoint)
+                    .then(data => {
+                        this.setAssigned(data.data.assigned)
+                    })
+            })
+            .then(error => {
+                console.log(error)
+            })
     }
 
 
