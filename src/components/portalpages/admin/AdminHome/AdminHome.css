@@ -208,7 +208,8 @@ MEDIA QUERIES
     .dash-nav {
         grid-column: 4 / -1;
         grid-row: 1 / 2;
-        padding: 15px;
+        position: fixed;
+        margin-left: 25%;
     }
     .dash-sidebar {
         grid-column: 1 / 4;
@@ -219,7 +220,7 @@ MEDIA QUERIES
         grid-row: 2 / -1;
         padding: 0 60px;
         background-color: rgb(240, 240, 240);
-        height: 200%;
+        height: 100%;
         padding-top: 50px;
     }
 }

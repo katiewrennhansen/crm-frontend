@@ -225,7 +225,6 @@ class AdminHome extends Component {
                     </div>
                     <div className='dash-nav'>
                         <AdminNav 
-                            logout={this.logout}
                             title={this.state.title}
                             handleTitle={this.handleTitle}
                             history={this.props.history}

@@ -7,10 +7,9 @@ ul {
 .dash-sidebar-container {
     background-image: linear-gradient( to right, #343434 85%, #292929);
     color: white;
-    /* position: fixed; */
-    height: 1470px;
     width: 100%;
     font-family: 'Open Sans',sans-serif;
+    font-size: 14px;
 }
 
 .admin-info {
@@ -64,4 +63,14 @@ ul {
 
 ul {
     padding-left: 20px;
+}
+
+
+@media (min-width: 900px){
+    .dash-sidebar-container {
+        width: 25%;
+        position: fixed;
+        overflow: scroll; 
+        height: 100%;
+    }
 }

@@ -3,6 +3,7 @@
     grid-template-columns: repeat(6, 1fr);
     color: #343434;
     background: white;
+    padding: 15px;
 }
 
 .dash-header h1 {

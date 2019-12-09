@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
-import AdminNav from '../../admin/AdminNav/AdminNav'
+import BrokerNav from '../BrokerNav/BrokerNav'
 import BrokerSidebar from '../BrokerSidebar/BrokerSidebar'
 import Dashboard from '../brokerViews/Dashboard/Dashboard'
 import Properties from '../brokerViews/Properties/Properties'
@@ -15,10 +15,11 @@ import SinglePropertyPage from '../brokerViews/Properties/SinglePropertyPage'
 import BrokerContext from '../../../../contexts/BrokerContext'
 import EditProperty from '../brokerViews/Properties/EditProperty'
 import AddProperty from '../brokerViews/Properties/AddProperty'
-import './BrokerHome.css'
 import AddProvider from '../brokerViews/Maintenance/AddProvider'
 import EditProvider from '../brokerViews/Maintenance/EditProvider'
 import PromotionPage from '../brokerViews/Promotion/PromotionPage'
+import ContactPage from '../brokerViews/Contacts/ContactPage'
+import './BrokerHome.css'
 
 
 class BrokerHome extends Component {
@@ -65,9 +66,10 @@ class BrokerHome extends Component {
                         />
                     </div>
                     <div className='dash-nav'>
-                        <AdminNav 
+                        <BrokerNav 
                             handleTitle={this.handleTitle}   
                             title={this.state.title}
+                            history={this.props.history}
                         />
                     </div>
                     <div className='dash-home'>
@@ -163,8 +165,20 @@ class BrokerHome extends Component {
                                 component={Network}
                             />
                             <Route 
-                                path='/broker/contacts' 
+                                exact path='/broker/contacts' 
                                 component={Contacts}
+                            />
+                            <Route 
+                                exact path='/broker/contacts/:id' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    return (
+                                        <ContactPage
+                                            id={id}
+                                            history={history}
+                                        />
+                                    )
+                                }}
                             />
                             <Route 
                                 path='/broker/alerts' 

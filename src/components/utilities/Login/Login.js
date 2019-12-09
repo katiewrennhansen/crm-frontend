@@ -39,6 +39,7 @@ class Login extends Component {
                 TokenService.saveAuthToken(resJson.token)
                 this.props.handleUserType(resJson.usertype);
                 this.selectUserAccount(resJson.usertype);
+                sessionStorage.setItem('id', resJson.id)
             })
             .catch(err => {
                 this.setState({ error: err.error })

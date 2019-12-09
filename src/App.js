@@ -128,7 +128,7 @@ class App extends Component {
                 }}}
             />
     {/* ******** ADMIN PORTAL ROUTES ******* */}
-            <Route 
+            <PrivateRoute 
               path='/broker'
               component={BrokerHome}
             />

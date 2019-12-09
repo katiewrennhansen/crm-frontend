@@ -3,14 +3,10 @@ import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service';
 
-const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
-
 class CustomerPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            delete: false,
             customer: []
         };
     }
@@ -23,8 +19,8 @@ class CustomerPage extends Component {
     }
 
     componentDidMount(){
-        const id = this.props.id
-        ApiService.getById(caEndpoint, id)
+        const endpoint = `${config.API_ENDPOINT}/customers`
+        ApiService.getById(endpoint, this.props.id)
             .then(data => {
                 this.setCustomer(data.data)
             })
@@ -36,28 +32,6 @@ class CustomerPage extends Component {
     componentWillUnmount(){
         this.setCustomer([])
     }
-
-    addCustomer = (e) => {
-        e.preventDefault()
-        const newCustomer = {
-            customer: {
-                name: e.target.customer.value,
-                email: e.target.customer_email.value,
-                phone: e.target.customer_phone.value,
-                dateCreated: this.props.formatDate(),
-                company_id: 6,
-                user_id: 1
-            }
-        }
-        ApiService.postDataHalf(caEndpoint, newCustomer)
-        .then(data => {
-            this.setCustomers(data.customers)
-            this.props.hideModal()
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
-    }
     
     render(){  
         const data = this.state.customer
@@ -66,7 +40,7 @@ class CustomerPage extends Component {
                 <div className='container'>
                     <div className='header-grid'>
                         <h3>{data.name}</h3>
-                        <Link to={`/dashboard/customer-accounts/${data.id}/edit`} className='btn'>Edit Customer</Link>
+                        <Link to={`/broker/contacts/${data.id}/edit`} className='btn'>Edit Customer</Link>
                     </div>
                     <div>
                         <p>{data.email}</p>
@@ -87,4 +61,4 @@ class CustomerPage extends Component {
     }
 }
 
-export default CustomerPage 
+export default CustomerPage
