@@ -33,6 +33,7 @@ class EditContact extends Component {
     }
 
     editCustomer = (e) => {
+        const endpoint = `${config.API_ENDPOINT}/customers`
         e.preventDefault()
         const id = this.props.id
         let updatedCustomer = {}
@@ -61,27 +62,26 @@ class EditContact extends Component {
                 updatedCustomer[key] = updatedCustomerFields[key]
             }
 
-        console.log(updatedCustomer, id)
-
-        // ApiService.updateDataHalf(caEndpoint, id, updatedCustomer)
-        //     .then(data => {
-        //         console.log(data)
-        //         ApiService.getDataHalf(caEndpoint)
-        //             .then(data => {
-        //                 this.setCustomer(data.customers)
-        //             })
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
-        // this.props.func.history.push(`/broker/contacts/${id}`)
+        ApiService.updateDataHalf(endpoint, id, updatedCustomer)
+            .then(data => {
+                ApiService.getDataHalf(endpoint)
+                    .then(data => {
+                        this.setCustomer(data.customers)
+                    })
+                    .then(() => {
+                        this.props.history.history.push(`/broker/contacts/${id}`)
+                    })
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     render(){ 
         return (
             <div className='add-customer'>
                 <div className='header-grid'>
-                    <h2>Edit Customer</h2>
+                    <h2>Edit Contact</h2>
                     <Link className='cancel-btn' to={`/broker/contacts/${this.props.id}`}>Cancel</Link>
                 </div>
 

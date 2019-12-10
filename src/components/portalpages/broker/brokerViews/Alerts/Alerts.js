@@ -32,7 +32,6 @@ class Alerts extends Component {
     componentDidMount(){
         ApiService.getDataHalf(endpoint)
             .then(data => {
-                console.log(data)
                 this.setAlerts(data.assetcomments)
             }) 
             .catch(error => {
@@ -40,7 +39,6 @@ class Alerts extends Component {
             }) 
         ApiService.getDataHalf(commEndpoint)
             .then(data => {
-                console.log(data)
                 this.setComms(data)
             }) 
             .catch(error => {
@@ -51,7 +49,7 @@ class Alerts extends Component {
     render(){  
         return (
             <div className='data-container'>
-                <h3>Alerts</h3>
+                <h2>Alerts</h2>
                 <table className='data-table'>
                     <thead>
                         <tr>

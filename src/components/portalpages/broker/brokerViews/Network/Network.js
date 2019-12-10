@@ -32,12 +32,17 @@ class Network extends Component {
             })
     }
 
+    deleteNetwork = (id) => {
+        const endpoint = `${config.API_ENDPOINT}/customers/10/networks`
+        
+    }
+
     render(){
         return (  
             <div className='container'>
                 <div className='header-grid'>
-                    <h3>Network</h3>
-                    <Link to='broker/network/add' className='add'>Add Network</Link>
+                    <h2>Network</h2>
+                    <Link to='/broker/network/add' className='add'>Add Network</Link>
                 </div>
                 <table className='data-table'>
                     <thead>
@@ -47,6 +52,7 @@ class Network extends Component {
                             <th>Reference</th>
                             <th>Special Event</th>
                             <th>Event Date</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,6 +63,7 @@ class Network extends Component {
                             <td>{p.data.reference}</td>
                             <td>{p.data.specialevent}</td>
                             <td>{p.data.eventdate}</td>
+                            <td><button className="delete-btn" onClick={() => {this.deleteNetwork(p.data.id)}}>Delete</button></td>
                         </tr>
                         ))}
                     </tbody>

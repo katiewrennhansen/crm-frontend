@@ -39,8 +39,8 @@ class CustomerPage extends Component {
             <>
                 <div className='container'>
                     <div className='header-grid'>
-                        <h3>{data.name}</h3>
-                        <Link to={`/broker/contacts/${data.id}/edit`} className='btn'>Edit Customer</Link>
+                        <h2>{data.name}</h2>
+                        <Link to={`/broker/contacts/${data.id}/edit`} className='btn'>Edit Contact</Link>
                     </div>
                     <div>
                         <p>{data.email}</p>

@@ -19,9 +19,10 @@ import AddProvider from '../brokerViews/Maintenance/AddProvider'
 import EditProvider from '../brokerViews/Maintenance/EditProvider'
 import PromotionPage from '../brokerViews/Promotion/PromotionPage'
 import ContactPage from '../brokerViews/Contacts/ContactPage'
-import './BrokerHome.css'
 import EditContact from '../brokerViews/Contacts/EditContact'
 import AddContact from '../brokerViews/Contacts/AddContact'
+import AddNetwork from '../brokerViews/Network/AddNetwork'
+import './BrokerHome.css'
 
 
 class BrokerHome extends Component {
@@ -163,8 +164,12 @@ class BrokerHome extends Component {
                                 component={Reminders}
                             />
                             <Route 
-                                path='/broker/network' 
+                                exact path='/broker/network' 
                                 component={Network}
+                            />
+                            <Route 
+                                exact path='/broker/network/add' 
+                                component={AddNetwork}
                             />
                             <Route 
                                 exact path='/broker/contacts' 

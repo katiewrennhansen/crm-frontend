@@ -54,19 +54,21 @@ class AddContact extends Component {
         }
 
         console.log(newCustomer)
-        // const endpoint = `${config.API_ENDPOINT}/customers`
-        // ApiService.updateDataHalf(endpoint, newCustomer)
-        //     .then(data => {
-        //         console.log(data)
-        //         ApiService.getDataHalf(caEndpoint)
-        //             .then(data => {
-        //                 this.setCustomer(data.customers)
-        //             })
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
-        // this.props.func.history.push(`/broker/contacts`)
+        const endpoint = `${config.API_ENDPOINT}/customers`
+        ApiService.updateDataHalf(endpoint, newCustomer)
+            .then(data => {
+                console.log(data)
+                ApiService.getDataHalf(endpoint)
+                    .then(data => {
+                        this.setCustomer(data.customers)
+                    })
+                    .then(() => {
+                        this.props.history.push(`/broker/contacts`)
+                    })
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     render(){ 

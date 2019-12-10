@@ -87,7 +87,7 @@ class Promotion extends Component {
             <>
                 <Modal className='add-modal' show={this.state.assign}>
                     <form className='add-content' onSubmit={(e) => this.assignPromotion(e)}>
-                        <h3>Assign user to {this.state.name}</h3>
+                        <h2>Assign user to {this.state.name}</h2>
                         <div className='form-group'>
                             <select name="user" onChange={(e) => this.changeUser(e.target.value)}>
                                 <option value="">Select a User</option>

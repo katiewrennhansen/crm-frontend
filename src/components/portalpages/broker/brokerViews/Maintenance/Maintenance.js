@@ -32,7 +32,7 @@ class Maintenance extends Component {
         return (
             <div className='container'>
                 <div className='header-grid'>
-                    <h3>Maintenance</h3>
+                    <h2>Maintenance</h2>
                     <Link to='/broker/maintenance/add-provider' className='add'>Add Provider</Link>
                 </div>
                 <div>

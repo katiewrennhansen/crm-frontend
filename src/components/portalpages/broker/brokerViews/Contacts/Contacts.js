@@ -36,7 +36,7 @@ class Contacts extends Component {
         return (
                 <div className='container'>
                     <div className='header-grid'>
-                        <h3>Contacts</h3>
+                        <h2>Contacts</h2>
                         <Link to='/broker/contacts/add' className='btn'>Add Contact</Link>
                     </div>
                     <table className='data-table'>
@@ -44,7 +44,6 @@ class Contacts extends Component {
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Category</th>
                                 <th>Status</th>
                                 <th></th>
                             </tr>
@@ -56,10 +55,9 @@ class Contacts extends Component {
                                     <tr id={id} key={id}>
                                         <td>{c.data.name}</td>
                                         <td>{c.data.email}</td>
-                                        <td>{c.data.category}</td>
                                         <td>{c.data.status}</td>
                                         <td className='update'>
-                                            <Link to={`/broker/contacts/${id}`}>View</Link>
+                                            <Link className="update-btn" to={`/broker/contacts/${id}`}>View</Link>
                                         </td>
                                     </tr>
                                 )

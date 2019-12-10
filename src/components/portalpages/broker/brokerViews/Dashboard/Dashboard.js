@@ -6,7 +6,7 @@ class Dashboard extends Component {
         return (
             <div className='admin-dashboard'>
                 <div className='dash-container'>
-                    <h3>Welcome {this.props.name}</h3>
+                    <h2>Welcome {this.props.name}</h2>
                 </div>
                 
             </div>

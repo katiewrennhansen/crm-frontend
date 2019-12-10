@@ -84,7 +84,7 @@ class Provider extends Component {
             <>
                 <div className='container'>
                     <div className='header-grid'>
-                        <h3>{data.contact}</h3>
+                        <h2>{data.contact}</h2>
                         <Link to={`/broker/maintenance/${this.props.id}/edit`} className='add'>Edit Provider</Link>
                     </div>
                     <div>

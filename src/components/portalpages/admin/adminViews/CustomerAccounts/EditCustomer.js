@@ -72,11 +72,13 @@ class EditCustomer extends Component {
                     .then(data => {
                         this.setCustomer(data.customers)
                     })
+                    .then(() => {
+                        this.props.func.history.push(`/dashboard/customer-accounts/${id}`)
+                    })
             })
             .catch(error => {
                 console.log(error)
             })
-        this.props.func.history.push(`/dashboard/customer-accounts/${id}`)
     }
 
     render(){ 

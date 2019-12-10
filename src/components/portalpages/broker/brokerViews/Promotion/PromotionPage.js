@@ -111,7 +111,7 @@ class PromotionPage extends Component {
 
                 <div className='container'>
                     <div className='header-grid'>
-                        <h3>{data.typepromotion}</h3>
+                        <h2>{data.typepromotion}</h2>
                     </div>
                     <p>Start: {data.startdate}</p>
                     <p>End: {data.enddate}</p>

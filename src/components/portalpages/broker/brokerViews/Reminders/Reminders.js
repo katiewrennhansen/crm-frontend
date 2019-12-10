@@ -170,7 +170,7 @@ class Reminders extends Component {
                 </Modal>
 
                 <div className='data-container'>
-                    <h3>Reminders</h3>
+                    <h2>Reminders</h2>
                     <button className='add-btn' onClick={context.showModal}>Add Reminder</button>
                     <table className='data-table'>
                         <thead>

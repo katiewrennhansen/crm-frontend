@@ -48,11 +48,13 @@ class AddCustomer extends Component {
                     .then(data => {
                         this.setCustomers(data.customers)
                     })
+                    .then(() => {
+                        this.props.func.history.push('/dashboard/customer-accounts')
+                    })
             })
             .catch(error => {
                 console.log(error)
             })
-        this.props.func.history.push('/dashboard/customer-accounts')
     }
 
     render(){  

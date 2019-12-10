@@ -36,7 +36,7 @@ td {
 }
 
 td, th {
-    padding: 6px 30px;
+    padding: 10px 30px;
 }
 
 select {
@@ -98,7 +98,7 @@ COMPONENT STYLES
 }
 
 .update-btn {
-    padding: 8px 10px;
+    padding: 6px 12px;
 }
 
 .edit {
