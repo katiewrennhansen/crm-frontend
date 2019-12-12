@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service';
+import AddNetwork from './components/AddNetwork';
 
-class CustomerPage extends Component {
+
+class ContactPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -36,29 +38,31 @@ class CustomerPage extends Component {
     render(){  
         const data = this.state.customer
         return (
-            <>
-                <div className='container'>
-                    <div className='header-grid'>
-                        <h2>{data.name}</h2>
-                        <Link to={`/broker/contacts/${data.id}/edit`} className='btn'>Edit Contact</Link>
-                    </div>
-                    <div>
-                        <p>{data.email}</p>
-                        <br></br>
-                        <p>{data.adescription4}</p>
-                        <p>{`${data.adescription2}, ${data.adescription3}`}</p>
-                        <p>{data.adescription1}</p>
-                        <br></br>
-                        <p>Category: {data.category}</p>
-                        <p>Status: {data.status}</p>
-                        <p>Tax ID: {data.taxid}</p>
-                        <p>Broker: {data.broker}</p>
-                        <p>Reminder: {data.remainder}</p>
-                    </div>
+            <div className='container'>
+                <div className='header-grid'>
+                    <h2>{data.name}</h2>
+                    <Link to={`/broker/contacts/${data.id}/edit`} className='btn'>Edit Contact</Link>
                 </div>
-            </>
+                <div>
+                    <p>{data.email}</p>
+                    <br></br>
+                    <p>{data.adescription4}</p>
+                    <p>{`${data.adescription2}, ${data.adescription3}`}</p>
+                    <p>{data.adescription1}</p>
+                    <br></br>
+                    <p>Category: {data.category}</p>
+                    <p>Status: {data.status}</p>
+                    <p>Tax ID: {data.taxid}</p>
+                    <p>Broker: {data.broker}</p>
+                    <p>Reminder: {data.remainder}</p>
+                </div>
+                <AddNetwork 
+                    id={this.props.id}
+                    name={data.name}
+                />
+            </div>
         )
     }
 }
 
-export default CustomerPage
+export default ContactPage

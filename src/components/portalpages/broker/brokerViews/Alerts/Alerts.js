@@ -46,6 +46,21 @@ class Alerts extends Component {
             })         
     }
 
+    handleCompleted = (id) => {
+        const completed = {
+            alert: false,
+            confirmatindate: new Date()
+        }
+
+        ApiService.updateDataHalf(endpoint, id, completed)
+            .then(data => {
+                ApiService.getDataHalf(endpoint)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     render(){  
         return (
             <div className='data-container'>
@@ -57,6 +72,7 @@ class Alerts extends Component {
                             <th>Comment</th>
                             <th>Alarm</th>
                             <th>Request Date</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,10 +87,18 @@ class Alerts extends Component {
                             </td>
                             <td>{a.data.assetcomment}</td>
                             <td>
-                                {(a.data.alarm) ? 'True' : 'False'}
+                                {(a.data.alarm) ? 'Active' : 'Read'}
                             </td>
                             <td>
                                 <Moment format="YYYY/MM/DD">{a.data.requestdate}</Moment>
+                            </td>
+                            <td>
+                                <button 
+                                    className="update-btn" 
+                                    onClick={() => this.handleCompleted(a.data.id)}
+                                >
+                                    {(a.data.alarm) ? 'Mark as Completed' : 'Completed'}
+                                </button>
                             </td>
                         </tr>
                         ))}

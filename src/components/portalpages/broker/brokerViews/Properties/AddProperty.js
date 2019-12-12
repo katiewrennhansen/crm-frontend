@@ -152,16 +152,16 @@ class AddProperty extends Component {
         console.log(e.target.images.value)
 
 
-        // const endpoint = `${config.API_ENDPOINT}/assets`
+        const endpoint = `${config.API_ENDPOINT}/assets`
 
-        // ApiService.postDataHalf(endpoint, newProperty)
-        //     .then(data => {
-        //         console.log(data)
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
-        // this.props.history.push('/broker/properties')
+        ApiService.postDataHalf(endpoint, newProperty)
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        this.props.history.push('/broker/properties')
     }
 
     render(){

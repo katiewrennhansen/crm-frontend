@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import BrokerContext from '../../../../../contexts/BrokerContext'
 import ApiService from '../../../../../services/api-service'
 import config from '../../../../../config'
@@ -22,7 +21,7 @@ class Network extends Component {
     }
 
     componentDidMount(){
-        const endpoint = `${config.API_ENDPOINT}/customers/10/networks`
+        const endpoint = `${config.API_ENDPOINT}/customers/0/networks`
         ApiService.getDataHalf(endpoint)
             .then(data => {
                 this.setNetwork(data.networks)
@@ -32,17 +31,11 @@ class Network extends Component {
             })
     }
 
-    deleteNetwork = (id) => {
-        const endpoint = `${config.API_ENDPOINT}/customers/10/networks`
-        
-    }
-
     render(){
         return (  
             <div className='container'>
                 <div className='header-grid'>
                     <h2>Network</h2>
-                    <Link to='/broker/network/add' className='add'>Add Network</Link>
                 </div>
                 <table className='data-table'>
                     <thead>
@@ -52,7 +45,6 @@ class Network extends Component {
                             <th>Reference</th>
                             <th>Special Event</th>
                             <th>Event Date</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,7 +55,6 @@ class Network extends Component {
                             <td>{p.data.reference}</td>
                             <td>{p.data.specialevent}</td>
                             <td>{p.data.eventdate}</td>
-                            <td><button className="delete-btn" onClick={() => {this.deleteNetwork(p.data.id)}}>Delete</button></td>
                         </tr>
                         ))}
                     </tbody>

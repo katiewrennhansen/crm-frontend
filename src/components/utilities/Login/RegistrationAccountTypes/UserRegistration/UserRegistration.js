@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import RegistrationForm from '../RegistrationForm/RegistrationFrom'
-import AuthApiService from '../../../services/auth-api-service'
+import AuthApiService from '../../../../../services/auth-api-service'
 import './UserRegistration.css'
 
 class UserRegistration extends Component {

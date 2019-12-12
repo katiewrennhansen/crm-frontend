@@ -8,7 +8,7 @@ import Contact from './components/webpages/Contact/Contact'
 import Login from './components/utilities/Login/Login'
 import ForgotPassword from './components/utilities/Login/ResetPassword/ForgotPassword/ForgotPassword'
 import ChangePassword from './components/utilities/Login/ResetPassword/ChangePassword/ChangePassword'
-// import UserRegistration from './components/utilities/Login/RegistrationAccountTypes/UserRegistration'
+import UserRegistration from './components/utilities/Login/RegistrationAccountTypes/UserRegistration/UserRegistration'
 import UserHome from './components/portalpages/user/UserHome/UserHome'
 import AdminHome from './components/portalpages/admin/AdminHome/AdminHome'
 import BrokerHome from './components/portalpages/broker/BrokerHome/BrokerHome'
@@ -107,10 +107,10 @@ class App extends Component {
               path='/change-password'
               component={ChangePassword}
             />
-            {/* <Route 
+            <Route 
               path='/register'
               component={UserRegistration}
-            /> */}
+            />
 
     {/* ******** USER PORTAL ROUTES ******* */}
             <Route 
@@ -119,7 +119,6 @@ class App extends Component {
                 if(this.state.usertype === 'user') {
                   return ( 
                     <UserHome 
-                      authenticated={this.state.authenticated}
                       logout={this.logout}
                     />
                   )
@@ -132,12 +131,10 @@ class App extends Component {
               path='/broker'
               component={BrokerHome}
             />
-
             <PrivateRoute 
               path='/dashboard'
               component={AdminHome}
             />
-            
           </Switch>
         </div>
       );
