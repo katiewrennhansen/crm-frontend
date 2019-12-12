@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import Moment from 'react-moment'
-import SubmitButton from '../../../../utilities/Login/LoginComponents/SubmitButton'
-import Modal from '../../../../utilities/Modal/Modal'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 
@@ -33,70 +32,14 @@ class Reminders extends Component {
             })      
     }
 
-    addReminder = (e) => {
-        e.preventDefault()
-        const newReminder = {
-            rtype: e.target.reminder.value,
-            periodmonths: e.target.months.value,
-            bodymessage: e.target.message.value,
-        }
-
-        ApiService.postDataHalf(endpoint, newReminder)
-        .then(res => {
-            ApiService.getDataHalf(endpoint)
-                .then(data => {
-                    this.context.setData(data)
-                    this.context.hideUpdate()
-                })
-        })
-        .catch(error => {
-            console.log(error)
-        }) 
-    }
-
-
     render(){  
-        const context = this.context
         return (
-            <>
-                <Modal className='add-modal' show={context.show} >
-                    <form 
-                        className= 'add-content' 
-                        onSubmit={(e) => this.addReminder(e)}
-                    >
-                        <h3>Add a Reminder</h3>
-                        <div className='form-group'>
-                            <label htmlFor='reminder'>Reminder</label>
-                            <input
-                                id='reminder'
-                                name='reminder'
-                                type='text'
-                            />
-                        </div>
-                        <div className='form-group'> 
-                            <label htmlFor='months'>Months</label>
-                            <input 
-                                id='months'
-                                name='months'
-                                type='number'
-                            />
-                        </div>
-                        <div className='form-group'>
-                            <label htmlFor='message'>Message</label>
-                            <input 
-                                id='message'
-                                name='message'
-                                type='text'
-                            />
-                        </div>
-                        <SubmitButton className='submit-content' text='Save'/>
-                    </form>
-                    <button className='cancel-btn' onClick={context.hideModal}>Cancel</button>
-                </Modal>
-
-                <div className='data-container'>
+            <div className='container'>
+                <div className='header-grid'>
                     <h2>Reminders</h2>
-                    <button className='add-btn' onClick={context.showModal}>Add Reminder</button>
+                    <Link to='/broker/reminders/add' className='add'>Add Reminder</Link>
+                </div>
+                <div>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -120,7 +63,7 @@ class Reminders extends Component {
                         </tbody>
                     </table>
                 </div>
-            </>
+            </div>
         )
     }
 }
