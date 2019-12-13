@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import SubmitButton from '../../../../utilities/Login/LoginComponents/SubmitButton'
 import Modal from '../../../../utilities/Modal/Modal'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
+import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
 
 const processEndpoint = config.PROCESS_ENDPOINT
@@ -92,11 +92,16 @@ class Process extends Component {
                 />
 
                 <Modal className='update-modal' show={context.update}>
+                    <CloseIcon 
+                        className="close-icon" 
+                        fontSize="large" 
+                        onClick={context.hideUpdate}
+                    />
                     <div className='update-content'>
                         <form className='form-group-form' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='process'>
-                                    <h3>Update {context.name}</h3>
+                                    <h3>Update: {context.name}</h3>
                                 </label>
                                 <input
                                     id='process'
@@ -104,13 +109,17 @@ class Process extends Component {
                                     type='text'
                                 />
                             </div>
-                            <SubmitButton className='submit-content' text='Update'/>
+                            <input type="submit" className="submit-full submit-modal" value="Update" />
                         </form>
                     </div>
-                    <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button>
                 </Modal>
 
                 <Modal className='add-modal' show={context.show} >
+                    <CloseIcon 
+                        className="close-icon" 
+                        fontSize="large" 
+                        onClick={context.hideModal}
+                    />
                     <form 
                         className= 'add-content' 
                         onSubmit={(e) => this.addProcess(e)}
@@ -125,9 +134,8 @@ class Process extends Component {
                                 type='text'
                             />
                         </div>
-                        <SubmitButton className='submit-content' text='Save'/>
+                        <input type="submit" className="submit-full submit-modal" value="Update" />
                     </form>
-                    <button className='cancel-btn' onClick={context.hideModal}>Cancel</button>
                 </Modal>
                 
                 <div className='data-container'>

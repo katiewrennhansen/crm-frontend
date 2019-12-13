@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import Moment from 'react-moment'
-import SubmitButton from '../../../../utilities/Login/LoginComponents/SubmitButton'
 import Modal from '../../../../utilities/Modal/Modal'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
 import AddIcon from '@material-ui/icons/Add';
+import CloseIcon from '@material-ui/icons/Close';
+
 
 const commEndpoint = config.COMMENTS_ENDPOINT
 
@@ -79,7 +80,12 @@ class AdminComments extends Component {
                     deleteFn={this.deleteComment}
                 />
 
-                <Modal className='update-modal' show={context.update}>
+                <Modal className='update-modal' show={context.update}>   
+                    <CloseIcon 
+                        className="close-icon" 
+                        fontSize="large" 
+                        onClick={context.hideUpdate}
+                    />
                     <form 
                         className='update-content' 
                         onSubmit={(e) => {
@@ -87,21 +93,25 @@ class AdminComments extends Component {
                         }}>
                         <div className='form-group'>
                             <label htmlFor='comment_type'>
-                                <h3>Update {context.name}</h3>
+                                <h3>Update: {context.name}</h3>
                                 </label>
                             <input
                                 id='comment_type'
                                 name='comment_type'
                                 type='text'
-                                placeholder="Comment Type"
+                                placeholder='Update Comment'
                             />
                         </div>
-                        <SubmitButton className='submit-content' text='Update'/>
+                        <input type="submit" className="submit-full submit-modal" value="Update" />
                     </form>
-                    <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button>   
                 </Modal>
                 
-                <Modal className='add-modal' show={context.show} >
+                <Modal className='add-modal' show={context.show}>
+                    <CloseIcon 
+                        className="close-icon" 
+                        fontSize="large" 
+                        onClick={context.hideModal}
+                    />
                     <form 
                         className='add-content'
                         onSubmit={(e) => this.addComment(e)}
@@ -112,12 +122,11 @@ class AdminComments extends Component {
                                 id='comment_type'
                                 name='comment_type'
                                 type='text'
-                                placeholder="Update Comment"
+                                placeholder="New Comment"
                             />
                         </div>
-                        <SubmitButton className='submit-content' text='Save'/>
+                        <input type="submit" className="submit-full submit-modal" value="Update" />
                     </form>
-                    <button className='cancel-btn' onClick={context.hideModal}>Cancel</button>
                 </Modal>
                 
                 <div className='data-container'>

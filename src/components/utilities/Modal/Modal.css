@@ -17,7 +17,7 @@
     left:50%;
     transform: translate(-50%,-50%);
     border-radius: 5px;
-    padding: 50px;
+    padding: 50px 50px 100px;
   }
   
   .display-block {
@@ -59,7 +59,7 @@
 .add-content .form-group,
 .update-content .form-group {
     display: block;
-  }
+}
 
 .add-content,
 .update-content {
@@ -73,7 +73,30 @@
 .update-content .form-group input[type="text"],
 .update-content .form-group input[type="date"],
 .update-content .form-group input[type="number"]{
-  width: 92%;
+  width: 89%;
   height: 30px;
 }
 
+svg.close-icon {
+  display: grid;
+  width: 190%;
+  align-self: flex-end;
+}
+
+
+button.modal-delete-btn {
+    background: red;
+    color: white;
+    font-weight: 500;
+    border-radius: 5px;
+    font-size: 14px;
+    border: 1px solid red;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.modal-delete-btn:hover {
+  cursor: pointer;
+  background: rgb(197, 6, 6);
+}

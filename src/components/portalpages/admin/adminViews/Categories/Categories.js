@@ -7,6 +7,7 @@ import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
 import AddIcon from '@material-ui/icons/Add';
+import CloseIcon from '@material-ui/icons/Close';
 
 const catEndpoint = config.CATEGORIES_ENDPOINT
 
@@ -83,6 +84,11 @@ class Categories extends Component {
                 />
                 
                 <Modal className='update-modal' show={context.update}>
+                    <CloseIcon 
+                        className="close-icon" 
+                        fontSize="large" 
+                        onClick={context.hideUpdate}
+                    />
                     <form 
                         className='update-content' 
                         onSubmit={(e) => {
@@ -90,7 +96,7 @@ class Categories extends Component {
                         }}>
                         <div className='form-group'>
                             <label htmlFor='category'>
-                                <h3>Update {context.name}</h3>
+                                <h3>Update: {context.name}</h3>
                             </label>
                             <input
                                 id='category'
@@ -99,17 +105,21 @@ class Categories extends Component {
                                 type='text'
                             />
                         </div>
-                        <SubmitButton className='submit-content' text='Update'/>
+                        <input type="submit" className="submit-full submit-modal" value="Update" />
                     </form>
-                    <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button>   
                 </Modal>
 
                 <Modal className='add-modal' show={context.show} >
+                    <CloseIcon 
+                        className="close-icon" 
+                        fontSize="large" 
+                        onClick={context.hideModal}
+                    />
                     <form 
                         className='add-content'
                         onSubmit={(e) => this.addCategory(e)}
                     >
-                        <h3>Add a Comment Type</h3>
+                        <h3>Add a Category</h3>
                         <div className='form-group'>
                             <label htmlFor='comment_type'></label>
                             <input 
@@ -119,9 +129,8 @@ class Categories extends Component {
                                 type='text'
                             />
                         </div>
-                        <SubmitButton className='submit-content' text='Save'/>
+                        <input type="submit" className="submit-full submit-modal" value="Update" />
                     </form>
-                    <button className='cancel-btn' onClick={context.hideModal}>Cancel</button>
                 </Modal>
                 
                 <div className='data-container'>

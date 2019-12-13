@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Moment from 'react-moment'
-import SubmitButton from '../../../../utilities/Login/LoginComponents/SubmitButton'
 import Modal from '../../../../utilities/Modal/Modal'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
 import AddIcon from '@material-ui/icons/Add';
+import CloseIcon from '@material-ui/icons/Close';
 
 const psEndpoint = config.PROPERTY_STATUS_ENDPOINT
 
@@ -87,11 +87,16 @@ class PropertyStatus extends Component {
                 />
 
                 <Modal className='update-modal' show={context.update}>
+                <CloseIcon 
+                        className="close-icon" 
+                        fontSize="large" 
+                        onClick={context.hideUpdate}
+                    />
                     <div className='update-content'>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
                                 <label htmlFor='maint_type'>
-                                    <h3>Update {context.name}</h3>
+                                    <h3>Update: {context.name}</h3>
                                 </label>
                                 <input
                                     id='status_type'
@@ -100,13 +105,17 @@ class PropertyStatus extends Component {
                                     type='text'
                                 />
                             </div>
-                            <SubmitButton className='submit-content' text='Update'/>
+                            <input type="submit" className="submit-full submit-modal" value="Update" />
                         </form>
                     </div>
-                    <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button> 
                 </Modal>
 
                 <Modal className='add-modal' show={context.show} >
+                <CloseIcon 
+                        className="close-icon" 
+                        fontSize="large" 
+                        onClick={context.hideModal}
+                    />
                     <form 
                         className= 'add-content' 
                         onSubmit={(e) => this.addPropertyStatus(e)}
@@ -121,9 +130,8 @@ class PropertyStatus extends Component {
                                 type='text'
                             />
                         </div>
-                        <SubmitButton className='submit-content' text='Save'/>
+                        <input type="submit" className="submit-full submit-modal" value="Update" />
                     </form>
-                    <button className='cancel-btn' onClick={context.hideModal}>Cancel</button>
                 </Modal>
 
                 <div className='data-container'>

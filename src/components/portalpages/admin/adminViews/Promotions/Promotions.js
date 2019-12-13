@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import SubmitButton from '../../../../utilities/Login/LoginComponents/SubmitButton'
 import Modal from '../../../../utilities/Modal/Modal'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
+import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
 
 
@@ -99,11 +99,16 @@ class Promotions extends Component {
                 />
 
                 <Modal className='update-modal' show={context.update}>
+                    <CloseIcon 
+                        className="close-icon" 
+                        fontSize="large" 
+                        onClick={context.hideUpdate}
+                    />
                     <div className='update-content'>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <h3>Update {context.name}</h3>
                             <div className='form-group'>
-                                <label htmlFor='comment_type'></label>
+                                <label htmlFor='comment_type'>Name</label>
                                 <input
                                     id='comment_type'
                                     name='promotion_name'
@@ -113,7 +118,7 @@ class Promotions extends Component {
                             </div>
                             <div className='dates'>
                                 <div className='form-group'>
-                                    <label htmlFor='promotion_start'></label>
+                                    <label htmlFor='promotion_start'>Start Date</label>
                                     <input 
                                         id='promotion_start'
                                         name='promotion_start'
@@ -121,7 +126,7 @@ class Promotions extends Component {
                                     />
                                 </div>
                                 <div className='form-group'>
-                                    <label htmlFor='promotion_end'></label>
+                                    <label htmlFor='promotion_end'>End Date</label>
                                     <input 
                                         id='promotion_end'
                                         name='promotion_end'
@@ -130,19 +135,23 @@ class Promotions extends Component {
                                 </div>
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='promotion_cost'></label>
+                                <label htmlFor='promotion_cost'>Total Cost</label>
                                 <input 
                                     id='total_cost'
                                     name='total_cost'
                                     type='number'
                                 />
                             </div>
-                            <SubmitButton className='submit-content' text='Update'/>
+                            <input type="submit" className="submit-full submit-modal" value="Update" />
                         </form>
                     </div>
-                    <button className='cancel-btn' onClick={context.hideUpdate}>Cancel</button> 
                 </Modal>
                 <Modal className='add-modal' show={context.show} >
+                    <CloseIcon 
+                        className="close-icon" 
+                        fontSize="large" 
+                        onClick={context.hideModal}
+                    />
                     <form 
                         className='add-content' 
                         onSubmit={(e) => this.addPromotion(e)}
@@ -181,9 +190,8 @@ class Promotions extends Component {
                                 type='number'
                             />
                         </div>
-                        <SubmitButton className='submit-content' text='Save'/>
+                        <input type="submit" className="submit-full submit-modal" value="Update" />
                     </form>
-                    <button className='cancel-btn' onClick={context.hideModal}>Cancel</button>
                 </Modal>
                 <div className='data-container'>
                     <h2>Promotions</h2>
