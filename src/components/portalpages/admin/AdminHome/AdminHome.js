@@ -44,6 +44,7 @@ class AdminHome extends Component {
                 name: '',
                 id: ''
             },
+            active: false
         }
     }
 
@@ -181,6 +182,27 @@ class AdminHome extends Component {
         let j = (i.length > 3) ? i.length % 3 : 0;
         return "$" + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands);
     }
+
+
+     setActive = () => {
+        this.setState({
+            active: true
+        })
+    }
+
+    setCollapsed = () => {
+        this.setState({
+            active: false
+        })
+    }
+
+    toggleNav = () => {
+        if(this.state.active === false){
+            this.setActive() 
+        } else {
+            this.setCollapsed()
+        }
+    }
   
     render(){
         const propFunctions = {
@@ -213,24 +235,27 @@ class AdminHome extends Component {
             setProcess: this.setProcess,
             deleteData: this.deleteData,
             deletePromotions: this.deletePromotions,
-            deleteProcess: this.deleteProcess
+            deleteProcess: this.deleteProcess,
+            active: this.state.active,
+            setActive: this.active,
+            toggleNav: this.toggleNav
         }
         return (
             <AdminContext.Provider value={value}>
                 <div className='dashboard-container'>
-                    <div className='dash-sidebar'>
+                    <div className={`${(this.state.active) ? null : 'collapsed'} dash-sidebar`}>
                         <AdminSidebar 
                             handleTitle={this.handleTitle}
                         />
                     </div>
-                    <div className='dash-nav'>
+                    <div className={`${(this.state.active) ? null : 'collapsed'} dash-nav`}>
                         <AdminNav 
                             title={this.state.title}
                             handleTitle={this.handleTitle}
                             history={this.props.history}
                         />
                     </div>
-                    <div className='dash-home'>
+                    <div className={`${(this.state.active) ? null : 'collapsed'} dash-home`}>
                         <Switch>
                             <Route 
                                 exact path='/dashboard' 

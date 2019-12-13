@@ -50,20 +50,20 @@ class CustomerAccounts extends Component {
 
 
     deactivateCustomer = (id) => {
-        // const updatedStatus = {
-        //     cstatus_id: 35
-        // }
+        const updatedStatus = {
+            cstatus_id: 35
+        }
 
-        // ApiService.updateDataHalf(caEndpoint, id, updatedStatus)
-        //     .then(data => {
-        //         ApiService.getDataHalf(caEndpoint)
-        //             .then(data => {
-        //                 this.setCustomers(data.customers)
-        //             })
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
+        ApiService.updateDataHalf(caEndpoint, id, updatedStatus)
+            .then(data => {
+                ApiService.getDataHalf(caEndpoint)
+                    .then(data => {
+                        this.setCustomers(data)
+                    })
+            })
+            .catch(error => {
+                console.log(error)
+            })
 
         const el = this.state.customers.find(c => c.data.id === id)
         const element = document.getElementById(id)
@@ -108,7 +108,7 @@ class CustomerAccounts extends Component {
                                         <td>{c.data.category}</td>
                                         <td>{c.data.status}</td>
                                         <td className='update'>
-                                            <Link to={`/dashboard/customer-accounts/${id}`}>View</Link>
+                                            <Link className="update-btn" to={`/dashboard/customer-accounts/${id}`}>View</Link>
                                         </td>
                                         <td>
                                             <button 

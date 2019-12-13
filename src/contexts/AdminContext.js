@@ -16,6 +16,7 @@ const AdminContext = React.createContext({
         name: '',
         id: ''
     },
+    active: false,
     showModal: () => {},
     hideModal: () => {},
     showDelete: () => {},
@@ -31,7 +32,8 @@ const AdminContext = React.createContext({
     setProcess: () => {},
     deleteData: () => {},
     deletePromotions: () => {},
-    deleteProcess: () => {}
+    deleteProcess: () => {},
+    toggleNav: () => {}
 })
 
 export default AdminContext

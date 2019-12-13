@@ -146,8 +146,8 @@ class Process extends Component {
                                 return (
                                 <tr key={p.data.id}>
                                     <td>{p.data.processdesc}</td>
-                                    <td className='update'>
-                                        <Link to={`/dashboard/process/${p.data.id}`}>View Steps</Link>
+                                    <td>
+                                        <Link className="update-btn" to={`/dashboard/process/${p.data.id}`}>View Steps</Link>
                                     </td>
                                     <td>
                                         <button className='update-btn' onClick={() => context.updateUpdate(p.data.processdesc, p.data.id)}>Update</button>

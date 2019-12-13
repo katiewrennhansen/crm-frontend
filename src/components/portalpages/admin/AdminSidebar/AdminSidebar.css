@@ -65,6 +65,27 @@ ul {
     padding-left: 20px;
 }
 
+.dash-nav-ul.collapsed {
+    display: none;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+}
+
+.burger-bar {
+    height: 3px;
+    margin: 5px 0 5px -5px;
+    width: 24px;
+    border-radius: 1px;
+    background: white;
+}
+
+.half {
+    width: 14px;
+}
+
 
 @media (min-width: 900px){
     .dash-sidebar-container {
@@ -72,5 +93,30 @@ ul {
         position: fixed;
         overflow: scroll; 
         height: 100%;
+        transition: 200ms linear;
+    }
+    .dash-nav-link p {
+        opacity: 1;
+        transition: 300ms linear 50ms;
+    }
+    .dash-nav-ul.collapsed {
+        display: block;
+    }
+    .dash-sidebar-container.collapsed {
+        width: 80px;
+    }
+    .dash-nav-link p.collapsed {
+        opacity: 0;
+        height: 20px;
+        transition: 0ms;
+    }
+    .icon.collapsed,
+    h2.collapsed {
+        display: none;
+    }
+    .dash-nav-link.collapsed:hover {
+        background: rgba(0, 0, 0, 0.6);
+        transition: 10ms linear;
+        width: 42px;
     }
 }

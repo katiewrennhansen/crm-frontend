@@ -38,7 +38,7 @@ class EditCustomer extends Component {
         e.preventDefault()
         const id = this.props.id
         let updatedCustomer = {}
-        const updatedCustomerFields = {
+        const updatedFields = {
             firstname: e.target.first_name.value,
             lastname: e.target.last_name.value,
             cemail: e.target.email.value,
@@ -58,12 +58,10 @@ class EditCustomer extends Component {
             ccomment: e.target.comment.value
         }
 
-        for (const key in updatedCustomerFields) {
-            if (updatedCustomerFields[key] !== '')
-                updatedCustomer[key] = updatedCustomerFields[key]
-            }
-
-        console.log(updatedCustomer, id)
+        for (const key in updatedFields) {
+            if (updatedFields[key] !== '')
+                updatedCustomer[key] = updatedFields[key]
+        }
 
         ApiService.updateDataHalf(caEndpoint, id, updatedCustomer)
             .then(data => {

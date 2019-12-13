@@ -12,166 +12,171 @@ import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import WorkIcon from '@material-ui/icons/Work';
 import DescriptionIcon from '@material-ui/icons/Description';
+import WeekendIcon from '@material-ui/icons/Weekend';
+import CategoryIcon from '@material-ui/icons/Category';
+import AdminContext from '../../../../contexts/AdminContext'
 import './AdminSidebar.css'
 
 
 
 
 class AdminSidebar extends Component {
+    static contextType = AdminContext
+
     constructor(props) {
         super(props);
         this.state = {
-            active: false,
+            error: null
         };
     }
 
-    toggleAccordion(){
-        const currentState = this.state.active;
-        this.setState({
-            active: !currentState
-        })
-    }
 
     render(){
 
         return (
-            <div className='dash-sidebar-container'>
+            <div className={`${(this.context.active) ? null : 'collapsed'} dash-sidebar-container`}>
                 <div className='admin-info'>
-                    <AccountCircleIcon 
+                    <AccountCircleIcon
                         fontSize='large'
+                        className={`${(this.context.active) ? null : 'collapsed'} icon`}
                     />
-                    <h2>Admin</h2>
+                    <h2 className={(this.context.active) ? null : 'collapsed'} >Admin</h2>
+                    <button className="toggle-btn"  aria-label="toggle-nav" onClick={this.context.toggleNav}>
+                        <div className="burger-bar"></div>
+                        <div className="burger-bar"></div>
+                        <div className="burger-bar half"></div>
+                    </button>
                 </div>
                 <hr />
-                <ul className='dash-nav-ul'>
+                <ul className={`${(this.context.active) ? null : 'collapsed'} dash-nav-ul`}>
                     <li>
                         <Link 
                             to="/dashboard" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Dashboard')}
                         >
                             <DashboardIcon />
-                            <p>Dashboard</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Dashboard</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/dashboard/company-setup" 
-                            className='dash-nav-link'
-                            onClick={() => {this.props.handleTitle('Company Set Up'); this.toggleAccordion();}}
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
+                            onClick={() => this.props.handleTitle('Company Set Up')}
                         >
                             <WorkIcon />
-                            <p>Company Set Up</p>
+                            <p className={(this.context.active) ? null : 'collapsed'} >Company Set Up</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/dashboard/comments" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Comments Type')}
                         >
                             <ChatBubbleOutlineIcon />
-                            <p>Comments Type</p>
+                            <p className={(this.context.active) ? null : 'collapsed'} >Comments Type</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/dashboard/categories" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Categories')}
                         >
-                            <ChatBubbleOutlineIcon />
-                            <p>Categories</p>
+                            <CategoryIcon />
+                            <p className={(this.context.active) ? null : 'collapsed'} >Categories</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/dashboard/promotions" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Promotions')}
                         >
                             <CardGiftcardIcon />
-                            <p>Promotions</p>
+                            <p className={(this.context.active) ? null : 'collapsed'} >Promotions</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/dashboard/maintenance" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Maintenance')}
                         >
                             <BuildIcon />
-                            <p>Maintenance</p>
+                            <p className={(this.context.active) ? null : 'collapsed'} >Maintenance</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/dashboard/property-features" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Property Features')}                        
                         >
                             <HomeIcon />
-                            <p>Property Features</p>
+                            <p className={(this.context.active) ? null : 'collapsed'} >Property Features</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/dashboard/property-status" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Property Status')}                                                    
                         >
                             <HomeWorkIcon />
-                            <p>Property Status</p>
+                            <p className={(this.context.active) ? null : 'collapsed'} >Property Status</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/dashboard/customer-status" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Customer Status')}                        
                         >
                             <AccountBoxIcon />
-                            <p>Customer Status</p>
+                            <p className={(this.context.active) ? null : 'collapsed'} >Customer Status</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/dashboard/reminders" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Reminders')}                        
                         >
                             <NotificationsActiveIcon />
-                            <p>Reminders</p>
+                            <p className={(this.context.active) ? null : 'collapsed'} >Reminders</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/dashboard/asset-type" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Assest Type')}                        
                         >
-                            <NotificationsActiveIcon />
-                            <p>Asset Type</p>
+                            <WeekendIcon />
+                            <p className={(this.context.active) ? null : 'collapsed'} >Asset Type</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/dashboard/process" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Process')}                        
                         >
                             <DescriptionIcon />
-                            <p>Process</p>
+                            <p className={(this.context.active) ? null : 'collapsed'} >Process</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/dashboard/customer-accounts" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Customer Accounts')}                        
                         >
                             <EmojiPeopleIcon />
-                            <p>Customer Accounts</p>
+                            <p className={(this.context.active) ? null : 'collapsed'} >Customer Accounts</p>
                         </Link>
                     </li>
                 </ul>

@@ -49,15 +49,15 @@ class Reminders extends Component {
         e.preventDefault()
         const id = this.context.id
         let updatedContent = {}
+        let updatedFields = {
+            rtype: e.target.reminder.value,
+            periodmonths: e.target.months.value,
+            bodymessage: e.target.message.value
+        }
 
-        if(e.target.reminder.value !== ''){
-            updatedContent.rtype = e.target.reminder.value
-        }
-        if(e.target.months.value !== ''){
-            updatedContent.periodmonths = e.target.months.value
-        }
-        if(e.target.message.value !== ''){
-            updatedContent.bodymessage = e.target.message.value
+        for (const key in updatedFields) {
+            if (updatedFields[key] !== '')
+                updatedContent[key] = updatedFields[key]
         }
 
         ApiService.updateDataHalf(remindersEndpoint, id, updatedContent)

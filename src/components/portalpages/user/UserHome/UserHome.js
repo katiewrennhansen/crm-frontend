@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 
 class UserHome extends Component {
@@ -31,12 +31,12 @@ class UserHome extends Component {
     }
     
     render(){
-        const value = {
-            assets: this.state.assets,
-            singleAsset: this.state.singleAsset,
-            setAssets: this.setAssets,
-            setSingleAsset: this.setSingleAsset
-        }
+        // const value = {
+        //     assets: this.state.assets,
+        //     singleAsset: this.state.singleAsset,
+        //     setAssets: this.setAssets,
+        //     setSingleAsset: this.setSingleAsset
+        // }
         return (
          <div>User Home</div>
         )

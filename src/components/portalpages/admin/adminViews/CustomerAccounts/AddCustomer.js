@@ -43,11 +43,7 @@ class AddCustomer extends Component {
 
         ApiService.postDataHalf(caEndpoint, newCustomer)
             .then(data => {
-                console.log(data)
                 ApiService.getDataHalf(caEndpoint)
-                    .then(data => {
-                        this.setCustomers(data.customers)
-                    })
                     .then(() => {
                         this.props.func.history.push('/dashboard/customer-accounts')
                     })

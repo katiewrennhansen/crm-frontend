@@ -76,8 +76,9 @@ class EditProvider extends Component {
 
     editProvider = (e) => {
         e.preventDefault()
-        // const id = this.props.id
-        const updatedProvider = {
+        const id = this.props.id
+        let updatedContent = {}
+        const updatedFields = {
             pemail: e.target.email.value,
             pemail2: e.target.email_alt.value,
             pcompany: e.target.company.value,
@@ -95,17 +96,22 @@ class EditProvider extends Component {
             mainttype_id: e.target.mainttype.value
         }
 
-        console.log(updatedProvider)
+        for (const key in updatedFields) {
+            if (updatedFields[key] !== '')
+                updatedContent[key] = updatedFields[key]
+        }
 
-        // const endpoint = `${config.API_ENDPOINT}/providers`
+        console.log(updatedContent)
 
-        // ApiService.postDataHalf(endpoint, id, updatedProvider)
-        //     .then(data => {
-        //         console.log(data)
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
+        const endpoint = `${config.API_ENDPOINT}/providers`
+
+        ApiService.postDataHalf(endpoint, id, updatedContent)
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         this.props.history.history.push('/broker/maintenance')
     }
 

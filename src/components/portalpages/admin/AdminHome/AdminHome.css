@@ -136,6 +136,10 @@ COMPONENT STYLES
     cursor: pointer;
 }
 
+.btn {
+    margin: 0 2px;
+}
+
 
 
 /* FORMS */
@@ -210,6 +214,7 @@ MEDIA QUERIES
         grid-row: 1 / 2;
         position: fixed;
         margin-left: 25%;
+        transition: 200ms linear;
     }
     .dash-sidebar {
         grid-column: 1 / 4;
@@ -222,5 +227,17 @@ MEDIA QUERIES
         background-color: rgb(240, 240, 240);
         height: 100%;
         padding-top: 50px;
+        transition: 200ms linear;
+
+    }
+    .dash-home.collapsed {
+        grid-column: 1 / -1;
+        transition: 200ms linear;
+        margin-left: 80px;
+    }
+    .dash-nav.collapsed {
+        grid-column: 1 / -1;
+        transition: 200ms linear;
+        margin-left: 80px;
     }
 }

@@ -33,6 +33,7 @@ class Promotions extends Component {
             startdate: e.target.promotion_start.value,
             duedate: e.target.promotion_end.value,
         }
+
         ApiService.postDataHalf(promEndpoint, newPromotion)
             .then(data => {
                 ApiService.getDataHalf(promEndpoint)
@@ -49,20 +50,19 @@ class Promotions extends Component {
     updateData = (e) => {
         e.preventDefault()
         const id = this.context.id
-        const updatedContent = {}
+        let updatedContent = {}
+        const updatedFields = {
+            typepromotion: e.target.promotion_name.value,
+            startdate: e.target.promotion_start.value,
+            duedate: e.target.promotion_end.value,
+            totalcost: Number(e.target.total_cost.value)
+        }
 
-        if(e.target.promotion_name.value !== ''){
-            updatedContent.typepromotion = e.target.promotion_name.value
+        for (const key in updatedFields) {
+            if (updatedFields[key] !== '')
+                updatedContent[key] = updatedFields[key]
         }
-        if(e.target.promotion_start.value !== ''){
-            updatedContent.startdate = e.target.promotion_start.value
-        }
-        if(e.target.promotion_end.value !== ''){
-            updatedContent.duedate = e.target.promotion_end.value
-        }
-        if(e.target.total_cost.value !== ''){
-            updatedContent.totalcost = Number(e.target.total_cost.value)
-        }
+
         ApiService.updateDataHalf(promEndpoint, id, updatedContent)
             .then(data => {
                 ApiService.getDataHalf(promEndpoint)

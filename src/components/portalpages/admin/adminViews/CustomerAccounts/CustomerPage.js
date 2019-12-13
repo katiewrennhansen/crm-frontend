@@ -66,7 +66,10 @@ class CustomerPage extends Component {
                 <div className='container'>
                     <div className='header-grid'>
                         <h3>{data.name}</h3>
-                        <Link to={`/dashboard/customer-accounts/${data.id}/edit`} className='btn'>Edit Customer</Link>
+                        <div>
+                            <Link to={`/dashboard/customer-accounts`} className='btn'>Back</Link>
+                            <Link to={`/dashboard/customer-accounts/${data.id}/edit`} className='btn'>Edit Customer</Link>
+                        </div>
                     </div>
                     <div>
                         <p>{data.email}</p>

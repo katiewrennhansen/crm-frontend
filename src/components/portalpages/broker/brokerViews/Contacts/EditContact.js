@@ -60,7 +60,7 @@ class EditContact extends Component {
         for (const key in updatedCustomerFields) {
             if (updatedCustomerFields[key] !== '')
                 updatedCustomer[key] = updatedCustomerFields[key]
-            }
+        }
 
         ApiService.updateDataHalf(endpoint, id, updatedCustomer)
             .then(data => {
