@@ -15,6 +15,7 @@ class Maintenance extends Component {
     }
 
     setMaintenance = (maintenance) => {
+
         this.setState({
             maintenance
         })
@@ -35,10 +36,10 @@ class Maintenance extends Component {
 
 
     componentDidMount(){
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
         ApiService.getDataHalf(endpoint)
             .then(data => {
-                this.setMaintenance(data.data.maintenances)
+                this.setMaintenance(data)
             })
             .catch(error => {
                 console.log(error)
@@ -74,14 +75,13 @@ class Maintenance extends Component {
             }
         }
 
-        const maintEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
         
-        ApiService.postDataHalf(maintEndpoint, newMaintenance)
+        ApiService.postDataHalf(endpoint, newMaintenance)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setMaintenance(data.data.maintenance)
+                        this.setMaintenance(data)
                     })
             })
             .catch(error => {
@@ -90,14 +90,13 @@ class Maintenance extends Component {
     }
 
     deleteMaintenance = (id) => {
-        const maintEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
 
-        ApiService.deleteDataHalf(maintEndpoint, id)
+        ApiService.deleteDataHalf(endpoint, id)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setMaintenance(data.data.maintenance)
+                        this.setMaintenance(data)
                     })
             })
             .catch(error => {
@@ -188,10 +187,16 @@ class Maintenance extends Component {
                         {this.state.maintenance.map(f => {
                             return (
                                 <tr key={f.id}>
-                                    <td>{f.description}</td>
+                                    <td>{f.informto}</td>
                                     <td>${f.initialcost}</td>
-                                    <td>{f.provider}</td>
-                                    <td>{f.requestdate}</td>
+                                    <td>
+                                        {(this.state.providers).map(p => {
+                                            if(p.data.id === f.provider_id){
+                                                return p.data.name
+                                            }
+                                        })}
+                                    </td>
+                                    <td>{f.reqdate}</td>
                                     <td>{(f.deliverdate) ? (f.deliverdate) : '-' }</td>
                                     <td><button className="delete-btn" onClick={() => this.deleteMaintenance(f.id)}>Delete</button></td>
                                 </tr>

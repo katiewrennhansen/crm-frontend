@@ -14,19 +14,11 @@ class SinglePageProperty extends Component {
     constructor(props){
         super(props)
         this.state = {
-            error: null,
-            costs: []
+            error: null
 
         }
     }
 
-    setCosts = (costs) => {
-        this.setState({
-            costs
-        })
-    }
-
-   
     componentDidMount(){
         const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
         ApiService.getDataHalf(endpoint)
@@ -38,11 +30,9 @@ class SinglePageProperty extends Component {
             })
     }
 
-
     componentWillUnmount(){
         this.context.setSingleAsset([])
     }
-
 
     render(){
         const asset = this.context.singleAsset
@@ -53,8 +43,11 @@ class SinglePageProperty extends Component {
                     <address>
                         <h2>{asset.adescription4}</h2>
                         <h3>{asset.adescription2}, {asset.adescription3}</h3>
-                    </address>                    
-                    <Link className="edit" to={`/broker/properties/${id}/edit`}>Edit Property</Link>
+                    </address>  
+                    <div>               
+                        <Link className="edit" to='/broker/properties'>Back</Link>
+                        <Link className="edit" to={`/broker/properties/${id}/edit`}>Edit Property</Link>
+                    </div>   
                 </div>
                 <div className='broker-properties'>
                     

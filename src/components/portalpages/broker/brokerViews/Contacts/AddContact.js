@@ -52,17 +52,12 @@ class AddContact extends Component {
             caniversary: e.target.anniversary.value,
             ccomment: e.target.comment.value
         }
-
-        console.log(newCustomer)
         const endpoint = `${config.API_ENDPOINT}/customers`
-        ApiService.updateDataHalf(endpoint, newCustomer)
+        ApiService.postDataHalf(endpoint, newCustomer)
             .then(data => {
-                console.log(data)
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
                         this.setCustomer(data.customers)
-                    })
-                    .then(() => {
                         this.props.history.push(`/broker/contacts`)
                     })
             })

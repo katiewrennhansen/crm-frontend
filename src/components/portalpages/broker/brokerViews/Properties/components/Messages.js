@@ -27,10 +27,10 @@ class Messages extends Component {
 
 
     componentDidMount(){
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/assetcomments`
         ApiService.getDataHalf(endpoint)
             .then(data => {
-                this.setMessages(data.data.messages)
+                this.setMessages(data.assetcomments)
             })
             .catch(error => {
                 console.log(error)
@@ -54,14 +54,12 @@ class Messages extends Component {
             }
         }
 
-        const messEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/assetcomments`
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
-
-        ApiService.postDataHalf(messEndpoint, newMessage)
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/assetcomments`
+        ApiService.postDataHalf(endpoint, newMessage)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setMessages(data.data.messages)
+                        this.setMessages(data.assetcomments)
                     })
             })
             .catch(error => {
@@ -73,14 +71,12 @@ class Messages extends Component {
     }
 
     deleteMessage = (id) => {
-        const messEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/assetcomments`
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
-
-        ApiService.deleteDataHalf(messEndpoint, id)
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/assetcomments`
+        ApiService.deleteDataHalf(endpoint, id)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setMessages(data.data.messages)
+                        this.setMessages(data.assetcomments)
                     })
             })
             .catch(error => {
@@ -136,10 +132,16 @@ class Messages extends Component {
                     <tbody>
                         {this.state.messages.map(f => {
                             return (
-                                <tr key={f.id}>
-                                    <td>{f.type}</td>
-                                    <td>{f.description}</td>
-                                    <td><button className="delete-btn" onClick={() => {this.deleteMessage(f.id)}}>Delete</button></td>
+                                <tr key={f.data.id}>
+                                    <td>
+                                        {this.state.messagetypes.map(p => {
+                                            if(p.id === f.data.commtype_id){
+                                                return p.commdesc
+                                            }
+                                        })}
+                                    </td>
+                                    <td>{f.data.assetcomment}</td>
+                                    <td><button className="delete-btn" onClick={() => {this.deleteMessage(f.data.id)}}>Delete</button></td>
                                 </tr>
                             )
                         })}

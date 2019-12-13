@@ -76,20 +76,22 @@ class AddProvider extends Component {
             adescription3: e.target.zip_code.value,
             adescription1: e.target.country.value,
             category_id: e.target.categories.value,
-            status_id: e.target.status.value,
+            cstatus_id: e.target.status.value,
             mainttype_id: e.target.mainttype.value
         }
+
+        console.log(newProvider)
 
         const endpoint = `${config.API_ENDPOINT}/providers`
 
         ApiService.postDataHalf(endpoint, newProvider)
             .then(data => {
                 console.log(data)
+                this.props.history.push('/broker/maintenance')
             })
             .catch(error => {
                 console.log(error)
             })
-        this.props.history.push('/broker/maintenance')
     }
 
     render(){

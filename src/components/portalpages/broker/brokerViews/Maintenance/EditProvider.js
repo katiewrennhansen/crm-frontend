@@ -92,7 +92,7 @@ class EditProvider extends Component {
             adescription3: e.target.zip_code.value,
             adescription1: e.target.country.value,
             category_id: e.target.categories.value,
-            status_id: e.target.status.value,
+            cstatus_id: e.target.status.value,
             mainttype_id: e.target.mainttype.value
         }
 

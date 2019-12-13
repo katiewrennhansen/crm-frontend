@@ -27,10 +27,10 @@ class Features extends Component {
 
 
     componentDidMount(){
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/features`
         ApiService.getDataHalf(endpoint)
             .then(data => {
-                this.setFeatures(data.data.features)
+                this.setFeatures(data)
             })
             .catch(error => {
                 console.log(error)
@@ -43,21 +43,22 @@ class Features extends Component {
                 console.log(error)
             })
     }
+
     addFeature = (e) => {
         e.preventDefault()
+        
         const newFeature = {
             featuredesc: e.target.description.value,
             featuretype_id: e.target.feature_type.value
         }
 
-        const featEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/features`
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/features`
 
-        ApiService.postDataHalf(featEndpoint, newFeature)
+        ApiService.postDataHalf(endpoint, newFeature)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setFeatures(data.data.features)
+                        this.setFeatures(data)
                     })
             })
             .catch(error => {
@@ -69,14 +70,12 @@ class Features extends Component {
     }
 
     deleteFeature = (id) => {
-        const featEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/features`
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
-
-        ApiService.deleteDataHalf(featEndpoint, id)
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/features`
+        ApiService.deleteDataHalf(endpoint, id)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setFeatures(data.data.features)
+                        this.setFeatures(data)
                     })
             })
             .catch(error => {
@@ -132,8 +131,14 @@ class Features extends Component {
                         {this.state.features.map(f => {
                             return (
                                 <tr key={f.id}>
-                                    <td>{f.type}</td>
-                                    <td>{f.description}</td>
+                                    <td>
+                                        {(this.state.featuretypes).map(t => {
+                                            if(t.id === f.featuretype_id){
+                                                return t.featuredescr
+                                            }
+                                        })}
+                                    </td>
+                                    <td>{f.featuredesc}</td>
                                     <td><button className="delete-btn" onClick={() => {this.deleteFeature(f.id)}}>Delete</button></td>
                                 </tr>
                             )

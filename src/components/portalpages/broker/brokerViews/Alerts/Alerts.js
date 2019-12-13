@@ -55,6 +55,9 @@ class Alerts extends Component {
         ApiService.updateDataHalf(endpoint, id, completed)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
+                    .then(data => {
+                        this.setAlerts(data.assetcomments)
+                    })
             })
             .catch(error => {
                 console.log(error)

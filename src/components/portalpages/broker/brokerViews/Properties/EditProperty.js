@@ -71,8 +71,7 @@ class EditProperty extends Component {
     }
 
     componentDidMount(){
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
-        ApiService.getDataHalf(endpoint)
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/assets/${this.props.id}`)
             .then(data => {
                 this.context.setSingleAsset(data.data)
             })
@@ -134,8 +133,8 @@ class EditProperty extends Component {
     editProperty = (e) => {
         e.preventDefault()
         const id = this.props.id
-
-        const updatedProperty = {
+        const updatedContent = {}
+        const updatedFields = {
             adescription4: e.target.street_name.value,
             adescription5: e.target.city.value,
             adescription2: e.target.state.value,
@@ -145,7 +144,7 @@ class EditProperty extends Component {
             assetprice: e.target.price.value,
             futureprice: e.target.future_price.value,
             assettype_id: e.target.asset_type.value,
-            customer_id: "1",
+            customer_id: e.target.owner.value,
             tcustomer_id: e.target.tenant.value,
             broker_id: e.target.brokers.value,
             processt_id: e.target.process.value,
@@ -156,15 +155,21 @@ class EditProperty extends Component {
             assetinsurance: e.target.insurance.value,
             insurancedued : e.target.insurance_due.value
         }
+
+        for (const key in updatedFields) {
+            if (updatedFields[key] !== '')
+                updatedContent[key] = updatedFields[key]
+        }
+
         const endpoint = `${config.API_ENDPOINT}/assets`
-        ApiService.updateDataHalf(endpoint, id, updatedProperty)
-            .then(data => {
-                console.log(data)
+
+        ApiService.updateDataHalf(endpoint, id, updatedContent)
+            .then(() => {
+                this.props.history.history.push('/broker/properties')
             })
             .catch(error => {
                 console.log(error)
             })
-        this.props.history.history.push('/broker/properties')
     }
 
     render(){
@@ -203,19 +208,6 @@ class EditProperty extends Component {
                         <div className="form-group">
                             <label htmlFor="description">Description: </label>
                             <textarea name="description" defaultValue={asset.assetdesc}></textarea>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="price">Rent/Sell: </label>
-                            <div className="price-type">
-                                <label htmlFor="rent">
-                                    <input type="radio" name="rent"></input>
-                                    Rent
-                                </label>    
-                                <label htmlFor="sell">
-                                    <input type="radio" name="sell"></input>
-                                    Sell
-                                </label>
-                            </div>
                         </div>
                         <div className="form-group">
                             <label htmlFor="price">Price: </label>

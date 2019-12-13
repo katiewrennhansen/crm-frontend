@@ -19,10 +19,10 @@ class Cost extends Component {
     }
 
     componentDidMount(){
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
         ApiService.getDataHalf(endpoint)
             .then(data => {
-                this.setCosts(data.data.costs)
+                this.setCosts(data)
             })
             .catch(error => {
                 console.log(error)
@@ -38,14 +38,12 @@ class Cost extends Component {
                 kind: e.target.kind.value
             }
         }
-
-        const costEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
-        ApiService.postDataHalf(costEndpoint, newCost)
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
+        ApiService.postDataHalf(endpoint, newCost)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setCosts(data.data.costs)
+                        this.setCosts(data)
                     })
             })
             .catch(error => {
@@ -59,13 +57,12 @@ class Cost extends Component {
     }
 
     deleteCost = (id) => {
-        const costEndpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}`
-        ApiService.deleteDataHalf(costEndpoint, id)
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
+        ApiService.deleteDataHalf(endpoint, id)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setCosts(data.data.costs)
+                        this.setCosts(data)
                     })
             })
             .catch(error => {
@@ -114,6 +111,7 @@ class Cost extends Component {
                     <thead>
                         <tr>
                             <th>Type</th>
+                            <th>Name</th>
                             <th>Amount</th>
                             <th>Year</th>
                             <th></th>
@@ -123,8 +121,9 @@ class Cost extends Component {
                         {this.state.costs.map(f => {
                             return (
                                 <tr key={f.id}>
+                                    <td>{f.kind}</td>
                                     <td>{f.concept}</td>
-                                    <td>{f.amount}</td>
+                                    <td>{f.annualamount}</td>
                                     <td>{f.year}</td>
                                     <td><button className="delete-btn" onClick={() => {this.deleteCost(f.id)}}>Delete</button></td>
                                 </tr>
