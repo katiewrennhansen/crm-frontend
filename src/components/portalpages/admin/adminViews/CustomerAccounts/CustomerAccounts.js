@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
+import AddIcon from '@material-ui/icons/Add';
 
 const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
 const brokerEndpoint = config.BROKER_ENDPOINT
@@ -82,11 +83,14 @@ class CustomerAccounts extends Component {
     
     render(){  
         return (
-                <div className='container'>
-                    <div className='header-grid'>
-                        <h3>Customer Accounts</h3>
-                        <Link to='/dashboard/add-customer' className='btn'>Add Customer</Link>
-                    </div>
+                <div className='data-container'>
+                    <h2>Customer Accounts</h2>
+                    <Link className="add-icon" to='/dashboard/add-customer'>
+                        <AddIcon 
+                            fontSize="large" 
+                            aria-label="add comment type" 
+                        /> 
+                    </Link>
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -107,8 +111,8 @@ class CustomerAccounts extends Component {
                                         <td>{c.data.email}</td>
                                         <td>{c.data.category}</td>
                                         <td>{c.data.status}</td>
-                                        <td className='update'>
-                                            <Link className="update-btn" to={`/dashboard/customer-accounts/${id}`}>View</Link>
+                                        <td >
+                                            <Link className="view" to={`/dashboard/customer-accounts/${id}`}>View</Link>
                                         </td>
                                         <td>
                                             <button 

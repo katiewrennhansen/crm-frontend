@@ -5,7 +5,7 @@ ul {
 }
 
 .dash-sidebar-container {
-    background-image: linear-gradient( to right, #343434 85%, #292929);
+    background-image: linear-gradient( to right, #273443 85%, #222d37);
     color: white;
     width: 100%;
     font-family: 'Open Sans',sans-serif;
@@ -89,7 +89,7 @@ ul {
 
 @media (min-width: 900px){
     .dash-sidebar-container {
-        width: 25%;
+        width: 20%;
         position: fixed;
         overflow: scroll; 
         height: 100%;
@@ -104,6 +104,7 @@ ul {
     }
     .dash-sidebar-container.collapsed {
         width: 80px;
+        transition: 200ms linear;
     }
     .dash-nav-link p.collapsed {
         opacity: 0;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
+import EditIcon from '@material-ui/icons/Edit';
 
 class CompanySetUp extends Component {
     constructor(props) {
@@ -52,7 +53,7 @@ class CompanySetUp extends Component {
             <div className="company-info-container">
                 <div className="company-info">
                     <h2>{data.company}</h2>
-                    <h3>Contact: {data.contact}</h3>
+                    <p>Contact: {data.contact}</p>
                     <p>Email: {data.email}</p>
                     <p>Phone: {data.phone}</p>
                     <p>Tax ID: {data.ctax_id}</p>
@@ -66,10 +67,13 @@ class CompanySetUp extends Component {
                 </div>
                 <div>
                     <Link 
-                        className="company-btn edit"
+                        className="edit-btn edit-company"
                         to='/dashboard/edit-account-settings'
                     >
-                        Edit Company
+                        <EditIcon 
+                            className="add-icon" 
+                            fontSize="large" 
+                        />
                     </Link>
                 </div>
             </div>

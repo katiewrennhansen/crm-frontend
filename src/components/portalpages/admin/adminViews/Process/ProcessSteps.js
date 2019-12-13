@@ -4,6 +4,8 @@ import config from '../../../../../config'
 import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
 import SubmitButton from '../../../../utilities/Login/LoginComponents/SubmitButton'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import CloseIcon from '@material-ui/icons/Close';
 
 const processEndpoint = config.PROCESS_ENDPOINT
 
@@ -68,15 +70,24 @@ class ProcessSteps extends Component {
         return (
             <div className='process-container'>
                 <div className="header-grid">
-                    <h3>Process For: {this.state.name.processdesc}</h3>
-                    <Link className="cancel-btn" to='/dashboard/process'>Back</Link>
+                    <h2>Process For: {this.state.name.processdesc}</h2>
+                    <Link className='edit-btn edit-customer' to='/dashboard/process'>
+                        <CloseIcon 
+                            className="add-icon" 
+                            fontSize="large" 
+                        />
+                    </Link>
                 </div>
                 <div>
                     {context.data.map(s => (
                         <div className='steps-grid' key={s.id}>
                             <span>{s.sequence}.</span>
                             <span>{s.stepdesc}</span>
-                            <button className='delete-icon' onClick={() => this.deleteStep(s.id)}>&#10005;</button>
+                            <button className='delete-icon' onClick={() => this.deleteStep(s.id)}>
+                                <DeleteForeverIcon 
+                                    className="delete-icon"
+                                />
+                            </button>
                         </div>
                     ))}
                 </div>
@@ -98,7 +109,7 @@ class ProcessSteps extends Component {
                             placeholder='Step Name'
                         />
                     </div>
-                    <SubmitButton text='Add Step'/>
+                    <input type="submit" className="submit-full" value='Add Step'/>
                 </form>      
             </div>
         )

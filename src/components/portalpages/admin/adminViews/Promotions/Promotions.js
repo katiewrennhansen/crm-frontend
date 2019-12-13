@@ -5,6 +5,8 @@ import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
+import AddIcon from '@material-ui/icons/Add';
+
 
 const promEndpoint = config.PROMOTIONS_ENDPOINT
 
@@ -184,8 +186,13 @@ class Promotions extends Component {
                     <button className='cancel-btn' onClick={context.hideModal}>Cancel</button>
                 </Modal>
                 <div className='data-container'>
-                    <h3>Promotions</h3>
-                    <button className='add-btn' onClick={context.showModal}>Add Promotion</button>
+                    <h2>Promotions</h2>
+                    <AddIcon 
+                        className="add-icon" 
+                        fontSize="large" 
+                        aria-label="add comment type" 
+                        onClick={context.showModal} 
+                    />
                     <table className='data-table'>
                         <thead>
                             <tr>

@@ -6,6 +6,8 @@ import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
+import AddIcon from '@material-ui/icons/Add';
+
 
 const maintEndpoint = config.MAINTENANCE_ENDPOINT
 
@@ -126,8 +128,13 @@ class Maintenance extends Component {
                 </Modal>
 
                 <div className='data-container'>
-                    <h3>Maintenance</h3>
-                    <button className='add-btn' onClick={context.showModal}>Add Maintenance Type</button>
+                    <h2>Maintenance Types</h2>
+                    <AddIcon 
+                        className="add-icon" 
+                        fontSize="large" 
+                        aria-label="add comment type" 
+                        onClick={context.showModal} 
+                    />
                     <table className='data-table'>
                         <thead>
                             <tr>

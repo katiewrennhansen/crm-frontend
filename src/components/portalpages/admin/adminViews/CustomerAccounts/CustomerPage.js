@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service';
+import EditIcon from '@material-ui/icons/Edit';
+import CloseIcon from '@material-ui/icons/Close';
 
 const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
 
@@ -62,16 +64,10 @@ class CustomerPage extends Component {
     render(){  
         const data = this.state.customer
         return (
-            <>
-                <div className='container'>
-                    <div className='header-grid'>
-                        <h3>{data.name}</h3>
-                        <div>
-                            <Link to={`/dashboard/customer-accounts`} className='btn'>Back</Link>
-                            <Link to={`/dashboard/customer-accounts/${data.id}/edit`} className='btn'>Edit Customer</Link>
-                        </div>
-                    </div>
+            <div className='company-info-container'>
+                <div className='info-container'>
                     <div>
+                        <h2>{data.name}</h2>
                         <p>{data.email}</p>
                         <br></br>
                         <p>{data.adescription4}</p>
@@ -85,7 +81,21 @@ class CustomerPage extends Component {
                         <p>Reminder: {data.remainder}</p>
                     </div>
                 </div>
-            </>
+                <div>
+                    <Link to='/dashboard/customer-accounts' className='edit-btn edit-company'>
+                        <CloseIcon 
+                            className="add-icon" 
+                            fontSize="large" 
+                        />
+                    </Link>
+                    <Link to={`/dashboard/customer-accounts/${data.id}/edit`} className='edit-btn edit-company'>
+                        <EditIcon 
+                            className="add-icon" 
+                            fontSize="large" 
+                        />
+                    </Link>
+                </div>
+            </div>
         )
     }
 }

@@ -6,6 +6,7 @@ import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
+import AddIcon from '@material-ui/icons/Add';
 
 const psEndpoint = config.PROPERTY_STATUS_ENDPOINT
 
@@ -126,9 +127,13 @@ class PropertyStatus extends Component {
                 </Modal>
 
                 <div className='data-container'>
-                    <h3>Property Status</h3>
-                    <button className='add-btn' onClick={context.showModal}>Add Property Status</button>
-                    <table className='data-table'>
+                    <h2>Property Status</h2>
+                    <AddIcon 
+                        className="add-icon" 
+                        fontSize="large" 
+                        aria-label="add comment type" 
+                        onClick={context.showModal} 
+                    />                    <table className='data-table'>
                         <thead>
                             <tr>
                                 <th>Name</th>

@@ -4,6 +4,7 @@ import config from '../../../../../config'
 import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
 import ContactFrom from '../../../../utilities/Forms/ContactForm'
+import CloseIcon from '@material-ui/icons/Close';
 
 const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
 
@@ -58,7 +59,12 @@ class AddCustomer extends Component {
             <div className='add-customer'>
                 <div className='header-grid'>
                     <h2>Add Customer</h2>
-                    <Link className='cancel-btn' to='/dashboard/customer-accounts'>Cancel</Link>
+                    <Link className='edit-btn edit-customer' to='/dashboard/customer-accounts'>
+                        <CloseIcon 
+                            className="add-icon" 
+                            fontSize="large" 
+                        />
+                    </Link>
                 </div>
 
                 <ContactFrom 

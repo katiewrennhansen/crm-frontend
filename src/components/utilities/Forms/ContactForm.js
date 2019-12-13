@@ -252,7 +252,7 @@ class ContactForm extends Component{
                         >
                         </textarea>
                     </div>
-                    <input type='submit' className='submit' text='Save'/>
+                    <input type='submit' className='submit-full' text='Save'/>
                 </div>
             </form> 
         )

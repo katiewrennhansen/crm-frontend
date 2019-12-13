@@ -9,34 +9,38 @@ GLOBAL STYLES
 .dashboard-container h2,
 .dashboard-container h3 {
     font-family: 'Work Sans', sans-serif;
+    color: #273443;
 }
 
 .dashboard-container {
     font-family: 'Open Sans', sans-serif;
 }
 
+span {
+    font-size: 14px;
+}
 
 /* GLOBAL ELEMENT STYLES */
 table {
     border-collapse: collapse;
-    border: 1px solid rgb(138, 138, 138);
+    border: 1px solid rgb(221, 220, 220);
     grid-column: 1 / -1;   
-    box-shadow: 1px 1px 3px rgb(215, 215, 215);
     background-color: white;
+    font-size: 14px;
 }
 
 th {
-    background: rgb(79, 79, 79);
+    background: #273443;
     color: white;
     text-align: left;
 }
 
 td {
-    border-top: 1px solid rgb(138, 138, 138);
+    border-top: 1px solid rgb(221, 220, 220);
 }
 
 td, th {
-    padding: 10px 30px;
+    padding: 5px 10px;
 }
 
 select {
@@ -56,10 +60,6 @@ select {
 /* ================
 CONTAINER STYLES
 ================ */
-.dash-home {
-    padding: 30px;
-}
-
 .data-container h3 {
     grid-column: 1 / 4;
     font-size: 25px;
@@ -67,10 +67,8 @@ CONTAINER STYLES
 
 .data-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
-
-
 
 /* ================
 COMPONENT STYLES
@@ -90,15 +88,10 @@ COMPONENT STYLES
 
 .edit,
 .cancel-btn,
-.add-btn,
-.update-btn {
+.add-btn {
     color: rgb(63, 63, 63);
     border: 1px solid rgb(63, 63, 63);
     box-shadow: 1px 1px 2px gray;
-}
-
-.update-btn {
-    padding: 6px 12px;
 }
 
 .edit {
@@ -120,17 +113,62 @@ COMPONENT STYLES
 }
 
 .delete-btn {
-    border: 1px solid red;
     color: red;
-    padding: 8px 10px;
-    box-shadow: 1px 1px 2px rgb(225, 125, 125);
+    font-weight: 500;
+    border: none;
+    font-size: 14px;
+}
+
+.delete-btn:hover {
+    color: rgb(197, 6, 6);
+}
+
+.update-btn {
+    color: rgb(23, 136, 87);
+    font-weight: 500;
+    border: none;
+    font-size: 15px;
+    transition: 200ms linear;
+}
+
+.update-btn:hover {
+    color: rgb(17, 105, 67);
+    transition: 200ms linear;
+}
+
+.view {
+    color: rgb(58, 58, 58);
+    text-decoration: none;
+}
+
+.view:hover {
+    color: rgb(38, 38, 38);
+}
+
+.submit-full {
+    border: 1px solid rgb(23, 136, 87);
+    font-size: 16px;
+    background: rgb(23, 136, 87);
+    padding: 10px 30px;
+    color: white;
+    border-radius: 5px;
+    transition: 200ms linear;
+}
+
+.submit-full:hover {
+    cursor:pointer;
+    background: rgb(17, 105, 67);
+    transition: 200ms linear;
+}
+
+.update-btn:hover,
+.delete-btn:hover {
+    cursor:pointer;
 }
 
 .edit:hover,
 .cancel-btn:hover,
-.add-btn:hover,
-.update-btn:hover,
-.delete-btn:hover {
+.add-btn:hover {
     box-shadow: 2px 2px 3px gray;    
     transition: 300ms linear;
     cursor: pointer;
@@ -140,6 +178,18 @@ COMPONENT STYLES
     margin: 0 2px;
 }
 
+.add-icon,
+button.add-icon {
+    align-self: flex-end;
+    justify-self: flex-end;
+    padding: 20px 0px 15px 20px;
+    color: #273443;
+}
+
+.add-icon:hover,
+.delete-icon:hover {
+    cursor: pointer;
+}
 
 
 /* FORMS */
@@ -154,20 +204,30 @@ COMPONENT STYLES
 
 
 /* COMPANY SETUP STYLES */
-div.edit-company {
-    width: 60%;
-    margin: 0 auto;
-    display: grid;
-    grid-column: 1 / -1;
-}
 
 .company-info-container {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .company-info {
-    grid-column: 1 / 8;
+    grid-column: 1 / 2;
+}
+
+.edit-company {
+    display: grid;
+    grid-column: 1 / -1;
+    align-self: flex-end;
+}
+
+.edit-customer {
+    display: grid;
+    align-self: flex-end;
+}
+
+.company-info-container p,
+.company-info-container address {
+    font-size: 14px;
 }
 
 
@@ -221,24 +281,39 @@ MEDIA QUERIES
         grid-row: 1 / -1;
     }
     .dash-home {
-        grid-column: 4 / -1;
+        padding: 30px;
+        grid-column: 3 / -1;
         grid-row: 2 / -1;
-        padding: 0 60px;
+        padding: 50px 60px 0 120px;
         background-color: rgb(240, 240, 240);
         height: 100%;
-        padding-top: 50px;
         transition: 200ms linear;
-
     }
     .dash-home.collapsed {
         grid-column: 1 / -1;
         transition: 200ms linear;
         margin-left: 80px;
+        padding: 50px 60px;
     }
     .dash-nav.collapsed {
         grid-column: 1 / -1;
         transition: 200ms linear;
         margin-left: 80px;
         width: 95%;
+    }
+    .data-container {
+        background: white;
+        padding: 30px 50px;
+        border: 1px solid rgb(230, 230, 230);
+        border-radius: 2px;
+    }
+    td, th {
+        padding: 10px 20px;
+    }
+    .company-info-container {
+        background: white;
+        padding: 30px 50px;
+        border: 1px solid rgb(230, 230, 230);
+        border-radius: 2px;
     }
 }

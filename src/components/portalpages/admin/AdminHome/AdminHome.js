@@ -376,7 +376,7 @@ class AdminHome extends Component {
                                     }}
                             />
                             <Route 
-                                path='/dashboard/add-customer' 
+                                exact path='/dashboard/add-customer' 
                                 render={(props) => {
                                     return (
                                         <AddCustomer func={propFunctions} />
@@ -396,7 +396,7 @@ class AdminHome extends Component {
                                     }}
                             />
                             <Route 
-                                path='/dashboard/customer-accounts/:id/edit' 
+                                exact path='/dashboard/customer-accounts/:id/edit' 
                                 render={(history) => {
                                     const id = history.match.params.id;
                                     return (

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import CloseIcon from '@material-ui/icons/Close';
 
 
 class EditSettings extends Component {
@@ -68,7 +69,12 @@ class EditSettings extends Component {
             <div className='edit-company'>
                 <div className="header-grid">
                     <h3>Edit Company Information</h3>
-                    <Link className='company-btn cancel-btn'to='/dashboard/company-setup'>Back</Link>
+                    <Link to='/dashboard/company-setup' className='edit-btn edit-customer'>
+                        <CloseIcon 
+                            className="add-icon" 
+                            fontSize="large" 
+                        />
+                    </Link>
                 </div>
                 <form className="edit-company-form edit-form" onSubmit={(e) => this.handleSubmit(e)}>
 
@@ -162,7 +168,7 @@ class EditSettings extends Component {
                 </div>
                 <input
                     type="submit"
-                    className="submit"
+                    className="submit-full"
                     value="Save"
                 />
             </form>

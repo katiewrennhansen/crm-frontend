@@ -6,6 +6,7 @@ import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
+import AddIcon from '@material-ui/icons/Add';
 
 const processEndpoint = config.PROCESS_ENDPOINT
 
@@ -130,8 +131,13 @@ class Process extends Component {
                 </Modal>
                 
                 <div className='data-container'>
-                    <h3>Process</h3>
-                    <button className='add-btn' onClick={context.showModal}>Add Process</button>
+                    <h2>Process</h2>
+                    <AddIcon 
+                        className="add-icon" 
+                        fontSize="large" 
+                        aria-label="add comment type" 
+                        onClick={context.showModal} 
+                    />                      
                     <table className='data-table'>
                         <thead>
                             <tr>
@@ -147,7 +153,7 @@ class Process extends Component {
                                 <tr key={p.data.id}>
                                     <td>{p.data.processdesc}</td>
                                     <td>
-                                        <Link className="update-btn" to={`/dashboard/process/${p.data.id}`}>View Steps</Link>
+                                        <Link className="view" to={`/dashboard/process/${p.data.id}`}>View Steps</Link>
                                     </td>
                                     <td>
                                         <button className='update-btn' onClick={() => context.updateUpdate(p.data.processdesc, p.data.id)}>Update</button>
