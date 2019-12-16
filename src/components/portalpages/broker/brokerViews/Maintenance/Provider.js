@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
-
+import CloseIcon from '@material-ui/icons/Close';
+import EditIcon from '@material-ui/icons/Edit';
 
 class Provider extends Component {
     constructor(props) {
@@ -86,8 +87,12 @@ class Provider extends Component {
                     <div className='header-grid'>
                         <h2>{data.contact}</h2>
                         <div>
-                        <Link to='/broker/maintenance/' className='add'>Back</Link>
-                        <Link to={`/broker/maintenance/${this.props.id}/edit`} className='add'>Edit Provider</Link>
+                        <Link to='/broker/maintenance/' className="close-icon">
+                            <CloseIcon fontSize="large" />
+                        </Link>
+                        <Link to={`/broker/maintenance/${this.props.id}/edit`} className="add-icon">
+                            <EditIcon fontSize="large" />
+                        </Link>
                         </div>
                     </div>
                     <div>

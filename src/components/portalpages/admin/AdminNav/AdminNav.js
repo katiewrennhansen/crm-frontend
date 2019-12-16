@@ -35,7 +35,6 @@ class AdminNav extends Component {
                     >
                         <p className='account'>Website</p>
                     </Link>
-                    
                     <button 
                         className='admin-logout' 
                         onClick={this.logout}

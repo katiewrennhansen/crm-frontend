@@ -32,7 +32,8 @@ class BrokerHome extends Component {
         this.state = {
             title: '',
             assets: [],
-            singleAsset: []
+            singleAsset: [],
+            active: false
         }
     }
 
@@ -53,30 +54,52 @@ class BrokerHome extends Component {
             title: title
         })
     }
+
+    setActive = () => {
+        this.setState({
+            active: true
+        })
+    }
+
+    setCollapsed = () => {
+        this.setState({
+            active: false
+        })
+    }
+
+    toggleNav = () => {
+        if(this.state.active === false){
+            this.setActive() 
+        } else {
+            this.setCollapsed()
+        }
+    }
     
     render(){
         const value = {
             assets: this.state.assets,
             singleAsset: this.state.singleAsset,
             setAssets: this.setAssets,
-            setSingleAsset: this.setSingleAsset
+            setSingleAsset: this.setSingleAsset,
+            active: this.state.active,
+            toggleNav: this.toggleNav
         }
         return (
             <BrokerContext.Provider value={value}>
              <div className='dashboard-container'>
-                    <div className='dash-sidebar'>
+                    <div className={`${(this.state.active) ? null : 'collapsed'} dash-sidebar`}>
                         <BrokerSidebar 
                             handleTitle={this.handleTitle}                        
                         />
                     </div>
-                    <div className='dash-nav'>
+                    <div className={`${(this.state.active) ? null : 'collapsed'} dash-nav`}>
                         <BrokerNav 
                             handleTitle={this.handleTitle}   
                             title={this.state.title}
                             history={this.props.history}
                         />
                     </div>
-                    <div className='dash-home'>
+                    <div className={`${(this.state.active) ? null : 'collapsed'} dash-home`}>
                         <Switch>
                             <Route 
                                 exact path='/broker' 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import ContactFrom from '../../../../utilities/Forms/ContactForm'
+import CloseIcon from '@material-ui/icons/Close';
 
 class AddContact extends Component {
 
@@ -71,7 +72,9 @@ class AddContact extends Component {
             <div className='add-customer'>
                 <div className='header-grid'>
                     <h2>Add Contact</h2>
-                    <Link className='cancel-btn' to={`/broker/contacts`}>Cancel</Link>
+                    <Link className="close-icon"  to={`/broker/contacts`}>
+                        <CloseIcon fontSize="large" />
+                    </Link>
                 </div>
                 
                 <ContactFrom 

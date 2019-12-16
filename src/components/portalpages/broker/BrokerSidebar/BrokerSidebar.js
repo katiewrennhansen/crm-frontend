@@ -9,10 +9,12 @@ import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import WorkIcon from '@material-ui/icons/Work';
-
+import BrokerContext from '../../../../contexts/BrokerContext'
 
 
 class BrokerSidebar extends Component {
+    static contextType = BrokerContext
+
     constructor(props) {
         super(props);
         this.state = {
@@ -21,102 +23,101 @@ class BrokerSidebar extends Component {
         };
     }
 
-    toggleAccordion(){
-        const currentState = this.state.active;
-        this.setState({
-            active: !currentState
-        })
-    }
-
     render(){
         return (
-            <div className='dash-sidebar-container'>
+            <div className={`${(this.context.active) ? null : 'collapsed'} dash-sidebar-container`}>
                 <div className='admin-info'>
                     <AccountCircleIcon 
                         fontSize='large'
+                        className={`${(this.context.active) ? null : 'collapsed'} icon`}
                     />
-                    <h2>Broker Name</h2>
+                    <h2 className={(this.context.active) ? null : 'collapsed'}>Broker Name</h2>
+                    <button className="toggle-btn"  aria-label="toggle-nav" onClick={this.context.toggleNav}>
+                        <div className="burger-bar"></div>
+                        <div className="burger-bar"></div>
+                        <div className="burger-bar half"></div>
+                    </button>
                 </div>
                 <hr />
-                <ul className='dash-nav-ul'>
+                <ul className={`${(this.context.active) ? null : 'collapsed'} dash-nav-ul`}>
                     <li>
                         <Link 
                             to="/broker" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Dashboard')}
                         >
                             <DashboardIcon />
-                            <p>Dashboard</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Dashboard</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/broker/properties" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Properties')}
                         >
                             <WorkIcon />
-                            <p>Properties</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Properties</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/broker/promotions" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Promotions')}
                         >
                             <ChatBubbleOutlineIcon />
-                            <p>Promotions</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Promotions</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/broker/maintenance" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Maintenance')}
                         >
                             <CardGiftcardIcon />
-                            <p>Maintenance</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Maintenance</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/broker/reminders" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Reminders')}                        
                         >
                             <HomeIcon />
-                            <p>Reminders</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Reminders</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/broker/network" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Network')}                                                    
                         >
                             <HomeWorkIcon />
-                            <p>Network</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Network</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/broker/contacts" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Contacts')}                        
                         >
                             <AccountBoxIcon />
-                            <p>Contacts</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Contacts</p>
                         </Link>
                     </li>
                     <li>
                         <Link 
                             to="/broker/alerts" 
-                            className='dash-nav-link'
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Alerts')}                        
                         >
                             <NotificationsActiveIcon />
-                            <p>Alerts</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Alerts</p>
                         </Link>
                     </li>
                 </ul>

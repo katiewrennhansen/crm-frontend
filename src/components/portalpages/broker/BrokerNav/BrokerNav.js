@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import TokenService from '../../../../services/token-service'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
  
 class AdminNav extends Component {
     constructor(props){
@@ -34,9 +35,12 @@ class AdminNav extends Component {
                         <p className='account'>Website</p>
                     </Link>
                     <button 
-                        className='logout admin-logout' 
+                        className='admin-logout' 
                         onClick={this.logout}
-                    >Logout</button>             
+                    >
+                        <ExitToAppIcon />
+                        <p>Logout</p>
+                    </button>             
                 </nav>
             </div>
         )

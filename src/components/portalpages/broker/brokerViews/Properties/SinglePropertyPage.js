@@ -7,6 +7,8 @@ import Features from './components/Features'
 import Messages from './components/Messages'
 import Maintenance from './components/Maintenance'
 import Cost from './components/Cost'
+import EditIcon from '@material-ui/icons/Edit';
+import CloseIcon from '@material-ui/icons/Close';
 import './Properties.css'
 
 class SinglePageProperty extends Component {
@@ -44,9 +46,17 @@ class SinglePageProperty extends Component {
                         <h2>{asset.adescription4}</h2>
                         <h3>{asset.adescription2}, {asset.adescription3}</h3>
                     </address>  
-                    <div>               
-                        <Link className="edit" to='/broker/properties'>Back</Link>
-                        <Link className="edit" to={`/broker/properties/${id}/edit`}>Edit Property</Link>
+                    <div className="property-icons">               
+                        <Link className="close-icon" to='/broker/properties'>
+                            <CloseIcon 
+                                fontSize="large" 
+                            />
+                        </Link>
+                        <Link className="add-icon" to={`/broker/properties/${id}/edit`}>
+                            <EditIcon 
+                                fontSize="large" 
+                            />
+                        </Link>
                     </div>   
                 </div>
                 <div className='broker-properties'>

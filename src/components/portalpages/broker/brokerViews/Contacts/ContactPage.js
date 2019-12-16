@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service';
 import AddNetwork from './components/AddNetwork';
+import CloseIcon from '@material-ui/icons/Close';
+import EditIcon from '@material-ui/icons/Edit';
 
 
 class ContactPage extends Component {
@@ -41,7 +43,18 @@ class ContactPage extends Component {
             <div className='container'>
                 <div className='header-grid'>
                     <h2>{data.name}</h2>
-                    <Link to={`/broker/contacts/${data.id}/edit`} className='btn'>Edit Contact</Link>
+                    <div className="property-icons">               
+                        <Link className="close-icon" to='/broker/contacts'>
+                            <CloseIcon 
+                                fontSize="large" 
+                            />
+                        </Link>
+                        <Link className="add-icon" to={`/broker/contacts/${this.props.id}/edit`}>
+                            <EditIcon 
+                                fontSize="large" 
+                            />
+                        </Link>
+                    </div>
                 </div>
                 <div>
                     <p>{data.email}</p>

@@ -95,9 +95,9 @@ class Alerts extends Component {
                             <td>
                                 <Moment format="YYYY/MM/DD">{a.data.requestdate}</Moment>
                             </td>
-                            <td>
+                            <td className="delete">
                                 <button 
-                                    className="update-btn" 
+                                    className="delete-btn" 
                                     onClick={() => this.handleCompleted(a.data.id)}
                                 >
                                     {(a.data.alarm) ? 'Mark as Completed' : 'Completed'}

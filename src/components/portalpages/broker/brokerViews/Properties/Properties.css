@@ -1,3 +1,8 @@
+td.delete {
+    text-align: right;
+    padding-right: 50px;
+}
+
 .broker-properties-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -9,7 +14,6 @@
     align-items: baseline;
 }
 
-.add,
 .submit,
 .edit,
 .btn {
@@ -22,15 +26,28 @@
     box-shadow: 1px 1px 2px gray;
 }
 
+.add {
+    border: none;
+    background: none;
+    justify-self: flex-end;
+    color: #273443;
+}
+
+.add:hover {
+    cursor:pointer;
+}
+
+button.add {
+    font-size: 45px;
+}
+
 .submit {
     border: 1px solid rgb(23, 136, 87);
     font-size: 16px;
     color: rgb(23, 136, 87);
 }
 
-
-.submit:hover,
-.add:hover {
+.submit:hover {
     cursor: pointer;
     box-shadow: 2px 2px 3px gray;
     transition: 300ms linear;
@@ -118,11 +135,6 @@ textarea {
 
 .hidden {
     display: none;
-}
-
-button.add {
-    font-size: 20px;
-    padding: 5px 20px;
 }
 
 table {

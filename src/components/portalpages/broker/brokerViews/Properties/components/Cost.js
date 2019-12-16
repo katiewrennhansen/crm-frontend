@@ -86,7 +86,7 @@ class Cost extends Component {
             <div>
             <div className='header-grid'>
                     <h2>Costs</h2>
-                    <button className='add' id="c-btn" onClick={this.toggleForm}>+</button>
+                    <button id="c-btn" className="add" onClick={this.toggleForm}>+</button>
                 </div>
                 <form className="sp-form hidden" id="costs-form" onSubmit={(e) => {this.addCost(e)}}>
                     <div className="form-group">
@@ -125,7 +125,9 @@ class Cost extends Component {
                                     <td>{f.concept}</td>
                                     <td>{f.annualamount}</td>
                                     <td>{f.year}</td>
-                                    <td><button className="delete-btn" onClick={() => {this.deleteCost(f.id)}}>Delete</button></td>
+                                    <td className="delete">
+                                        <button className="delete-btn" onClick={() => {this.deleteCost(f.id)}}>Delete</button>
+                                    </td>
                                 </tr>
                             )
                         })}

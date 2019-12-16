@@ -198,7 +198,9 @@ class Maintenance extends Component {
                                     </td>
                                     <td>{f.reqdate}</td>
                                     <td>{(f.deliverdate) ? (f.deliverdate) : '-' }</td>
-                                    <td><button className="delete-btn" onClick={() => this.deleteMaintenance(f.id)}>Delete</button></td>
+                                    <td className="delete">
+                                        <button className="delete-btn" onClick={() => this.deleteMaintenance(f.id)}>Delete</button>
+                                    </td>
                                 </tr>
                             )
                         })}

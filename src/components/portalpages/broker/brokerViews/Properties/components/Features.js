@@ -139,7 +139,9 @@ class Features extends Component {
                                         })}
                                     </td>
                                     <td>{f.featuredesc}</td>
-                                    <td><button className="delete-btn" onClick={() => {this.deleteFeature(f.id)}}>Delete</button></td>
+                                    <td className="delete">
+                                        <button className="delete-btn" onClick={() => {this.deleteFeature(f.id)}}>Delete</button>
+                                    </td>
                                 </tr>
                             )
                         })}

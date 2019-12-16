@@ -141,7 +141,9 @@ class Messages extends Component {
                                         })}
                                     </td>
                                     <td>{f.data.assetcomment}</td>
-                                    <td><button className="delete-btn" onClick={() => {this.deleteMessage(f.data.id)}}>Delete</button></td>
+                                    <td className="delete">
+                                        <button className="delete-btn" onClick={() => {this.deleteMessage(f.data.id)}}>Delete</button>
+                                    </td>
                                 </tr>
                             )
                         })}

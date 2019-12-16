@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import ApiService from '../../../../../services/api-service'
 import config from '../../../../../config'
 import BrokerContext from '../../../../../contexts/BrokerContext'
+import AddIcon from '@material-ui/icons/Add';
 import './Properties.css'
 
 class Properties extends Component {
@@ -24,7 +25,12 @@ class Properties extends Component {
             <div className='broker-properties'>
                 <div className='header-grid'>
                     <h2>Properties</h2>
-                    <Link className="add" to='/broker/properties/add'>Add Property</Link>
+                    <Link className="add-icon" to='/broker/properties/add'>
+                        <AddIcon 
+                            fontSize="large" 
+                            aria-label="add property" 
+                        />
+                    </Link>
                 </div>
                 <div className='broker-properties-grid'>
                     {this.context.assets.map(a => {

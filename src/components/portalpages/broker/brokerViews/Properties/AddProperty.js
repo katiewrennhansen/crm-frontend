@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import ApiService from '../../../../../services/api-service'
 import config from '../../../../../config'
 import BrokerContext from '../../../../../contexts/BrokerContext'
+import CloseIcon from '@material-ui/icons/Close';
 import './Properties.css'
 
 class AddProperty extends Component {
@@ -175,7 +176,12 @@ class AddProperty extends Component {
             <div className='add-property'>
                 <div className='header-grid'>
                     <h2>Add New Property</h2>
-                    <Link className="add" to='/broker/properties'>Cancel</Link>
+                    <Link to='/broker/properties'>
+                        <CloseIcon 
+                            className="close-icon" 
+                            fontSize="large" 
+                        />
+                    </Link>
                 </div>
                 <div>
                     <form className="add-property-form" onSubmit={(e) => {this.submitProperty(e)}}>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import AddIcon from '@material-ui/icons/Add';
 
 class Contacts extends Component {
     constructor(props) {
@@ -37,7 +38,12 @@ class Contacts extends Component {
                 <div className='container'>
                     <div className='header-grid'>
                         <h2>Contacts</h2>
-                        <Link to='/broker/contacts/add' className='btn'>Add Contact</Link>
+                        <Link to='/broker/contacts/add' className='add-icon'>
+                            <AddIcon 
+                                fontSize="large" 
+                                aria-label="add comment type" 
+                            />
+                        </Link>
                     </div>
                     <table className='data-table'>
                         <thead>

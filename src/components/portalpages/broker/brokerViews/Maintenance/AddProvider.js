@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import ApiService from '../../../../../services/api-service'
 import config from '../../../../../config'
 import BrokerContext from '../../../../../contexts/BrokerContext'
+import CloseIcon from '@material-ui/icons/Close';
 
 class AddProvider extends Component {
     static contextType = BrokerContext
@@ -99,7 +100,9 @@ class AddProvider extends Component {
             <div className='add-property'>
                 <div className='header-grid'>
                     <h2>Add New Provider</h2>
-                    <Link className="add" to='/broker/maintenance'>Cancel</Link>
+                    <Link className="close-icon" to='/broker/maintenance'>
+                        <CloseIcon fontSize="large" />
+                    </Link>
                 </div>
                 <div>
                     <form className="add-property-form" onSubmit={(e) => {this.submitProvider(e)}}>

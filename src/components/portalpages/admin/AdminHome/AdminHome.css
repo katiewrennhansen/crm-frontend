@@ -4,12 +4,20 @@
 GLOBAL STYLES
 ============= */
 
+body {
+    background-color: rgb(240, 240, 240);
+}
+
 /* FONT STYLES */
 .dashboard-container h1,
 .dashboard-container h2,
 .dashboard-container h3 {
     font-family: 'Work Sans', sans-serif;
     color: #273443;
+}
+
+.dash-sidebar h2 {
+    color: white;
 }
 
 .dashboard-container {
@@ -184,6 +192,7 @@ COMPONENT STYLES
 }
 
 .add-icon,
+.add-icon a,
 button.add-icon {
     align-self: flex-end;
     justify-self: flex-end;
@@ -191,10 +200,26 @@ button.add-icon {
     color: #273443;
 }
 
+button.add-icon {
+    background: none;
+    border: none;
+}
+
+.close-icon,
+.close-icon a {
+    color: #273443;
+    align-self: flex-end;
+    justify-self: flex-end;
+}
+
 .add-icon:hover,
 .delete-icon:hover,
 .close-icon {
     cursor: pointer;
+}
+
+.property-icons {
+    display: grid;
 }
 
 
@@ -279,7 +304,7 @@ MEDIA QUERIES
         grid-column: 4 / -1;
         grid-row: 1 / 2;
         position: fixed;
-        margin-left: 25%;
+        margin-left: 20%;
         transition: 200ms linear;
     }
     .dash-sidebar {
@@ -291,7 +316,6 @@ MEDIA QUERIES
         grid-column: 3 / -1;
         grid-row: 2 / -1;
         padding: 50px 60px 0 120px;
-        background-color: rgb(240, 240, 240);
         height: 100%;
         transition: 200ms linear;
     }

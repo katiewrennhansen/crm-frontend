@@ -139,7 +139,7 @@ class PromotionPage extends Component {
                                     <td>{a.cost}</td>
                                     <td>{a.assigned}</td>
                                     <td>
-                                        <button className='update-btn' onClick={() => this.unassignPromo(a.id)}>Unassign</button>
+                                        <button className='delete-btn' onClick={() => this.unassignPromo(a.id)}>Unassign</button>
                                     </td>
                                 </tr>
                                 )

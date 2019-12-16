@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import AddIcon from '@material-ui/icons/Add';
 
 const endpoint = config.MAINTENANCE_PROVIDERS_ENDPOINT
 
@@ -33,7 +34,12 @@ class Maintenance extends Component {
             <div className='container'>
                 <div className='header-grid'>
                     <h2>Maintenance</h2>
-                    <Link to='/broker/maintenance/add-provider' className='add'>Add Provider</Link>
+                    <Link to='/broker/maintenance/add-provider' className='add-icon'>
+                    <AddIcon 
+                        fontSize="large" 
+                        aria-label="add comment type" 
+                    />
+                    </Link>
                 </div>
                 <div>
                     <table className='data-table'>

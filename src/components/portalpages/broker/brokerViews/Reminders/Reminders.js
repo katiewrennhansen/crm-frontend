@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Moment from 'react-moment'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import AddIcon from '@material-ui/icons/Add';
 
 const endpoint = `${config.API_ENDPOINT}/remainders`
 
@@ -37,7 +38,12 @@ class Reminders extends Component {
             <div className='container'>
                 <div className='header-grid'>
                     <h2>Reminders</h2>
-                    <Link to='/broker/reminders/add' className='add'>Add Reminder</Link>
+                    <Link to='/broker/reminders/add' className='add-icon'>
+                        <AddIcon 
+                            fontSize="large" 
+                            aria-label="add comment type" 
+                        />
+                    </Link>
                 </div>
                 <div>
                     <table className='data-table'>
