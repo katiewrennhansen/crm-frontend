@@ -304,7 +304,7 @@ MEDIA QUERIES
         grid-column: 4 / -1;
         grid-row: 1 / 2;
         position: fixed;
-        margin-left: 20%;
+        margin-left: 25%;
         transition: 200ms linear;
     }
     .dash-sidebar {
@@ -312,10 +312,10 @@ MEDIA QUERIES
         grid-row: 1 / -1;
     }
     .dash-home {
-        padding: 30px;
         grid-column: 3 / -1;
         grid-row: 2 / -1;
-        padding: 50px 60px 0 120px;
+        padding: 50px 60px;
+        margin-left: 10%;
         height: 100%;
         transition: 200ms linear;
     }
