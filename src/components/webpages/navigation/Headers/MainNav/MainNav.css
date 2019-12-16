@@ -2,6 +2,7 @@
 
 nav {
     display: grid;
+    height: 80px;
 }
 
 .link,
@@ -50,6 +51,7 @@ nav {
     grid-template-columns: 92px 95px;
     grid-column: 20 / 23;
     grid-gap: 10px;
+    align-items: center;
 }
 
 .login,
@@ -58,6 +60,7 @@ nav {
 .account {
     border-radius: 5px;
     margin-top: 14px;
+    text-align: center;
 }
 
 .login {

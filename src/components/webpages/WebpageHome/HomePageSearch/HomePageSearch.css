@@ -54,11 +54,13 @@
     padding: 10px 20px;
     font-size: 16px;
     border: 0.5px solid green;
-    border-radius: 5px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px black;
 }
 
 .home-page-search input[type='submit']:hover {
     background: rgb(77, 154, 77);
     border: 0.5px solid rgb(77, 154, 77);
     transition: 300ms linear 10ms;
+    cursor: pointer;
 }
