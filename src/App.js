@@ -13,6 +13,8 @@ import UserHome from './components/portalpages/user/UserHome/UserHome'
 import AdminHome from './components/portalpages/admin/AdminHome/AdminHome'
 import BrokerHome from './components/portalpages/broker/BrokerHome/BrokerHome'
 import PrivateRoute from './components/utilities/PrivateRoute'
+import AdminPrivateRoute from './components/utilities/AdminPrivateRoute'
+import BrokerPrivateRoute from './components/utilities/BrokerPrivateRoute'
 import './App.css'
 
 
@@ -127,11 +129,11 @@ class App extends Component {
                 }}}
             />
     {/* ******** ADMIN PORTAL ROUTES ******* */}
-            <PrivateRoute 
+            <BrokerPrivateRoute 
               path='/broker'
               component={BrokerHome}
             />
-            <PrivateRoute 
+            <AdminPrivateRoute 
               path='/dashboard'
               component={AdminHome}
             />

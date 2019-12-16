@@ -38,8 +38,12 @@ class Login extends Component {
             .then(resJson => {
                 TokenService.saveAuthToken(resJson.token)
                 this.props.handleUserType(resJson.usertype);
-                this.selectUserAccount(resJson.usertype);
                 sessionStorage.setItem('id', resJson.id)
+                sessionStorage.setItem('usertype', resJson.usertype)
+            })
+            .then(() => {
+                const user = sessionStorage.getItem('usertype')
+                this.selectUserAccount(user);
             })
             .catch(err => {
                 this.setState({ error: err.error })

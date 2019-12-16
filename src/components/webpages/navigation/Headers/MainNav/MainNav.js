@@ -16,8 +16,20 @@ class MainNav extends Component {
         console.log('logged out');
         TokenService.clearAuthToken()
     }
+
+    accountType = (usertype) => {
+        if(usertype === 'admin'){
+            return '/dashboard'
+        } else if (usertype === 'broker'){
+            return '/broker'
+        } else if (usertype === 'user'){
+            return '/user-home'
+        }  
+    }
     
     render() {
+        const usertype = sessionStorage.getItem('usertype')
+        console.log(usertype)
         return (
             <nav>
                 <div className='logo'>
@@ -32,7 +44,7 @@ class MainNav extends Component {
                     {(TokenService.hasAuthToken()) 
                         ?
                         <>
-                            <Link to='/dashboard' style={{textDecoration: 'none'}}>
+                            <Link to={this.accountType(usertype)} style={{textDecoration: 'none'}}>
                                 <p className='account'>Account</p>
                             </Link>
                             <Link to='/' 
