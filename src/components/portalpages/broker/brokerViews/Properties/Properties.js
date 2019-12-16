@@ -4,6 +4,7 @@ import ApiService from '../../../../../services/api-service'
 import config from '../../../../../config'
 import BrokerContext from '../../../../../contexts/BrokerContext'
 import AddIcon from '@material-ui/icons/Add';
+import property1 from '../../../../../images/property1.jpg'
 import './Properties.css'
 
 class Properties extends Component {
@@ -24,7 +25,7 @@ class Properties extends Component {
         return (
             <div className='broker-properties'>
                 <div className='header-grid'>
-                    <h2>Properties</h2>
+                    <h2>My Properties</h2>
                     <Link className="add-icon" to='/broker/properties/add'>
                         <AddIcon 
                             fontSize="large" 
@@ -39,7 +40,11 @@ class Properties extends Component {
                                 key={a.data.id} 
                                 className='asset-card'
                             >
-                                <div>
+                                <div className="top-content">
+                                    <div className="image-container">
+                                        <img className="property-photo" src={property1} alt="property"/>
+                                        <p className="price">${a.data.assetprice}</p>
+                                    </div>
                                     <h4>{a.data.processt}</h4>
                                     <address>
                                         {a.data.adescription4}

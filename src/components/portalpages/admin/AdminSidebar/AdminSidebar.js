@@ -5,7 +5,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
 import HomeIcon from '@material-ui/icons/Home';
-import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import BuildIcon from '@material-ui/icons/Build';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
@@ -15,6 +14,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import WeekendIcon from '@material-ui/icons/Weekend';
 import CategoryIcon from '@material-ui/icons/Category';
 import AdminContext from '../../../../contexts/AdminContext'
+import EventNoteIcon from '@material-ui/icons/EventNote';
 import './AdminSidebar.css'
 
 
@@ -145,7 +145,7 @@ class AdminSidebar extends Component {
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Reminders')}                        
                         >
-                            <NotificationsActiveIcon />
+                            <EventNoteIcon />
                             <p className={(this.context.active) ? null : 'collapsed'} >Reminders</p>
                         </Link>
                     </li>

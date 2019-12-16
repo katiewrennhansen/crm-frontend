@@ -60,8 +60,33 @@ button.add {
     box-shadow: 1px 1px 3px rgb(181, 181, 181);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 2fr 1fr;
     margin: 10px;
+    position: relative;
+    z-index: -1;
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.property-photo {
+    width: 100%;
+}
+
+.price {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 25px;
+    color: white;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0));
+    width: 100%;
+    padding: 20px 20px 15px;
+}
+
+.top-content {
+    margin-bottom: 20px;
 }
 
 .asset-card div {
@@ -79,6 +104,7 @@ button.add {
     align-self: flex-end;
     justify-self: flex-end;
 }
+
 
 .manage-listing {
     border: 1px solid gray;

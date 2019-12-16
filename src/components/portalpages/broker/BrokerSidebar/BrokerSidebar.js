@@ -4,12 +4,12 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
-import HomeIcon from '@material-ui/icons/Home';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
-import WorkIcon from '@material-ui/icons/Work';
 import BrokerContext from '../../../../contexts/BrokerContext'
+import BuildIcon from '@material-ui/icons/Build';
+import EventNoteIcon from '@material-ui/icons/EventNote';
 
 
 class BrokerSidebar extends Component {
@@ -56,7 +56,7 @@ class BrokerSidebar extends Component {
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Properties')}
                         >
-                            <WorkIcon />
+                            <HomeWorkIcon />
                             <p className={(this.context.active) ? null : 'collapsed'}>Properties</p>
                         </Link>
                     </li>
@@ -66,7 +66,7 @@ class BrokerSidebar extends Component {
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Promotions')}
                         >
-                            <ChatBubbleOutlineIcon />
+                            <CardGiftcardIcon />
                             <p className={(this.context.active) ? null : 'collapsed'}>Promotions</p>
                         </Link>
                     </li>
@@ -76,7 +76,7 @@ class BrokerSidebar extends Component {
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Maintenance')}
                         >
-                            <CardGiftcardIcon />
+                            <BuildIcon />
                             <p className={(this.context.active) ? null : 'collapsed'}>Maintenance</p>
                         </Link>
                     </li>
@@ -86,7 +86,7 @@ class BrokerSidebar extends Component {
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Reminders')}                        
                         >
-                            <HomeIcon />
+                            <EventNoteIcon />
                             <p className={(this.context.active) ? null : 'collapsed'}>Reminders</p>
                         </Link>
                     </li>
@@ -96,7 +96,7 @@ class BrokerSidebar extends Component {
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Network')}                                                    
                         >
-                            <HomeWorkIcon />
+                            <ChatBubbleOutlineIcon />
                             <p className={(this.context.active) ? null : 'collapsed'}>Network</p>
                         </Link>
                     </li>

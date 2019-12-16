@@ -35,40 +35,36 @@ class Reminders extends Component {
 
     render(){  
         return (
-            <div className='container'>
-                <div className='header-grid'>
-                    <h2>Reminders</h2>
-                    <Link to='/broker/reminders/add' className='add-icon'>
-                        <AddIcon 
-                            fontSize="large" 
-                            aria-label="add comment type" 
-                        />
-                    </Link>
-                </div>
-                <div>
-                    <table className='data-table'>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Months</th>
-                                <th>Message</th>
-                                <th>Date Created</th>
+            <div className='data-container'>
+                <h2>Reminders</h2>
+                <Link to='/broker/reminders/add' className='add-icon'>
+                    <AddIcon 
+                        fontSize="large" 
+                        aria-label="add comment type" 
+                    />
+                </Link>
+                <table className='data-table'>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Months</th>
+                            <th>Message</th>
+                            <th>Date Created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.reminders.map(r => (
+                            <tr key={r.id}>
+                                <td>{r.rtype}</td>
+                                <td>{r.periodmonths}</td>
+                                <td>{r.bodymessage}</td>
+                                <td>
+                                    <Moment format="YYYY/MM/DD">{r.created_at}</Moment>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.reminders.map(r => (
-                                <tr key={r.id}>
-                                    <td>{r.rtype}</td>
-                                    <td>{r.periodmonths}</td>
-                                    <td>{r.bodymessage}</td>
-                                    <td>
-                                        <Moment format="YYYY/MM/DD">{r.created_at}</Moment>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         )
     }

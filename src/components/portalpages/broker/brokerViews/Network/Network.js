@@ -33,10 +33,8 @@ class Network extends Component {
 
     render(){
         return (  
-            <div className='container'>
-                <div className='header-grid'>
-                    <h2>Network</h2>
-                </div>
+            <div className='data-container'>
+                <h2>Network</h2>
                 <table className='data-table'>
                     <thead>
                         <tr>

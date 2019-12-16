@@ -21,7 +21,6 @@ import PromotionPage from '../brokerViews/Promotion/PromotionPage'
 import ContactPage from '../brokerViews/Contacts/ContactPage'
 import EditContact from '../brokerViews/Contacts/EditContact'
 import AddContact from '../brokerViews/Contacts/AddContact'
-import AddNetwork from '../brokerViews/Network/AddNetwork'
 import AddReminder from '../brokerViews/Reminders/AddReminder'
 import './BrokerHome.css'
 
@@ -194,10 +193,6 @@ class BrokerHome extends Component {
                             <Route 
                                 exact path='/broker/network' 
                                 component={Network}
-                            />
-                            <Route 
-                                exact path='/broker/network/add' 
-                                component={AddNetwork}
                             />
                             <Route 
                                 exact path='/broker/contacts' 

@@ -35,16 +35,14 @@ class Contacts extends Component {
     
     render(){  
         return (
-                <div className='container'>
-                    <div className='header-grid'>
-                        <h2>Contacts</h2>
-                        <Link to='/broker/contacts/add' className='add-icon'>
-                            <AddIcon 
-                                fontSize="large" 
-                                aria-label="add comment type" 
-                            />
-                        </Link>
-                    </div>
+                <div className='data-container'>
+                    <h2>Contacts</h2>
+                    <Link to='/broker/contacts/add' className='add-icon'>
+                        <AddIcon 
+                            fontSize="large" 
+                            aria-label="add comment type" 
+                        />
+                    </Link>
                     <table className='data-table'>
                         <thead>
                             <tr>
