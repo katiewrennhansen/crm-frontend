@@ -14,7 +14,7 @@
 
 .dashboard-nav {
     grid-column: 6 / 7;
-    align-self: center;
+    align-items: center;
     justify-self: flex-start;
     padding-right: 50px;
 }

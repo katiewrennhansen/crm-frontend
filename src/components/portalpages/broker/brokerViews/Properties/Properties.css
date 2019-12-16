@@ -53,6 +53,11 @@ button.add {
     transition: 300ms linear;
 }
 
+.dash-nav {
+    position: fixed;
+    z-index: 1000;
+}
+
 .asset-card {
     background: white;
     padding: 20px;
@@ -62,7 +67,7 @@ button.add {
     grid-template-columns: repeat(2, 1fr);
     margin: 10px;
     position: relative;
-    z-index: -1;
+    z-index: 0;
 }
 
 .image-container {
@@ -104,7 +109,6 @@ button.add {
     align-self: flex-end;
     justify-self: flex-end;
 }
-
 
 .manage-listing {
     border: 1px solid gray;
