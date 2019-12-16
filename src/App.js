@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
 import WebpageHome from './components/webpages/WebpageHome/WebpageHome'
 import AboutPage from './components/webpages/AboutPage/AboutPage'
 import ServicesPage from './components/webpages/ServicesPage/ServicesPage'
@@ -12,9 +12,9 @@ import UserRegistration from './components/utilities/Login/RegistrationAccountTy
 import UserHome from './components/portalpages/user/UserHome/UserHome'
 import AdminHome from './components/portalpages/admin/AdminHome/AdminHome'
 import BrokerHome from './components/portalpages/broker/BrokerHome/BrokerHome'
-import PrivateRoute from './components/utilities/PrivateRoute'
 import AdminPrivateRoute from './components/utilities/AdminPrivateRoute'
 import BrokerPrivateRoute from './components/utilities/BrokerPrivateRoute'
+import UserPrivateRoute from './components/utilities/UserPrivateRoute'
 import './App.css'
 
 
@@ -114,21 +114,11 @@ class App extends Component {
               component={UserRegistration}
             />
 
-    {/* ******** USER PORTAL ROUTES ******* */}
-            <Route 
+    {/* ******** PORTAL ROUTES ******* */}
+            <UserPrivateRoute 
               path='/user-home'
-              render={(props) => {
-                if(this.state.usertype === 'user') {
-                  return ( 
-                    <UserHome 
-                      logout={this.logout}
-                    />
-                  )
-                } else {
-                  return ( <Redirect to='/login' /> )
-                }}}
+              component={UserHome}
             />
-    {/* ******** ADMIN PORTAL ROUTES ******* */}
             <BrokerPrivateRoute 
               path='/broker'
               component={BrokerHome}

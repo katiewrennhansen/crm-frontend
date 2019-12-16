@@ -2,19 +2,16 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import UserContext from '../../../../contexts/UserContext'
+import ApiService from '../../../../services/api-service'
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
-import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
-import BrokerContext from '../../../../contexts/BrokerContext'
+import PaymentIcon from '@material-ui/icons/Payment';
 import BuildIcon from '@material-ui/icons/Build';
 import EventNoteIcon from '@material-ui/icons/EventNote';
-import ApiService from '../../../../services/api-service'
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 
-
-class BrokerSidebar extends Component {
-    static contextType = BrokerContext
+class UserSidebar extends Component {
+    static contextType = UserContext
 
     constructor(props) {
         super(props);
@@ -76,82 +73,52 @@ class BrokerSidebar extends Component {
                 <ul className={`${(this.context.active) ? null : 'collapsed'} dash-nav-ul`}>
                     <li>
                         <Link 
-                            to="/broker" 
+                            to="/user-home" 
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Dashboard')}
                         >
                             <DashboardIcon />
                             <p className={(this.context.active) ? null : 'collapsed'}>Dashboard</p>
                         </Link>
-                    </li>
-                    <li>
                         <Link 
-                            to="/broker/properties" 
+                            to="/user-home" 
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
-                            onClick={() => this.props.handleTitle('Properties')}
+                            onClick={() => this.props.handleTitle('My Properties')}
                         >
                             <HomeWorkIcon />
-                            <p className={(this.context.active) ? null : 'collapsed'}>Properties</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>My Properties</p>
                         </Link>
-                    </li>
-                    <li>
                         <Link 
-                            to="/broker/promotions" 
+                            to="/user-home" 
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
-                            onClick={() => this.props.handleTitle('Promotions')}
+                            onClick={() => this.props.handleTitle('Visit Requests')}
                         >
-                            <CardGiftcardIcon />
-                            <p className={(this.context.active) ? null : 'collapsed'}>Promotions</p>
+                            <EventNoteIcon />
+                            <p className={(this.context.active) ? null : 'collapsed'}>Visit Requests</p>
                         </Link>
-                    </li>
-                    <li>
                         <Link 
-                            to="/broker/maintenance" 
+                            to="/user-home" 
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Maintenance')}
                         >
                             <BuildIcon />
                             <p className={(this.context.active) ? null : 'collapsed'}>Maintenance</p>
                         </Link>
-                    </li>
-                    <li>
                         <Link 
-                            to="/broker/reminders" 
+                            to="/user-home" 
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
-                            onClick={() => this.props.handleTitle('Reminders')}                        
+                            onClick={() => this.props.handleTitle('Payments')}
                         >
-                            <EventNoteIcon />
-                            <p className={(this.context.active) ? null : 'collapsed'}>Reminders</p>
+                            <PaymentIcon  />
+                            <p className={(this.context.active) ? null : 'collapsed'}>Payments</p>
                         </Link>
-                    </li>
-                    <li>
                         <Link 
-                            to="/broker/network" 
+                            to="/user-home" 
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
-                            onClick={() => this.props.handleTitle('Network')}                                                    
+                            onClick={() => this.props.handleTitle('Contracts')}
                         >
-                            <ChatBubbleOutlineIcon />
-                            <p className={(this.context.active) ? null : 'collapsed'}>Network</p>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link 
-                            to="/broker/contacts" 
-                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
-                            onClick={() => this.props.handleTitle('Contacts')}                        
-                        >
-                            <AccountBoxIcon />
-                            <p className={(this.context.active) ? null : 'collapsed'}>Contacts</p>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link 
-                            to="/broker/alerts" 
-                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
-                            onClick={() => this.props.handleTitle('Alerts')}                        
-                        >
-                            <NotificationsActiveIcon />
-                            <p className={(this.context.active) ? null : 'collapsed'}>Alerts</p>
+                            <InsertDriveFileIcon  />
+                            <p className={(this.context.active) ? null : 'collapsed'}>Contracts</p>
                         </Link>
                     </li>
                 </ul>
@@ -160,4 +127,4 @@ class BrokerSidebar extends Component {
     }
 }
 
-export default BrokerSidebar
+export default UserSidebar

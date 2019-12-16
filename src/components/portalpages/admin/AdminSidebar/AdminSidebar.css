@@ -28,6 +28,7 @@ ul {
     font-family: 'Work Sans', sans-serif;
     grid-column: 2 / 6;
     padding-left: 15px;
+    font-size: 20px;
 }
 
 .dash-nav-ul {

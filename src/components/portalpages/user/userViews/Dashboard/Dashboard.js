@@ -14,7 +14,6 @@ class Dashboard extends Component {
         const firstChar = first.slice(0, 1).toUpperCase()
         const rest = first.slice(1, first.length)
         const firstname = firstChar + rest
-        console.log(firstChar)
         this.setState({
             firstname
         })

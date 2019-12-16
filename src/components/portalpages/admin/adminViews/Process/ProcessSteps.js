@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
-import SubmitButton from '../../../../utilities/Login/LoginComponents/SubmitButton'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CloseIcon from '@material-ui/icons/Close';
 
