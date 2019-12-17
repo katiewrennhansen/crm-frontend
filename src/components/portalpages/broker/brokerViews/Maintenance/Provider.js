@@ -86,13 +86,13 @@ class Provider extends Component {
                 <div className='container'>
                     <div className='header-grid'>
                         <h2>{data.contact}</h2>
-                        <div>
-                        <Link to='/broker/maintenance/' className="close-icon">
-                            <CloseIcon fontSize="large" />
-                        </Link>
-                        <Link to={`/broker/maintenance/${this.props.id}/edit`} className="add-icon">
-                            <EditIcon fontSize="large" />
-                        </Link>
+                        <div className="property-icons">
+                            <Link to='/broker/maintenance/' className="close-icon">
+                                <CloseIcon fontSize="large" />
+                            </Link>
+                            <Link to={`/broker/maintenance/${this.props.id}/edit`} className="add-icon">
+                                <EditIcon fontSize="large" />
+                            </Link>
                         </div>
                     </div>
                     <div>

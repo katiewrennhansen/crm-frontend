@@ -38,13 +38,13 @@ class EditSettings extends Component {
         const id = 6
         let updatedInfo = {}
         let updatedFields = {
-            company: company_name.value,
-            contact: contact.value,
+            cianame: company_name.value,
+            ccontact: contact.value,
             adescription1: address.value,
-            email: email.value,
-            phone: phone.value,
+            cemail: email.value,
+            cphone: phone.value,
             adescription2: country.value,
-            ctax_id: tax_id.value
+            ctaxinfo: tax_id.value
         }
 
         for (const key in updatedFields) {

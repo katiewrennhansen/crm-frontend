@@ -95,19 +95,15 @@ class EditProvider extends Component {
             adescription1: e.target.country.value,
             category_id: e.target.categories.value,
             cstatus_id: e.target.status.value,
-            mainttype_id: Number(e.target.mainttype.value)
+            mainttype_id: e.target.mainttype.value
         }
 
         for (const key in updatedFields) {
             if (updatedFields[key] !== '')
                 updatedContent[key] = updatedFields[key]
         }
-
-        console.log(updatedContent)
-
         const endpoint = `${config.API_ENDPOINT}/providers`
-
-        ApiService.postDataHalf(endpoint, id, updatedContent)
+        ApiService.updateDataHalf(endpoint, id, updatedContent)
             .then(data => {
                 console.log(data)
             })
@@ -120,16 +116,14 @@ class EditProvider extends Component {
     render(){
         const info = this.state.provider
         return (
-            <div className='add-property'>
+            <div className='edit-property'>
                 <div className='header-grid'>
                     <h2>Edit Provider</h2>
                     <Link className="close-icon" to='/broker/maintenance'>
                         <CloseIcon fontSize="large" />
                     </Link>
                 </div>
-                <div>
                     <form className="add-property-form" onSubmit={(e) => {this.editProvider(e)}}>
-
                     <h3>Company Information</h3>
                         <div className="form-group">
                             <label htmlFor="company">Company: </label>
@@ -245,7 +239,6 @@ class EditProvider extends Component {
                         <input type="submit" className="submit" value="Edit Provider"></input>
                     </form>
                 </div>
-            </div>
         )
     }
 }
