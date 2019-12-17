@@ -5,7 +5,7 @@ import Footer from '../navigation/Footer/Footer'
 class SearchPage extends Component {
     render(){
         return (
-            <>
+            <div className="web-home">
                 <MainNav 
                     authenticated={this.props.authenticated} 
                     logout={this.props.logout} 
@@ -14,7 +14,7 @@ class SearchPage extends Component {
                     <h1>This is the Seach Page</h1>
                 </div>
                 <Footer />
-            </>
+            </div>
         )
     }
 }

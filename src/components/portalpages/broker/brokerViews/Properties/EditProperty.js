@@ -114,6 +114,13 @@ class EditProperty extends Component {
             .catch(error => {
                 console.log(error)
             })
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/customers`)
+            .then(data => {
+                this.setCustomers(data.customers)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     getSteps = (e) => {
@@ -151,7 +158,7 @@ class EditProperty extends Component {
             processt_id: e.target.process.value,
             step_id: e.target.steps.value,
             stepdate: e.target.step_date.value,
-            category_id: e.target.categories.value,
+            // category_id: e.target.categories.value,
             status_id: e.target.status.value,
             assetinsurance: e.target.insurance.value,
             insurancedued : e.target.insurance_due.value
@@ -227,6 +234,11 @@ class EditProperty extends Component {
                             <select name="asset_type">
                                 <option value="">Select an Asset Type</option>
                                 {this.state.assets.map(a => {
+                                    if(this.context.singleAsset.assettype === a.assettdesc){
+                                        return (
+                                            <option key={a.id} value={a.id} selected>{a.assettdesc}</option>
+                                        )
+                                    }
                                     return (
                                     <option key={a.id} value={a.id}>{a.assettdesc}</option>
                                     )
@@ -238,6 +250,11 @@ class EditProperty extends Component {
                             <select name="owner">
                                 <option value="">Select an Owner</option>
                                 {this.state.customers.map(c => {
+                                    // if(this.context.singleAsset.owner === c.assettdesc){
+                                    //     return (
+                                    //         <option key={c.id} value={c.id} selected>{c.assettdesc}</option>
+                                    //     )
+                                    // }
                                     return (
                                     <option key={c.data.id} value={c.data.id}>{c.data.name}</option>
                                     )
@@ -260,6 +277,11 @@ class EditProperty extends Component {
                             <select name="brokers">
                                 <option value="">Select a Broker</option>
                                 {this.state.brokers.map(b => {
+                                    if(this.context.singleAsset.broker === b.data.name){
+                                        return (
+                                            <option key={b.data.id} value={b.data.id} selected>{b.data.name}</option>
+                                        )
+                                    }
                                     return (
                                     <option key={b.data.id} value={b.data.id}>{b.data.name}</option>
                                     )
@@ -271,6 +293,11 @@ class EditProperty extends Component {
                             <select name="process" onChange={(e) => {this.getSteps(e)}}>
                                 <option value="">Select a Process</option>
                                 {this.state.process.map(p => {
+                                    if(this.context.singleAsset.processt === p.data.processdesc){
+                                        return (
+                                            <option key={p.data.id} value={p.data.id} selected>{p.data.processdesc}</option>
+                                        )
+                                    }
                                     return (
                                     <option key={p.data.id} value={p.data.id}>{p.data.processdesc}</option>
                                     )
@@ -292,7 +319,7 @@ class EditProperty extends Component {
                             <label htmlFor="step_date">Step Date: </label>
                             <input type="date" name="step_date" defaultValue={asset.stepdate}></input>
                         </div>
-                        <div className="form-group">
+                        {/* <div className="form-group">
                             <label htmlFor="categories">Category: </label>
                             <select name="categories">
                                 <option value="">Select a Category</option>
@@ -302,12 +329,17 @@ class EditProperty extends Component {
                                     )
                                 })}
                             </select>
-                        </div>
+                        </div> */}
                         <div className="form-group">
                             <label htmlFor="status">Status: </label>
                             <select name="status">
                                 <option value="">Select a Status</option>
                                 {this.state.status.map(s => {
+                                    if(this.context.singleAsset.status === s.statusdesc){
+                                        return (
+                                            <option key={s.id} value={s.id} selected>{s.statusdesc}</option>
+                                        )
+                                    }
                                     return (
                                     <option key={s.id} value={s.id}>{s.statusdesc}</option>
                                     )

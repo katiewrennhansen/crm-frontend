@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans:300&display=swap');
 
-.footer-container {
+footer {
     background: #343434;
     color: white;
-    display: flex;
-    justify-content: space-around;
-    padding: 50px;
+    padding: 50px 70px 30px;
     font-family: 'Open Sans', sans-serif;
 }
 
-.company-info {
-    flex: 1;
-    align-content: flex-start;
+.footer-container {
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: 4fr 3fr 3fr;
+    justify-content: space-around;
+    margin-bottom: 50px;
 }
 
 .footer-container h2 {
@@ -19,27 +20,48 @@
     font-family: 'Work Sans', sans-serif;
 }
 
+.contact-info {
+    justify-self: center;
+    align-self: center;
+}
+
+.contact-info a {
+    color: white;
+    text-decoration: none;
+    transition: 200ms linear;
+}
+
 .green-logo {
     color: lightgreen;
-}
-
-.contact-info {
-    flex: 1;
-}
-
-.footer-nav {
-    flex: 1;
+    font-size: 34px;
 }
 
 .footer-nav-links {
     display: grid;
-    justify-content: center;
+    text-align: center;
+    align-self: center;
 }
 
 .footer-nav-links p {
     color: white;
+    margin: 6px 0;
 }
 
-.footer-nav-links p:hover {
-    color: green;
+.footer-nav-links p:hover,
+.contact-info a:hover {
+    color: lightgreen;
+    transition: 200ms linear;
+}
+
+.footer-line {
+    width: 100%;
+    margin: 0 auto;
+    height: 1px;
+    background-color: rgb(85, 84, 84);
+}
+
+.credit {
+    text-align: center;
+    margin-top: 40px;
+    color: gray;
 }

@@ -67,7 +67,7 @@ class Login extends Component {
                                 name='email'
                                 label='Email'
                                 type='email'
-                                autoComplete='email'
+                                autofocus
                             />
                         </div>
                         

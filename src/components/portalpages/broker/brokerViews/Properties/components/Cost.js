@@ -124,7 +124,7 @@ class Cost extends Component {
                                     <td>{f.kind}</td>
                                     <td>{f.concept}</td>
                                     <td>{f.annualamount}</td>
-                                    <td>{f.year}</td>
+                                    <td>{f.year.split('-')[0]}</td>
                                     <td className="delete">
                                         <button className="delete-btn" onClick={() => {this.deleteCost(f.id)}}>Delete</button>
                                     </td>

@@ -95,7 +95,7 @@ class EditProvider extends Component {
             adescription1: e.target.country.value,
             category_id: e.target.categories.value,
             cstatus_id: e.target.status.value,
-            mainttype_id: e.target.mainttype.value
+            mainttype_id: Number(e.target.mainttype.value)
         }
 
         for (const key in updatedFields) {

@@ -47,7 +47,6 @@ class BrokerSidebar extends Component {
 
     highlight = (str) => {
         const name = document.getElementsByClassName('name')
-        console.log(name)
         if(name.innerText === str){
             console.log(str)
         }
