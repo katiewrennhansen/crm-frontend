@@ -44,6 +44,15 @@ class BrokerSidebar extends Component {
         })
     }
 
+
+    highlight = (str) => {
+        const name = document.getElementsByClassName('name')
+        console.log(name)
+        if(name.innerText === str){
+            console.log(str)
+        }
+    }
+
     componentDidMount(){
         const id = sessionStorage.getItem('id')
         const endpoint = `http://crmmia-api.herokuapp.com/api/users/${id}`
@@ -58,6 +67,7 @@ class BrokerSidebar extends Component {
     }
 
     render(){
+        this.highlight('Dashboard');
         return (
             <div className={`${(this.context.active) ? null : 'collapsed'} dash-sidebar-container`}>
                 <div className='admin-info'>
@@ -81,7 +91,7 @@ class BrokerSidebar extends Component {
                             onClick={() => this.props.handleTitle('Dashboard')}
                         >
                             <DashboardIcon />
-                            <p className={(this.context.active) ? null : 'collapsed'}>Dashboard</p>
+                            <p className={`${(this.context.active) ? null : 'collapsed'} name`}>Dashboard</p>
                         </Link>
                     </li>
                     <li>

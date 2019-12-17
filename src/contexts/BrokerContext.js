@@ -4,9 +4,11 @@ const BrokerContext = React.createContext({
     assets: [],
     singleAsset: [],
     active: false,
+    highlighted: '',
     setAssets: () => {},
     setSingleAsset: () => {},
-    toggleNav: () => {}
+    toggleNav: () => {},
+    setHiglighted: () => {}
 })
 
 export default BrokerContext

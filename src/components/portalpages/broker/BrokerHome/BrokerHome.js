@@ -32,7 +32,8 @@ class BrokerHome extends Component {
             title: '',
             assets: [],
             singleAsset: [],
-            active: false
+            active: false,
+            highlighted: ''
         }
     }
 
@@ -73,15 +74,23 @@ class BrokerHome extends Component {
             this.setCollapsed()
         }
     }
+
+    setHighlighted = (highlighted) => {
+        this.setState({
+            highlighted
+        })
+    }
     
     render(){
         const value = {
             assets: this.state.assets,
             singleAsset: this.state.singleAsset,
+            highlighted: this.state.highlighted,
             setAssets: this.setAssets,
             setSingleAsset: this.setSingleAsset,
             active: this.state.active,
-            toggleNav: this.toggleNav
+            toggleNav: this.toggleNav,
+            setHighlighted: this.setHighlighted
         }
         return (
             <BrokerContext.Provider value={value}>

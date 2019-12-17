@@ -3,6 +3,7 @@
 nav {
     display: grid;
     height: 80px;
+    background-color: white;
 }
 
 .link,
@@ -17,6 +18,10 @@ nav {
     align-content: center;
     font-family: 'Work Sans', sans-serif;
     grid-column: 3 / 4;
+}
+
+.logo span {
+    font-size: 24px;
 }
 
 .logo h2 {

@@ -2,6 +2,8 @@
 
 .about-page {
     font-family: 'Open Sans', sans-serif;
+    background: white;
+    padding-top: 100px;
 }
 
 .about-page h1,
@@ -24,4 +26,5 @@
 
 .about-img {
     width: 50vw;
+    margin-bottom: -5px;
 }

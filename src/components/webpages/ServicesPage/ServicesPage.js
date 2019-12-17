@@ -6,7 +6,7 @@ import Footer from '../navigation/Footer/Footer'
 class ServicesPage extends Component {
     render(){
         return (
-            <>
+            <div className="web-home">
             <MainNav 
                 authenticated={this.props.authenticated} 
                 logout={this.props.logout} 
@@ -41,7 +41,7 @@ class ServicesPage extends Component {
                 </div>
             </div>
             <Footer />
-            </>
+            </div>
         )
     }
 }

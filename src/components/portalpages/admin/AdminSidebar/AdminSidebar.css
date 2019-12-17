@@ -75,6 +75,10 @@ ul {
     border: none;
 }
 
+.toggle-btn:hover {
+    cursor: pointer;
+}
+
 .burger-bar {
     height: 3px;
     margin: 5px 0 5px -5px;

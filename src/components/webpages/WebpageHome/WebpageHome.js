@@ -36,22 +36,28 @@ class WebpageHome extends Component {
                                     <p className="web-price">$50,000</p>
                                 </div>
                                 <div className="property-content">
-                                    <h3>Property A</h3>
-                                    <div>
+                                    <h3>101 Address St</h3>
+                                    <div className="first-row">
                                         <p>House</p>
-                                        <p>
-                                            <HotelIcon fontSize="small" />
-                                        </p>
-                                        <p>2</p>
-                                        <p>
-                                            <HotTubIcon fontSize="small" />
-                                        </p>
-                                        <p>2</p>
-                                        <p>32.3m2</p>
+                                        <div className="beds">
+                                            <p>
+                                                <HotelIcon fontSize="small" />
+                                            </p>
+                                            <p>2</p>
+                                        </div>
+                                        <div className="baths">
+                                            <p>
+                                                <HotTubIcon fontSize="small" />
+                                            </p>
+                                            <p>2</p>
+                                        </div>
+                                        <p>32.3m&#178;</p>
                                     </div>
-                                    <div className="property-grid">
-                                        <LocationOnIcon fontSize="small" />
-                                        <p>Santiago, Chile</p>
+                                    <div className="second-row">
+                                        <div className="location">
+                                            <LocationOnIcon fontSize="small" />
+                                            <p>Santiago, Chile</p>
+                                        </div>
                                         <button className="rent-button">Rent</button>
                                     </div>
                                 </div>
@@ -64,22 +70,28 @@ class WebpageHome extends Component {
                                     <p className="web-price">$50,000</p>
                                 </div>
                                 <div className="property-content">
-                                    <h3>Property A</h3>
-                                    <div>
+                                    <h3>101 Address St</h3>
+                                    <div className="first-row">
                                         <p>House</p>
-                                        <p>
-                                            <HotelIcon fontSize="small" />
-                                        </p>
-                                        <p>2</p>
-                                        <p>
-                                            <HotTubIcon fontSize="small" />
-                                        </p>
-                                        <p>2</p>
-                                        <p>32.3m2</p>
+                                        <div className="beds">
+                                            <p>
+                                                <HotelIcon fontSize="small" />
+                                            </p>
+                                            <p>2</p>
+                                        </div>
+                                        <div className="baths">
+                                            <p>
+                                                <HotTubIcon fontSize="small" />
+                                            </p>
+                                            <p>2</p>
+                                        </div>
+                                        <p>32.3m&#178;</p>
                                     </div>
-                                    <div className="property-grid">
-                                        <LocationOnIcon fontSize="small" />
-                                        <p>Santiago, Chile</p>
+                                    <div className="second-row">
+                                        <div className="location">
+                                            <LocationOnIcon fontSize="small" />
+                                            <p>Santiago, Chile</p>
+                                        </div>
                                         <button className="rent-button">Rent</button>
                                     </div>
                                 </div>
@@ -92,28 +104,34 @@ class WebpageHome extends Component {
                                     <p className="web-price">$50,000</p>
                                 </div>
                                 <div className="property-content">
-                                    <h3>Property A</h3>
-                                    <div>
+                                    <h3>101 Address St</h3>
+                                    <div className="first-row">
                                         <p>House</p>
-                                        <p>
-                                            <HotelIcon fontSize="small" />
-                                        </p>
-                                        <p>2</p>
-                                        <p>
-                                            <HotTubIcon fontSize="small" />
-                                        </p>
-                                        <p>2</p>
-                                        <p>32.3m2</p>
+                                        <div className="beds">
+                                            <p>
+                                                <HotelIcon fontSize="small" />
+                                            </p>
+                                            <p>2</p>
+                                        </div>
+                                        <div className="baths">
+                                            <p>
+                                                <HotTubIcon fontSize="small" />
+                                            </p>
+                                            <p>2</p>
+                                        </div>
+                                        <p>32.3m&#178;</p>
                                     </div>
-                                    <div className="property-grid">
-                                        <LocationOnIcon fontSize="small" />
-                                        <p>Santiago, Chile</p>
+                                    <div className="second-row">
+                                        <div className="location">
+                                            <LocationOnIcon fontSize="small" />
+                                            <p>Santiago, Chile</p>
+                                        </div>
                                         <button className="rent-button">Rent</button>
                                     </div>
                                 </div>
                             </div>
                         </Link>
-                        </div>
+                       </div>
                     </div>
                     <div className='services'>
                         <h2>Servicios</h2>
@@ -137,7 +155,7 @@ class WebpageHome extends Component {
                                     fontSize='large'
                                 />
                                 <h3>Servicio de Mucamas</h3>
-                                <p>A  través de ApartmenChile podrá contratar un servicio de mucama, donde personal de nuestra empresa realizara el aseo del departamento, diariamente o dias a convenir. Estos servicios son adicionales al arriendo se contratan directamente con Servicios Inmobiliarios Apartmentchile, se cancelan mensualmente.</p>
+                                <p>ApartmenChile podrá contratar un servicio de mucama, donde personal de nuestra empresa realizara el aseo del departamento, diariamente o dias a convenir. Estos servicios son adicionales al arriendo se contratan directamente con Servicios Inmobiliarios Apartmentchile, se cancelan mensualmente.</p>
                             </div>
                         </div>
                         <div className='services-button'>
