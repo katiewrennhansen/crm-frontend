@@ -23,7 +23,7 @@ class MainNav extends Component {
         } else if (usertype === 'broker'){
             return '/broker'
         } else if (usertype === 'user'){
-            return '/user-home'
+            return '/user'
         }  
     }
     

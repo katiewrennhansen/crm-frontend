@@ -2,7 +2,9 @@ import React  from 'react'
 
 const UserContext = React.createContext({
     active: false,
-    toggleNav: () => {}
+    singleAsset: {},
+    toggleNav: () => {},
+    setSingleAsset: () => {},
 })
 
 export default UserContext

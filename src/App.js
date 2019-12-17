@@ -115,7 +115,7 @@ class App extends Component {
 
     {/* ******** PORTAL ROUTES ******* */}
             <UserPrivateRoute 
-              path='/user-home'
+              path='/user'
               component={UserHome}
             />
             <BrokerPrivateRoute 

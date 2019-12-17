@@ -150,6 +150,7 @@ textarea {
 .edit-property-form select,
 .single-property-container select {
     margin: 0;
+    width: 40%;
 }
 
 .form-group {

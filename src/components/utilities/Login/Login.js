@@ -20,7 +20,7 @@ class Login extends Component {
         if(usertype === 'admin') {
             this.props.history.push('/dashboard')
         } else if(usertype === 'user') {
-            this.props.history.push('/user-home')
+            this.props.history.push('/user')
         } else if (usertype === 'broker') {
             this.props.history.push('/broker')
         }

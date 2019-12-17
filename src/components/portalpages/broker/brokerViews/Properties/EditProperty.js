@@ -229,6 +229,22 @@ class EditProperty extends Component {
                             <input type="number" name="future_price" defaultValue={asset.futureprice}></input>
                         </div>
                         <div className="form-group">
+                            <label htmlFor="status">Status: </label>
+                            <select name="status">
+                                <option value="">Select a Status</option>
+                                {this.state.status.map(s => {
+                                    if(this.context.singleAsset.status === s.statusdesc){
+                                        return (
+                                            <option key={s.id} value={s.id} selected>{s.statusdesc}</option>
+                                        )
+                                    }
+                                    return (
+                                    <option key={s.id} value={s.id}>{s.statusdesc}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
+                        <div className="form-group">
                             <label htmlFor="asset_type">Asset Type: </label>
                             <select name="asset_type">
                                 <option value="">Select an Asset Type</option>
@@ -294,7 +310,7 @@ class EditProperty extends Component {
                         </div>
                         <div className="form-group">
                             <label htmlFor="process">Process: </label>
-                            <select name="process" onChange={(e) => {this.getSteps(e)}}>
+                            <select name="process"  onLoad={(e) => {this.getSteps(e)}} >
                                 <option value="">Select a Process</option>
                                 {this.state.process.map(p => {
                                     if(this.context.singleAsset.processt === p.data.processdesc){
@@ -322,22 +338,6 @@ class EditProperty extends Component {
                         <div className="form-group">
                             <label htmlFor="step_date">Step Date: </label>
                             <input type="date" name="step_date" defaultValue={asset.stepdate}></input>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="status">Status: </label>
-                            <select name="status">
-                                <option value="">Select a Status</option>
-                                {this.state.status.map(s => {
-                                    if(this.context.singleAsset.status === s.statusdesc){
-                                        return (
-                                            <option key={s.id} value={s.id} selected>{s.statusdesc}</option>
-                                        )
-                                    }
-                                    return (
-                                    <option key={s.id} value={s.id}>{s.statusdesc}</option>
-                                    )
-                                })}
-                            </select>
                         </div>
 
                         <h3>Insurance Information</h3>
