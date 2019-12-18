@@ -134,7 +134,7 @@ class PropertyForm extends Component {
     render(){
         const asset = this.props.asset
         return (
-            <form className="add-property-form" onSubmit={(e) => {this.handleSubmit(e)}}>
+            <form className="add-property-form" onSubmit={(e) => {this.props.handleSubmit(e)}}>
                 <h3>Address</h3>
                 <div className="form-group">
                     <label htmlFor="street_name">Street Name: </label>
@@ -175,7 +175,7 @@ class PropertyForm extends Component {
                     <select name="status">
                         <option value="">Select a Status</option>
                         {this.state.status.map(s => {
-                            if(this.context.singleAsset.status === s.statusdesc){
+                            if(asset.status === s.statusdesc){
                                 return (
                                     <option key={s.id} value={s.id} selected>{s.statusdesc}</option>
                                 )
@@ -303,7 +303,7 @@ class PropertyForm extends Component {
                     </div>
                 </div>
 
-                <input type="submit" className="submit" value="Edit Property"></input>
+                <input type="submit" className="submit" value={this.props.button}></input>
             </form>
         )
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import config from '../../../../../../config'
-import BrokerContext from '../../../../../../contexts/BrokerContext'
-import ApiService from '../../../../../../services/api-service'
+import config from '../../../config'
+import BrokerContext from '../../../contexts/BrokerContext'
+import ApiService from '../../../services/api-service'
 
 class Features extends Component {
     static contextType = BrokerContext

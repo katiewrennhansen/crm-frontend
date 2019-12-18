@@ -69,6 +69,7 @@ class AddProperty extends Component {
                 <PropertyForm 
                     handleSubmit={this.submitProperty}
                     asset={[]}
+                    button="Add Property"
                 />
             </div>
         )

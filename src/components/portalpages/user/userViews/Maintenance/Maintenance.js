@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
-import AddIcon from '@material-ui/icons/Add';
 
 class Maintenance extends Component {
     constructor(props) {
@@ -20,7 +18,7 @@ class Maintenance extends Component {
     }
 
     componentDidMount(){
-        const endpoint = `${config.API_ENDPOINT}/asset/0/assetcomments`
+        const endpoint = `${config.API_ENDPOINT}/assets/0/maintenances`
         ApiService.getData(
             endpoint,
             this.setData
@@ -30,36 +28,26 @@ class Maintenance extends Component {
     render(){
         return (
             <div className='data-container'>
-                <h2>Maintenance</h2>
-                <Link to='/user/maintenance/request-maintentance' className='add-icon'>
-                <AddIcon 
-                    fontSize="large" 
-                    aria-label="add comment type" 
-                />
-                </Link>
+                <h2>Maintenance Requests</h2>
                 <table className='data-table'>
                     <thead>
                         <tr>
-                            <th>Provider</th>
+                            <th>Requestor</th>
                             <th>Type</th>
-                            <th>Company</th>
-                            <th>Email</th>
-                            <th>Phone</th>
+                            <th>Description</th>
+                            <th>Date Requested</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.requests.map(p => (
                         
-                        <tr key={p.data.id}>
-                            <td>
-                                <Link to={`/broker/maintenance/${p.data.id}`}>
-                                    {p.data.contact}
-                                </Link>
-                            </td>
-                            <td>{p.data.typeservice}</td>
-                            <td>{p.data.name}</td>
-                            <td>{p.data.email}</td>
-                            <td>{p.data.phone}</td>
+                        <tr key="">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         ))}
                     </tbody>

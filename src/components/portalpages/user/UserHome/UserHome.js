@@ -106,6 +106,7 @@ class UserHome extends Component {
                                     return (
                                     <EditProperty 
                                         id={id}
+                                        history={history}
                                     />
                                     )
                                 }}

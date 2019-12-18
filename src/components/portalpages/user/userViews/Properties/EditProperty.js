@@ -70,7 +70,7 @@ class EditProperty extends Component {
 
         ApiService.updateDataHalf(endpoint, id, updatedContent)
             .then(() => {
-                this.props.history.history.push('/user/properties')
+                this.props.hstory.history.push('/user/properties')
             })
             .catch(error => {
                 console.log(error)
@@ -93,6 +93,7 @@ class EditProperty extends Component {
                 <PropertyForm 
                     handleSubmit={this.editProperty}
                     asset={asset}
+                    button="Edit Property"
                 />
             </div>
         )
