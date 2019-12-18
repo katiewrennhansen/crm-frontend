@@ -98,7 +98,7 @@ class Features extends Component {
         return (
             <div>
                 <div className='header-grid'>
-                    <h2>Features</h2>
+                    <h3>Features</h3>
                     <button className='add' id="f-btn" onClick={this.toggleForm}>+</button>
                 </div>
                 <form className="sp-form hidden" id="feature-form" onSubmit={(e) => {this.addFeature(e)}}>

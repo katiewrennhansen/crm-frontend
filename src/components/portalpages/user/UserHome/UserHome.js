@@ -9,6 +9,7 @@ import AddProperty from '../userViews/Properties/AddProperty'
 import SingleProperty from '../userViews/Properties/SingleProperty'
 import EditProperty from '../userViews/Properties/EditProperty'
 import Maintenance from '../userViews/Maintenance/Maintenance'
+import './UserHome.css'
 
 class UserHome extends Component {
     constructor(props){

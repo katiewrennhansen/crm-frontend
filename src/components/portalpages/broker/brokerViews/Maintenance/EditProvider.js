@@ -5,7 +5,6 @@ import config from '../../../../../config'
 import CloseIcon from '@material-ui/icons/Close';
 import MaintenanceForm from '../../../../utilities/Forms/MaintenanceForm'
 
-
 class EditProvider extends Component {
     constructor(props) {
         super(props)
@@ -15,7 +14,7 @@ class EditProvider extends Component {
         }
     }
 
-    setProvider= (provider) => {
+    setProvider= provider => {
         this.setState({
             provider
         })

@@ -85,7 +85,7 @@ class Cost extends Component {
         return (
             <div>
             <div className='header-grid'>
-                    <h2>Costs</h2>
+                    <h3>Costs</h3>
                     <button id="c-btn" className="add" onClick={this.toggleForm}>+</button>
                 </div>
                 <form className="sp-form hidden" id="costs-form" onSubmit={(e) => {this.addCost(e)}}>
