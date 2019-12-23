@@ -86,6 +86,9 @@ class Alerts extends Component {
                                     if(c.id === a.data.commtype_id){
                                         return c.commdesc
                                     }
+                                    else {
+                                        return null
+                                    }
                                 })}
                             </td>
                             <td>{a.data.assetcomment}</td>

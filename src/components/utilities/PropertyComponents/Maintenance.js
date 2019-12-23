@@ -194,6 +194,9 @@ class Maintenance extends Component {
                                             if(p.data.id === f.provider_id){
                                                 return p.data.name
                                             }
+                                            else {
+                                                return null
+                                            }
                                         })}
                                     </td>
                                     <td>{f.reqdate}</td>

@@ -135,6 +135,8 @@ class Features extends Component {
                                         {(this.state.featuretypes).map(t => {
                                             if(t.id === f.featuretype_id){
                                                 return t.featuredescr
+                                            } else {
+                                                return null
                                             }
                                         })}
                                     </td>

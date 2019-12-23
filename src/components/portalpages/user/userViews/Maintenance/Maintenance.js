@@ -19,10 +19,14 @@ class Maintenance extends Component {
 
     componentDidMount(){
         const endpoint = `${config.API_ENDPOINT}/assets/0/maintenances`
-        ApiService.getData(
-            endpoint,
-            this.setData
-        )
+        ApiService.getDataHalf(endpoint)
+            .then(data => {
+                // console.log(data)
+                this.setRequests(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     render(){

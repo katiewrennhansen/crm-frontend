@@ -1,4 +1,5 @@
 import config from '../config'
+import TokenService from './token-service'
 
 const ApiService = {
     getData(ApiEndpoint, cb) {
@@ -6,7 +7,7 @@ const ApiService = {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
         })
         .then(res => 
@@ -26,7 +27,7 @@ const ApiService = {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
         })
         .then(res => 

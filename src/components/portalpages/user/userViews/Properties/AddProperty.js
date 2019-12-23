@@ -41,8 +41,9 @@ class AddProperty extends Component {
             category_id: e.target.categories.value,
             status_id: e.target.status.value,
             assetinsurance: e.target.insurance.value,
-            insurancedued : e.target.insurance_due.value
+            insurancedued: e.target.insurance_due.value
         }
+        
         const endpoint = `${config.API_ENDPOINT}/assets`
 
         ApiService.postDataHalf(endpoint, newProperty)
@@ -52,6 +53,17 @@ class AddProperty extends Component {
             .catch(error => {
                 console.log(error)
             })
+    }
+
+
+    onChange = (e) =>{
+        e.preventDefault()
+        const files = Array.from(e.target.files)
+        const formData = new FormData()
+        files.forEach((file, i) => {
+            formData.append(i, file)
+        })
+        console.log(files)
     }
 
     render(){
@@ -68,6 +80,7 @@ class AddProperty extends Component {
                 </div>
                 <PropertyForm 
                     handleSubmit={this.submitProperty}
+                    onChange={this.onChange}
                     asset={[]}
                     button="Add Property"
                 />

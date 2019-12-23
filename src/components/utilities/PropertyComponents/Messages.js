@@ -138,6 +138,9 @@ class Messages extends Component {
                                             if(p.id === f.data.commtype_id){
                                                 return p.commdesc
                                             }
+                                            else {
+                                                return null
+                                            }
                                         })}
                                     </td>
                                     <td>{f.data.assetcomment}</td>

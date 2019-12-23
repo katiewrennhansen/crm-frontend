@@ -69,14 +69,17 @@ class PropertyForm extends Component {
     }
 
     componentDidMount(){
-        ApiService.getDataHalf(`${config.API_ENDPOINT}/assets/${this.props.id}`)
-            .then(data => {
-                this.context.setSingleAsset(data.data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-            ApiService.getDataHalf(`${config.API_ENDPOINT}/brokers`)
+        if(this.props.id){
+            ApiService.getDataHalf(`${config.API_ENDPOINT}/assets/${this.props.id}`)
+                .then(data => {
+                    this.context.setSingleAsset(data.data)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+        
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/brokers`)
             .then(data => {
                 this.setBrokers(data.brokers)
             })
@@ -296,10 +299,7 @@ class PropertyForm extends Component {
                 <div className="form-group">
                     <label htmlFor="images">Images: </label>
                     <div>
-                        {this.state.file.map(f => {
-                            return (<p key={f.name}>{f.name}</p>)
-                        })}
-                        <input type="file" name="images" onChange={this.fileSelectedHandler} multiple></input>
+                        <input type="file" onChange={(e) => this.props.onChange(e)} multiple />
                     </div>
                 </div>
 
