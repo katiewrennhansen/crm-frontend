@@ -29,7 +29,6 @@ class MainNav extends Component {
     
     render() {
         const usertype = sessionStorage.getItem('usertype')
-        console.log(usertype)
         return (
             <nav>
                 <div className='logo'>

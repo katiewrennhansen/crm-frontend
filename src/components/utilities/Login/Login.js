@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import './Login.css'
 import SubmitButton from './LoginComponents/SubmitButton'
 import TextInput from './LoginComponents/TextInput'
 import TokenService from '../../../services/token-service'
 import AuthApiService from '../../../services/auth-api-service'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import './Login.css'
 
 
 class Login extends Component {
@@ -12,6 +13,7 @@ class Login extends Component {
         super(props)
         this.state = {
             usertype: '',
+            loading: false,
             error: null
         }
     }
@@ -28,6 +30,7 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        this.setState({ loading: true })
         const authUser = {
             user: {
                 email: e.target.email.value,
@@ -44,9 +47,11 @@ class Login extends Component {
             .then(() => {
                 const user = sessionStorage.getItem('usertype')
                 this.selectUserAccount(user);
+                this.setState({ loading: false })
             })
             .catch(err => {
                 this.setState({ error: err.error })
+                this.setState({ loading: false })
             })
     }
 
@@ -81,11 +86,16 @@ class Login extends Component {
                                 autoComplete='password'
                             />
                         </div>
-                        <div className='form-group'>
-                            <SubmitButton
-                                text='Log In'
-                            />
-                        </div>
+                        {(this.state.loading)
+                            ? <div className="loading"><CircularProgress /></div>
+                            : (
+                                <div className='form-group'>
+                                    <SubmitButton
+                                        text='Log In'
+                                    />
+                                </div>
+                            )
+                        }
                     </form>
                     <div className='password-controls'>
                         <p>

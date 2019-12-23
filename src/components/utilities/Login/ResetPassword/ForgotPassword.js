@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import './ForgotPassword.css'
-import SubmitButton from '../../LoginComponents/SubmitButton'
-import TextInput from '../../LoginComponents/TextInput'
+import SubmitButton from '../LoginComponents/SubmitButton'
+import TextInput from '../LoginComponents/TextInput'
 
 class ForgotPassword extends Component {
     constructor(props){
@@ -22,24 +21,10 @@ class ForgotPassword extends Component {
         })
     }
 
-    // validateEmail(){
-    //     const email = this.state.email.value.trim();
-    //     if(email.length < 3 || email.length > 40){
-    //         console.log('email must be between 3 and 40 characters')
-    //         return 'email must be between 3 and 40 characters'
-            
-    //     }
-    // }
-
-
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('submitted')
-        const email = this.state.email.value;
-        console.log(`
-        Email: ${email}
-        `)
-
+        
+        this.props.history.push('/change-password')
     }
 
     render(){

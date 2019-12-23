@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
-import './RegistrationForm.css'
-import SubmitButton from '../../LoginComponents/SubmitButton'
-import TextInput from '../../LoginComponents/TextInput'
+import SubmitButton from '../LoginComponents/SubmitButton'
+import TextInput from '../LoginComponents/TextInput'
 
 class RegistrationForm extends Component {
-
     render(){
         return (
             <div>
-                <form onSubmit={(e) => this.props.handleSubmit(e)}>
+                <form className="register-form" onSubmit={(e) => this.props.handleSubmit(e)}>
                     <div className='form-group'>
-                        <label htmlFor='first'></label>
+                        <label htmlFor='firstname'></label>
                         <TextInput 
                             id='firstname'
                             type='text'
@@ -20,7 +18,7 @@ class RegistrationForm extends Component {
                     </div>
 
                     <div className='form-group'>
-                        <label htmlFor='last'></label>
+                        <label htmlFor='lastname'></label>
                         <TextInput 
                             id='lastname'
                             type='text'
@@ -79,7 +77,7 @@ class RegistrationForm extends Component {
                         />
                     </div>
 
-                    <div className='form-group'>
+                    <div className="terms-container">
                         <input type='checkbox' name='terms' required></input>
                         <label id='terms' htmlFor='terms'> I have read agree to the terms and conditions</label>
                     </div>
