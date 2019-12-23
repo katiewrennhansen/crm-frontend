@@ -12,8 +12,8 @@ const ValidationService = {
         }
     },
     validateEmail(email){
-        if(email.length < 3 || email.length > 40){
-            return 'Email must be between 3 and 40 characters'  
+        if(email.length < 4 || email.length > 40){
+            return 'Email must be between 4 and 40 characters'  
         } else {
             return null
         }

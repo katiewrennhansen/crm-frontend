@@ -2,9 +2,16 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import RegistrationForm from './RegistrationFrom'
 import AuthApiService from '../../../../services/auth-api-service'
+import ValidationService from '../../../../services/validation-service'
 import '../Login.css'
 
 class UserRegistration extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            error: null
+        }
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -20,11 +27,21 @@ class UserRegistration extends Component {
                 password: e.target.password.value,
             }
         }
-        AuthApiService.postUser(newUser)
+
+        const emailError = ValidationService.validateEmail(e.target.email.value)
+        const passwordError = ValidationService.validatePassword(e.target.password.value)
+
+        if(emailError){
+            this.setState({ error: emailError })
+        } else if (passwordError){
+            this.setState({ error: passwordError })
+        } else {
+            AuthApiService.postUser(newUser)
             .catch(err => {
                 console.log(err)
             })
-        this.props.history.push('/login');
+            this.props.history.push('/login');
+        }
     }
 
 
@@ -33,6 +50,7 @@ class UserRegistration extends Component {
             <div className='register-container'>
                 <h1>Create an account</h1>
                 <div className='margin-container'>
+                    {(this.state.error) ? <p className='error-message'>{this.state.error}</p> : null}
                     <RegistrationForm 
                         handleSubmit={this.handleSubmit}
                     />

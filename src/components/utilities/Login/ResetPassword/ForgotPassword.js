@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import SubmitButton from '../LoginComponents/SubmitButton'
 import TextInput from '../LoginComponents/TextInput'
+import ValidationService from '../../../../services/validation-service'
 
 class ForgotPassword extends Component {
     constructor(props){
@@ -23,8 +24,13 @@ class ForgotPassword extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        
-        this.props.history.push('/change-password')
+        const email = e.target.email.value
+        const error = ValidationService.validateEmail(email)
+        if(error){
+            this.setState({ error: error })
+        } else {
+            this.props.history.push('/change-password')
+        }
     }
 
     render(){
@@ -32,6 +38,7 @@ class ForgotPassword extends Component {
             <div className='login-container'>
                 <h1>Enter your email to send reset password link</h1>
                 <div className='margin-container'>
+                {(this.state.error) ? <p className='error-message'>{this.state.error}</p> : null}
                     <form onSubmit={(e) => this.handleSubmit(e)}>
                         <div className='form-group'>
                             <label htmlFor='email'></label>
