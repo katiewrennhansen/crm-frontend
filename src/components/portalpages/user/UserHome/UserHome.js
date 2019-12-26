@@ -9,6 +9,7 @@ import AddProperty from '../userViews/Properties/AddProperty'
 import SingleProperty from '../userViews/Properties/SingleProperty'
 import EditProperty from '../userViews/Properties/EditProperty'
 import Maintenance from '../userViews/Maintenance/Maintenance'
+import Visits from '../userViews/Visits/Visits'
 import './UserHome.css'
 
 class UserHome extends Component {
@@ -115,6 +116,10 @@ class UserHome extends Component {
                             <Route 
                                 exact path='/user/maintenance' 
                                 component={Maintenance}
+                            />
+                            <Route 
+                                exact path='/user/visit-requests' 
+                                component={Visits}
                             />
                         </Switch>
                     </div>

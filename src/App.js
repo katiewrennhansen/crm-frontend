@@ -22,14 +22,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      usertype: '',
+      error: null
     }
-  }
-
-  handleUserType = (user) => {
-    this.setState({
-      usertype: user
-    })
   }
 
   render() {
@@ -91,14 +85,7 @@ class App extends Component {
     {/* ******** LOGIN AND AUTH ROUTES ******* */}
             <Route 
               path='/login'
-              render={(props) => {
-                return (
-                  <Login 
-                    history={props.history}
-                    handleUserType={this.handleUserType} 
-                  />
-                )
-              }}
+              component={Login}
             />
             <Route 
               path='/forgot-password'

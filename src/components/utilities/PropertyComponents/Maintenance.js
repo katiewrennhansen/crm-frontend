@@ -81,7 +81,7 @@ class Maintenance extends Component {
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setMaintenance(data)
+                        this.setMaintenance(data.maintenances)
                     })
             })
             .catch(error => {

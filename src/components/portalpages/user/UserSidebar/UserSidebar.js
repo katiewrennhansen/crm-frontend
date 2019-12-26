@@ -89,7 +89,7 @@ class UserSidebar extends Component {
                             <p className={(this.context.active) ? null : 'collapsed'}>My Properties</p>
                         </Link>
                         <Link 
-                            to="/user" 
+                            to="/user/visit-requests" 
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Visit Requests')}
                         >

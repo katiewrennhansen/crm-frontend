@@ -12,7 +12,6 @@ class Login extends Component {
     constructor(props){
         super(props)
         this.state = {
-            usertype: '',
             loading: false,
             error: null
         }
@@ -40,18 +39,18 @@ class Login extends Component {
         AuthApiService.postLogin(authUser)
             .then(resJson => {
                 TokenService.saveAuthToken(resJson.token)
-                this.props.handleUserType(resJson.usertype);
                 sessionStorage.setItem('id', resJson.id)
                 sessionStorage.setItem('usertype', resJson.usertype)
             })
             .then(() => {
                 const user = sessionStorage.getItem('usertype')
                 this.selectUserAccount(user);
-                this.setState({ loading: false })
             })
             .catch(err => {
-                this.setState({ error: err.error })
-                this.setState({ loading: false })
+                this.setState({ 
+                    error: err.error,
+                    loading: false 
+                })
             })
     }
 
@@ -72,7 +71,7 @@ class Login extends Component {
                                 name='email'
                                 label='Email'
                                 type='email'
-                                autofocus
+                                autofocus="true"
                             />
                         </div>
                         

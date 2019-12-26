@@ -35,19 +35,22 @@ class Maintenance extends Component {
         const endpoint = `${config.API_ENDPOINT}/assets/0/maintenances`
         ApiService.getDataHalf(endpoint)
             .then(data => {
-                this.setRequests(data.maintenances)
+                if(data.maintenances){
+                    this.setRequests(data.maintenances)
+                    const maint = `${config.API_ENDPOINT}/mainttypes`
+                    ApiService.getDataHalf(maint)
+                        .then(data => {
+                            this.setMainttypes(data)
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                }
             })
             .catch(error => {
                 console.log(error)
             })
-        const maint = `${config.API_ENDPOINT}/mainttypes`
-        ApiService.getDataHalf(maint)
-            .then(data => {
-                this.setMainttypes(data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        
         const assets = `${config.API_ENDPOINT}/assets`
         ApiService.getDataHalf(assets)
             .then(data => {
