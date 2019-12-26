@@ -39,7 +39,7 @@ class Maintenance extends Component {
         const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
         ApiService.getDataHalf(endpoint)
             .then(data => {
-                this.setMaintenance(data)
+                this.setMaintenance(data.maintenances)
             })
             .catch(error => {
                 console.log(error)
@@ -96,7 +96,7 @@ class Maintenance extends Component {
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setMaintenance(data)
+                        this.setMaintenance(data.maintenances)
                     })
             })
             .catch(error => {
@@ -186,12 +186,12 @@ class Maintenance extends Component {
                     <tbody>
                         {this.state.maintenance.map(f => {
                             return (
-                                <tr key={f.id}>
-                                    <td>{f.informto}</td>
-                                    <td>${f.initialcost}</td>
+                                <tr key={f.data.id}>
+                                    <td>{f.data.informto}</td>
+                                    <td>${f.data.initialcost}</td>
                                     <td>
                                         {(this.state.providers).map(p => {
-                                            if(p.data.id === f.provider_id){
+                                            if(p.data.id === f.data.provider_id){
                                                 return p.data.name
                                             }
                                             else {
@@ -199,8 +199,8 @@ class Maintenance extends Component {
                                             }
                                         })}
                                     </td>
-                                    <td>{f.reqdate}</td>
-                                    <td>{(f.deliverdate) ? (f.deliverdate) : '-' }</td>
+                                    <td>{f.data.reqdate}</td>
+                                    <td>{(f.data.deliverdate) ? `Completed ${f.data.deliverdate}` : 'Pending' }</td>
                                     <td className="delete">
                                         <button className="delete-btn" onClick={() => this.deleteMaintenance(f.id)}>Delete</button>
                                     </td>
