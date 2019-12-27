@@ -5,6 +5,7 @@ import Messages from '../../../../utilities/PropertyComponents/Messages'
 import Maintenance from '../../../../utilities/PropertyComponents/Maintenance'
 import Cost from '../../../../utilities/PropertyComponents/Cost'
 import PropertyInfo from '../../../../utilities/PropertyComponents/PropertyInfo'
+import ErrorBoundary from '../../../../utilities/ErrorBoundary'
 
 class SingleProperty extends Component {
     static contextType = BrokerContext
@@ -18,23 +19,33 @@ class SingleProperty extends Component {
     render(){
         return (
             <div className="single-property-container">
-                <PropertyInfo 
-                    id={this.props.id}
-                    type='user'
-                />
-                <Features 
-                    id={this.props.id}
-                />
-                <Messages 
-                    id={this.props.id}
-                />
-                <Maintenance
-                    id={this.props.id}
-                />
-               <Cost
-                    id={this.props.id}
-                    setCosts={this.setCosts}
-                />
+                <ErrorBoundary>
+                    <PropertyInfo 
+                        id={this.props.id}
+                        type='user'
+                    />
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    <Features 
+                        id={this.props.id}
+                    />
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    <Messages 
+                        id={this.props.id}
+                    />
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    <Maintenance
+                        id={this.props.id}
+                    />
+                </ErrorBoundary>
+                <ErrorBoundary>
+                <Cost
+                        id={this.props.id}
+                        setCosts={this.setCosts}
+                    />
+                </ErrorBoundary>
             </div>
         )
     }
