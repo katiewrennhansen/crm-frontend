@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import CompanyDash from '../../../../../images/CompanyDash.png'
 
 class AdminDash extends Component {
     constructor(props) {
@@ -31,6 +32,9 @@ class AdminDash extends Component {
         return (
             <div className='dash-container'>
                 <h2>Welcome {this.state.companyInfo.company}</h2>
+                <div className="dash-stats">
+                    <img src={CompanyDash} alt="Company Dashboard"/>
+                </div>
             </div>
         )
     }

@@ -299,7 +299,7 @@ class PropertyForm extends Component {
                 <div className="form-group">
                     <label htmlFor="images">Images: </label>
                     <div>
-                        <input type="file" onChange={(e) => this.props.onChange(e)} multiple />
+                        <input type="file" name="images" onChange={(e) => this.props.onChange(e)} multiple />
                     </div>
                 </div>
 

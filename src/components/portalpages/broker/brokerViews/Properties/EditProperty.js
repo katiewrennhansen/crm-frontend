@@ -13,14 +13,10 @@ class EditProperty extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            error: null
+            error: null,
+            files: []
         }
-    }
-
-    updateFiles = (file) => {
-        this.setState({
-            file: [...file]
-        })
+        this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
     }
 
     componentDidMount(){
@@ -34,11 +30,19 @@ class EditProperty extends Component {
     }
 
     fileSelectedHandler = (e) => {
-        this.updateFiles(e.target.files)
+        this.setState({
+            files: [...e.target.files]
+        })
     }
 
     editProperty = (e) => {
         e.preventDefault()
+        //handle file upload
+        const formData = new FormData();
+        this.state.files.forEach((file) => {
+            formData.append('files[]', file)
+        })
+
         const id = this.props.id
         const updatedContent = {}
         const updatedFields = {
@@ -59,7 +63,8 @@ class EditProperty extends Component {
             stepdate: e.target.step_date.value,
             status_id: e.target.status.value,
             assetinsurance: e.target.insurance.value,
-            insurancedued : e.target.insurance_due.value
+            insurancedued : e.target.insurance_due.value,
+            images: [...this.state.files] // or use formData?
         }
 
         for (const key in updatedFields) {
@@ -94,6 +99,7 @@ class EditProperty extends Component {
                 <PropertyForm 
                     handleSubmit={this.editProperty}
                     asset={this.context.singleAsset}
+                    onChange={this.fileSelectedHandler}
                     button="Edit Property"
                 />
             </div>

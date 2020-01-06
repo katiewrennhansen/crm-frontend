@@ -22,7 +22,7 @@ class Cost extends Component {
         const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
         ApiService.getDataHalf(endpoint)
             .then(data => {
-                this.setCosts(data)
+                this.setCosts(data.costs)
             })
             .catch(error => {
                 console.log(error)

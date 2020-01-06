@@ -233,6 +233,14 @@ button.add-icon {
     margin: 20px 0;  
 }
 
+/* DASHBOARD STYLES */
+.dash-stats {
+    width: 100%;
+}
+
+.dash-stats img {
+    width: 100%;
+}
 
 /* COMPANY SETUP STYLES */
 
