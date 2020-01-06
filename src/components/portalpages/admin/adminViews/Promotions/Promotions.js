@@ -6,7 +6,8 @@ import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
-
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import EditIcon from '@material-ui/icons/Edit';
 
 const promEndpoint = config.PROMOTIONS_ENDPOINT
 
@@ -101,7 +102,6 @@ class Promotions extends Component {
                 <Modal className='update-modal' show={context.update}>
                     <CloseIcon 
                         className="close-icon" 
-                        fontSize="large" 
                         onClick={context.hideUpdate}
                     />
                     <div className='update-content'>
@@ -149,7 +149,6 @@ class Promotions extends Component {
                 <Modal className='add-modal' show={context.show} >
                     <CloseIcon 
                         className="close-icon" 
-                        fontSize="large" 
                         onClick={context.hideModal}
                     />
                     <form 
@@ -197,7 +196,6 @@ class Promotions extends Component {
                     <h2>Promotions</h2>
                     <AddIcon 
                         className="add-icon" 
-                        fontSize="large" 
                         aria-label="add comment type" 
                         onClick={context.showModal} 
                     />
@@ -220,10 +218,14 @@ class Promotions extends Component {
                                 <td>{p.data.duedate}</td>
                                 <td>{this.props.formatPrice(p.data.totalcost)}</td>
                                 <td>
-                                    <button className='update-btn' onClick={() => context.updateUpdate(p.data.typepromotion, p.data.id)}>Update</button>
+                                    <button className='update-btn' onClick={() => context.updateUpdate(p.data.typepromotion, p.data.id)}>
+                                        <EditIcon />
+                                    </button>
                                 </td>
                                 <td>
-                                    <button className='delete-btn' onClick={() => context.updateDelete(p.data.typepromotion, p.data.id)}>Delete</button>
+                                    <button className='delete-btn' onClick={() => context.updateDelete(p.data.typepromotion, p.data.id)}>
+                                        <DeleteOutlineIcon />
+                                    </button>
                                 </td>
                             </tr>
                             ))}

@@ -7,7 +7,8 @@ import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
-
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import EditIcon from '@material-ui/icons/Edit';
 
 const pfEndpoint = config.PROPERTY_FEATURE_ENDPOINT
 
@@ -89,7 +90,6 @@ class PropertyFeatures extends Component {
                 <Modal className='update-modal' show={context.update}>
                     <CloseIcon 
                         className="close-icon" 
-                        fontSize="large" 
                         onClick={context.hideUpdate}
                     />
                     <div className='update-content'>
@@ -113,7 +113,6 @@ class PropertyFeatures extends Component {
                 <Modal show={context.show}>
                     <CloseIcon 
                         className="close-icon" 
-                        fontSize="large" 
                         onClick={context.hideModal}
                     />
                     <form 
@@ -138,7 +137,6 @@ class PropertyFeatures extends Component {
                     <h2>Property Features</h2>
                     <AddIcon 
                         className="add-icon" 
-                        fontSize="large" 
                         aria-label="add comment type" 
                         onClick={context.showModal} 
                     />                    
@@ -159,10 +157,14 @@ class PropertyFeatures extends Component {
                                     <Moment format="YYYY/MM/DD">{f.created_at}</Moment>
                                 </td>
                                 <td>
-                                    <button className='update-btn' onClick={() => context.updateUpdate(f.featuredescr, f.id)}>Update</button>
+                                    <button className='update-btn' onClick={() => context.updateUpdate(f.featuredescr, f.id)}>
+                                        <EditIcon />
+                                    </button>
                                 </td>
                                 <td>
-                                    <button className='delete-btn' onClick={() => context.updateDelete(f.featuredescr, f.id)}>Delete</button>
+                                    <button className='delete-btn' onClick={() => context.updateDelete(f.featuredescr, f.id)}>
+                                        <DeleteOutlineIcon />
+                                    </button>
                                 </td>
                             </tr>
                             ))}

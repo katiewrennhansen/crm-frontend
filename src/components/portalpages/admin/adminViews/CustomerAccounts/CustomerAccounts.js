@@ -87,7 +87,6 @@ class CustomerAccounts extends Component {
                     <h2>Customer Accounts</h2>
                     <Link className="add-icon" to='/dashboard/add-customer'>
                         <AddIcon 
-                            fontSize="large" 
                             aria-label="add comment type" 
                         /> 
                     </Link>

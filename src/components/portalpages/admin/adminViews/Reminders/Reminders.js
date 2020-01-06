@@ -7,6 +7,8 @@ import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import EditIcon from '@material-ui/icons/Edit';
 
 const remindersEndpoint = config.REMINDERS_ENDPOINT
 
@@ -97,7 +99,6 @@ class Reminders extends Component {
                 <Modal className='update-modal' show={context.update}>
                     <CloseIcon 
                         className="close-icon" 
-                        fontSize="large" 
                         onClick={context.hideUpdate}
                     />
                     <div className='update-content'>
@@ -138,7 +139,6 @@ class Reminders extends Component {
                 <Modal className='add-modal' show={context.show} >
                     <CloseIcon 
                         className="close-icon" 
-                        fontSize="large" 
                         onClick={context.hideModal}
                     />
                     <form 
@@ -178,7 +178,6 @@ class Reminders extends Component {
                     <h2>Reminders</h2>
                     <AddIcon 
                         className="add-icon" 
-                        fontSize="large" 
                         aria-label="add comment type" 
                         onClick={context.showModal} 
                     />                    
@@ -203,10 +202,14 @@ class Reminders extends Component {
                                     <Moment format="YYYY/MM/DD">{r.created_at}</Moment>
                                 </td>
                                  <td>
-                                    <button className='update-btn' onClick={() => this.context.updateUpdate(r.rtype, r.id)}>Update</button>
+                                    <button className='update-btn' onClick={() => this.context.updateUpdate(r.rtype, r.id)}>
+                                        <EditIcon />
+                                    </button>
                                 </td>
                                 <td>
-                                    <button className='delete-btn' onClick={() => context.updateDelete(r.rtype, r.id)}>Delete</button>
+                                    <button className='delete-btn' onClick={() => context.updateDelete(r.rtype, r.id)}>
+                                        <DeleteOutlineIcon />
+                                    </button>
                                 </td>
                             </tr>
                             ))}

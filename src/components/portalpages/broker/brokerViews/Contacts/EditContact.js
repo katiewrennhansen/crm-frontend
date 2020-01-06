@@ -86,7 +86,6 @@ class EditContact extends Component {
                     <Link className="close-icon" to={`/broker/contacts/${this.props.id}`}>
                         <CloseIcon
                             className="action-icon" 
-                            fontSize="medium" 
                         />
                     </Link>
                 </div>

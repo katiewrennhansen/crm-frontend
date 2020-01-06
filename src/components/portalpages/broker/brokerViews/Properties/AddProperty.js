@@ -68,7 +68,6 @@ class AddProperty extends Component {
                     <Link className="close-icon" to='/broker/properties'>
                         <CloseIcon 
                             className="action-icon" 
-                            fontSize="medium" 
                         />
                     </Link>
                 </div>

@@ -7,6 +7,8 @@ import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import EditIcon from '@material-ui/icons/Edit';
 
 const processEndpoint = config.PROCESS_ENDPOINT
 
@@ -94,7 +96,6 @@ class Process extends Component {
                 <Modal className='update-modal' show={context.update}>
                     <CloseIcon 
                         className="close-icon" 
-                        fontSize="large" 
                         onClick={context.hideUpdate}
                     />
                     <div className='update-content'>
@@ -117,7 +118,6 @@ class Process extends Component {
                 <Modal className='add-modal' show={context.show} >
                     <CloseIcon 
                         className="close-icon" 
-                        fontSize="large" 
                         onClick={context.hideModal}
                     />
                     <form 
@@ -142,7 +142,6 @@ class Process extends Component {
                     <h2>Process</h2>
                     <AddIcon 
                         className="add-icon" 
-                        fontSize="large" 
                         aria-label="add comment type" 
                         onClick={context.showModal} 
                     />                      
@@ -164,10 +163,14 @@ class Process extends Component {
                                         <Link className="view" to={`/dashboard/process/${p.data.id}`}>View Steps</Link>
                                     </td>
                                     <td>
-                                        <button className='update-btn' onClick={() => context.updateUpdate(p.data.processdesc, p.data.id)}>Update</button>
+                                        <button className='update-btn' onClick={() => context.updateUpdate(p.data.processdesc, p.data.id)}>
+                                            <EditIcon />
+                                        </button>
                                     </td>
                                     <td>
-                                        <button className='delete-btn' onClick={() => context.updateDelete(p.data.processdesc, p.data.id)}>Delete</button>
+                                        <button className='delete-btn' onClick={() => context.updateDelete(p.data.processdesc, p.data.id)}>
+                                            <DeleteOutlineIcon />
+                                        </button>
                                     </td>
                                 </tr>
                             )})}

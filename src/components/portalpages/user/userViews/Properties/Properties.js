@@ -40,7 +40,7 @@ class Properties extends Component {
                     <h2>My Listings</h2>
                     <Link className="add-icon" to='/user/properties/add'>
                         <AddIcon 
-                            fontSize="large" 
+                            className="action-icon" 
                             aria-label="add property" 
                         />
                     </Link>

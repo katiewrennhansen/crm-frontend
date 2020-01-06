@@ -40,8 +40,6 @@ class AddCustomer extends Component {
             ccomment: e.target.comment.value
         }
 
-        console.log(newCustomer)
-
         ApiService.postDataHalf(caEndpoint, newCustomer)
             .then(data => {
                 ApiService.getDataHalf(caEndpoint)
@@ -62,7 +60,6 @@ class AddCustomer extends Component {
                     <Link className='edit-btn edit-customer' to='/dashboard/customer-accounts'>
                         <CloseIcon 
                             className="add-icon" 
-                            fontSize="large" 
                         />
                     </Link>
                 </div>
@@ -70,8 +67,7 @@ class AddCustomer extends Component {
                 <ContactFrom 
                     handleSubmit={this.addCustomer}
                     cust={[]}
-                />
-                    
+                />  
             </div>
         )
     }

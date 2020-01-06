@@ -36,7 +36,6 @@ class Maintenance extends Component {
                 <Link to='/broker/maintenance/add-provider' className='add-icon'>
                 <AddIcon 
                     className="action-icon" 
-                    fontSize="medium" 
                     aria-label="add comment type" 
                 />
                 </Link>

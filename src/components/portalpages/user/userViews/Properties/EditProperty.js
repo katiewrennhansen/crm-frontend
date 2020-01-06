@@ -86,7 +86,7 @@ class EditProperty extends Component {
                     <h2>Edit {asset.adescription4}</h2>
                     <Link className="close-icon" to={`/user/properties/${id}`}>
                         <CloseIcon 
-                            fontSize="large" 
+                            className="action-icon" 
                         />
                     </Link>
                 </div>

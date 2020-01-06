@@ -137,7 +137,6 @@ class Promotion extends Component {
                                     <Link className="update-btn" to={`/broker/promotions/${p.data.id}`}>
                                         <PersonAddIcon 
                                             className="action-icon"
-                                            fontSize="medium"
                                         />
                                     </Link>
                                 </td>

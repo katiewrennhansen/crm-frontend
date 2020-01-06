@@ -85,13 +85,11 @@ class CustomerPage extends Component {
                     <Link to='/dashboard/customer-accounts' className='edit-btn edit-company'>
                         <CloseIcon 
                             className="add-icon" 
-                            fontSize="large" 
                         />
                     </Link>
                     <Link to={`/dashboard/customer-accounts/${data.id}/edit`} className='edit-btn edit-company'>
                         <EditIcon 
                             className="add-icon" 
-                            fontSize="large" 
                         />
                     </Link>
                 </div>

@@ -39,8 +39,7 @@ class Contacts extends Component {
                     <h2>Contacts</h2>
                     <Link to='/broker/contacts/add' className='add-icon'>
                         <AddIcon 
-                            fclassName="action-icon" 
-                            fontSize="medium" 
+                            className="action-icon" 
                             aria-label="add contact" 
                         />
                     </Link>

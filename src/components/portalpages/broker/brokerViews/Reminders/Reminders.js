@@ -40,7 +40,6 @@ class Reminders extends Component {
                 <Link to='/broker/reminders/add' className='add-icon'>
                     <AddIcon 
                         className="action-icon" 
-                        fontSize="medium" 
                         aria-label="add comment type" 
                     />
                 </Link>

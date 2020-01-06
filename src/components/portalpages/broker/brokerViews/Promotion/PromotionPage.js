@@ -143,7 +143,6 @@ class PromotionPage extends Component {
                                         <button className='delete-btn' onClick={() => this.unassignPromo(a.id)}>
                                             <DeleteOutlineIcon 
                                                 className="action-icon" 
-                                                fontSize="medium" 
                                             />
                                         </button>
                                     </td>

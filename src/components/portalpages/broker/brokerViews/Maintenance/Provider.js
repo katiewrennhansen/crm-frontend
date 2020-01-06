@@ -90,13 +90,11 @@ class Provider extends Component {
                             <Link to='/broker/maintenance/' className="close-icon">
                                 <CloseIcon
                                     className="action-icon" 
-                                    fontSize="medium" 
                                 />
                             </Link>
                             <Link to={`/broker/maintenance/${this.props.id}/edit`} className="add-icon">
                                 <EditIcon
                                     className="action-icon" 
-                                    fontSize="medium" 
                                 />
                             </Link>
                         </div>

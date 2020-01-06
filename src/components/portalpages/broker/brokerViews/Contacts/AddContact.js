@@ -75,7 +75,6 @@ class AddContact extends Component {
                     <Link className="close-icon"  to={`/broker/contacts`}>
                         <CloseIcon
                             className="action-icon" 
-                            fontSize="medium" 
                         />
                     </Link>
                 </div>

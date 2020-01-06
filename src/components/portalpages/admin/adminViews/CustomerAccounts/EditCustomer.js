@@ -66,7 +66,6 @@ class EditCustomer extends Component {
 
         ApiService.updateDataHalf(caEndpoint, id, updatedCustomer)
             .then(data => {
-                console.log(data)
                 ApiService.getDataHalf(caEndpoint)
                     .then(data => {
                         this.setCustomer(data.customers)
@@ -88,7 +87,6 @@ class EditCustomer extends Component {
                     <Link to={`/dashboard/customer-accounts/${this.props.id}`} className='edit-btn edit-customer'>
                         <CloseIcon 
                             className="add-icon" 
-                            fontSize="large" 
                         />
                     </Link>
                 </div>

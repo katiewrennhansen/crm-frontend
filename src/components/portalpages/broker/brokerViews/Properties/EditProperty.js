@@ -95,7 +95,6 @@ class EditProperty extends Component {
                     <Link className="close-icon" to={`/broker/properties/${id}`}>
                         <CloseIcon 
                             className="action-icon"
-                            fontSize="medium" 
                         />
                     </Link>
                 </div>

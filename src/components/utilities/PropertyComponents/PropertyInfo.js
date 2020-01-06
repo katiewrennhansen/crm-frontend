@@ -51,13 +51,11 @@ class PropertyInfo extends Component {
                     <Link className="close-icon" to={`/${type}/properties`}>
                         <CloseIcon 
                             className="action-icon" 
-                            fontSize="medium"  
                         />
                     </Link>
                     <Link className="add-icon" to={`/${type}/properties/${this.props.id}/edit`}>
                         <EditIcon 
                             className="action-icon" 
-                            fontSize="medium" 
                         />
                     </Link>
                 </div>  

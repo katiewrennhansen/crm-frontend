@@ -71,11 +71,10 @@ class AddProperty extends Component {
             <div className='add-property'>
                 <div className='header-grid'>
                     <h2>Add New Property</h2>
-                    <Link to='/user/properties'>
+                    <Link className="close-icon" to='/user/properties'>
                         <CloseIcon 
-                            className="close-icon" 
-                            fontSize="large" 
-                        />
+                            className="action-icon" 
+                            />
                     </Link>
                 </div>
                 <PropertyForm 
