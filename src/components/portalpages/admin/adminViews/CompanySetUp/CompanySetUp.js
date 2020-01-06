@@ -72,7 +72,6 @@ class CompanySetUp extends Component {
                     >
                         <EditIcon 
                             className="add-icon" 
-                            fontSize="large" 
                         />
                     </Link>
                 </div>

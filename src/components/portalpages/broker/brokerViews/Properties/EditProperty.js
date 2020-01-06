@@ -67,6 +67,8 @@ class EditProperty extends Component {
             images: [...this.state.files] // or use formData?
         }
 
+        console.log(formData)
+
         for (const key in updatedFields) {
             if (updatedFields[key] !== '')
                 updatedContent[key] = updatedFields[key]
@@ -92,7 +94,8 @@ class EditProperty extends Component {
                     <h2>Edit {asset.adescription4}</h2>
                     <Link className="close-icon" to={`/broker/properties/${id}`}>
                         <CloseIcon 
-                            fontSize="large" 
+                            className="action-icon"
+                            fontSize="medium" 
                         />
                     </Link>
                 </div>

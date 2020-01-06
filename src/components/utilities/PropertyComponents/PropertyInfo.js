@@ -50,12 +50,14 @@ class PropertyInfo extends Component {
                 <div className="property-icons">               
                     <Link className="close-icon" to={`/${type}/properties`}>
                         <CloseIcon 
-                            fontSize="large" 
+                            className="action-icon" 
+                            fontSize="medium"  
                         />
                     </Link>
                     <Link className="add-icon" to={`/${type}/properties/${this.props.id}/edit`}>
                         <EditIcon 
-                            fontSize="large" 
+                            className="action-icon" 
+                            fontSize="medium" 
                         />
                     </Link>
                 </div>  

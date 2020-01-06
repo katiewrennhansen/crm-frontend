@@ -39,7 +39,8 @@ class Reminders extends Component {
                 <h2>Reminders</h2>
                 <Link to='/broker/reminders/add' className='add-icon'>
                     <AddIcon 
-                        fontSize="large" 
+                        className="action-icon" 
+                        fontSize="medium" 
                         aria-label="add comment type" 
                     />
                 </Link>

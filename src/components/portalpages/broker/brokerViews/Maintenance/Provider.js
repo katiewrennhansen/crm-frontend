@@ -88,10 +88,16 @@ class Provider extends Component {
                         <h2>{data.contact}</h2>
                         <div className="property-icons">
                             <Link to='/broker/maintenance/' className="close-icon">
-                                <CloseIcon fontSize="large" />
+                                <CloseIcon
+                                    className="action-icon" 
+                                    fontSize="medium" 
+                                />
                             </Link>
                             <Link to={`/broker/maintenance/${this.props.id}/edit`} className="add-icon">
-                                <EditIcon fontSize="large" />
+                                <EditIcon
+                                    className="action-icon" 
+                                    fontSize="medium" 
+                                />
                             </Link>
                         </div>
                     </div>

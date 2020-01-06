@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
 import ApiService from '../../../services/api-service'
-
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+ 
 class Maintenance extends Component {
     static contextType = BrokerContext
     constructor(props){
@@ -202,7 +203,11 @@ class Maintenance extends Component {
                                     <td>{f.data.reqdate}</td>
                                     <td>{(f.data.deliverdate) ? `Completed ${f.data.deliverdate}` : 'Pending' }</td>
                                     <td className="delete">
-                                        <button className="delete-btn" onClick={() => this.deleteMaintenance(f.id)}>Delete</button>
+                                        <button className="delete-btn" onClick={() => this.deleteMaintenance(f.id)}>
+                                            <DeleteOutlineIcon
+                                                className="active-icon"
+                                            />
+                                        </button>
                                     </td>
                                 </tr>
                             )

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 const endpoint = `${config.API_ENDPOINT}/assignedproms`
 
@@ -134,12 +135,17 @@ class PromotionPage extends Component {
                         <tbody>
                             {this.state.assigned.map(a => {
                                 return (
-                                <tr key={a.id}>
+                                <tr className="promotions-table" key={a.id}>
                                     <td>{a.customer}</td>
                                     <td>{a.cost}</td>
                                     <td>{a.assigned}</td>
                                     <td>
-                                        <button className='delete-btn' onClick={() => this.unassignPromo(a.id)}>Unassign</button>
+                                        <button className='delete-btn' onClick={() => this.unassignPromo(a.id)}>
+                                            <DeleteOutlineIcon 
+                                                className="action-icon" 
+                                                fontSize="medium" 
+                                            />
+                                        </button>
                                     </td>
                                 </tr>
                                 )

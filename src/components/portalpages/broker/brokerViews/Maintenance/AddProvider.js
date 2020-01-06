@@ -50,7 +50,10 @@ class AddProvider extends Component {
                 <div className='header-grid'>
                     <h2>Add New Provider</h2>
                     <Link className="close-icon" to='/broker/maintenance'>
-                        <CloseIcon fontSize="large" />
+                        <CloseIcon
+                            className="action-icon" 
+                            fontSize="medium" 
+                        />
                     </Link>
                 </div>
                 <div>

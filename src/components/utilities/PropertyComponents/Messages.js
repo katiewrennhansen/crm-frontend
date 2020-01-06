@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
 import ApiService from '../../../services/api-service'
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 class Messages extends Component {
     static contextType = BrokerContext
@@ -145,7 +146,11 @@ class Messages extends Component {
                                     </td>
                                     <td>{f.data.assetcomment}</td>
                                     <td className="delete">
-                                        <button className="delete-btn" onClick={() => {this.deleteMessage(f.data.id)}}>Delete</button>
+                                        <button className="delete-btn" onClick={() => {this.deleteMessage(f.data.id)}}>
+                                            <DeleteOutlineIcon
+                                                className="active-icon"
+                                            />
+                                        </button>
                                     </td>
                                 </tr>
                             )

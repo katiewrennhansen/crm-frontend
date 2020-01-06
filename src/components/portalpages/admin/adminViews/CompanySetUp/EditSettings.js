@@ -72,7 +72,6 @@ class EditSettings extends Component {
                     <Link to='/dashboard/company-setup' className='edit-btn edit-customer'>
                         <CloseIcon 
                             className="add-icon" 
-                            fontSize="large" 
                         />
                     </Link>
                 </div>

@@ -71,7 +71,10 @@ class EditProvider extends Component {
                 <div className='header-grid'>
                     <h2>Edit Provider</h2>
                     <Link className="close-icon" to='/broker/maintenance'>
-                        <CloseIcon fontSize="large" />
+                        <CloseIcon
+                            className="action-icon" 
+                            fontSize="medium" 
+                        />
                     </Link>
                 </div>
                 <MaintenanceForm 

@@ -35,7 +35,8 @@ class AddProvider extends Component {
                     <h2>Add New Provider</h2>
                     <Link className="close-icon" to='/broker/reminders'>
                         <CloseIcon 
-                            fontSize="large" 
+                            className="action-icon" 
+                            fontSize="medium" 
                         />
                     </Link>
                 </div>

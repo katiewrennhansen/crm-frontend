@@ -28,7 +28,8 @@ class Properties extends Component {
                     <h2>My Properties</h2>
                     <Link className="add-icon" to='/broker/properties/add'>
                         <AddIcon 
-                            fontSize="large" 
+                            className="action-icon" 
+                            fontSize="medium" 
                             aria-label="add property" 
                         />
                     </Link>

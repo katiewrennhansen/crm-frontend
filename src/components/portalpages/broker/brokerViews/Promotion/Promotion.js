@@ -4,11 +4,10 @@ import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import Modal from '../../../../utilities/Modal/Modal'
 import SubmitButton from '../../../../utilities/Login/LoginComponents/SubmitButton'
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 const promotionsEndpoint = config.PROMOTIONS_ENDPOINT
 const assignPromsEndpoint = config.ASSIGN_PROMOTIONS_ENDPOINT
-// const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
-
 
 class Promotion extends Component {
     constructor(props) {
@@ -124,20 +123,22 @@ class Promotion extends Component {
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Total Cost</th>
-                                <th></th>
+                                <th>Assign User</th>
                             </tr>
                         </thead>
                         <tbody>
                             {this.state.data.map(p => (
-                            <tr key={p.data.id}>
+                            <tr className="promotions-table" key={p.data.id}>
                                 <td>{p.data.typepromotion}</td>
                                 <td>{p.data.startdate}</td>
                                 <td>{p.data.duedate}</td>
                                 <td>{p.data.totalcost}</td>
                                 <td>
-                                    {/* <button className='update-btn' onClick={() => this.setAssign(true, p.data.id, p.data.typepromotion)}>Assign to User</button> */}
-                                    <Link to={`/broker/promotions/${p.data.id}`}>
-                                        <button className='update-btn'>Assign to User</button>
+                                    <Link className="update-btn" to={`/broker/promotions/${p.data.id}`}>
+                                        <PersonAddIcon 
+                                            className="action-icon"
+                                            fontSize="medium"
+                                        />
                                     </Link>
                                 </td>
                             </tr>

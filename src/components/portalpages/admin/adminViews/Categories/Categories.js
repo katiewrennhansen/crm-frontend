@@ -7,6 +7,8 @@ import AdminContext from '../../../../../contexts/AdminContext'
 import DeleteModal from '../../../../utilities/Modal/DeleteModal'
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import EditIcon from '@material-ui/icons/Edit';
 
 const catEndpoint = config.CATEGORIES_ENDPOINT
 
@@ -85,7 +87,6 @@ class Categories extends Component {
                 <Modal className='update-modal' show={context.update}>
                     <CloseIcon 
                         className="close-icon" 
-                        fontSize="large" 
                         onClick={context.hideUpdate}
                     />
                     <form 
@@ -111,7 +112,6 @@ class Categories extends Component {
                 <Modal className='add-modal' show={context.show} >
                     <CloseIcon 
                         className="close-icon" 
-                        fontSize="large" 
                         onClick={context.hideModal}
                     />
                     <form 
@@ -136,7 +136,6 @@ class Categories extends Component {
                     <h2>Categories</h2>
                     <AddIcon 
                         className="add-icon" 
-                        fontSize="large" 
                         aria-label="add comment type" 
                         onClick={context.showModal} 
                     />
@@ -157,10 +156,14 @@ class Categories extends Component {
                                     <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
                                 </td>
                                 <td>
-                                    <button className='update-btn' onClick={() => context.updateUpdate(c.ccategdesc, c.id)}>Update</button>
+                                    <button className='update-btn' onClick={() => context.updateUpdate(c.ccategdesc, c.id)}>
+                                        <EditIcon /> 
+                                    </button>
                                 </td>
                                 <td>
-                                    <button className='delete-btn' onClick={() => context.updateDelete(c.ccategdesc, c.id)}>Delete</button>
+                                    <button className='delete-btn' onClick={() => context.updateDelete(c.ccategdesc, c.id)}>
+                                        <DeleteOutlineIcon />
+                                    </button>
                                 </td>
                             </tr>
                         ))}

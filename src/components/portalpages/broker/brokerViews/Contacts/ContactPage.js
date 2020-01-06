@@ -46,12 +46,14 @@ class ContactPage extends Component {
                     <div className="property-icons">               
                         <Link className="close-icon" to='/broker/contacts'>
                             <CloseIcon 
-                                fontSize="large" 
+                                className="action-icon" 
+                                fontSize="medium" 
                             />
                         </Link>
                         <Link className="add-icon" to={`/broker/contacts/${this.props.id}/edit`}>
                             <EditIcon 
-                                fontSize="large" 
+                                className="action-icon" 
+                                fontSize="medium"  
                             />
                         </Link>
                     </div>

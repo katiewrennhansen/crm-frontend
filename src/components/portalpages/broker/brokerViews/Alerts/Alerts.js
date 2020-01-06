@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Moment from 'react-moment'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 const endpoint = `${config.API_ENDPOINT}/assets/0/assetcomments`
 const commEndpoint = `${config.API_ENDPOINT}/commtypes`
@@ -71,6 +72,7 @@ class Alerts extends Component {
                 <table className='data-table'>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Comment Type</th>
                             <th>Comment</th>
                             <th>Alarm</th>
@@ -81,6 +83,9 @@ class Alerts extends Component {
                     <tbody>
                         {this.state.alerts.map(a => (
                         <tr key={a.data.id}>
+                            <td className="update-btn">
+                                <CheckCircleOutlineIcon />
+                            </td>
                             <td>
                                 {this.state.commtypes.map(c => {
                                     if(c.id === a.data.commtype_id){

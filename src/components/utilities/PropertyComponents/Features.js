@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
 import ApiService from '../../../services/api-service'
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 class Features extends Component {
     static contextType = BrokerContext
@@ -142,7 +143,11 @@ class Features extends Component {
                                     </td>
                                     <td>{f.featuredesc}</td>
                                     <td className="delete">
-                                        <button className="delete-btn" onClick={() => {this.deleteFeature(f.id)}}>Delete</button>
+                                        <button className="delete-btn" onClick={() => {this.deleteFeature(f.id)}}>
+                                            <DeleteOutlineIcon
+                                                className="active-icon"
+                                            />
+                                        </button>
                                     </td>
                                 </tr>
                             )

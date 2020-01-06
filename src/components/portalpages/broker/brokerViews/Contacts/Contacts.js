@@ -39,8 +39,9 @@ class Contacts extends Component {
                     <h2>Contacts</h2>
                     <Link to='/broker/contacts/add' className='add-icon'>
                         <AddIcon 
-                            fontSize="large" 
-                            aria-label="add comment type" 
+                            fclassName="action-icon" 
+                            fontSize="medium" 
+                            aria-label="add contact" 
                         />
                     </Link>
                     <table className='data-table'>

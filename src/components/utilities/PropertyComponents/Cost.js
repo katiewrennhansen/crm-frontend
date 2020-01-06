@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
 import ApiService from '../../../services/api-service'
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 class Cost extends Component {
     static contextType = BrokerContext
@@ -62,7 +63,8 @@ class Cost extends Component {
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setCosts(data)
+                        console.log(data)
+                        this.setCosts(data.costs)
                     })
             })
             .catch(error => {
@@ -120,13 +122,17 @@ class Cost extends Component {
                     <tbody>
                         {this.state.costs.map(f => {
                             return (
-                                <tr key={f.id}>
-                                    <td>{f.kind}</td>
-                                    <td>{f.concept}</td>
-                                    <td>{f.annualamount}</td>
-                                    <td>{f.year.split('-')[0]}</td>
+                                <tr key={f.data.id}>
+                                    <td>{f.data.kind}</td>
+                                    <td>{f.data.concept}</td>
+                                    <td>${f.data.amount}</td>
+                                    <td>{f.data.date.split('-')[0]}</td>
                                     <td className="delete">
-                                        <button className="delete-btn" onClick={() => {this.deleteCost(f.id)}}>Delete</button>
+                                        <button className="delete-btn" onClick={() => {this.deleteCost(f.id)}}>
+                                            <DeleteOutlineIcon
+                                                className="active-icon"
+                                            />
+                                        </button>
                                     </td>
                                 </tr>
                             )

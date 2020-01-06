@@ -73,7 +73,10 @@ class AddContact extends Component {
                 <div className='header-grid'>
                     <h2>Add Contact</h2>
                     <Link className="close-icon"  to={`/broker/contacts`}>
-                        <CloseIcon fontSize="large" />
+                        <CloseIcon
+                            className="action-icon" 
+                            fontSize="medium" 
+                        />
                     </Link>
                 </div>
                 
