@@ -29,19 +29,27 @@ class EditProperty extends Component {
             })
     }
 
-    fileSelectedHandler = (e) => {
+    fileSelectedHandler = (file) => {
         this.setState({
-            files: [...e.target.files]
+            files: [...file]
+        })
+    }
+
+    removeImage = (file, index) => {
+        let newPics = this.state.files
+        newPics.splice(index, 1);
+        this.setState({
+            files: [...newPics]
         })
     }
 
     editProperty = (e) => {
         e.preventDefault()
         //handle file upload
-        const formData = new FormData();
-        this.state.files.forEach((file) => {
-            formData.append('files[]', file)
-        })
+        // const formData = new FormData();
+        // this.state.files.forEach((file) => {
+        //     formData.append('files[]', file)
+        // })
 
         const id = this.props.id
         const updatedContent = {}
@@ -66,8 +74,6 @@ class EditProperty extends Component {
             insurancedued : e.target.insurance_due.value,
             images: [...this.state.files] // or use formData?
         }
-
-        console.log(formData)
 
         for (const key in updatedFields) {
             if (updatedFields[key] !== '')
@@ -103,6 +109,8 @@ class EditProperty extends Component {
                     asset={this.context.singleAsset}
                     onChange={this.fileSelectedHandler}
                     button="Edit Property"
+                    files={this.state.files}
+                    removeImage={this.removeImage}
                 />
             </div>
         )

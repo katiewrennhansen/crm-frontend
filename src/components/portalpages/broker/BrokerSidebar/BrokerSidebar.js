@@ -11,7 +11,7 @@ import BrokerContext from '../../../../contexts/BrokerContext'
 import BuildIcon from '@material-ui/icons/Build';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import ApiService from '../../../../services/api-service'
-
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 class BrokerSidebar extends Component {
     static contextType = BrokerContext
@@ -22,7 +22,8 @@ class BrokerSidebar extends Component {
             active: false,
             title: '',
             firstname: '',
-            lastname: ''
+            lastname: '',
+            unread: false
         };
     }
 
@@ -44,6 +45,17 @@ class BrokerSidebar extends Component {
         })
     }
 
+    // setUnread = () => {
+    //     this.setState({
+    //         unread: true
+    //     })
+    // }
+
+    // setRead = () => {
+    //     this.setState({
+    //         unread: false
+    //     })
+    // }
 
     highlight = (str) => {
         const name = document.getElementsByClassName('name')

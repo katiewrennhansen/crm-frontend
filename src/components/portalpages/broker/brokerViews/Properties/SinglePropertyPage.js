@@ -14,7 +14,7 @@ class SinglePageProperty extends Component {
             error: null
         }
     }
-
+    
     render(){
         return (
             <div className="single-property-container">

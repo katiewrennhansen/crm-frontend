@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import ApiService from '../../../services/api-service'
 import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
+import ImageUploader from 'react-images-upload'
+import CloseIcon from '@material-ui/icons/Close';
+
 
 class PropertyForm extends Component {
     static contextType = BrokerContext
@@ -16,7 +19,7 @@ class PropertyForm extends Component {
             status: [],
             assets: [],
             customers: [],
-            file: []
+            pictures: []
         }
     }
 
@@ -61,12 +64,6 @@ class PropertyForm extends Component {
             customers
         })
     }
-    
-    updateFiles = (file) => {
-        this.setState({
-            file: [...file]
-        })
-    }
 
     componentDidMount(){
         if(this.props.id){
@@ -78,7 +75,6 @@ class PropertyForm extends Component {
                     console.log(error)
                 })
         }
-        
         ApiService.getDataHalf(`${config.API_ENDPOINT}/brokers`)
             .then(data => {
                 this.setBrokers(data.brokers)
@@ -136,8 +132,52 @@ class PropertyForm extends Component {
 
     render(){
         const asset = this.props.asset
+        const files = this.props.files
         return (
             <form className="add-property-form" onSubmit={(e) => {this.props.handleSubmit(e)}}>
+
+                <div className="form-group">
+                    <label htmlFor="images"><h3>Upload Images</h3></label>
+                    <div>
+                        <ImageUploader
+                            withIcon={true}
+                            buttonText='Choose Images'
+                            onChange={(e) => this.props.onChange(e)}
+                            imgExtension={['.jpg', '.gif', '.png', '.gif', '.jpeg']}
+                            maxFileSize={5242880}
+                            name="image"
+                            className="image-uploader"
+                        />
+                        <div className="images-container">
+                        {(files) 
+                        ? files.map((file, i) => {
+                            return (
+                                <div 
+                                    key={i}
+                                    className="thumbnail-container"
+                                >
+                                    <CloseIcon 
+                                        onClick={() => this.props.removeImage(file, i)}
+                                        className="close-image"
+                                        fontSize="small"
+                                    />
+                                    <img 
+                                        width={100}
+                                        src={file.id ? file.url : URL.createObjectURL(file)} 
+                                        alt="thumbnail"
+                                    />
+                                    <p>{file.name}</p>
+                                </div>
+                            )
+                        })
+                        : null
+                    }
+                    </div>
+
+                        {/* <input type="file" name="images" onChange={(e) => this.props.onChange(e)} multiple /> */}
+                    </div>
+                </div>
+
                 <h3>Address</h3>
                 <div className="form-group">
                     <label htmlFor="street_name">Street Name: </label>
@@ -293,14 +333,6 @@ class PropertyForm extends Component {
                 <div className="form-group">
                     <label htmlFor="insurance_due">Insurance Due: </label>
                     <input type="date" name="insurance_due"defaultValue={asset.insurancedued}></input>
-                </div>
-                
-                <h3>Upload Images</h3>
-                <div className="form-group">
-                    <label htmlFor="images">Images: </label>
-                    <div>
-                        <input type="file" name="images" onChange={(e) => this.props.onChange(e)} multiple />
-                    </div>
                 </div>
 
                 <input type="submit" className="submit" value={this.props.button}></input>
