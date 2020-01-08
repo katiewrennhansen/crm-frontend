@@ -51,7 +51,6 @@ class Cost extends Component {
                 reciepts: [...this.state.files]
             }
         }
-        console.log(newCost)
         const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
         ApiService.postDataHalf(endpoint, newCost)
             .then(data => {
@@ -76,7 +75,6 @@ class Cost extends Component {
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        console.log(data)
                         this.setCosts(data.costs)
                     })
             })
@@ -96,6 +94,14 @@ class Cost extends Component {
         }
     }
 
+    removeImage = (file, index) => {
+        let newPics = this.state.files
+        newPics.splice(index, 1);
+        this.setState({
+            files: [...newPics]
+        })
+    }
+
     render() {
         const files = this.state.files
         return (
@@ -105,48 +111,46 @@ class Cost extends Component {
                     <button id="c-btn" className="add" onClick={this.toggleForm}>+</button>
                 </div>
                 <form className="sp-form hidden" id="costs-form" onSubmit={(e) => {this.addCost(e)}}>
-                <div className="form-group">
-                    <label htmlFor="images"><h3>Upload Images</h3></label>
-                    <div>
-                        <ImageUploader
-                            withIcon={true}
-                            buttonText='Upload Reciept'
-                            onChange={(e) => this.fileSelectedHandler(e)}
-                            imgExtension={['.pdf']}
-                            accept="application/pdf"
-                            maxFileSize={5242880}
-                            name="image"
-                            className="image-uploader"
-                        />
-                        <div className="images-container">
-                        {(files) 
-                        ? files.map((file, i) => {
-                            return (
-                                <div 
-                                    key={i}
-                                    className="thumbnail-container"
-                                >
-                                    <CloseIcon 
-                                        onClick={() => this.props.removeImage(file, i)}
-                                        className="close-image"
-                                        fontSize="small"
-                                    />
-                                    {/* <img 
-                                        width={100}
-                                        src={file.id ? file.url : URL.createObjectURL(file)} 
-                                        alt="thumbnail"
-                                    /> */}
-                                    <p>{file.name}</p>
-                                </div>
-                            )
-                        })
-                        : null
-                    }
+                    <div className="form-group">
+                        <label htmlFor="images"><h3>Upload Reciept</h3></label>
+                        <div>
+                            <ImageUploader
+                                withIcon={true}
+                                buttonText='Upload Reciept'
+                                onChange={(e) => this.fileSelectedHandler(e)}
+                                imgExtension={['.pdf']}
+                                accept="application/pdf"
+                                maxFileSize={5242880}
+                                name="image"
+                                className="image-uploader"
+                            />
+                            <div className="images-container">
+                            {(files) 
+                            ? files.map((file, i) => {
+                                return (
+                                    <div 
+                                        key={i}
+                                        className="thumbnail-container"
+                                    >
+                                        <CloseIcon 
+                                            onClick={() => this.removeImage(file, i)}
+                                            className="close-image"
+                                            fontSize="small"
+                                        />
+                                        <img 
+                                            width={100}
+                                            src={file.id ? file.url : URL.createObjectURL(file)} 
+                                            alt={file.name}
+                                        />
+                                        <p>{file.name}</p>
+                                    </div>
+                                    )
+                                })
+                            : null
+                            }
+                            </div>
+                        </div>
                     </div>
-
-                        {/* <input type="file" name="images" onChange={(e) => this.props.onChange(e)} multiple /> */}
-                    </div>
-                </div>
                     <div className="form-group">
                         <label htmlFor="description">Description: </label>
                         <input type="text" name="description"></input>
@@ -182,7 +186,7 @@ class Cost extends Component {
                                     <td>{f.data.kind}</td>
                                     <td>{f.data.concept}</td>
                                     <td>${f.data.amount}</td>
-                                    <td>{f.data.date.split('-')[0]}</td> 
+                                    <td>{f.data.date}</td> 
                                     <td className="delete">
                                         <button className="delete-btn" onClick={() => {this.deleteCost(f.data.id)}}>
                                             <DeleteOutlineIcon

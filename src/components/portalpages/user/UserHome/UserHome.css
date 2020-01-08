@@ -18,3 +18,30 @@
 .property-image {
     width: 100%;
 }
+
+.active-icon {
+    color: #273443;
+}
+
+.active-icon:hover {
+    cursor:pointer
+}
+
+.payments-nav {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: 35%;
+    padding: 5px;
+    background: none;
+    align-content: center;
+}
+
+.payments-nav a {
+    margin: 0 5px;
+    text-decoration: none;
+    color: #273443;
+}
+
+.entry-count {
+    font-size: 12px;
+}

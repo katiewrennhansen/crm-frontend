@@ -3,6 +3,8 @@ import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
 import ApiService from '../../../services/api-service'
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import ImageUploader from 'react-images-upload'
+import CloseIcon from '@material-ui/icons/Close';
  
 class Maintenance extends Component {
     static contextType = BrokerContext
@@ -11,12 +13,19 @@ class Maintenance extends Component {
         this.state = {
             maintenance: [],
             mainttypes: [],
-            providers: []
+            providers: [],
+            files: []
         }
+        this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
+    }
+
+    fileSelectedHandler = (file) => {
+        this.setState({
+            files: [...file]
+        })
     }
 
     setMaintenance = (maintenance) => {
-
         this.setState({
             maintenance
         })
@@ -33,8 +42,6 @@ class Maintenance extends Component {
             providers
         })
     }
-
-
 
     componentDidMount(){
         const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
@@ -72,9 +79,12 @@ class Maintenance extends Component {
                 plandate: e.target.plan_date.value,
                 deliverdate: e.target.deliver_date.value,
                 provider_id: e.target.provider.value,
-                mainttype_id: e.target.maint_type.value
+                mainttype_id: e.target.maint_type.value,
+                receipts: [...this.state.files]
             }
         }
+
+        console.log(newMaintenance)
 
         const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
         
@@ -92,7 +102,6 @@ class Maintenance extends Component {
 
     deleteMaintenance = (id) => {
         const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
-
         ApiService.deleteDataHalf(endpoint, id)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
@@ -118,6 +127,7 @@ class Maintenance extends Component {
 
 
     render() {
+        const files = this.state.files
         return (
             <div>
                 <div className='header-grid'>
@@ -125,6 +135,46 @@ class Maintenance extends Component {
                     <button className='add' id="m-btn" onClick={this.toggleForm}>+</button>
                 </div>
                 <form className="sp-form hidden" id="maintenance-form" onSubmit={(e) => {this.addMaintenance(e)}}>
+                <div className="form-group">
+                        <label htmlFor="images"><h3>Upload Reciept</h3></label>
+                        <div>
+                            <ImageUploader
+                                withIcon={true}
+                                buttonText='Upload Reciept'
+                                onChange={(e) => this.fileSelectedHandler(e)}
+                                imgExtension={['.pdf']}
+                                accept="application/pdf"
+                                maxFileSize={5242880}
+                                name="image"
+                                className="image-uploader"
+                            />
+                            <div className="images-container">
+                            {(files) 
+                            ? files.map((file, i) => {
+                                return (
+                                    <div 
+                                        key={i}
+                                        className="thumbnail-container"
+                                    >
+                                        <CloseIcon 
+                                            onClick={() => this.props.removeImage(file, i)}
+                                            className="close-image"
+                                            fontSize="small"
+                                        />
+                                        <img 
+                                            width={100}
+                                            src={file.id ? file.url : URL.createObjectURL(file)} 
+                                            alt={file.name}
+                                        />
+                                        <p>{file.name}</p>
+                                    </div>
+                                    )
+                                })
+                            : null
+                            }
+                            </div>
+                        </div>
+                    </div>
                     <div className="form-group">
                         <label htmlFor="maint_type">Maintenance Type: </label>
                         <select name="maint_type">
@@ -203,7 +253,7 @@ class Maintenance extends Component {
                                     <td>{f.data.reqdate}</td>
                                     <td>{(f.data.deliverdate) ? `Completed ${f.data.deliverdate}` : 'Pending' }</td>
                                     <td className="delete">
-                                        <button className="delete-btn" onClick={() => this.deleteMaintenance(f.id)}>
+                                        <button className="delete-btn" onClick={() => this.deleteMaintenance(f.data.id)}>
                                             <DeleteOutlineIcon
                                                 className="active-icon"
                                             />

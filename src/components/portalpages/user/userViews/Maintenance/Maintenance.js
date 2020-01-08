@@ -103,6 +103,7 @@ class Maintenance extends Component {
                         ))}
                     </tbody>
                 </table>
+                <p className="entry-count">Showing {this.state.requests.length} of {this.state.requests.length} entries</p>
             </div>
         )
     }

@@ -11,6 +11,8 @@ import EditProperty from '../userViews/Properties/EditProperty'
 import Maintenance from '../userViews/Maintenance/Maintenance'
 import Visits from '../userViews/Visits/Visits'
 import './UserHome.css'
+import Payments from '../userViews/Payments/Payments'
+import Contracts from '../userViews/Contracts/Contracts'
 
 class UserHome extends Component {
     constructor(props){
@@ -121,6 +123,14 @@ class UserHome extends Component {
                                 exact path='/user/visit-requests' 
                                 component={Visits}
                             />
+                            <Route 
+                                path='/user/payments'
+                                component={Payments}
+                            />
+                            <Route 
+                                path='/user/contracts'
+                                component={Contracts}
+                            />    
                         </Switch>
                     </div>
                 </div>

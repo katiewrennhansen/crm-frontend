@@ -105,7 +105,7 @@ class UserSidebar extends Component {
                             <p className={(this.context.active) ? null : 'collapsed'}>Maintenance</p>
                         </Link>
                         <Link 
-                            to="/user" 
+                            to="/user/payments" 
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Payments')}
                         >
@@ -113,7 +113,7 @@ class UserSidebar extends Component {
                             <p className={(this.context.active) ? null : 'collapsed'}>Payments</p>
                         </Link>
                         <Link 
-                            to="/user" 
+                            to="/user/contracts" 
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Contracts')}
                         >

@@ -13,18 +13,25 @@ class AddProperty extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            error: null
+            error: null,
+            files: []
         }
+        this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
+
     }
 
-    updateFiles = (file) => {
+    fileSelectedHandler = (file) => {
         this.setState({
-            file: [...file]
+            files: [...file]
         })
     }
 
-    fileSelectedHandler = (e) => {
-        this.updateFiles(e.target.files)
+    removeImage = (file, index) => {
+        let newPics = this.state.files
+        newPics.splice(index, 1);
+        this.setState({
+            files: [...newPics]
+        })
     }
 
     submitProperty = (e) => {
@@ -47,7 +54,8 @@ class AddProperty extends Component {
             stepdate: e.target.step_date.value,
             status_id: e.target.status.value,
             assetinsurance: e.target.insurance.value,
-            insurancedued : e.target.insurance_due.value
+            insurancedued : e.target.insurance_due.value,
+            images: [...this.state.files]
         }
         const endpoint = `${config.API_ENDPOINT}/assets`
 
@@ -76,6 +84,9 @@ class AddProperty extends Component {
                         handleSubmit={this.submitProperty}
                         asset={[]}
                         button="Add Property"
+                        onChange={this.fileSelectedHandler}
+                        files={this.state.files}
+                        removeImage={this.removeImage}
                     />
                 </div>
             </div>
