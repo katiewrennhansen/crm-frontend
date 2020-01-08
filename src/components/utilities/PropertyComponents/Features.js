@@ -144,9 +144,7 @@ class Features extends Component {
                                     <td>{f.featuredesc}</td>
                                     <td className="delete">
                                         <button className="delete-btn" onClick={() => {this.deleteFeature(f.id)}}>
-                                            <DeleteOutlineIcon
-                                                className="active-icon"
-                                            />
+                                            <DeleteOutlineIcon />
                                         </button>
                                     </td>
                                 </tr>

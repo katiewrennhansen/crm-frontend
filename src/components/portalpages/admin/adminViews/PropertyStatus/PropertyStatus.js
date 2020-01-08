@@ -170,6 +170,7 @@ class PropertyStatus extends Component {
                             ))}
                         </tbody>
                     </table>
+                    <p className="entry-count">Showing {context.data.length} of {context.data.length} entries</p>
                 </div>
             </>
         )

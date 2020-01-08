@@ -176,6 +176,7 @@ class Process extends Component {
                             )})}
                         </tbody>
                     </table>
+                    <p className="entry-count">Showing {context.process.length} of {context.process.length} entries</p>
                 </div>
             </>
         )

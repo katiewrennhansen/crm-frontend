@@ -231,6 +231,7 @@ class Promotions extends Component {
                             ))}
                         </tbody>
                     </table>
+                    <p className="entry-count">Showing {context.promotions.length} of {context.promotions.length} entries</p>
                 </div>
             </>
         )

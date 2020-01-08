@@ -93,7 +93,7 @@ class UserHome extends Component {
                                 component={AddProperty}
                             />
                             <Route 
-                                exact path='/user/properties/:id' 
+                                path='/user/properties/:id' 
                                 render={(history) => {
                                     const id = history.match.params.id;
                                     return (

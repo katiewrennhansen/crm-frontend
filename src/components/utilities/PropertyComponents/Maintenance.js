@@ -254,9 +254,7 @@ class Maintenance extends Component {
                                     <td>{(f.data.deliverdate) ? `Completed ${f.data.deliverdate}` : 'Pending' }</td>
                                     <td className="delete">
                                         <button className="delete-btn" onClick={() => this.deleteMaintenance(f.data.id)}>
-                                            <DeleteOutlineIcon
-                                                className="active-icon"
-                                            />
+                                            <DeleteOutlineIcon />
                                         </button>
                                     </td>
                                 </tr>

@@ -115,6 +115,7 @@ class Alerts extends Component {
                         ))}
                     </tbody>
                 </table>
+                <p className="entry-count">Showing {this.state.alerts.length} of {this.state.alerts.length} entries</p>
             </div>
         )
     }

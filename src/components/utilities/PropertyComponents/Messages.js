@@ -147,9 +147,7 @@ class Messages extends Component {
                                     <td>{f.data.assetcomment}</td>
                                     <td className="delete">
                                         <button className="delete-btn" onClick={() => {this.deleteMessage(f.data.id)}}>
-                                            <DeleteOutlineIcon
-                                                className="active-icon"
-                                            />
+                                            <DeleteOutlineIcon />
                                         </button>
                                     </td>
                                 </tr>

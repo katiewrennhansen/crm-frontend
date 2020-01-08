@@ -57,6 +57,7 @@ class Network extends Component {
                         ))}
                     </tbody>
                 </table>
+                <p className="entry-count">Showing {this.state.network.length} of {this.state.network.length} entries</p>
                 <p>{(this.state.error) ? this.state.error : null}</p>
             </div>
         )

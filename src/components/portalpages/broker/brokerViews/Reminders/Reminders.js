@@ -65,6 +65,7 @@ class Reminders extends Component {
                         ))}
                     </tbody>
                 </table>
+                <p className="entry-count">Showing {this.state.reminders.length} of {this.state.reminders.length} entries</p>
             </div>
         )
     }

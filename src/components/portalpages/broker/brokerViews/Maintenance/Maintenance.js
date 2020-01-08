@@ -66,6 +66,7 @@ class Maintenance extends Component {
                         ))}
                     </tbody>
                 </table>
+                <p className="entry-count">Showing {this.state.data.length} of {this.state.data.length} entries</p>
             </div>
         )
     }

@@ -135,9 +135,7 @@ class Promotion extends Component {
                                 <td>{p.data.totalcost}</td>
                                 <td>
                                     <Link className="update-btn" to={`/broker/promotions/${p.data.id}`}>
-                                        <PersonAddIcon 
-                                            className="action-icon"
-                                        />
+                                        <PersonAddIcon />
                                     </Link>
                                 </td>
                             </tr>
@@ -145,6 +143,7 @@ class Promotion extends Component {
                         </tbody>
                     </table>
                     <p>{(this.state.error) ? this.state.error : null}</p>
+                    <p className="entry-count">Showing {this.state.data.length} of {this.state.data.length} entries</p>
                 </div>
             </>
         )

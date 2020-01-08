@@ -189,9 +189,7 @@ class Cost extends Component {
                                     <td>{f.data.date}</td> 
                                     <td className="delete">
                                         <button className="delete-btn" onClick={() => {this.deleteCost(f.data.id)}}>
-                                            <DeleteOutlineIcon
-                                                className="active-icon"
-                                            />
+                                            <DeleteOutlineIcon />
                                         </button>
                                     </td>
                                 </tr>

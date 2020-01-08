@@ -127,6 +127,7 @@ class CustomerAccounts extends Component {
                             })}
                         </tbody>
                     </table>
+                    <p className="entry-count">Showing {this.state.customers.length} of {this.state.customers.length} entries</p>
                 </div>
         )
     }

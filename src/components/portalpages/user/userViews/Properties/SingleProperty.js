@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link, Route } from 'react-router-dom'
 import BrokerContext from '../../../../../contexts/BrokerContext'
 import Features from '../../../../utilities/PropertyComponents/Features'
 import Messages from '../../../../utilities/PropertyComponents/Messages'
@@ -25,27 +26,57 @@ class SingleProperty extends Component {
                         type='user'
                     />
                 </ErrorBoundary>
-                <ErrorBoundary>
-                    <Features 
-                        id={this.props.id}
-                    />
-                </ErrorBoundary>
-                <ErrorBoundary>
-                    <Messages 
-                        id={this.props.id}
-                    />
-                </ErrorBoundary>
-                <ErrorBoundary>
-                    <Maintenance
-                        id={this.props.id}
-                    />
-                </ErrorBoundary>
-                <ErrorBoundary>
-                <Cost
-                        id={this.props.id}
-                        setCosts={this.setCosts}
-                    />
-                </ErrorBoundary>
+
+                <nav className="property-nav">
+                    <Link to={`/user/properties/${this.props.id}/`}>
+                        <h4>Features</h4>
+                    </Link>
+                    <Link to={`/user/properties/${this.props.id}/messages`}>
+                        <h4>Messages</h4>
+                    </Link>
+                    <Link to={`/user/properties/${this.props.id}/maintenance`}>
+                        <h4>Maintenance</h4>
+                    </Link>
+                    <Link to={`/user/properties/${this.props.id}/costs`}>
+                        <h4>Costs</h4>
+                    </Link>
+                </nav>
+
+                <Route 
+                    exact path={`/user/properties/${this.props.id}/`}
+                    render={props => (
+                        <ErrorBoundary>
+                            <Features id={this.props.id} />
+                        </ErrorBoundary>
+                    )}
+                />
+
+                <Route 
+                    exact path={`/user/properties/${this.props.id}/messages`}
+                    render={props => (
+                        <ErrorBoundary>
+                            <Messages id={this.props.id} />
+                        </ErrorBoundary>
+                    )}
+                />
+
+                <Route 
+                    exact path={`/user/properties/${this.props.id}/maintenance`}
+                    render={props => (
+                        <ErrorBoundary>
+                            <Maintenance id={this.props.id} />
+                        </ErrorBoundary>
+                    )}
+                />
+
+                <Route 
+                    exact path={`/user/properties/${this.props.id}/costs`}
+                    render={props => (
+                        <ErrorBoundary>
+                            <Cost id={this.props.id} />
+                        </ErrorBoundary>
+                    )}
+                />
             </div>
         )
     }
