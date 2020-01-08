@@ -133,7 +133,7 @@ class BrokerHome extends Component {
                                 }}
                             />
                             <Route 
-                                path='/broker/properties/:id/edit' 
+                                path='/broker/property/:id/edit' 
                                 render={(history) => {
                                     const id = history.match.params.id;
                                     return (

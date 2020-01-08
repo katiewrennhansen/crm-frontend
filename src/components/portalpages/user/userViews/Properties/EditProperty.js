@@ -12,8 +12,11 @@ class EditProperty extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            singleAsset: {}
+            singleAsset: {},
+            files: []
         }
+        this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
+
     }
 
     setSingleAsset = singleAsset => {
@@ -32,8 +35,18 @@ class EditProperty extends Component {
             })
     }
 
-    fileSelectedHandler = (e) => {
-        this.updateFiles(e.target.files)
+    fileSelectedHandler = (file) => {
+        this.setState({
+            files: [...file]
+        })
+    }
+
+    removeImage = (file, index) => {
+        let newPics = this.state.files
+        newPics.splice(index, 1);
+        this.setState({
+            files: [...newPics]
+        })
     }
 
     editProperty = (e) => {
@@ -70,7 +83,7 @@ class EditProperty extends Component {
 
         ApiService.updateDataHalf(endpoint, id, updatedContent)
             .then(() => {
-                this.props.hstory.history.push('/user/properties')
+                this.props.history.history.push('/user/properties')
             })
             .catch(error => {
                 console.log(error)
@@ -93,7 +106,10 @@ class EditProperty extends Component {
                 <PropertyForm 
                     handleSubmit={this.editProperty}
                     asset={asset}
+                    onChange={this.fileSelectedHandler}
                     button="Edit Property"
+                    files={this.state.files}
+                    removeImage={this.removeImage}
                 />
             </div>
         )

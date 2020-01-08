@@ -104,7 +104,7 @@ class UserHome extends Component {
                                 }}
                             />
                             <Route 
-                                exact path='/user/properties/:id/edit' 
+                                exact path='/user/property/:id/edit' 
                                 render={(history) => {
                                     const id = history.match.params.id;
                                     return (

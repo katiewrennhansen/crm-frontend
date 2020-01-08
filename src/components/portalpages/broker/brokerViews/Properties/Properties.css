@@ -1,3 +1,17 @@
+.single-property-container address h2 {
+    font-weight: 200;
+    font-style: normal;
+    margin-bottom: 0;
+    font-size: 40px;
+}
+
+.single-property-container address h3 {
+    font-weight: 300;
+    font-style: normal;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
 td.delete {
     text-align: right;
     padding-right: 50px;
@@ -237,4 +251,11 @@ table {
 
 .close-image:hover {
     cursor: pointer;
+}
+
+
+@media (min-width: 1200px){
+    .broker-properties-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }

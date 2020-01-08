@@ -53,7 +53,7 @@ class PropertyInfo extends Component {
                             className="action-icon" 
                         />
                     </Link>
-                    <Link className="add-icon" to={`/${type}/properties/${this.props.id}/edit`}>
+                    <Link className="add-icon" to={`/${type}/property/${this.props.id}/edit`}>
                         <EditIcon 
                             className="action-icon" 
                         />

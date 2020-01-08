@@ -13,6 +13,7 @@
 
 .property-info p {
     margin: 10px 0;
+    font-size: 14px;
 }
 
 .property-image {
@@ -42,6 +43,7 @@
     color: white;
     height: 40px;
     margin-top: 50px;
+    width: 60%;
 }
 
 .payments-nav {
