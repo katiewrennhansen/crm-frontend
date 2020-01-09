@@ -130,7 +130,7 @@ class Maintenance extends Component {
         const files = this.state.files
         return (
             <div>
-                <div className='header-grid'>
+                <div className='header-grid-component'>
                     <button className='add' id="m-btn" onClick={this.toggleForm}>+</button>
                 </div>
                 <form className="sp-form hidden" id="maintenance-form" onSubmit={(e) => {this.addMaintenance(e)}}>

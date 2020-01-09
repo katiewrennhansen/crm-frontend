@@ -178,6 +178,7 @@ class PropertyForm extends Component {
                             </div>
                         </div>
                     </div>
+
                     <div className="form-content-section">
                         <h3>Address</h3>
                         <div className="form-group">
