@@ -78,10 +78,11 @@ class MaintenanceForm extends Component {
         return (
             <form className="add-property-form" onSubmit={(e) => {this.props.handleSubmit(e)}}>
                 <div className="inner-form-content">
-                <div className="form-content-section">
-                    <h3>Company Information</h3>
+                    <p>Please fill out all forms marked with an <span className="required">*</span></p>
+                    <div className="form-content-section">
+                        <h3>Company Information</h3>
                         <div className="form-group">
-                            <label htmlFor="company">Company Name: </label>
+                            <label htmlFor="company">Company Name<span className="required">*</span></label>
                             <input 
                                 type="text" 
                                 name="company" 
@@ -91,22 +92,22 @@ class MaintenanceForm extends Component {
                         </div>
                         <div className="form-group row">
                             <div>
-                                <label htmlFor="contact">Contact Name: </label>
+                                <label htmlFor="contact">Contact Name<span className="required">*</span></label>
                                 <input type="text" name="contact" defaultValue={info.contact}></input>
                             </div>
                             <div>
-                                <label htmlFor="phone">Phone: </label>
+                                <label htmlFor="phone">Phone<span className="required">*</span></label>
                                 <input type="number" name="phone" defaultValue={info.phone}></input>
                             </div>
                         </div>
                         
                         <div className="form-group row">
                             <div>
-                                <label htmlFor="email">Email: </label>
+                                <label htmlFor="email">Email<span className="required">*</span></label>
                                 <input type="text" name="email" defaultValue={info.email}></input>
                             </div>
                             <div>
-                                <label htmlFor="email_alt">Alternate Email: </label>
+                                <label htmlFor="email_alt">Alternate Email<span className="required">*</span></label>
                                 <input type="text" name="email_alt" defaultValue={info.secondemail}></input>
                             </div>
                         </div>
@@ -115,26 +116,26 @@ class MaintenanceForm extends Component {
                     <div className="form-content-section">
                         <h3>Address</h3>
                         <div className="form-group">
-                            <label htmlFor="street_name">Street Name: </label>
+                            <label htmlFor="street_name">Street Name<span className="required">*</span></label>
                             <input type="text" name="street_name" defaultValue={info.adescription4}></input>
                         </div>
                         <div className="form-group row">
                             <div>
-                                <label htmlFor="city">City: </label>
+                                <label htmlFor="city">City<span className="required">*</span></label>
                                 <input type="text" name="city" defaultValue={info.adescription5}></input>
                             </div>
                             <div>
-                                <label htmlFor="state">State: </label>
+                                <label htmlFor="state">State<span className="required">*</span></label>
                                 <input type="text" name="state" defaultValue={info.adescription2}></input>
                             </div>
                         </div>
                         <div className="form-group row">
                             <div>
-                                <label htmlFor="zip_code">Zip Code: </label>
+                                <label htmlFor="zip_code">Zip Code<span className="required">*</span></label>
                                 <input type="text" name="zip_code" defaultValue={info.adescription3}></input>
                             </div>
                             <div>
-                                <label htmlFor="country">Country: </label>
+                                <label htmlFor="country">Country<span className="required">*</span></label>
                                 <input type="text" name="country" defaultValue={info.adescription1}></input>
                             </div>
                         </div>
@@ -144,7 +145,7 @@ class MaintenanceForm extends Component {
                         <h3>Other Information</h3>
                         <div className="form-group row">
                             <div>
-                                <label htmlFor="mainttype">Maintenance Type: </label>
+                                <label htmlFor="mainttype">Maintenance Type<span className="required">*</span></label>
                                 <select name="mainttype">
                                     <option value="">Select a Type</option>
                                     {this.state.mainttype.map(m => {
@@ -160,7 +161,7 @@ class MaintenanceForm extends Component {
                                 </select>
                             </div>
                             <div>
-                                <label htmlFor="status">Status: </label>
+                                <label htmlFor="status">Status<span className="required">*</span></label>
                                 <select name="status">
                                     <option value="">Select a Status</option>
                                     {this.state.status.map(s => {
@@ -179,7 +180,7 @@ class MaintenanceForm extends Component {
 
                         <div className="form-group row">
                             <div>
-                                <label htmlFor="categories">Category: </label>
+                                <label htmlFor="categories">Category<span className="required">*</span></label>
                                 <select name="categories">
                                     <option value="">Select a Category</option>
                                     {this.state.categories.map(s => {
@@ -195,13 +196,13 @@ class MaintenanceForm extends Component {
                                 </select>
                             </div>
                             <div>
-                                <label htmlFor="provider_id">Provider ID: </label>
+                                <label htmlFor="provider_id">Provider ID<span className="required">*</span></label>
                                 <input type="number" name="provider_id" defaultValue={info.taxid}></input>
                             </div>
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="comment">Comment: </label>
+                            <label htmlFor="comment">Comment<span className="required">*</span></label>
                             <textarea name="comment" rows="5" defaultValue={info.comment}></textarea>
                         </div>
                     </div>

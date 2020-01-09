@@ -4,6 +4,7 @@ import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
 import ImageUploader from 'react-images-upload'
 import CloseIcon from '@material-ui/icons/Close';
+import '../../portalpages/broker/brokerViews/Properties/Properties.css'
 
 
 class PropertyForm extends Component {
@@ -183,7 +184,7 @@ class PropertyForm extends Component {
                         <h3>Address</h3>
                         <div className="form-group">
                             <label htmlFor="street_name">Street Name<span className="required">*</span></label>
-                            <input type="text" name="street_name" defaultValue={asset.adescription4}></input>
+                            <input type="text" name="street_name" defaultValue={asset.adescription4} required></input>
                         </div>
                         <div className="form-group row">
                             <div>

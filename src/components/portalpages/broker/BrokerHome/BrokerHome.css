@@ -1,0 +1,29 @@
+.contact-container {
+    background: white;
+    padding: 30px 50px;
+    border: 1px solid rgb(230, 230, 230);
+    margin-bottom: 60px;
+}
+
+.customer-info {
+    font-size: 14px;
+}
+
+.customer-info h3 {
+    background: #27344317;
+    padding: 12px;
+    margin-top: 50px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.contact-grid p {
+    margin: 8px 0;
+}
+
+.customer-networks {
+    margin-top: 50px;
+}

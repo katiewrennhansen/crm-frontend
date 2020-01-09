@@ -206,11 +206,6 @@ button.add-icon {
     border: none;
 }
 
-/* .add-icon:hover {
-    background: rgba(128, 128, 128, 0.1);
-    border-radius: 5px;
-    transition: background 400ms ease-in-out;
-} */
 
 .close-icon,
 .close-icon a {
@@ -223,9 +218,6 @@ button.add-icon {
 .delete-icon:hover,
 .close-icon:hover {
     cursor: pointer;
-    /* background: rgba(128, 128, 128, 0.1); */
-    /* border-radius: 5px; */
-    /* transition: background 400ms ease-in-out; */
 }
 
 .property-icons {

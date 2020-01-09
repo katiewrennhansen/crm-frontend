@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import config from '../../../../../../config'
 import BrokerContext from '../../../../../../contexts/BrokerContext'
 import ApiService from '../../../../../../services/api-service'
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 class AddNetwork extends Component {
     static contextType = BrokerContext
@@ -56,6 +57,8 @@ class AddNetwork extends Component {
         e.target.email_phone.value = ""
         e.target.specialevent.value = ""
         e.target.eventdate.value = ""
+        const form = document.getElementById('costs-form')
+        form.classList.add('hidden')
     }
 
     deleteNetwork = (id) => {
@@ -85,9 +88,9 @@ class AddNetwork extends Component {
 
     render() {
         return (
-            <div>
+            <div className="customer-networks">
             <div className='header-grid'>
-                    <h2>Network</h2>
+                    <h3>Network</h3>
                     <button className='add' id="c-btn" onClick={this.toggleForm}>+</button>
                 </div>
                 <form className="sp-form hidden" id="costs-form" onSubmit={(e) => {this.addNetwork(e)}}>
@@ -128,7 +131,11 @@ class AddNetwork extends Component {
                                     <td>{n.data.contact}</td>
                                     <td>{n.data.specialevent}</td>
                                     <td>{n.data.eventdate}</td>
-                                    <td><button className="delete-btn" onClick={() => {this.deleteNetwork(n.data.id)}}>Delete</button></td>
+                                    <td>
+                                        <button className="delete-btn" onClick={() => {this.deleteNetwork(n.data.id)}}>
+                                            <DeleteOutlineIcon />
+                                        </button>
+                                    </td>
                                 </tr>
                             )
                         })}

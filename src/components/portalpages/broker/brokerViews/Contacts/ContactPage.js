@@ -5,6 +5,7 @@ import ApiService from '../../../../../services/api-service';
 import AddNetwork from './components/AddNetwork';
 import CloseIcon from '@material-ui/icons/Close';
 import EditIcon from '@material-ui/icons/Edit';
+import CustomerInfo from '../../../../utilities/CustomerComponents/CustomerInfo';
 
 
 class ContactPage extends Component {
@@ -40,7 +41,7 @@ class ContactPage extends Component {
     render(){  
         const data = this.state.customer
         return (
-            <div className='container'>
+            <div className='container contact-container'>
                 <div className='header-grid'>
                     <h2>{data.name}</h2>
                     <div className="property-icons">               
@@ -56,19 +57,9 @@ class ContactPage extends Component {
                         </Link>
                     </div>
                 </div>
-                <div>
-                    <p>{data.email}</p>
-                    <br></br>
-                    <p>{data.adescription4}</p>
-                    <p>{`${data.adescription2}, ${data.adescription3}`}</p>
-                    <p>{data.adescription1}</p>
-                    <br></br>
-                    <p>Category: {data.category}</p>
-                    <p>Status: {data.status}</p>
-                    <p>Tax ID: {data.taxid}</p>
-                    <p>Broker: {data.broker}</p>
-                    <p>Reminder: {data.remainder}</p>
-                </div>
+                <CustomerInfo
+                    data={data}
+                />
                 <AddNetwork 
                     id={this.props.id}
                     name={data.name}
