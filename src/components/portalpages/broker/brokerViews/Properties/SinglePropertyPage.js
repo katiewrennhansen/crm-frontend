@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import { Link, Route } from 'react-router-dom'
 import Features from '../../../../utilities/PropertyComponents/Features'
 import Messages from '../../../../utilities/PropertyComponents/Messages'
 import Maintenance from '../../../../utilities/PropertyComponents/Maintenance'
 import Cost from '../../../../utilities/PropertyComponents/Cost'
 import PropertyInfo from '../../../../utilities/PropertyComponents/PropertyInfo'
+import ErrorBoundary from '../../../../utilities/ErrorBoundary'
 import './Properties.css'
 
 
@@ -11,29 +13,82 @@ class SinglePageProperty extends Component {
     constructor(props){
         super(props)
         this.state = {
-            error: null
+            error: null,
+            active: 'features'
         }
+    }
+
+    setActive = (type) => {
+        this.setState({
+            active: type
+        })
     }
     
     render(){
         return (
             <div className="single-property-container">
-                <PropertyInfo 
-                    id={this.props.id}
-                    type='broker'
+
+                <ErrorBoundary>
+                    <PropertyInfo 
+                        id={this.props.id}
+                        type='broker'
+                    />
+                </ErrorBoundary>
+
+                <nav className="property-nav">
+                    <Link to={`/broker/properties/${this.props.id}/`} onClick={() => this.setActive('features')}>
+                        <h4>Features</h4>
+                        <div className={(this.state.active === 'features' ? 'underline active' : 'underline')}></div>
+                    </Link>
+                    <Link to={`/broker/properties/${this.props.id}/messages`} onClick={() => this.setActive('messages')}>
+                        <h4>Messages</h4>
+                        <div className={(this.state.active === 'messages' ? 'underline active' : 'underline')}></div>
+                    </Link>
+                    <Link to={`/broker/properties/${this.props.id}/maintenance`} onClick={() => this.setActive('maintenance')}>
+                        <h4>Maintenance</h4>
+                        <div className={(this.state.active === 'maintenance' ? 'underline active' : 'underline')}></div>
+                    </Link>
+                    <Link to={`/broker/properties/${this.props.id}/costs`} onClick={() => this.setActive('cost')}>
+                        <h4>Costs</h4>
+                        <div className={(this.state.active === 'cost' ? 'underline active' : 'underline')}></div>
+                    </Link>
+                </nav>
+
+                
+               <Route 
+                    exact path={`/broker/properties/${this.props.id}/`}
+                    render={props => (
+                        <ErrorBoundary>
+                            <Features id={this.props.id} />
+                        </ErrorBoundary>
+                    )}
                 />
-                <Features 
-                    id={this.props.id}
+
+                <Route 
+                    exact path={`/broker/properties/${this.props.id}/messages`}
+                    render={props => (
+                        <ErrorBoundary>
+                            <Messages id={this.props.id} />
+                        </ErrorBoundary>
+                    )}
                 />
-                <Messages 
-                    id={this.props.id}
+
+                <Route 
+                    exact path={`/broker/properties/${this.props.id}/maintenance`}
+                    render={props => (
+                        <ErrorBoundary>
+                            <Maintenance id={this.props.id} />
+                        </ErrorBoundary>
+                    )}
                 />
-                <Maintenance
-                    id={this.props.id}
-                />
-               <Cost
-                    id={this.props.id}
-                    setCosts={this.setCosts}
+
+                <Route 
+                    exact path={`/broker/properties/${this.props.id}/costs`}
+                    render={props => (
+                        <ErrorBoundary>
+                            <Cost id={this.props.id} />
+                        </ErrorBoundary>
+                    )}
                 />
             </div>
         )

@@ -45,7 +45,7 @@ ul {
     color: white;
     border-radius: 5px;
     padding-left: 20px;
-    width: 92%;
+    width: 100%;
 }
 
 .dash-nav-link:hover {
@@ -123,6 +123,6 @@ ul {
     .dash-nav-link.collapsed:hover {
         background: rgba(0, 0, 0, 0.6);
         transition: 10ms linear;
-        width: 42px;
+        width: 100%;
     }
 }

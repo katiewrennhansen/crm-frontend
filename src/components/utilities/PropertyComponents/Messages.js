@@ -101,7 +101,6 @@ class Messages extends Component {
         return (
             <div>
                 <div className='header-grid'>
-                    <h3>Messages</h3>
                     <button className='add' id="me-btn" onClick={this.toggleForm}>+</button>
                 </div>
                 <form className="sp-form hidden" id="message-form" onSubmit={(e) => {this.addMessage(e)}}>

@@ -14,7 +14,14 @@ class SingleProperty extends Component {
         super(props)
         this.state = {
             error: null,
+            active: 'features'
         }
+    }
+
+    setActive = (type) => {
+        this.setState({
+            active: type
+        })
     }
 
     render(){
@@ -28,17 +35,21 @@ class SingleProperty extends Component {
                 </ErrorBoundary>
 
                 <nav className="property-nav">
-                    <Link to={`/user/properties/${this.props.id}/`}>
+                    <Link to={`/user/properties/${this.props.id}/`} onClick={() => this.setActive('features')}>
                         <h4>Features</h4>
+                        <div className={(this.state.active === 'features' ? 'underline active' : 'underline')}></div>
                     </Link>
-                    <Link to={`/user/properties/${this.props.id}/messages`}>
+                    <Link to={`/user/properties/${this.props.id}/messages`} onClick={() => this.setActive('messages')}>
                         <h4>Messages</h4>
+                        <div className={(this.state.active === 'messages' ? 'underline active' : 'underline')}></div>
                     </Link>
-                    <Link to={`/user/properties/${this.props.id}/maintenance`}>
+                    <Link to={`/user/properties/${this.props.id}/maintenance`} onClick={() => this.setActive('maintenance')}>
                         <h4>Maintenance</h4>
+                        <div className={(this.state.active === 'maintenance' ? 'underline active' : 'underline')}></div>
                     </Link>
-                    <Link to={`/user/properties/${this.props.id}/costs`}>
+                    <Link to={`/user/properties/${this.props.id}/costs`} onClick={() => this.setActive('cost')}>
                         <h4>Costs</h4>
+                        <div className={(this.state.active === 'cost' ? 'underline active' : 'underline')}></div>
                     </Link>
                 </nav>
 

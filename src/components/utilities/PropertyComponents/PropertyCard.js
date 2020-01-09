@@ -31,7 +31,7 @@ class PropertyCard extends Component {
                 </div>
                 <p>{a.data.status}</p>
                 <Link 
-                    to={`/user/properties/${a.data.id}`}
+                    to={`/${this.props.type}/properties/${a.data.id}`}
                     className="manage-listing"
                 >
                     Manage Listing

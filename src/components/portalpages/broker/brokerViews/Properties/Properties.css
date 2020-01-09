@@ -26,6 +26,11 @@ td.delete {
     grid-template-columns: repeat(2, 1fr);
 }
 
+.header-grid-componet {
+    display: grid;
+    align-items: baseline;
+}
+
 .header-grid {
     display: grid;
     grid-template-columns: 3fr 1fr;
@@ -185,7 +190,8 @@ td.delete {
 .add-property-form option,
 .edit-property-form select,
 .edit-property-form option,
-textarea {
+textarea,
+select {
     padding: 10px 15px;
     border-radius: 2px;
     border: 1px solid rgba(128, 128, 128, 0.4);

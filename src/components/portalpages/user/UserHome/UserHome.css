@@ -65,11 +65,23 @@
 
 .property-nav a h4 {
     margin: 0;
-    padding: 5px 20px;
+    padding: 2px 20px;
 }
 
-.property-nav a:hover{
-    background: rgba(0, 0, 0, 0.3);
+.underline {
+    background: rgb(23, 136, 87);
+    margin: 0 auto;
+    height: 2px;
+    width: 0;
+    transition: 300ms linear;
+}
+
+.active {
+    width: 75%;
+}
+
+.property-nav a:hover .underline {
+    width: 75%;
     transition: 300ms linear;
 }
 

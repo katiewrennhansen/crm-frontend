@@ -42,7 +42,7 @@ class PropertyInfo extends Component {
         const asset = this.state.singleAsset
         const type = this.props.type
         return (
-            <div className='header-grid'>
+            <div className='info-header-grid'>
                 <address>
                     <h2>{asset.adescription4}</h2>
                     <h3>{asset.adescription5} {asset.adescription2}, {asset.adescription3}</h3>

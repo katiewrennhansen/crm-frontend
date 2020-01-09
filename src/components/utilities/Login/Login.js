@@ -86,7 +86,9 @@ class Login extends Component {
                             />
                         </div>
                         {(this.state.loading)
-                            ? <div className="loading"><CircularProgress /></div>
+                            ? <div className="loading">
+                                <CircularProgress />
+                            </div>
                             : (
                                 <div className='form-group'>
                                     <SubmitButton

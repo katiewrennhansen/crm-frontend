@@ -106,8 +106,7 @@ class Cost extends Component {
         const files = this.state.files
         return (
             <div>
-            <div className='header-grid'>
-                    <h3>Costs</h3>
+            <div className='header-grid-component'>
                     <button id="c-btn" className="add" onClick={this.toggleForm}>+</button>
                 </div>
                 <form className="sp-form hidden" id="costs-form" onSubmit={(e) => {this.addCost(e)}}>

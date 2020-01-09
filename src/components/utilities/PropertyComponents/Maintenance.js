@@ -131,7 +131,6 @@ class Maintenance extends Component {
         return (
             <div>
                 <div className='header-grid'>
-                    <h3>Maintenance</h3>
                     <button className='add' id="m-btn" onClick={this.toggleForm}>+</button>
                 </div>
                 <form className="sp-form hidden" id="maintenance-form" onSubmit={(e) => {this.addMaintenance(e)}}>

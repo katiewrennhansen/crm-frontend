@@ -51,6 +51,7 @@ class Properties extends Component {
                             <div key={a.id}>
                                 <PropertyCard
                                     property={a}
+                                    type='user'
                                 />
                             </div>
                         )

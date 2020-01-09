@@ -16,19 +16,23 @@
     font-family: 'Work Sans', sans-serif;
 }
 
-.login-form,
-.register-form {
-    padding: 0;
-}
-
 .margin-container {
-    width: 310px;
+    width: 415px;
     margin: 0 auto;
     background: white;
     padding: 50px;
     border-radius: 5px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-} 
+}
+
+.login-form,
+.register-form {
+    padding: 0;
+}
+
+.login-form label {
+    margin: 0;
+}
 
 .password-controls p {
     font-size: 13px;
@@ -47,11 +51,6 @@
 div.loading {
     text-align: center;
 }
-
-.progress {
-    color: green;
-}
-
 
 .form-group {
     font-family: 'Open Sans', sans-serif;
