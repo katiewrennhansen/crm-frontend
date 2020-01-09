@@ -39,8 +39,9 @@
 
 .property-nav {
     grid-template-columns: repeat(4, auto);
-    background: #273443;
-    color: white;
+    background: #2734431a;
+    color: #273443;
+    border-radius: 2px;
     height: 40px;
     margin-top: 50px;
     width: 60%;
@@ -63,7 +64,6 @@
 }
 
 .property-nav a h4 {
-    color: white;
     margin: 0;
     padding: 5px 20px;
 }

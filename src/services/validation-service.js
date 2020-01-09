@@ -18,7 +18,6 @@ const ValidationService = {
             return null
         }
     }
-
 }
 
 

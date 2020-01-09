@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .single-property-container address h2 {
     font-weight: 200;
     font-style: normal;
@@ -28,7 +32,6 @@ td.delete {
     align-items: baseline;
 }
 
-.submit,
 .edit,
 .btn {
     border: 1px solid gray;
@@ -56,16 +59,19 @@ td.delete {
     transition: background 400ms ease-in-out;
 }
 
-
 .submit {
     border: 1px solid rgb(23, 136, 87);
-    font-size: 16px;
-    color: rgb(23, 136, 87);
+    font-size: 15px;
+    background: rgb(23, 136, 87);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 2px;
+    transition: 300ms linear;
 }
 
 .submit:hover {
     cursor: pointer;
-    box-shadow: 2px 2px 3px gray;
+    box-shadow: 1px 1px 3px gray;
     transition: 300ms linear;
 }
 
@@ -145,13 +151,30 @@ td.delete {
     padding-bottom: 100px;
 }
 
-
 .add-property-form {
-    padding: 30px 40px;
+    padding: 30px 50px 60px;
     background: white;
     border-radius: 5px;
     margin-bottom: 100px;
     box-shadow: 1px 1px 2px rgb(174, 174, 174);
+}
+
+.inner-form-content {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.inner-form-content h3 {
+    background: #27344317;
+    padding: 15px;
+}
+
+.inner-form-content p {
+    font-size: 12px;
+}
+
+.form-content-section {
+    margin-bottom: 80px;
 }
 
 .dashboard-container input[type="text"],
@@ -164,23 +187,52 @@ td.delete {
 .edit-property-form option,
 textarea {
     padding: 10px 15px;
-    border-radius: 5px;
-    border: 1px solid gray;
-    width: 70%;
+    border-radius: 2px;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+    width: 100%;
     font-size: 14px;
+    box-shadow:inset 0 0 1px 1px rgba(194, 194, 194, 0.288);
+    background-image: linear-gradient(rgba(219, 219, 219, 0.144),rgba(255,255,255,0))
 }
+
+.dashboard-container input[type="text"]:focus,
+.dashboard-container input[type="number"]:focus,
+.dashboard-container input[type="date"]:focus,
+.dashboard-container input[type="email"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    box-shadow: 0 0 2px 2px rgba(194, 194, 194, 0.9     );
+}
+
 
 .add-property-form select,
 .edit-property-form select,
 .single-property-container select {
     margin: 0;
-    width: 40%;
+    width: 100%;
 }
 
 .form-group {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
     margin: 10px 0;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 40px;
+}
+
+.col3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 40px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 13px;
 }
 
 .price-type {
@@ -208,6 +260,7 @@ table {
 
 .action-icon {
     padding: 5px;
+    box-sizing: initial;
 }
 
 .action-icon:hover {
@@ -217,7 +270,7 @@ table {
 }
 
 .image-uploader {
-    width: 75%;
+    width: 100%;
 }
 
 .images-container {
@@ -253,6 +306,10 @@ table {
     cursor: pointer;
 }
 
+.required {
+    color:red;
+    font-size: 11px;
+}
 
 @media (min-width: 1200px){
     .broker-properties-grid {
