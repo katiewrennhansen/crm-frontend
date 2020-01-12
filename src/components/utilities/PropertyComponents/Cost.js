@@ -136,6 +136,7 @@ class Cost extends Component {
                                 maxFileSize={5242880}
                                 className="image-uploader"
                                 name="file"
+                                label="Max file size: 5mb | accepted: pdf"
                             />
                             <div className="images-container">
                             {(files) 

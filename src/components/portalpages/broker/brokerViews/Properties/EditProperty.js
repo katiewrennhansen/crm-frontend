@@ -14,7 +14,8 @@ class EditProperty extends Component {
         super(props)
         this.state = {
             error: null,
-            files: []
+            files: [],
+            contracts: null
         }
         this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
     }
@@ -29,9 +30,15 @@ class EditProperty extends Component {
             })
     }
 
-    fileSelectedHandler = (file) => {
+    fileSelectedHandler = (e) => {
         this.setState({
-            files: [...file]
+            files: e
+        })
+    }
+
+    contractSelectedHandler = (e) => {
+        this.setState({
+            contracts: e
         })
     }
 
@@ -45,17 +52,10 @@ class EditProperty extends Component {
 
     editProperty = (e) => {
         e.preventDefault()
-        // handle file upload
-        const fileList = this.state.files
-        const formData = new FormData();
-        fileList.forEach((file) => {
-            formData.append('images[]', file);
-        });
 
-        console.log(formData)
+        const formData = new FormData();
 
         const id = this.props.id
-        const updatedContent = {}
         const updatedFields = {
             adescription4: e.target.street_name.value,
             adescription5: e.target.city.value,
@@ -74,21 +74,33 @@ class EditProperty extends Component {
             stepdate: e.target.step_date.value,
             status_id: e.target.status.value,
             assetinsurance: e.target.insurance.value,
-            insurancedued : e.target.insurance_due.value,
-            images: formData
+            insurancedued : e.target.insurance_due.value
         }
 
         for (const key in updatedFields) {
             if (updatedFields[key] !== '')
-                updatedContent[key] = updatedFields[key]
+                formData.append(key, updatedFields[key])
         }
 
-        console.log(updatedContent)
+        formData.append('images[]', this.state.files[0])
+        // formData.append('contract', this.state.contract)
+        
 
-        const endpoint = `${config.API_ENDPOINT}/assets`
+        const endpoint = `${config.API_ENDPOINT}/assets/${id}`
 
-        ApiService.updateDataHalf(endpoint, id, updatedContent)
-            .then(() => {
+        fetch(endpoint, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+            })
+            .then(res => {
+                if(!res.ok)
+                    return res.json().then(error => Promise.reject(error))
+                return res.json()
+            })
+            .then(data => {
                 this.props.history.history.push('/broker/properties')
             })
             .catch(error => {
@@ -104,10 +116,7 @@ class EditProperty extends Component {
                 <div className='header-grid'>
                     <h2>Edit {asset.adescription4}</h2>
                     <Link className="close-icon" to={`/broker/properties/${id}`}>
-                        <CloseIcon 
-                            className="action-icon"
-                            fontSize="large"
-                        />
+                        <CloseIcon className="action-icon" />
                     </Link>
                 </div>
                 <PropertyForm 
@@ -117,6 +126,7 @@ class EditProperty extends Component {
                     button="Edit Property"
                     files={this.state.files}
                     removeImage={this.removeImage}
+                    contractOnChange={this.contractSelectedHandler}
                 />
             </div>
         )

@@ -148,8 +148,9 @@ class PropertyForm extends Component {
                                     onChange={(e) => this.props.onChange(e)}
                                     imgExtension={['.jpg', '.gif', '.png', '.gif', '.jpeg']}
                                     maxFileSize={5242880}
-                                    name="image"
+                                    name="file"
                                     className="image-uploader"
+                                    label="Max file size: 5mb | accepted: jpg, gif, png, jpeg"
                                 />
                                 <div className="images-container">
                                 {(files) 
@@ -362,6 +363,51 @@ class PropertyForm extends Component {
                             <input type="date" name="insurance_due"defaultValue={asset.insurancedued}></input>
                         </div>
                     </div>
+
+                    <div className="form-content-section">
+                    <h3>Upload Contracts</h3>
+                        <div className="form-group">
+                            <div>
+                                <ImageUploader
+                                    withIcon={true}
+                                    buttonText='Upload Contract'
+                                    onChange={(e) => this.props.contractOnChange(e)}
+                                    imgExtension={['.pdf']}
+                                    accept="application/pdf"
+                                    maxFileSize={5242880}
+                                    className="image-uploader"
+                                    name="contract"
+                                    label="Max file size: 5mb | accepted: pdf"
+                                />
+                                <div className="images-container">
+                                {(files) 
+                                ? files.map((file, i) => {
+                                    return (
+                                        <div 
+                                            key={i}
+                                            className="thumbnail-container"
+                                        >
+                                            <CloseIcon 
+                                                onClick={() => this.props.removeImage(file, i)}
+                                                className="close-image"
+                                                fontSize="small"
+                                            />
+                                            <img 
+                                                width={100}
+                                                src={file.id ? file.url : URL.createObjectURL(file)} 
+                                                alt="thumbnail"
+                                            />
+                                            <p>{file.name}</p>
+                                        </div>
+                                    )
+                                })
+                                : null
+                                }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     
                     <input type="submit" className="submit" value={this.props.button}></input>
                 </div>

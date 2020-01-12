@@ -19,9 +19,10 @@ class Maintenance extends Component {
         this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
     }
 
-    fileSelectedHandler = (file) => {
+    fileSelectedHandler = (e) => {
+        console.log(e)
         this.setState({
-            files: [...file]
+            files: e
         })
     }
 
@@ -70,25 +71,33 @@ class Maintenance extends Component {
 
     addMaintenance = (e) => {
         e.preventDefault()
-        const newMaintenance= {
-            maintenance: {
-                informto: e.target.description.value,
-                initialcost: e.target.initial_cost.value,
-                finalcost: e.target.final_cost.value,
-                maintcomm: e.target.comment.value,
-                plandate: e.target.plan_date.value,
-                deliverdate: e.target.deliver_date.value,
-                provider_id: e.target.provider.value,
-                mainttype_id: e.target.maint_type.value,
-                receipts: [...this.state.files]
-            }
-        }
 
-        console.log(newMaintenance)
+        let formData = new FormData()
+
+        formData.append('maintenance[informto]', e.target.description.value)
+        formData.append('maintenance[initialcost]', e.target.initial_cost.value)
+        formData.append('maintenance[finalcost]', e.target.final_cost.value)
+        formData.append('maintenance[maintcomm]', e.target.comment.value)
+        formData.append('maintenance[plandate]', e.target.plan_date.value)
+        formData.append('maintenance[deliverdate]', e.target.deliver_date.value)
+        formData.append('maintenance[provider_id]', e.target.provider.value)
+        formData.append('maintenance[mainttype_id]', e.target.maint_type.value)
+        formData.append('maintenance[receipts][]', this.state.files[0])
 
         const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/maintenances`
-        
-        ApiService.postDataHalf(endpoint, newMaintenance)
+
+        fetch(endpoint, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+            })
+            .then(res => {
+                if(!res.ok)
+                    return res.json().then(error => Promise.reject(error))
+                return res.json()
+            })
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
@@ -144,8 +153,9 @@ class Maintenance extends Component {
                                 imgExtension={['.pdf']}
                                 accept="application/pdf"
                                 maxFileSize={5242880}
-                                name="image"
+                                name="file"
                                 className="image-uploader"
+                                label="Max file size: 5mb | accepted: pdf"
                             />
                             <div className="images-container">
                             {(files) 
@@ -230,11 +240,17 @@ class Maintenance extends Component {
                             <th>Provider</th>
                             <th>Request Date</th>
                             <th>Deliver Date</th>
+                            <th>Reciept</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.maintenance.map(f => {
+                            const receiptUrl = f.data.receipt_url[0]
+                            let url;
+                            if(receiptUrl){
+                                url = receiptUrl.receipt
+                            }
                             return (
                                 <tr key={f.data.id}>
                                     <td>{f.data.informto}</td>
@@ -251,6 +267,9 @@ class Maintenance extends Component {
                                     </td>
                                     <td>{f.data.reqdate}</td>
                                     <td>{(f.data.deliverdate) ? `Completed ${f.data.deliverdate}` : 'Pending' }</td>
+                                    <td>
+                                        {(url ? <a href={`${url}`} target="_blank" rel="noopener noreferrer">View</a> : null)}
+                                    </td>
                                     <td className="delete">
                                         <button className="delete-btn" onClick={() => this.deleteMaintenance(f.data.id)}>
                                             <DeleteOutlineIcon />
