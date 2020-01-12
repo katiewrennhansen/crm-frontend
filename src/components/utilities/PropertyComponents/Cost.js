@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
 import ApiService from '../../../services/api-service'
@@ -14,7 +15,6 @@ class Cost extends Component {
             costs: [],
             files: []
         }
-        this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
         this.addCost = this.addCost.bind(this)
     }
 
@@ -24,9 +24,10 @@ class Cost extends Component {
         })
     }
 
-    fileSelectedHandler = (file) => {
+    fileSelectedHandler = (e) => {
+        console.log(e)
         this.setState({
-            files: [...file]
+            files: e
         })
     }
 
@@ -39,20 +40,33 @@ class Cost extends Component {
             .catch(error => {
                 console.log(error)
             })
-    }
+    } 
+
     addCost = (e) => {
         e.preventDefault()
-        const newCost = {
-            cost: {
-                concept: e.target.description.value,
-                date: e.target.year.value,
-                amount: e.target.annualamount.value,
-                kind: e.target.kind.value,
-                reciepts: [...this.state.files]
-            }
-        }
+
+        let formData = new FormData()
+
+        formData.append('cost[concept]', e.target.description.value)
+        formData.append('cost[date]', e.target.year.value)
+        formData.append('cost[amount]', e.target.annualamount.value)
+        formData.append('cost[kind]', e.target.kind.value)
+        formData.append('cost[receipts][]', this.state.files[0])
+
         const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
-        ApiService.postDataHalf(endpoint, newCost)
+
+        fetch(endpoint, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+            })
+            .then(res => {
+                if(!res.ok)
+                    return res.json().then(error => Promise.reject(error))
+                return res.json()
+            })
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
@@ -120,8 +134,8 @@ class Cost extends Component {
                                 imgExtension={['.pdf']}
                                 accept="application/pdf"
                                 maxFileSize={5242880}
-                                name="image"
                                 className="image-uploader"
+                                name="file"
                             />
                             <div className="images-container">
                             {(files) 
@@ -175,17 +189,26 @@ class Cost extends Component {
                             <th>Name</th>
                             <th>Amount</th>
                             <th>Year</th>
+                            <th>Reciept</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.costs.map(f => {
+                            const receiptUrl = f.data.receipt_url[0]
+                            let url;
+                            if(receiptUrl){
+                                url = receiptUrl.receipt
+                            }
                             return (
                                 <tr key={f.data.id}>
                                     <td>{f.data.kind}</td>
                                     <td>{f.data.concept}</td>
                                     <td>${f.data.amount}</td>
                                     <td>{f.data.date}</td> 
+                                    <td>
+                                        {(url ? <a href={`${url}`} target="_blank" rel="noopener noreferrer">View</a> : null)}
+                                    </td>
                                     <td className="delete">
                                         <button className="delete-btn" onClick={() => {this.deleteCost(f.data.id)}}>
                                             <DeleteOutlineIcon />

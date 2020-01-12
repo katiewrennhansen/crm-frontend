@@ -45,11 +45,14 @@ class EditProperty extends Component {
 
     editProperty = (e) => {
         e.preventDefault()
-        //handle file upload
-        // const formData = new FormData();
-        // this.state.files.forEach((file) => {
-        //     formData.append('files[]', file)
-        // })
+        // handle file upload
+        const fileList = this.state.files
+        const formData = new FormData();
+        fileList.forEach((file) => {
+            formData.append('images[]', file);
+        });
+
+        console.log(formData)
 
         const id = this.props.id
         const updatedContent = {}
@@ -72,13 +75,15 @@ class EditProperty extends Component {
             status_id: e.target.status.value,
             assetinsurance: e.target.insurance.value,
             insurancedued : e.target.insurance_due.value,
-            images: [...this.state.files] // or use formData?
+            images: formData
         }
 
         for (const key in updatedFields) {
             if (updatedFields[key] !== '')
                 updatedContent[key] = updatedFields[key]
         }
+
+        console.log(updatedContent)
 
         const endpoint = `${config.API_ENDPOINT}/assets`
 
