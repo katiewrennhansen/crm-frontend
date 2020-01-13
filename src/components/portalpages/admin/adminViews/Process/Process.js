@@ -150,8 +150,8 @@ class Process extends Component {
                             <tr>
                                 <th>Name</th>
                                 <th>Steps</th>
-                                <th></th>
-                                <th></th>
+                                <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>

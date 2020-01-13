@@ -144,8 +144,8 @@ class Categories extends Component {
                             <tr>
                                 <th>Name</th>
                                 <th>Date Created</th>
-                                <th></th>
-                                <th></th>
+                                <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>

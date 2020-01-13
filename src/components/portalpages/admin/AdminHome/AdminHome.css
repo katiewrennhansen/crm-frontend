@@ -198,7 +198,6 @@ button.add-icon {
     justify-self: flex-end;
     margin: 20px 0px 15px 20px;
     color: #273443;
-    padding: 5px;
 }
 
 button.add-icon {
@@ -223,7 +222,6 @@ button.add-icon {
 .property-icons {
     display: grid;
 }
-
 
 /* FORMS */
 .edit-form,

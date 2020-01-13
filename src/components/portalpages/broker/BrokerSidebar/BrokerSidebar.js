@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import config from '../../../../config'
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
@@ -11,7 +12,7 @@ import BrokerContext from '../../../../contexts/BrokerContext'
 import BuildIcon from '@material-ui/icons/Build';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import ApiService from '../../../../services/api-service'
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+// import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 class BrokerSidebar extends Component {
     static contextType = BrokerContext
@@ -66,7 +67,7 @@ class BrokerSidebar extends Component {
 
     componentDidMount(){
         const id = sessionStorage.getItem('id')
-        const endpoint = `http://crmmia-api.herokuapp.com/api/users/${id}`
+        const endpoint = `${config.API_ENDPOINT}/users/${id}`
         ApiService.getDataHalf(endpoint)
             .then(data => {
                 this.setFirst(data.firstname)

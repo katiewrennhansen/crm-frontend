@@ -40,7 +40,6 @@ class PropertyInfo extends Component {
     render(){
         const asset = this.state.singleAsset
         const url = this.state.singleAsset.images_url
-        console.log(url)
         const type = this.props.type
         return (
             <div className='header-grid'>

@@ -94,7 +94,7 @@ class AdminComments extends Component {
                         <div className='form-group'>
                             <label htmlFor='comment_type'>
                                 <h3>Update: {context.name}</h3>
-                                </label>
+                            </label>
                             <input
                                 id='comment_type'
                                 name='comment_type'
@@ -115,8 +115,10 @@ class AdminComments extends Component {
                         className='add-content'
                         onSubmit={(e) => this.addComment(e)}
                     >
-                        <label htmlFor='comment_type'><h3>Add a Comment Type</h3></label>
                         <div className='form-group'>
+                            <label htmlFor='comment_type'>
+                                <h3>Add a Comment Type</h3>
+                            </label>
                             <input
                                 id='comment_type'
                                 name='comment_type'
@@ -124,7 +126,7 @@ class AdminComments extends Component {
                                 placeholder="New Comment"
                             />
                         </div>
-                        <input type="submit" className="submit-full submit-modal" value="Update" />
+                        <input type="submit" className="submit submit-modal" value="Update" />
                     </form>
                 </Modal>
                 
@@ -140,8 +142,8 @@ class AdminComments extends Component {
                             <tr>
                                 <th>Name</th>
                                 <th>Date Created</th>
-                                <th></th>
-                                <th></th>
+                                <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>

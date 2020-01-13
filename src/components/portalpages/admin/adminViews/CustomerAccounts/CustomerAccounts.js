@@ -4,6 +4,8 @@ import config from '../../../../../config'
 import AdminContext from '../../../../../contexts/AdminContext'
 import ApiService from '../../../../../services/api-service'
 import AddIcon from '@material-ui/icons/Add';
+import PageviewIcon from '@material-ui/icons/Pageview';
+import NotInterestedIcon from '@material-ui/icons/NotInterested';
 
 const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
 const brokerEndpoint = config.BROKER_ENDPOINT
@@ -88,7 +90,7 @@ class CustomerAccounts extends Component {
                     <Link className="add-icon" to='/dashboard/add-customer'>
                         <AddIcon 
                             aria-label="add comment type" 
-                        /> 
+                        />
                     </Link>
                     <table className='data-table'>
                         <thead>
@@ -97,8 +99,8 @@ class CustomerAccounts extends Component {
                                 <th>Email</th>
                                 <th>Category</th>
                                 <th>Status</th>
-                                <th></th>
-                                <th></th>
+                                <th>View</th>
+                                <th>Deactivate</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,7 +113,9 @@ class CustomerAccounts extends Component {
                                         <td>{c.data.category}</td>
                                         <td>{c.data.status}</td>
                                         <td >
-                                            <Link className="view" to={`/dashboard/customer-accounts/${id}`}>View</Link>
+                                            <Link className="view" to={`/dashboard/customer-accounts/${id}`}>
+                                                <PageviewIcon />
+                                            </Link>
                                         </td>
                                         <td>
                                             <button 
@@ -119,7 +123,7 @@ class CustomerAccounts extends Component {
                                                 id={`delete${id}`} 
                                                 onClick={() => this.deactivateCustomer(id)}
                                             >
-                                                Deactivate
+                                                <NotInterestedIcon />
                                             </button>
                                         </td>
                                     </tr>

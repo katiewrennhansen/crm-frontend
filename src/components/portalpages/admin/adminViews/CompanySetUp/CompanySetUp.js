@@ -70,9 +70,7 @@ class CompanySetUp extends Component {
                         className="edit-btn edit-company"
                         to='/dashboard/edit-account-settings'
                     >
-                        <EditIcon 
-                            className="add-icon" 
-                        />
+                        <EditIcon className="add-icon" />
                     </Link>
                 </div>
             </div>

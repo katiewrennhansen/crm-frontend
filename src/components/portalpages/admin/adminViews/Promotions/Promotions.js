@@ -140,6 +140,7 @@ class Promotions extends Component {
                                     id='total_cost'
                                     name='total_cost'
                                     type='number'
+                                    defaultValue={context.cost}
                                 />
                             </div>
                             <input type="submit" className="submit-full submit-modal" value="Update" />
@@ -206,8 +207,8 @@ class Promotions extends Component {
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Total Cost</th>
-                                <th></th>
-                                <th></th>
+                                <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -32,7 +32,7 @@ class AddProvider extends Component {
         return (
             <div className='add-property'>
                 <div className='header-grid'>
-                    <h2>Add New Provider</h2>
+                    <h2>Add New Reminder</h2>
                     <Link className="close-icon" to='/broker/reminders'>
                         <CloseIcon 
                             className="action-icon" 
