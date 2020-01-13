@@ -87,14 +87,12 @@ td.delete {
 
 .asset-card {
     background: white;
-    padding: 20px;
-    border-radius: 5px;
+    border-radius: 3px;
     box-shadow: 1px 1px 3px rgb(181, 181, 181);
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
     margin: 10px;
     position: relative;
     z-index: 0;
+    font-size: 14px;
 }
 
 .image-container {
@@ -104,6 +102,8 @@ td.delete {
 
 .property-photo {
     width: 100%;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 
 .price {
@@ -118,7 +118,16 @@ td.delete {
 }
 
 .top-content {
-    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.top-content h4 {
+    margin: 0 0 10px;
+}
+
+.bottom-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .asset-card div {
@@ -137,6 +146,11 @@ td.delete {
     justify-self: flex-end;
 }
 
+.property-thumbnail-image-container {
+    width: 100%;
+    height: 80px;
+}
+
 .manage-listing {
     border: 1px solid gray;
     border-radius: 5px;
@@ -148,6 +162,7 @@ td.delete {
     box-shadow: 2px 2px 3px rgb(199, 199, 199);
     transition: 400ms ease-in-out;
 }
+
 .promotions-table td:last-child {
     text-align: center;
 }
@@ -210,7 +225,6 @@ select:focus {
     outline: none;
     box-shadow: 0 0 2px 2px rgba(194, 194, 194, 0.9     );
 }
-
 
 .add-property-form select,
 .edit-property-form select,
@@ -320,5 +334,9 @@ table {
 @media (min-width: 1200px){
     .broker-properties-grid {
         grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+    }
+    .manage-listing {
+        padding: 8px 12px;
     }
 }

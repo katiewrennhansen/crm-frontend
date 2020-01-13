@@ -380,7 +380,7 @@ class PropertyForm extends Component {
                                     label="Max file size: 5mb | accepted: pdf"
                                 />
                                 <div className="images-container">
-                                {(files) 
+                                {(this.state.contracts) 
                                 ? files.map((file, i) => {
                                     return (
                                         <div 

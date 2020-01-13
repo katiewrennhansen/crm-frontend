@@ -4,7 +4,6 @@ import config from '../../../config'
 import ApiService from '../../../services/api-service'
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
-import property1 from '../../../images/property1.jpg'
 
 class PropertyInfo extends Component {
     constructor(props){
@@ -40,6 +39,8 @@ class PropertyInfo extends Component {
 
     render(){
         const asset = this.state.singleAsset
+        const url = this.state.singleAsset.images_url
+        console.log(url)
         const type = this.props.type
         return (
             <div className='header-grid'>
@@ -60,7 +61,10 @@ class PropertyInfo extends Component {
                     </Link>
                 </div>  
                 <div className='broker-properties'>
-                    <img className="property-image" src={property1} alt="property"/>
+                    <img className="property-image" src={(url) ? url[0].image : null} alt="property"/>
+                    {/* <div className="property-thumbnail-image-container" >
+                        <img className="property-thumbnail-image" src={(url) ? url[1].image : null } alt="property"/>
+                    </div> */}
                     <div>
                         <h3>Property Information</h3>
                         <div className="property-info">

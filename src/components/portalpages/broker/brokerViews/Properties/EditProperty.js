@@ -15,7 +15,7 @@ class EditProperty extends Component {
         this.state = {
             error: null,
             files: [],
-            contracts: null
+            contracts: []
         }
         this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
     }
@@ -89,7 +89,7 @@ class EditProperty extends Component {
         const endpoint = `${config.API_ENDPOINT}/assets/${id}`
 
         fetch(endpoint, {
-            method: 'POST',
+            method: 'PATCH',
             body: formData,
             headers: {
                 'Authorization': `Bearer ${config.API_KEY}`
@@ -98,7 +98,7 @@ class EditProperty extends Component {
             .then(res => {
                 if(!res.ok)
                     return res.json().then(error => Promise.reject(error))
-                return res.json()
+                return res
             })
             .then(data => {
                 this.props.history.history.push('/broker/properties')
@@ -125,6 +125,7 @@ class EditProperty extends Component {
                     onChange={this.fileSelectedHandler}
                     button="Edit Property"
                     files={this.state.files}
+                    contracts={this.state.contracts}
                     removeImage={this.removeImage}
                     contractOnChange={this.contractSelectedHandler}
                 />

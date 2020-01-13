@@ -5,6 +5,8 @@
     background: white;
     padding: 10px;
     width: 100%;
+    font-size: 14px;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.2);
 }
 
 .dash-header h1 {
@@ -23,14 +25,14 @@
     grid-column: 6 / 7;
     align-self: center;
     border: none;
-    font-size: 17px;
     color: rgb(23, 136, 87);
     display: flex;
     margin-left: 20px;
+    font-size: 15px;
 }
 
 button.admin-logout p {
-    margin: 2px 0 0 5px;
+    margin: 3px 0 0 5px;
 }
 
 .admin-logout:hover {
