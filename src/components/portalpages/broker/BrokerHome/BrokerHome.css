@@ -27,3 +27,15 @@
 .customer-networks {
     margin-top: 50px;
 }
+
+.alert-link {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    align-items: center;
+}
+
+.alert-link span {
+    color: red;
+    font-size: 25px;
+    padding-bottom: 15px;
+}

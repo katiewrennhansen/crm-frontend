@@ -120,7 +120,11 @@ class PropertyInfo extends Component {
                             <p>{asset.assetinsurance}</p>
                         </div>
                     </div>
-                </div> 
+                </div>
+                {(asset.contract_url)
+                ? <a className="contract-link submit" href={asset.contract_url} target="_blank" rel="noopener noreferrer">View Contract</a>
+                : null
+                }
             </div>
         )
     }

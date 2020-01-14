@@ -135,6 +135,7 @@ class PropertyForm extends Component {
     render(){
         const asset = this.props.asset
         const files = this.props.files
+        const contract = this.props.contract
         return (
             <form className="add-property-form" onSubmit={(e) => {this.props.handleSubmit(e)}}>
                 <div className="inner-form-content">
@@ -381,8 +382,8 @@ class PropertyForm extends Component {
                                     label="Max file size: 5mb | accepted: pdf"
                                 />
                                 <div className="images-container">
-                                {(this.state.contracts) 
-                                ? files.map((file, i) => {
+                                {(contract) 
+                                ? contract.map((file, i) => {
                                     return (
                                         <div 
                                             key={i}
@@ -396,7 +397,7 @@ class PropertyForm extends Component {
                                             <img 
                                                 width={100}
                                                 src={file.id ? file.url : URL.createObjectURL(file)} 
-                                                alt="thumbnail"
+                                                alt="contract"
                                             />
                                             <p>{file.name}</p>
                                         </div>

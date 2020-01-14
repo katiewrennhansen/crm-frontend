@@ -38,6 +38,12 @@ td.delete {
     align-items: baseline;
 }
 
+.contract-link {
+    text-decoration: none;
+    align-self: flex-start;
+    justify-self: center;
+}
+
 .edit,
 .btn {
     border: 1px solid gray;

@@ -12,7 +12,6 @@ import BrokerContext from '../../../../contexts/BrokerContext'
 import BuildIcon from '@material-ui/icons/Build';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import ApiService from '../../../../services/api-service'
-// import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 class BrokerSidebar extends Component {
     static contextType = BrokerContext
@@ -24,7 +23,7 @@ class BrokerSidebar extends Component {
             title: '',
             firstname: '',
             lastname: '',
-            unread: false
+            alert: false
         };
     }
 
@@ -46,18 +45,6 @@ class BrokerSidebar extends Component {
         })
     }
 
-    // setUnread = () => {
-    //     this.setState({
-    //         unread: true
-    //     })
-    // }
-
-    // setRead = () => {
-    //     this.setState({
-    //         unread: false
-    //     })
-    // }
-
     highlight = (str) => {
         const name = document.getElementsByClassName('name')
         if(name.innerText === str){
@@ -67,8 +54,7 @@ class BrokerSidebar extends Component {
 
     componentDidMount(){
         const id = sessionStorage.getItem('id')
-        const endpoint = `${config.API_ENDPOINT}/users/${id}`
-        ApiService.getDataHalf(endpoint)
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/users/${id}`)
             .then(data => {
                 this.setFirst(data.firstname)
                 this.setLast(data.lastname)
@@ -76,6 +62,15 @@ class BrokerSidebar extends Component {
             .catch(error => {
                 console.log(error)
             })
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/assets/0/assetcomments`)
+        .then(data => {
+            if(data.assetcomments[0]){
+                this.setState({ alert: true })
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
 
     render(){
@@ -172,7 +167,10 @@ class BrokerSidebar extends Component {
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
                             onClick={() => this.props.handleTitle('Alerts')}                        
                         >
-                            <NotificationsActiveIcon />
+                            <div className="alert-link">
+                                <NotificationsActiveIcon />
+                                {(alert) ? <span>&#x2022;</span> : null}
+                            </div>
                             <p className={(this.context.active) ? null : 'collapsed'}>Alerts</p>
                         </Link>
                     </li>
