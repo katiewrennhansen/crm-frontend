@@ -4,6 +4,7 @@ import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
 import ImageUploader from 'react-images-upload'
 import CloseIcon from '@material-ui/icons/Close';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import '../../portalpages/broker/brokerViews/Properties/Properties.css'
 
 
@@ -408,8 +409,14 @@ class PropertyForm extends Component {
                         </div>
                     </div>
 
-                    
-                    <input type="submit" className="submit" value={this.props.button}></input>
+                    {(this.props.loading)
+                        ? <div className="loading-property">
+                            <CircularProgress />
+                        </div>
+                        : (
+                        <input type="submit" className="submit" value={this.props.button}></input>
+                        )
+                    }
                 </div>
             </form>
         )

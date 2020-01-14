@@ -24,6 +24,7 @@ td.delete {
 .broker-properties-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
 }
 
 .header-grid-component {
@@ -149,6 +150,18 @@ td.delete {
 .property-thumbnail-image-container {
     width: 100%;
     height: 80px;
+}
+
+.property-thumbnail-image {
+    height: 100%;
+    margin-right: 4px;
+    transition: 200ms linear;
+}
+
+.property-thumbnail-image:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: 200ms linear;
 }
 
 .manage-listing {
@@ -331,10 +344,10 @@ table {
     font-size: 11px;
 }
 
+
 @media (min-width: 1200px){
     .broker-properties-grid {
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 20px;
     }
     .manage-listing {
         padding: 8px 12px;

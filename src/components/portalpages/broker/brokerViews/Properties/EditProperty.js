@@ -15,7 +15,8 @@ class EditProperty extends Component {
         this.state = {
             error: null,
             files: [],
-            contracts: []
+            contracts: [],
+            loading: false
         }
         this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
     }
@@ -52,10 +53,11 @@ class EditProperty extends Component {
 
     editProperty = (e) => {
         e.preventDefault()
+        this.setState({ loading: true })
 
         const formData = new FormData();
-
         const id = this.props.id
+
         const updatedFields = {
             adescription4: e.target.street_name.value,
             adescription5: e.target.city.value,
@@ -81,14 +83,10 @@ class EditProperty extends Component {
             if (updatedFields[key] !== '')
                 formData.append(key, updatedFields[key])
         }
-
-        formData.append('images[]', this.state.files[0])
+        this.state.files.map(file => formData.append('images[]', file))
         // formData.append('contract', this.state.contract)
         
-
-        const endpoint = `${config.API_ENDPOINT}/assets/${id}`
-
-        fetch(endpoint, {
+        fetch(`${config.API_ENDPOINT}/assets/${id}`, {
             method: 'PATCH',
             body: formData,
             headers: {
@@ -101,10 +99,11 @@ class EditProperty extends Component {
                 return res
             })
             .then(data => {
-                this.props.history.history.push('/broker/properties')
+                this.props.history.push('/broker/properties')
             })
             .catch(error => {
                 console.log(error)
+                this.setState({ loading: false })
             })
     }
 
@@ -128,6 +127,7 @@ class EditProperty extends Component {
                     contracts={this.state.contracts}
                     removeImage={this.removeImage}
                     contractOnChange={this.contractSelectedHandler}
+                    loading={this.state.loading}
                 />
             </div>
         )

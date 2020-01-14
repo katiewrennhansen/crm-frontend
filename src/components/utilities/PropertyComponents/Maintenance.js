@@ -5,6 +5,7 @@ import ApiService from '../../../services/api-service'
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ImageUploader from 'react-images-upload'
 import CloseIcon from '@material-ui/icons/Close';
+import CircularProgress from '@material-ui/core/CircularProgress';
  
 class Maintenance extends Component {
     static contextType = BrokerContext
@@ -14,7 +15,8 @@ class Maintenance extends Component {
             maintenance: [],
             mainttypes: [],
             providers: [],
-            files: []
+            files: [],
+            loading: false
         }
         this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
     }
@@ -72,6 +74,8 @@ class Maintenance extends Component {
     addMaintenance = (e) => {
         e.preventDefault()
 
+        this.setState({ loading: true })
+
         let formData = new FormData()
 
         formData.append('maintenance[informto]', e.target.description.value)
@@ -102,10 +106,12 @@ class Maintenance extends Component {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
                         this.setMaintenance(data.maintenances)
+                        this.toggleForm()
                     })
             })
             .catch(error => {
                 console.log(error)
+                this.setState({ loading: false })
             })
     }
 
@@ -230,7 +236,14 @@ class Maintenance extends Component {
                         <label htmlFor="deliver_date">Deliver Date: </label>
                         <input type="date" name="deliver_date"></input>
                     </div>
-                    <input type="submit" className="submit" value="Add Maintenance"></input>
+                    {(this.state.loading)
+                        ? <div className="loading-property">
+                            <CircularProgress />
+                        </div>
+                        : (
+                        <input type="submit" className="submit" value="Add Maintenance"></input>
+                        )
+                    }                
                 </form>
                 <table>
                     <thead>

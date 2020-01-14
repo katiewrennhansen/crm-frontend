@@ -3,6 +3,7 @@ import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
 import ApiService from '../../../services/api-service'
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Features extends Component {
     static contextType = BrokerContext
@@ -10,7 +11,8 @@ class Features extends Component {
         super(props)
         this.state = {
             features: [],
-            featuretypes: []
+            featuretypes: [],
+            loading: false
         }
     }
 
@@ -48,6 +50,8 @@ class Features extends Component {
     addFeature = (e) => {
         e.preventDefault()
         
+        this.setState({ loading: true })
+        
         const newFeature = {
             featuredesc: e.target.description.value,
             featuretype_id: e.target.feature_type.value
@@ -60,10 +64,14 @@ class Features extends Component {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
                         this.setFeatures(data)
+                        this.toggleForm()
                     })
             })
             .catch(error => {
                 console.log(error)
+                this.setState({
+                    loading: false
+                })
             })
 
         e.target.description.value = ""
@@ -117,7 +125,14 @@ class Features extends Component {
                         <label htmlFor="description">Description: </label>
                         <input type="text" name="description"></input>
                     </div>
-                    <input type="submit" className="submit" value="Add Feature"></input>
+                    {(this.state.loading)
+                            ? <div className="loading-property">
+                                <CircularProgress />
+                            </div>
+                            : (
+                            <input type="submit" className="submit" value="Add Feature"></input>
+                            )
+                        }
                 </form>
                 <table>
                     <thead>

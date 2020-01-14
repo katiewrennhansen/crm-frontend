@@ -3,6 +3,8 @@ import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
 import ApiService from '../../../services/api-service'
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 class Messages extends Component {
     static contextType = BrokerContext
@@ -10,7 +12,8 @@ class Messages extends Component {
         super(props)
         this.state = {
             messages: [],
-            messagetypes: []
+            messagetypes: [],
+            loading: false
         }
     }
 
@@ -47,6 +50,9 @@ class Messages extends Component {
 
     addMessage = (e) => {
         e.preventDefault()
+
+        this.setState({ loading: true })
+
         const newMessage = {
             assetcomment: {
                 assetcomment: e.target.description.value,
@@ -61,10 +67,12 @@ class Messages extends Component {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
                         this.setMessages(data.assetcomments)
+                        this.toggleForm()
                     })
             })
             .catch(error => {
                 console.log(error)
+                this.setState({ loading: false })
             })
     
         e.target.description.value = ""
@@ -119,8 +127,14 @@ class Messages extends Component {
                         <label htmlFor="description">Description: </label>
                         <input type="text" name="description"></input>
                     </div>
-                    <input type="submit" className="submit" value="Add Message"></input>
-                </form>
+                    {(this.state.loading)
+                        ? <div className="loading-property">
+                            <CircularProgress />
+                        </div>
+                        : (
+                        <input type="submit" className="submit" value="Add Message"></input>
+                        )
+                    }                </form>
                 <table>
                     <thead>
                         <tr>

@@ -13,7 +13,8 @@ class EditProperty extends Component {
         super(props)
         this.state = {
             singleAsset: {},
-            files: []
+            files: [],
+            loading: false
         }
         this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
 
@@ -51,8 +52,8 @@ class EditProperty extends Component {
 
     editProperty = (e) => {
         e.preventDefault()
-        const id = this.props.id
-        const updatedContent = {}
+        this.setState({ loading: true })
+        const formData = new FormData();
         const updatedFields = {
             adescription4: e.target.street_name.value,
             adescription5: e.target.city.value,
@@ -63,9 +64,6 @@ class EditProperty extends Component {
             assetprice: e.target.price.value,
             futureprice: e.target.future_price.value,
             assettype_id: e.target.asset_type.value,
-            customer_id: e.target.owner.value,
-            tcustomer_id: e.target.tenant.value,
-            broker_id: e.target.brokers.value,
             processt_id: e.target.process.value,
             step_id: e.target.steps.value,
             stepdate: e.target.step_date.value,
@@ -75,18 +73,30 @@ class EditProperty extends Component {
         }
 
         for (const key in updatedFields) {
-            if (updatedFields[key] !== '')
-                updatedContent[key] = updatedFields[key]
+            if (updatedFields[key] !== '' || undefined)
+                formData.append(key, updatedFields[key])
         }
 
-        const endpoint = `${config.API_ENDPOINT}/assets`
+        this.state.files.map(file => formData.append('images[]', file))
 
-        ApiService.updateDataHalf(endpoint, id, updatedContent)
-            .then(() => {
+        fetch(`${config.API_ENDPOINT}/assets/${this.props.id}`, {
+            method: 'PATCH',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+            })
+            .then(res => {
+                if(!res.ok)
+                    return res.json().then(error => Promise.reject(error))
+                return res
+            })
+            .then(data => {
                 this.props.history.history.push('/user/properties')
             })
             .catch(error => {
                 console.log(error)
+                this.setState({ loading: false })
             })
     }
 
@@ -110,6 +120,7 @@ class EditProperty extends Component {
                     button="Edit Property"
                     files={this.state.files}
                     removeImage={this.removeImage}
+                    loading={this.state.loading}
                 />
             </div>
         )

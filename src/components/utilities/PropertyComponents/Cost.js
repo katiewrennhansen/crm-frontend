@@ -5,6 +5,7 @@ import ApiService from '../../../services/api-service'
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ImageUploader from 'react-images-upload'
 import CloseIcon from '@material-ui/icons/Close';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Cost extends Component {
     static contextType = BrokerContext
@@ -12,7 +13,8 @@ class Cost extends Component {
         super(props)
         this.state = {
             costs: [],
-            files: []
+            files: [],
+            loading: false
         }
         this.addCost = this.addCost.bind(this)
     }
@@ -43,6 +45,7 @@ class Cost extends Component {
 
     addCost = (e) => {
         e.preventDefault()
+        this.setState({ loading: true })
 
         let formData = new FormData()
 
@@ -70,12 +73,15 @@ class Cost extends Component {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
                         this.setCosts(data.costs)
+                        this.toggleForm()
                     })
             })
             .catch(error => {
-                console.log(error)
+                this.setState({ 
+                    error: error.error,
+                    loading: false 
+                })
             })
-
         e.target.description.value = ""
         e.target.year.value = ""
         e.target.annualamount.value = ""
@@ -180,7 +186,14 @@ class Cost extends Component {
                         <label htmlFor="kind">Kind: </label>
                         <input type="text" name="kind"></input>
                     </div>
-                    <input type="submit" className="submit" value="Add Cost"></input>
+                    {(this.state.loading)
+                        ? <div className="loading-property">
+                            <CircularProgress />
+                        </div>
+                        : (
+                        <input type="submit" className="submit" value="Add Cost"></input>
+                        )
+                    }
                 </form>
                 <table>
                     <thead>

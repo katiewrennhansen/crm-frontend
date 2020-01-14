@@ -10,7 +10,8 @@ class PropertyInfo extends Component {
         super(props)
         this.state = {
             error: null,
-            singleAsset: {}
+            singleAsset: {},
+            imgToDisplay: ''
         }
     }
 
@@ -31,10 +32,17 @@ class PropertyInfo extends Component {
         ApiService.getDataHalf(endpoint)
             .then(data => {
                 this.setSingleAsset(data.data)
+                this.setImgToDisplay(data.data.images_url[0].image)
             })
             .catch(error => {
                 console.log(error)
             })
+    }
+
+    setImgToDisplay = url => {
+        this.setState({
+            imgToDisplay: url
+        })
     }
 
     render(){
@@ -60,10 +68,19 @@ class PropertyInfo extends Component {
                     </Link>
                 </div>  
                 <div className='broker-properties'>
-                    <img className="property-image" src={(url) ? url[0].image : null} alt="property"/>
-                    {/* <div className="property-thumbnail-image-container" >
-                        <img className="property-thumbnail-image" src={(url) ? url[1].image : null } alt="property"/>
-                    </div> */}
+                    <img className="property-image" src={this.state.imgToDisplay} alt="property"/>
+                    <div className="property-thumbnail-image-container">
+                        {(url) ? asset.images_url.map(img => {
+                            return (
+                                <img 
+                                    className="property-thumbnail-image" 
+                                    src={img.image} 
+                                    alt="property"
+                                    onClick={() => this.setImgToDisplay(img.image)}
+                                />
+                            )
+                        }) : null}
+                    </div>
                     <div>
                         <h3>Property Information</h3>
                         <div className="property-info">

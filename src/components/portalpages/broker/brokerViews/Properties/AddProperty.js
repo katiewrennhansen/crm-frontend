@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import ApiService from '../../../../../services/api-service'
 import config from '../../../../../config'
 import BrokerContext from '../../../../../contexts/BrokerContext'
 import CloseIcon from '@material-ui/icons/Close';
@@ -14,10 +13,9 @@ class AddProperty extends Component {
         super(props)
         this.state = {
             error: null,
-            files: []
+            files: [],
+            loading: false
         }
-        this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
-
     }
 
     fileSelectedHandler = (file) => {
@@ -36,6 +34,10 @@ class AddProperty extends Component {
 
     submitProperty = (e) => {
         e.preventDefault()
+        this.setState({ loading: true })
+
+        const formData = new FormData();
+
         const newProperty = {
             adescription4: e.target.street_name.value,
             adescription5: e.target.city.value,
@@ -55,16 +57,32 @@ class AddProperty extends Component {
             status_id: e.target.status.value,
             assetinsurance: e.target.insurance.value,
             insurancedued : e.target.insurance_due.value,
-            images: [...this.state.files]
         }
-        const endpoint = `${config.API_ENDPOINT}/assets`
 
-        ApiService.postDataHalf(endpoint, newProperty)
-            .then(() => {
-                this.props.history.push('/broker/properties')
+        for (const key in newProperty) {
+            formData.append(key, newProperty[key])
+        }
+
+        this.state.files.map(file => formData.append('images[]', file))
+
+        fetch(`${config.API_ENDPOINT}/assets`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+            })
+            .then(res => {
+                if(!res.ok)
+                    return res.json().then(error => Promise.reject(error))
+                return res
+            })
+            .then(data => {
+                this.props.history.history.push('/broker/properties')
             })
             .catch(error => {
                 console.log(error)
+                this.setState({ loading: false })
             })
     }
 
@@ -87,6 +105,7 @@ class AddProperty extends Component {
                         onChange={this.fileSelectedHandler}
                         files={this.state.files}
                         removeImage={this.removeImage}
+                        loading={this.state.loading}
                     />
                 </div>
             </div>
