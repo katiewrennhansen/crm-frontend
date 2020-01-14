@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AddIcon from '@material-ui/icons/Add';
+import PageviewIcon from '@material-ui/icons/Pageview';
 
 const endpoint = config.MAINTENANCE_PROVIDERS_ENDPOINT
 
@@ -42,26 +43,27 @@ class Maintenance extends Component {
                 <table className='data-table'>
                     <thead>
                         <tr>
-                            <th>Provider</th>
                             <th>Type</th>
                             <th>Company</th>
+                            <th>Provider</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>View</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.data.map(p => (
-                        
                         <tr key={p.data.id}>
-                            <td>
-                                <Link to={`/broker/maintenance/${p.data.id}`}>
-                                    {p.data.contact}
-                                </Link>
-                            </td>
                             <td>{p.data.typeservice}</td>
                             <td>{p.data.name}</td>
+                            <td>{p.data.contact}</td>
                             <td>{p.data.email}</td>
                             <td>{p.data.phone}</td>
+                            <td className='update'>
+                                <Link className="update-btn" to={`/broker/maintenance/${p.data.id}`}>
+                                    <PageviewIcon />
+                                </Link>
+                            </td>
                         </tr>
                         ))}
                     </tbody>

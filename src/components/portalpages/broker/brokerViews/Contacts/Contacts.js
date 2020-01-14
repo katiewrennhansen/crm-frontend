@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import AddIcon from '@material-ui/icons/Add';
+import PageviewIcon from '@material-ui/icons/Pageview';
 
 class Contacts extends Component {
     constructor(props) {
@@ -49,7 +50,7 @@ class Contacts extends Component {
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Status</th>
-                                <th></th>
+                                <th>View</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,7 +62,9 @@ class Contacts extends Component {
                                         <td>{c.data.email}</td>
                                         <td>{c.data.status}</td>
                                         <td className='update'>
-                                            <Link className="update-btn" to={`/broker/contacts/${id}`}>View</Link>
+                                            <Link className="update-btn" to={`/broker/contacts/${id}`}>
+                                                <PageviewIcon />
+                                            </Link>
                                         </td>
                                     </tr>
                                 )

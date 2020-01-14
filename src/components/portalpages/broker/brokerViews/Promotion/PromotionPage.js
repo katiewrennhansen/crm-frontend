@@ -67,6 +67,7 @@ class PromotionPage extends Component {
                 ApiService.getDataHalf(singlePromoEndpoint)
                     .then(data => {
                         this.setAssigned(data.data.assigned)  
+                        this.toggleForm()
                     })
             })
             .catch(error => {
@@ -107,80 +108,76 @@ class PromotionPage extends Component {
     render(){
         const data = this.state.promotion
         return (
-            <>
-            
-
-                <div className='container'>
-                    <div className='header-grid'>
-                        <h2>{data.typepromotion}</h2>
-                    </div>
-                    <p>Start: {data.startdate}</p>
-                    <p>End: {data.enddate}</p>
-                    <p>Total Cost: {data.totalcost}</p>
-
-                    <div className='header-grid'>
-                        <h3>Assigned Users</h3>
-                        <button className='add' id="c-btn" onClick={this.toggleForm}>+</button>
-                    </div>
-                    
-                    <table className='data-table'>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Cost</th>
-                                <th>Assigned</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.assigned.map(a => {
-                                return (
-                                <tr className="promotions-table" key={a.id}>
-                                    <td>{a.customer}</td>
-                                    <td>{a.cost}</td>
-                                    <td>{a.assigned}</td>
-                                    <td>
-                                        <button className='delete-btn' onClick={() => this.unassignPromo(a.id)}>
-                                            <DeleteOutlineIcon 
-                                                className="action-icon" 
-                                            />
-                                        </button>
-                                    </td>
-                                </tr>
-                                )
-                            })}
-                            
-                        </tbody>
-                    </table>
-                    <form className="sp-form hidden" id="costs-form" onSubmit={(e) => {this.assignPromotion(e)}}>
-                        <h3>Assign User to {data.typepromotion}</h3>
-                        <div className="form-group">
-                            <label htmlFor="customer">Customer: </label>
-                            <select name="customer">
-                                <option value="">Select a User</option>
-                                {this.state.users.map(user => (
-                                    <option 
-                                        key={user.customer.id} 
-                                        value={user.customer.email}
-                                    >
-                                        {user.customer.name}
-                                    </option>
-                                ))}  
-                            </select>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="cost">Cost: </label>
-                            <input type="number" name="cost"></input>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="date">Date: </label>
-                            <input type="date" name="date"></input>
-                        </div>
-                        <input type="submit" className="submit" value="Assign Promotion"></input>
-                    </form>
-                    <p>{(this.state.error) ? this.state.error : null}</p>
+            <div className='container'>
+                <div className='header-grid'>
+                    <h2>{data.typepromotion}</h2>
                 </div>
-            </>
+                <p>Start: {data.startdate}</p>
+                <p>End: {data.enddate}</p>
+                <p>Total Cost: {data.totalcost}</p>
+
+                <div className='header-grid'>
+                    <h3>Assigned Users</h3>
+                    <button className='add' id="c-btn" onClick={this.toggleForm}>+</button>
+                </div>
+
+                <form className="sp-form hidden" id="costs-form" onSubmit={(e) => {this.assignPromotion(e)}}>
+                    <h3>Assign User to {data.typepromotion}</h3>
+                    <div className="form-group">
+                        <label htmlFor="customer">Customer: </label>
+                        <select name="customer">
+                            <option value="">Select a User</option>
+                            {this.state.users.map(user => (
+                                <option 
+                                    key={user.customer.id} 
+                                    value={user.customer.email}
+                                >
+                                    {user.customer.name}
+                                </option>
+                            ))}  
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="cost">Cost: </label>
+                        <input type="number" name="cost"></input>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="date">Date: </label>
+                        <input type="date" name="date"></input>
+                    </div>
+                    <input type="submit" className="submit" value="Assign Promotion"></input>
+                </form>
+
+                <table className='data-table'>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Cost</th>
+                            <th>Assigned</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.assigned.map(a => {
+                            return (
+                            <tr className="promotions-table" key={a.id}>
+                                <td>{a.customer}</td>
+                                <td>{a.cost}</td>
+                                <td>{a.assigned}</td>
+                                <td>
+                                    <button className='delete-btn' onClick={() => this.unassignPromo(a.id)}>
+                                        <DeleteOutlineIcon 
+                                            className="action-icon" 
+                                        />
+                                    </button>
+                                </td>
+                            </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+                <p>{(this.state.error) ? this.state.error : null}</p>
+            </div>
         )
     }
 }

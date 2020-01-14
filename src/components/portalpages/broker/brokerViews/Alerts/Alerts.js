@@ -2,19 +2,18 @@ import React, { Component } from 'react'
 import Moment from 'react-moment'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+// import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 
 const endpoint = `${config.API_ENDPOINT}/assets/0/assetcomments`
-const commEndpoint = `${config.API_ENDPOINT}/commtypes`
 
 class Alerts extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
             error: null,
             alerts: [],
-            commtypes: []
+            commtypes: [],
         }
     }
 
@@ -38,7 +37,7 @@ class Alerts extends Component {
             .catch(error => {
                 console.log(error)
             }) 
-        ApiService.getDataHalf(commEndpoint)
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/commtypes`)
             .then(data => {
                 this.setComms(data)
             }) 
@@ -62,6 +61,7 @@ class Alerts extends Component {
             })
             .catch(error => {
                 console.log(error)
+                this.setState({ checked: false })
             })
     }
 
@@ -72,19 +72,17 @@ class Alerts extends Component {
                 <table className='data-table'>
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>Mark Completed</th>
                             <th>Comment Type</th>
                             <th>Comment</th>
-                            <th>Alarm</th>
                             <th>Request Date</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.alerts.map(a => (
                         <tr key={a.data.id}>
-                            <td className="update-btn">
-                                <CheckCircleOutlineIcon />
+                            <td className="mark-completed" id={a.data.id}>
+                                <RadioButtonUncheckedIcon onClick={() => this.handleCompleted(a.data.id)} />
                             </td>
                             <td>
                                 {this.state.commtypes.map(c => {
@@ -98,18 +96,7 @@ class Alerts extends Component {
                             </td>
                             <td>{a.data.assetcomment}</td>
                             <td>
-                                {(a.data.alarm) ? 'Active' : 'Read'}
-                            </td>
-                            <td>
                                 <Moment format="YYYY/MM/DD">{a.data.requestdate}</Moment>
-                            </td>
-                            <td className="delete">
-                                <button 
-                                    className="delete-btn" 
-                                    onClick={() => this.handleCompleted(a.data.id)}
-                                >
-                                    {(a.data.alarm) ? 'Mark as Completed' : 'Completed'}
-                                </button>
                             </td>
                         </tr>
                         ))}

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import CloseIcon from '@material-ui/icons/Close';
 import EditIcon from '@material-ui/icons/Edit';
+import ProviderInfo from '../../../../utilities/CustomerComponents/ProviderInfo';
 
 class Provider extends Component {
     constructor(props) {
@@ -83,9 +84,9 @@ class Provider extends Component {
         const data = this.state.customer
         return (
             <>
-                <div className='container'>
+                <div className='container contact-container'>
                     <div className='header-grid'>
-                        <h2>{data.contact}</h2>
+                        <h2>{data.name}</h2>
                         <div className="property-icons">
                             <Link to='/broker/maintenance/' className="close-icon">
                                 <CloseIcon
@@ -98,24 +99,10 @@ class Provider extends Component {
                                 />
                             </Link>
                         </div>
-                    </div>
-                    <div>
-                        <p>{data.typeservice}</p>
-                        <p>{data.email}</p>
-                        <p>{data.phone}</p>
-                        <br></br>
-                        <h4>{data.name}</h4>
-                        <p>{data.adescription4}</p>
-                        <p>{`${data.adescription2}, ${data.adescription3}`}</p>
-                        <p>{data.adescription1}</p>
-                        <br></br>
-                        <p>Category: {data.category}</p>
-                        <p>Status: {data.status}</p>
-                        <p>Tax ID: {data.taxid}</p>
-                        <br></br>
-                        <h4>Comments</h4>
-                        <p>{data.comment}</p>
-                    </div>
+                   </div>
+                   <ProviderInfo 
+                        data={data}
+                   />
                 </div>
             </>
         )

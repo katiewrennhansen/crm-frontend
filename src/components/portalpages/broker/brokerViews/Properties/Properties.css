@@ -222,7 +222,7 @@ td.delete {
 .dashboard-container input[type="email"],
 .add-property-form select,
 .add-property-form option,
-.edit-property-form select,
+.edit-property-form ,
 .edit-property-form option,
 textarea,
 select {

@@ -39,3 +39,12 @@
     font-size: 25px;
     padding-bottom: 15px;
 }
+
+.mark-completed {
+    text-align: left;
+    padding-left: 30px;
+}
+
+.mark-completed:hover {
+    cursor: pointer;
+}

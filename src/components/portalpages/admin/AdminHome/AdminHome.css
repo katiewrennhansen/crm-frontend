@@ -4,6 +4,10 @@
 GLOBAL STYLES
 ============= */
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: rgb(240, 240, 240);
 }
@@ -59,9 +63,9 @@ select {
     -moz-appearance: none;
     appearance: none;
     border: 1px sold gray;
-    border-radius: 5px;
-    width: 75%;
-    background: url(https://image.flaticon.com/icons/svg/32/32195.svg) 95% / 5% no-repeat #fff;
+    border-radius: 2px;
+    /* width: 75%; */
+    /* background: url(https://image.flaticon.com/icons/svg/32/32195.svg) 95% / 5% no-repeat #fff; */
 }
 
 
