@@ -7,8 +7,6 @@ const csEndpoint = config.CUSTOMER_STATUS_ENDPOINT
 const remindersEndpoint = config.REMINDERS_ENDPOINT
 const catEndpoint = config.CATEGORIES_ENDPOINT
 
-
-
 class ContactForm extends Component{
     constructor(props) {
         super(props);

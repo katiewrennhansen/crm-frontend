@@ -71,10 +71,7 @@ class ProcessSteps extends Component {
                 <div className="header-grid">
                     <h2>Process For: {this.state.name.processdesc}</h2>
                     <Link className='edit-btn edit-customer' to='/dashboard/process'>
-                        <CloseIcon 
-                            className="add-icon" 
-                            fontSize="large" 
-                        />
+                        <CloseIcon className="add-icon" />
                     </Link>
                 </div>
                 <div>
@@ -108,7 +105,7 @@ class ProcessSteps extends Component {
                             placeholder='Step Name'
                         />
                     </div>
-                    <input type="submit" className="submit-full" value='Add Step'/>
+                    <input type="submit" className="submit" value='Add Step'/>
                 </form>      
             </div>
         )

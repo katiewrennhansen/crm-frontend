@@ -4,6 +4,7 @@ import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service';
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
+import CustomerInfo from '../../../../utilities/CustomerComponents/CustomerInfo';
 
 const caEndpoint = config.CUSTOMER_ACCOUNTS_ENDPOINT
 
@@ -64,35 +65,25 @@ class CustomerPage extends Component {
     render(){  
         const data = this.state.customer
         return (
-            <div className='company-info-container'>
-                <div className='info-container'>
-                    <div>
-                        <h2>{data.name}</h2>
-                        <p>{data.email}</p>
-                        <br></br>
-                        <p>{data.adescription4}</p>
-                        <p>{`${data.adescription2}, ${data.adescription3}`}</p>
-                        <p>{data.adescription1}</p>
-                        <br></br>
-                        <p>Category: {data.category}</p>
-                        <p>Status: {data.status}</p>
-                        <p>Tax ID: {data.taxid}</p>
-                        <p>Broker: {data.broker}</p>
-                        <p>Reminder: {data.remainder}</p>
+            <div className='container contact-container'>
+                <div className='header-grid'>
+                    <h2>{data.name}</h2>
+                    <div className="property-icons">               
+                        <Link className="close-icon" to='/dashboard/customer-accounts'>
+                            <CloseIcon 
+                                className="action-icon" 
+                            />
+                        </Link>
+                        <Link className="add-icon" to={`/dashboard/customer-accounts/${data.id}/edit`}>
+                            <EditIcon 
+                                className="action-icon" 
+                            />
+                        </Link>
                     </div>
                 </div>
-                <div>
-                    <Link to='/dashboard/customer-accounts' className='edit-btn edit-company'>
-                        <CloseIcon 
-                            className="add-icon" 
-                        />
-                    </Link>
-                    <Link to={`/dashboard/customer-accounts/${data.id}/edit`} className='edit-btn edit-company'>
-                        <EditIcon 
-                            className="add-icon" 
-                        />
-                    </Link>
-                </div>
+                <CustomerInfo
+                    data={data}
+                />
             </div>
         )
     }

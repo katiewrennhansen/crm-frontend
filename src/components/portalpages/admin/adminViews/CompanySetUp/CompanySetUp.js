@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import EditIcon from '@material-ui/icons/Edit';
+import CompanyInfo from '../../../../utilities/CustomerComponents/CompanyInfo'
 
 class CompanySetUp extends Component {
     constructor(props) {
@@ -50,29 +51,20 @@ class CompanySetUp extends Component {
     render(){
         const data = this.state.companyInfo
         return (
-            <div className="company-info-container">
-                <div className="company-info">
+            <div className='container contact-container'>
+                <div className='header-grid'>
                     <h2>{data.company}</h2>
-                    <p>Contact: {data.contact}</p>
-                    <p>Email: {data.email}</p>
-                    <p>Phone: {data.phone}</p>
-                    <p>Tax ID: {data.ctax_id}</p>
-                    <br></br>
-                    <h3>Address</h3>
-                    <address>
-                        {data.adescription3}<br></br>
-                        {`${data.adescription2}, ${data.adescription5} ${data.adescription4}`}<br></br>
-                        {data.adescription1}
-                    </address>
+                    <div className="property-icons">  
+                        <Link className="add-icon" to='/dashboard/edit-account-settings'>
+                            <EditIcon 
+                                className="action-icon"
+                            />
+                        </Link>
+                    </div>
                 </div>
-                <div>
-                    <Link 
-                        className="edit-btn edit-company"
-                        to='/dashboard/edit-account-settings'
-                    >
-                        <EditIcon className="add-icon" />
-                    </Link>
-                </div>
+                <CompanyInfo 
+                    data={data}
+                />
             </div>
         )
     }

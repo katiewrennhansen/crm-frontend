@@ -8,6 +8,7 @@ import DeleteModal from '../../../../utilities/Modal/DeleteModal'
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import PageviewIcon from '@material-ui/icons/Pageview';
 import EditIcon from '@material-ui/icons/Edit';
 
 const processEndpoint = config.PROCESS_ENDPOINT
@@ -149,7 +150,7 @@ class Process extends Component {
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Steps</th>
+                                <th>View Steps</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
@@ -160,7 +161,9 @@ class Process extends Component {
                                 <tr key={p.data.id}>
                                     <td>{p.data.processdesc}</td>
                                     <td>
-                                        <Link className="view" to={`/dashboard/process/${p.data.id}`}>View Steps</Link>
+                                        <Link className="view" to={`/dashboard/process/${p.data.id}`}>
+                                            <PageviewIcon />
+                                        </Link>
                                     </td>
                                     <td>
                                         <button className='update-btn' onClick={() => context.updateUpdate(p.data.processdesc, p.data.id)}>
