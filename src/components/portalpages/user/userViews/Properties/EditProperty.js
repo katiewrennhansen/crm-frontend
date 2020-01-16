@@ -14,6 +14,7 @@ class EditProperty extends Component {
         this.state = {
             singleAsset: {},
             files: [],
+            contract: [],
             loading: false,
             radioValue: true
         }
@@ -37,9 +38,15 @@ class EditProperty extends Component {
             })
     }
 
-    fileSelectedHandler = (file) => {
+    fileSelectedHandler = (e) => {
         this.setState({
-            files: [...file]
+            files: e
+        })
+    }
+
+    contractSelectedHandler = (e) => {
+        this.setState({
+            contract: e
         })
     }
 
@@ -90,6 +97,7 @@ class EditProperty extends Component {
         }
 
         this.state.files.map(file => formData.append('images[]', file))
+        formData.append('contract', this.state.contract[0])
 
         fetch(`${config.API_ENDPOINT}/assets/${this.props.id}`, {
             method: 'PATCH',
@@ -133,6 +141,8 @@ class EditProperty extends Component {
                     files={this.state.files}
                     removeImage={this.removeImage}
                     loading={this.state.loading}
+                    contractOnChange={this.contractSelectedHandler}
+                    contract={this.state.contract}
                     setValue={this.setValue}
                 />
             </div>
