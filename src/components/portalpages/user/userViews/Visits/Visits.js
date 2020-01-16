@@ -59,7 +59,8 @@ class Visits extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.requests.map(p => {
+                        {(this.state.requests[0])
+                        ? this.state.requests.map(p => {
                             if(p.data.alarm){
                                 return (
                                     <tr key={p.data.id}>
@@ -80,7 +81,15 @@ class Visits extends Component {
                             } else {
                                 return null
                             }
-                        })}
+                        })
+                        : 
+                        <tr>
+                            <td className="nothing-to-display">No Visit Requests to Display</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        }
                     </tbody>
                 </table>
                 <p className="entry-count">Showing {this.state.requests.length} of {this.state.requests.length} entries</p>

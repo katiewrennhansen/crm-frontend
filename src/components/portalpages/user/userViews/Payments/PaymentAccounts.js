@@ -36,7 +36,7 @@ class PaymentAccounts extends Component {
                                     </tr>
                                 )})
                             : ( <tr>
-                                    <td>You have not set up any payment accounts</td>
+                                    <td className="nothing-to-display">You have not set up any payment accounts</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

@@ -47,7 +47,7 @@ class Contracts extends Component {
                                     </tr>
                                 )})
                             : ( <tr>
-                                    <td>No Contracts to Display</td>
+                                    <td className="nothing-to-display">No Contracts to Display</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

@@ -76,7 +76,8 @@ class Maintenance extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.requests.map(p => (
+                        {(this.state.requests[0])
+                        ? this.state.requests.map(p => (
                         <tr key={p.data.id}>
                             <td>
                                 {this.state.assets.map(a => {
@@ -100,7 +101,14 @@ class Maintenance extends Component {
                             <td>{p.data.reqdate}</td>
                             <td>{(p.data.deliverdate) ? 'Completed' : 'Pending'}</td>
                         </tr>
-                        ))}
+                        ))
+                        : <tr>
+                            <td className="nothing-to-display">No Maintenance Requests to Display</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
                 <p className="entry-count">Showing {this.state.requests.length} of {this.state.requests.length} entries</p>

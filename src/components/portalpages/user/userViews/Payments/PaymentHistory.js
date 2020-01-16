@@ -39,7 +39,7 @@ class PaymentHistory extends Component {
                                     </tr>
                                 )})
                             : ( <tr>
-                                    <td>You have not submitted any payments yet</td>
+                                    <td className="nothing-to-display">You have not submitted any payments yet</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

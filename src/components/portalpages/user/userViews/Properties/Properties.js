@@ -26,6 +26,7 @@ class Properties extends Component {
         const endpoint = `${config.API_ENDPOINT}/assets`
         ApiService.getDataHalf(endpoint)
             .then(data => {
+                console.log(data.assets)
                 this.setAssets(data.assets)
             })
             .catch(error => {
@@ -46,7 +47,8 @@ class Properties extends Component {
                     </Link>
                 </div>
                 <div className='broker-properties-grid'>
-                    {this.state.assets.map(a => {
+                    {(this.state.assets[0])
+                    ? this.state.assets.map(a => {
                         return (
                             <div key={a.id}>
                                 <PropertyCard
@@ -55,7 +57,10 @@ class Properties extends Component {
                                 />
                             </div>
                         )
-                    })}
+                    })
+                    :
+                    <p className="nothing-to-display">Click the + icon to add a new listing</p>
+                    }
                 </div>
             </div>
         )

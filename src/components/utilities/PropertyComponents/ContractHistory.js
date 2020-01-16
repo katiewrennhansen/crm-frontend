@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
 import ApiService from '../../../services/api-service'
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import PageviewIcon from '@material-ui/icons/Pageview';
 
 class ContractHistory extends Component {

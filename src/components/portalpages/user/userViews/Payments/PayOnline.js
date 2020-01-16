@@ -40,7 +40,7 @@ class PayOnline extends Component {
                                     </tr>
                                 )})
                             : ( <tr>
-                                    <td>No Current Charges to Display</td>
+                                    <td className="nothing-to-display">No Current Charges to Display</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
