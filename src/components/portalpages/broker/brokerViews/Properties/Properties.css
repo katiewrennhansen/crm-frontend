@@ -21,6 +21,11 @@ td.delete {
     padding-right: 50px;
 }
 
+.delete-heading {
+    text-align: right;
+    padding-right: 42px;
+}
+
 .broker-properties-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -272,6 +277,17 @@ label {
     display: block;
     margin: 10px 0 5px;
     font-size: 13px;
+}
+
+.radio-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 2fr;
+    align-items: center;
+    width: 150px;
+}
+
+.radio-grid label {
+    margin: 0;
 }
 
 .price-type {

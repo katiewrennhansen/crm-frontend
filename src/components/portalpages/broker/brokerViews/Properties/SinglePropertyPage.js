@@ -7,6 +7,7 @@ import Cost from '../../../../utilities/PropertyComponents/Cost'
 import PropertyInfo from '../../../../utilities/PropertyComponents/PropertyInfo'
 import ErrorBoundary from '../../../../utilities/ErrorBoundary'
 import './Properties.css'
+import ContractHistory from '../../../../utilities/PropertyComponents/ContractHistory'
 
 
 class SinglePageProperty extends Component {
@@ -52,6 +53,10 @@ class SinglePageProperty extends Component {
                         <h4>Costs</h4>
                         <div className={(this.state.active === 'cost' ? 'underline active' : 'underline')}></div>
                     </Link>
+                    <Link to={`/broker/properties/${this.props.id}/contract-history`} onClick={() => this.setActive('contract-history')}>
+                        <h4>Contract History</h4>
+                        <div className={(this.state.active === 'contract-history' ? 'underline active' : 'underline')}></div>
+                    </Link>
                 </nav>
 
                 
@@ -87,6 +92,15 @@ class SinglePageProperty extends Component {
                     render={props => (
                         <ErrorBoundary>
                             <Cost id={this.props.id} />
+                        </ErrorBoundary>
+                    )}
+                />
+
+                <Route 
+                    exact path={`/broker/properties/${this.props.id}/contract-history`}
+                    render={props => (
+                        <ErrorBoundary>
+                            <ContractHistory id={this.props.id} />
                         </ErrorBoundary>
                     )}
                 />

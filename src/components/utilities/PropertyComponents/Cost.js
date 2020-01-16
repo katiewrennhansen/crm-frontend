@@ -6,6 +6,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ImageUploader from 'react-images-upload'
 import CloseIcon from '@material-ui/icons/Close';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import PageviewIcon from '@material-ui/icons/Pageview';
 
 class Cost extends Component {
     static contextType = BrokerContext
@@ -203,11 +204,12 @@ class Cost extends Component {
                             <th>Amount</th>
                             <th>Year</th>
                             <th>Reciept</th>
-                            <th></th>
+                            <th className="delete-heading">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.costs.map(f => {
+                        {(this.state.costs[0])
+                        ? this.state.costs.map(f => {
                             const receiptUrl = f.data.receipt_url[0]
                             let url;
                             if(receiptUrl){
@@ -220,16 +222,32 @@ class Cost extends Component {
                                     <td>${f.data.amount}</td>
                                     <td>{f.data.date}</td> 
                                     <td>
-                                        {(url ? <a href={`${url}`} target="_blank" rel="noopener noreferrer">View</a> : null)}
+                                        {(url 
+                                            ? <a href={`${url}`} className="close-icon" target="_blank" rel="noopener noreferrer">
+                                                <PageviewIcon />
+                                            </a> 
+                                            : null)
+                                        }
                                     </td>
                                     <td className="delete">
-                                        <button className="delete-btn" onClick={() => {this.deleteCost(f.data.id)}}>
-                                            <DeleteOutlineIcon />
-                                        </button>
+                                            <DeleteOutlineIcon 
+                                                className="delete-btn" 
+                                                onClick={() => this.deleteCost(f.data.id)}
+                                            />
                                     </td>
                                 </tr>
-                            )
-                        })}
+                            ) 
+                        })
+                        :
+                        <tr>
+                            <td className='nothing-to-display'>No costs to display</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        }
                     </tbody>
                 </table>
             </div>

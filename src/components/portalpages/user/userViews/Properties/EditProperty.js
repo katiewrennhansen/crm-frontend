@@ -14,7 +14,8 @@ class EditProperty extends Component {
         this.state = {
             singleAsset: {},
             files: [],
-            loading: false
+            loading: false,
+            radioValue: true
         }
         this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
 
@@ -50,6 +51,12 @@ class EditProperty extends Component {
         })
     }
 
+    setValue = e => {
+        this.setState({
+            radioValue: e.target.value
+        })
+    }
+
     editProperty = (e) => {
         e.preventDefault()
         this.setState({ loading: true })
@@ -69,7 +76,12 @@ class EditProperty extends Component {
             stepdate: e.target.step_date.value,
             status_id: e.target.status.value,
             assetinsurance: e.target.insurance.value,
-            insurancedued : e.target.insurance_due.value
+            insurancedued : e.target.insurance_due.value,
+            emailnewcontract: this.state.radioValue,
+            rentadjustment: e.target.rentadjustment.value,
+            endorsment: e.target.endorsment.value,
+            interestrent: e.target.interestrent.value,
+            daysbeforeexp: e.target.daysbeforeexp.value
         }
 
         for (const key in updatedFields) {
@@ -121,6 +133,7 @@ class EditProperty extends Component {
                     files={this.state.files}
                     removeImage={this.removeImage}
                     loading={this.state.loading}
+                    setValue={this.setValue}
                 />
             </div>
         )

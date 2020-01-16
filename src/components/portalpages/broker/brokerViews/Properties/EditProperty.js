@@ -16,7 +16,8 @@ class EditProperty extends Component {
             error: null,
             files: [],
             contract: [],
-            loading: false
+            loading: false,
+            radioValue: true
         }
         this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
     }
@@ -32,8 +33,14 @@ class EditProperty extends Component {
     }
 
     fileSelectedHandler = (e) => {
+        console.log(e)
+        
+        const all = [...e, ...this.state.files]
+        const fileList = Array.from(new Set(all.map(f => f.name))).map(name => {
+            return e.find(a => a.name === name)
+        })
         this.setState({
-            files: e
+            files: fileList
         })
     }
 
@@ -43,13 +50,19 @@ class EditProperty extends Component {
         })
     }
 
-    removeImage = (file, index) => {
-        let newPics = this.state.files
-        newPics.splice(index, 1);
+    removeImage = (file) => {
+        let newPics = this.state.files.filter(f => f.name !== file.name)
         this.setState({
             files: [...newPics]
         })
     }
+
+    setValue = e => {
+        this.setState({
+            radioValue: e.target.value
+        })
+    }
+
 
     editProperty = (e) => {
         e.preventDefault()
@@ -76,7 +89,12 @@ class EditProperty extends Component {
             stepdate: e.target.step_date.value,
             status_id: e.target.status.value,
             assetinsurance: e.target.insurance.value,
-            insurancedued : e.target.insurance_due.value
+            insurancedued : e.target.insurance_due.value,
+            emailnewcontract: this.state.radioValue,
+            rentadjustment: e.target.rentadjustment.value,
+            endorsment: e.target.endorsment.value,
+            interestrent: e.target.interestrent.value,
+            daysbeforeexp: e.target.daysbeforeexp.value
         }
 
         for (const key in updatedFields) {
@@ -130,6 +148,7 @@ class EditProperty extends Component {
                     contractOnChange={this.contractSelectedHandler}
                     loading={this.state.loading}
                     contract={this.state.contract}
+                    setValue={this.setValue}
                 />
             </div>
         )

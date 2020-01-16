@@ -38,13 +38,13 @@
 }
 
 .property-nav {
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(5, auto);
     background: #2734431a;
     color: #273443;
     border-radius: 2px;
     height: 40px;
     margin-top: 50px;
-    width: 80%;
+    width: 100%;
 }
 
 .payments-nav {
@@ -87,4 +87,9 @@
 
 .entry-count {
     font-size: 12px;
+}
+
+.nothing-to-display {
+    color: gray;
+    font-style: italic;
 }

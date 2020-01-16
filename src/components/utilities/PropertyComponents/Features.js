@@ -139,11 +139,12 @@ class Features extends Component {
                         <tr>
                             <th>Type</th>
                             <th>Description</th>
-                            <th></th>
+                            <th className="delete-heading">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.features.map(f => {
+                        {(this.state.features[0])
+                        ? this.state.features.map(f => {
                             return (
                                 <tr key={f.id}>
                                     <td>
@@ -157,13 +158,18 @@ class Features extends Component {
                                     </td>
                                     <td>{f.featuredesc}</td>
                                     <td className="delete">
-                                        <button className="delete-btn" onClick={() => {this.deleteFeature(f.id)}}>
-                                            <DeleteOutlineIcon />
-                                        </button>
+                                        <DeleteOutlineIcon className="delete-btn" onClick={() => this.deleteFeature(f.id)} />
                                     </td>
                                 </tr>
                             )
-                        })}
+                        })
+                        :
+                        <tr>
+                            <td className='nothing-to-display'>No features to display</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        }
                     </tbody>
                 </table>
             </div>

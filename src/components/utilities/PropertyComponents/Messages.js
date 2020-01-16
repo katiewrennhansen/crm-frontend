@@ -140,11 +140,12 @@ class Messages extends Component {
                         <tr>
                             <th>Type</th>
                             <th>Description</th>
-                            <th></th>
+                            <th className="delete-heading">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.messages.map(f => {
+                        {(this.state.messages[0])
+                        ? this.state.messages.map(f => {
                             return (
                                 <tr key={f.data.id}>
                                     <td>
@@ -159,13 +160,21 @@ class Messages extends Component {
                                     </td>
                                     <td>{f.data.assetcomment}</td>
                                     <td className="delete">
-                                        <button className="delete-btn" onClick={() => {this.deleteMessage(f.data.id)}}>
-                                            <DeleteOutlineIcon />
-                                        </button>
+                                            <DeleteOutlineIcon
+                                                className="delete-btn"
+                                                onClick={() => this.deleteMessage(f.data.id)}
+                                            />
                                     </td>
                                 </tr>
                             )
-                        })}
+                        })
+                        :
+                        <tr>
+                            <td className='nothing-to-display'>No messages to display</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        }
                     </tbody>
                 </table>
                 

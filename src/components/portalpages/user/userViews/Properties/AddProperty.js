@@ -13,7 +13,8 @@ class AddProperty extends Component {
         this.state = {
             error: null,
             files: [],
-            loading: false
+            loading: false,
+            radioValue: true
         }
     }
 
@@ -32,13 +33,17 @@ class AddProperty extends Component {
         })
     }
 
+    setValue = e => {
+        this.setState({
+            radioValue: e.target.value
+        })
+    }
+
     submitProperty = (e) => {
         e.preventDefault()
-
         this.setState({ loading: true })
 
         const formData = new FormData();
-        console.log(this.state.files)
 
         const newProperty = {
             adescription4: e.target.street_name.value,
@@ -56,7 +61,12 @@ class AddProperty extends Component {
             category_id: e.target.categories.value,
             status_id: e.target.status.value,
             assetinsurance: e.target.insurance.value,
-            insurancedued: e.target.insurance_due.value
+            insurancedued: e.target.insurance_due.value,
+            emailnewcontract: this.state.radioValue,
+            rentadjustment: e.target.rentadjustment.value,
+            endorsment: e.target.endorsment.value,
+            interestrent: e.target.interestrent.value,
+            daysbeforeexp: e.target.daysbeforeexp.value
         }
 
         for (const key in newProperty) {
@@ -105,6 +115,7 @@ class AddProperty extends Component {
                     files={this.state.files}
                     removeImage={this.removeImage}
                     loading={this.state.loading}
+                    setValue={this.setValue}
                 />
             </div>
         )

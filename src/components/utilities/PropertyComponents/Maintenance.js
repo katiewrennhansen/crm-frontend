@@ -6,6 +6,8 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ImageUploader from 'react-images-upload'
 import CloseIcon from '@material-ui/icons/Close';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import PageviewIcon from '@material-ui/icons/Pageview';
+
  
 class Maintenance extends Component {
     static contextType = BrokerContext
@@ -254,11 +256,12 @@ class Maintenance extends Component {
                             <th>Request Date</th>
                             <th>Deliver Date</th>
                             <th>Reciept</th>
-                            <th></th>
+                            <th className="delete-heading">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.maintenance.map(f => {
+                        {(this.state.maintenance[0])
+                        ? this.state.maintenance.map(f => {
                             const receiptUrl = f.data.receipt_url[0]
                             let url;
                             if(receiptUrl){
@@ -281,16 +284,33 @@ class Maintenance extends Component {
                                     <td>{f.data.reqdate}</td>
                                     <td>{(f.data.deliverdate) ? `Completed ${f.data.deliverdate}` : 'Pending' }</td>
                                     <td>
-                                        {(url ? <a href={`${url}`} target="_blank" rel="noopener noreferrer">View</a> : null)}
+                                        {(url 
+                                            ? <a href={`${url}`} className="close-icon" target="_blank" rel="noopener noreferrer">
+                                                <PageviewIcon />
+                                            </a> 
+                                            : null)
+                                        }
                                     </td>
                                     <td className="delete">
-                                        <button className="delete-btn" onClick={() => this.deleteMaintenance(f.data.id)}>
-                                            <DeleteOutlineIcon />
-                                        </button>
+                                            <DeleteOutlineIcon
+                                                className="delete-btn" 
+                                                onClick={() => this.deleteMaintenance(f.data.id)} 
+                                            />
                                     </td>
                                 </tr>
                             )
-                        })}
+                        })
+                        :
+                        <tr>
+                            <td className='nothing-to-display'>No maintenance records to display</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        }
                     </tbody>
                 </table>
             </div>

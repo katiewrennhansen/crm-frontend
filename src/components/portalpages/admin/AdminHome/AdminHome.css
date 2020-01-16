@@ -126,7 +126,6 @@ COMPONENT STYLES
 
 .delete-btn {
     color: red;
-    font-weight: 500;
     border: none;
     font-size: 14px;
 }
@@ -208,7 +207,6 @@ button.add-icon {
     background: none;
     border: none;
 }
-
 
 .close-icon,
 .close-icon a {

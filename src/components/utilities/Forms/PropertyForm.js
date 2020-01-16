@@ -367,7 +367,7 @@ class PropertyForm extends Component {
                     </div>
 
                     <div className="form-content-section">
-                    <h3>Upload Contracts</h3>
+                        <h3>Contract Information</h3>
                         <div className="form-group">
                             <div>
                                 <ImageUploader
@@ -407,6 +407,38 @@ class PropertyForm extends Component {
                                 }
                                 </div>
                             </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="yes">Email contract<span className="required">*</span></label>
+                                    <div className="radio-grid" onChange={(e) => this.props.setValue(e)}>
+                                        <input type="radio" name="yes" value="true"></input>
+                                        <label htmlFor="yes">Yes</label>
+                                        <input type="radio" name="yes" value="false"></input>
+                                        <label htmlFor="yes">No</label>
+                                    </div>
+                                </div>
+
+                                <div className="form-group row">
+                                    <div>
+                                        <label htmlFor="rentadjustment">Rent Adjustment<span className="required">*</span></label>
+                                        <input type="number" name="rentadjustment" defaultValue={asset.rentadjustment}></input>
+                                    </div>
+                                    <div>
+                                        <label htmlFor="endorsment">Endorsment<span className="required">*</span></label>
+                                        <input type="text" name="endorsment" defaultValue={asset.endorsment}></input>
+                                    </div>
+                                </div>
+
+                                <div className="form-group row">
+                                    <div>
+                                        <label htmlFor="interestrent">Interest<span className="required">*</span></label>
+                                        <input type="number" name="interestrent" defaultValue={asset.interestrent}></input>
+                                    </div>
+                                    <div>
+                                        <label htmlFor="daysbeforeexp">Days Before Expiration<span className="required">*</span></label>
+                                        <input type="number" name="daysbeforeexp" defaultValue={asset.daysbeforeexp}></input>
+                                    </div>
+                                </div>
                         </div>
                     </div>
 
