@@ -46,15 +46,24 @@ class Network extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.network.map(p => (
-                        <tr key={p.data.id}>
-                            <td>{p.data.customer}</td>
-                            <td>{p.data.contact}</td>
-                            <td>{p.data.reference}</td>
-                            <td>{p.data.specialevent}</td>
-                            <td>{p.data.eventdate}</td>
-                        </tr>
-                        ))}
+                        {(this.state.network[0])
+                            ? this.state.network.map(p => (
+                            <tr key={p.data.id}>
+                                <td>{p.data.customer}</td>
+                                <td>{p.data.contact}</td>
+                                <td>{p.data.reference}</td>
+                                <td>{p.data.specialevent}</td>
+                                <td>{p.data.eventdate}</td>
+                            </tr>
+                            ))
+                            : <tr>
+                                <td className="nothing-to-display">No Network to Display</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
                 <p className="entry-count">Showing {this.state.network.length} of {this.state.network.length} entries</p>

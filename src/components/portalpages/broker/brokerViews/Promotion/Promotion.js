@@ -127,19 +127,28 @@ class Promotion extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.data.map(p => (
-                            <tr className="promotions-table" key={p.data.id}>
-                                <td>{p.data.typepromotion}</td>
-                                <td>{p.data.startdate}</td>
-                                <td>{p.data.duedate}</td>
-                                <td>{p.data.totalcost}</td>
-                                <td>
-                                    <Link className="update-btn" to={`/broker/promotions/${p.data.id}`}>
-                                        <PersonAddIcon />
-                                    </Link>
-                                </td>
-                            </tr>
-                            ))}
+                            {(this.state.data[0]) 
+                                ? this.state.data.map(p => (
+                                <tr className="promotions-table" key={p.data.id}>
+                                    <td>{p.data.typepromotion}</td>
+                                    <td>{p.data.startdate}</td>
+                                    <td>{p.data.duedate}</td>
+                                    <td>{p.data.totalcost}</td>
+                                    <td>
+                                        <Link className="close-icon" to={`/broker/promotions/${p.data.id}`}>
+                                            <PersonAddIcon />
+                                        </Link>
+                                    </td>
+                                </tr>
+                                ))
+                                :  <tr>
+                                        <td className="nothing-to-display">No Promotions to Display</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                            }
                         </tbody>
                     </table>
                     <p>{(this.state.error) ? this.state.error : null}</p>

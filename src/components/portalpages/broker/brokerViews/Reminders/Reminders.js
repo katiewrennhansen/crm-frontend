@@ -53,16 +53,24 @@ class Reminders extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.reminders.map(r => (
-                            <tr key={r.id}>
-                                <td>{r.rtype}</td>
-                                <td>{r.periodmonths}</td>
-                                <td>{r.bodymessage}</td>
-                                <td>
-                                    <Moment format="YYYY/MM/DD">{r.created_at}</Moment>
-                                </td>
+                        {(this.state.reminders[0])
+                            ? this.state.reminders.map(r => (
+                                <tr key={r.id}>
+                                    <td>{r.rtype}</td>
+                                    <td>{r.periodmonths}</td>
+                                    <td>{r.bodymessage}</td>
+                                    <td>
+                                        <Moment format="YYYY/MM/DD">{r.created_at}</Moment>
+                                    </td>
+                                </tr>
+                            ))
+                            : <tr>
+                                <td className="nothing-to-display">No Reminders to Display</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                        ))}
+                        }
                     </tbody>
                 </table>
                 <p className="entry-count">Showing {this.state.reminders.length} of {this.state.reminders.length} entries</p>

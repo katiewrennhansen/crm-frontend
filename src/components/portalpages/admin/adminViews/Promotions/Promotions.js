@@ -212,24 +212,34 @@ class Promotions extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {context.promotions.map(p => (
-                            <tr key={p.data.id}>
-                                <td>{p.data.typepromotion}</td>
-                                <td>{p.data.startdate}</td>
-                                <td>{p.data.duedate}</td>
-                                <td>{this.props.formatPrice(p.data.totalcost)}</td>
-                                <td>
-                                    <button className='update-btn' onClick={() => context.updateUpdate(p.data.typepromotion, p.data.id)}>
-                                        <EditIcon />
-                                    </button>
-                                </td>
-                                <td>
-                                    <button className='delete-btn' onClick={() => context.updateDelete(p.data.typepromotion, p.data.id)}>
-                                        <DeleteOutlineIcon />
-                                    </button>
-                                </td>
-                            </tr>
-                            ))}
+                            {(context.promotions[0]) 
+                                ? context.promotions.map(p => (
+                                <tr key={p.data.id}>
+                                    <td>{p.data.typepromotion}</td>
+                                    <td>{p.data.startdate}</td>
+                                    <td>{p.data.duedate}</td>
+                                    <td>{this.props.formatPrice(p.data.totalcost)}</td>
+                                    <td>
+                                        <button className='update-btn' onClick={() => context.updateUpdate(p.data.typepromotion, p.data.id)}>
+                                            <EditIcon />
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button className='delete-btn' onClick={() => context.updateDelete(p.data.typepromotion, p.data.id)}>
+                                            <DeleteOutlineIcon />
+                                        </button>
+                                    </td>
+                                </tr>
+                                )) 
+                                : <tr>
+                                    <td className="nothing-to-display">No Promotions to Display</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <p className="entry-count">Showing {context.promotions.length} of {context.promotions.length} entries</p>

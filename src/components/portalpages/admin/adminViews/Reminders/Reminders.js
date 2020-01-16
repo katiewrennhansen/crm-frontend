@@ -193,26 +193,36 @@ class Reminders extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {context.data.map(r => (
-                            <tr key={r.id}>
-                                <td>{r.rtype}</td>
-                                <td>{r.periodmonths}</td>
-                                <td>{r.bodymessage}</td>
-                                <td>
-                                    <Moment format="YYYY/MM/DD">{r.created_at}</Moment>
-                                </td>
-                                 <td>
-                                    <button className='update-btn' onClick={() => this.context.updateUpdate(r.rtype, r.id)}>
-                                        <EditIcon />
-                                    </button>
-                                </td>
-                                <td>
-                                    <button className='delete-btn' onClick={() => context.updateDelete(r.rtype, r.id)}>
-                                        <DeleteOutlineIcon />
-                                    </button>
-                                </td>
-                            </tr>
-                            ))}
+                            {(context.data[0])
+                                ? context.data.map(r => (
+                                <tr key={r.id}>
+                                    <td>{r.rtype}</td>
+                                    <td>{r.periodmonths}</td>
+                                    <td>{r.bodymessage}</td>
+                                    <td>
+                                        <Moment format="YYYY/MM/DD">{r.created_at}</Moment>
+                                    </td>
+                                    <td>
+                                        <button className='update-btn' onClick={() => this.context.updateUpdate(r.rtype, r.id)}>
+                                            <EditIcon />
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button className='delete-btn' onClick={() => context.updateDelete(r.rtype, r.id)}>
+                                            <DeleteOutlineIcon />
+                                        </button>
+                                    </td>
+                                </tr>
+                                ))
+                                : <tr>
+                                    <td className="nothing-to-display">No Reminders to Display</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <p className="entry-count">Showing {context.data.length} of {context.data.length} entries</p>

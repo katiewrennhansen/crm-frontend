@@ -150,24 +150,32 @@ class PropertyFeatures extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {context.data.map(f => (
-                            <tr key={f.id}>
-                                <td>{f.featuredescr}</td>
-                                <td>
-                                    <Moment format="YYYY/MM/DD">{f.created_at}</Moment>
-                                </td>
-                                <td>
-                                    <button className='update-btn' onClick={() => context.updateUpdate(f.featuredescr, f.id)}>
-                                        <EditIcon />
-                                    </button>
-                                </td>
-                                <td>
-                                    <button className='delete-btn' onClick={() => context.updateDelete(f.featuredescr, f.id)}>
-                                        <DeleteOutlineIcon />
-                                    </button>
-                                </td>
-                            </tr>
-                            ))}
+                            {(context.data[0])
+                                ? context.data.map(f => (
+                                <tr key={f.id}>
+                                    <td>{f.featuredescr}</td>
+                                    <td>
+                                        <Moment format="YYYY/MM/DD">{f.created_at}</Moment>
+                                    </td>
+                                    <td>
+                                        <button className='update-btn' onClick={() => context.updateUpdate(f.featuredescr, f.id)}>
+                                            <EditIcon />
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button className='delete-btn' onClick={() => context.updateDelete(f.featuredescr, f.id)}>
+                                            <DeleteOutlineIcon />
+                                        </button>
+                                    </td>
+                                </tr>
+                                ))
+                                : <tr>
+                                    <td className="nothing-to-display">No Property Features to Display</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <p className="entry-count">Showing {context.data.length} of {context.data.length} entries</p>

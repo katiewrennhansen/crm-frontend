@@ -140,7 +140,8 @@ class PropertyStatus extends Component {
                         className="add-icon" 
                         aria-label="add comment type" 
                         onClick={context.showModal} 
-                    />                    <table className='data-table'>
+                    />                    
+                    <table className='data-table'>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -150,24 +151,32 @@ class PropertyStatus extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {context.data.map(s => (
-                            <tr key={s.id}>
-                                <td>{s.statusdesc}</td>
-                                <td>
-                                    <Moment format="YYYY/MM/DD">{s.created_at}</Moment>                                
-                                </td>
-                                <td>
-                                    <button className='update-btn' onClick={() => context.updateUpdate(s.statusdescr, s.id)}>
-                                        <EditIcon />
-                                    </button>
-                                </td>
-                                <td>
-                                    <button className='delete-btn' onClick={() => context.updateDelete(s.statusdesc, s.id)}>
-                                        <DeleteOutlineIcon />
-                                    </button>
-                                </td>
-                            </tr>
-                            ))}
+                            {(context.data[0])
+                                ? context.data.map(s => (
+                                <tr key={s.id}>
+                                    <td>{s.statusdesc}</td>
+                                    <td>
+                                        <Moment format="YYYY/MM/DD">{s.created_at}</Moment>                                
+                                    </td>
+                                    <td>
+                                        <button className='update-btn' onClick={() => context.updateUpdate(s.statusdescr, s.id)}>
+                                            <EditIcon />
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button className='delete-btn' onClick={() => context.updateDelete(s.statusdesc, s.id)}>
+                                            <DeleteOutlineIcon />
+                                        </button>
+                                    </td>
+                                </tr>
+                                ))
+                                : <tr>
+                                    <td className="nothing-to-display">No Property Statuses to Display</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <p className="entry-count">Showing {context.data.length} of {context.data.length} entries</p>

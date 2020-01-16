@@ -147,24 +147,32 @@ class AdminComments extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                        {context.data.map(c => (
-                            <tr key={c.id}>
-                                <td>{c.commdesc}</td>
-                                <td>
-                                    <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
-                                </td>
-                                <td>
-                                    <button className='update-btn' onClick={() => context.updateUpdate(c.commdesc, c.id)}>
-                                        <EditIcon />
-                                    </button>
-                                </td>
-                                <td>
-                                    <button  className='delete-btn' onClick={() => context.updateDelete(c.commdesc, c.id)}>
-                                        <DeleteOutlineIcon />
-                                    </button>
-                                </td>
+                        {(context.data[0])
+                            ? context.data.map(c => (
+                                <tr key={c.id}>
+                                    <td>{c.commdesc}</td>
+                                    <td>
+                                        <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
+                                    </td>
+                                    <td>
+                                        <button className='update-btn' onClick={() => context.updateUpdate(c.commdesc, c.id)}>
+                                            <EditIcon />
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button  className='delete-btn' onClick={() => context.updateDelete(c.commdesc, c.id)}>
+                                            <DeleteOutlineIcon />
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                            : <tr>
+                                <td className="nothing-to-display">No Comment Types to Display</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                        ))}
+                        }
                         </tbody>
                     </table>
                     <p className="entry-count">Showing {context.data.length} of {context.data.length} entries</p>

@@ -79,27 +79,35 @@ class Alerts extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.alerts.map(a => (
-                        <tr key={a.data.id}>
-                            <td className="mark-completed" id={a.data.id}>
-                                <RadioButtonUncheckedIcon onClick={() => this.handleCompleted(a.data.id)} />
-                            </td>
-                            <td>
-                                {this.state.commtypes.map(c => {
-                                    if(c.id === a.data.commtype_id){
-                                        return c.commdesc
-                                    }
-                                    else {
-                                        return null
-                                    }
-                                })}
-                            </td>
-                            <td>{a.data.assetcomment}</td>
-                            <td>
-                                <Moment format="YYYY/MM/DD">{a.data.requestdate}</Moment>
-                            </td>
-                        </tr>
-                        ))}
+                        {(this.state.alerts[0])
+                            ? this.state.alerts.map(a => (
+                            <tr key={a.data.id}>
+                                <td className="mark-completed" id={a.data.id}>
+                                    <RadioButtonUncheckedIcon onClick={() => this.handleCompleted(a.data.id)} />
+                                </td>
+                                <td>
+                                    {this.state.commtypes.map(c => {
+                                        if(c.id === a.data.commtype_id){
+                                            return c.commdesc
+                                        }
+                                        else {
+                                            return null
+                                        }
+                                    })}
+                                </td>
+                                <td>{a.data.assetcomment}</td>
+                                <td>
+                                    <Moment format="YYYY/MM/DD">{a.data.requestdate}</Moment>
+                                </td>
+                            </tr>
+                            )) 
+                            : <tr>
+                                <td className="nothing-to-display">No Alerts to Display</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
                 <p className="entry-count">Showing {this.state.alerts.length} of {this.state.alerts.length} entries</p>

@@ -156,27 +156,35 @@ class Process extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {context.process.map(p => {
-                                return (
-                                <tr key={p.data.id}>
-                                    <td>{p.data.processdesc}</td>
-                                    <td>
-                                        <Link className="view" to={`/dashboard/process/${p.data.id}`}>
-                                            <PageviewIcon />
-                                        </Link>
-                                    </td>
-                                    <td>
-                                        <button className='update-btn' onClick={() => context.updateUpdate(p.data.processdesc, p.data.id)}>
-                                            <EditIcon />
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button className='delete-btn' onClick={() => context.updateDelete(p.data.processdesc, p.data.id)}>
-                                            <DeleteOutlineIcon />
-                                        </button>
-                                    </td>
+                            {(context.process[0])
+                                ? context.process.map(p => {
+                                    return (
+                                    <tr key={p.data.id}>
+                                        <td>{p.data.processdesc}</td>
+                                        <td>
+                                            <Link className="view" to={`/dashboard/process/${p.data.id}`}>
+                                                <PageviewIcon />
+                                            </Link>
+                                        </td>
+                                        <td>
+                                            <button className='update-btn' onClick={() => context.updateUpdate(p.data.processdesc, p.data.id)}>
+                                                <EditIcon />
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button className='delete-btn' onClick={() => context.updateDelete(p.data.processdesc, p.data.id)}>
+                                                <DeleteOutlineIcon />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                )})
+                                : <tr>
+                                    <td className="nothing-to-display">No Processes to Display</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
-                            )})}
+                            }
                         </tbody>
                     </table>
                     <p className="entry-count">Showing {context.process.length} of {context.process.length} entries</p>

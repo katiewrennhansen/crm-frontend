@@ -52,20 +52,30 @@ class Maintenance extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.data.map(p => (
-                        <tr key={p.data.id}>
-                            <td>{p.data.typeservice}</td>
-                            <td>{p.data.name}</td>
-                            <td>{p.data.contact}</td>
-                            <td>{p.data.email}</td>
-                            <td>{p.data.phone}</td>
-                            <td className='update'>
-                                <Link className="update-btn" to={`/broker/maintenance/${p.data.id}`}>
-                                    <PageviewIcon />
-                                </Link>
-                            </td>
-                        </tr>
-                        ))}
+                        {(this.state.data[0]) 
+                            ? this.state.data.map(p => (
+                            <tr key={p.data.id}>
+                                <td>{p.data.typeservice}</td>
+                                <td>{p.data.name}</td>
+                                <td>{p.data.contact}</td>
+                                <td>{p.data.email}</td>
+                                <td>{p.data.phone}</td>
+                                <td className='update'>
+                                    <Link className="close-icon" to={`/broker/maintenance/${p.data.id}`}>
+                                        <PageviewIcon />
+                                    </Link>
+                                </td>
+                            </tr>
+                            ))
+                            : <tr>
+                                <td className="nothing-to-display">No Providers to Display</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
                 <p className="entry-count">Showing {this.state.data.length} of {this.state.data.length} entries</p>

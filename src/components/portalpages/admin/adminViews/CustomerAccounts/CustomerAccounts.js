@@ -104,31 +104,41 @@ class CustomerAccounts extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.customers.map(c => {
-                                const id = c.data.id
-                                return (
-                                    <tr id={id} key={id}>
-                                        <td>{c.data.name}</td>
-                                        <td>{c.data.email}</td>
-                                        <td>{c.data.category}</td>
-                                        <td>{c.data.status}</td>
-                                        <td >
-                                            <Link className="view" to={`/dashboard/customer-accounts/${id}`}>
-                                                <PageviewIcon />
-                                            </Link>
-                                        </td>
-                                        <td>
-                                            <button 
-                                                className='delete-btn' 
-                                                id={`delete${id}`} 
-                                                onClick={() => this.deactivateCustomer(id)}
-                                            >
-                                                <NotInterestedIcon />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                )
-                            })}
+                            {(this.state.customers[0])
+                                ? this.state.customers.map(c => {
+                                    const id = c.data.id
+                                    return (
+                                        <tr id={id} key={id}>
+                                            <td>{c.data.name}</td>
+                                            <td>{c.data.email}</td>
+                                            <td>{c.data.category}</td>
+                                            <td>{c.data.status}</td>
+                                            <td >
+                                                <Link className="view" to={`/dashboard/customer-accounts/${id}`}>
+                                                    <PageviewIcon />
+                                                </Link>
+                                            </td>
+                                            <td>
+                                                <button 
+                                                    className='delete-btn' 
+                                                    id={`delete${id}`} 
+                                                    onClick={() => this.deactivateCustomer(id)}
+                                                >
+                                                    <NotInterestedIcon />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )
+                                })
+                                : <tr>
+                                    <td className="nothing-to-display">No Customers to Display</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <p className="entry-count">Showing {this.state.customers.length} of {this.state.customers.length} entries</p>

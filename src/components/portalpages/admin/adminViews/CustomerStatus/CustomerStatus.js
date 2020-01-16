@@ -151,24 +151,32 @@ class CustomerStatus extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {context.data.map(c => (
-                            <tr key={c.id}>
-                                <td>{c.csdesc}</td>
-                                <td>
-                                    <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
-                                </td>
-                                <td>
-                                    <button className='update-btn' onClick={() => context.updateUpdate(c.csdesc, c.id)}>
-                                        <EditIcon />
-                                    </button>
-                                </td>
-                                <td>
-                                    <button className='delete-btn' onClick={() => context.updateDelete(c.csdesc, c.id)}>
-                                        <DeleteOutlineIcon />
-                                    </button>
-                                </td>
-                            </tr>
-                            ))}
+                            {(context.data[0])
+                                ? context.data.map(c => (
+                                <tr key={c.id}>
+                                    <td>{c.csdesc}</td>
+                                    <td>
+                                        <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
+                                    </td>
+                                    <td>
+                                        <button className='update-btn' onClick={() => context.updateUpdate(c.csdesc, c.id)}>
+                                            <EditIcon />
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button className='delete-btn' onClick={() => context.updateDelete(c.csdesc, c.id)}>
+                                            <DeleteOutlineIcon />
+                                        </button>
+                                    </td>
+                                </tr>
+                                ))
+                                : <tr>
+                                    <td className="nothing-to-display">No Customer Statuses to Display</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <p className="entry-count">Showing {context.data.length} of {context.data.length} entries</p>

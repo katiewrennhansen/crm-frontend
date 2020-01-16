@@ -54,21 +54,29 @@ class Contacts extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.customers.map(c => {
-                                const id = c.data.id
-                                return (
-                                    <tr id={id} key={id}>
-                                        <td>{c.data.name}</td>
-                                        <td>{c.data.email}</td>
-                                        <td>{c.data.status}</td>
-                                        <td className='update'>
-                                            <Link className="update-btn" to={`/broker/contacts/${id}`}>
-                                                <PageviewIcon />
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                )
-                            })}
+                            {(this.state.customers[0])
+                                ? this.state.customers.map(c => {
+                                    const id = c.data.id
+                                    return (
+                                        <tr id={id} key={id}>
+                                            <td>{c.data.name}</td>
+                                            <td>{c.data.email}</td>
+                                            <td>{c.data.status}</td>
+                                            <td className='update'>
+                                                <Link className="close-icon" to={`/broker/contacts/${id}`}>
+                                                    <PageviewIcon />
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    )
+                                })
+                                : <tr>
+                                    <td className="nothing-to-display">No Contacts to Display</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <p className="entry-count">Showing {this.state.customers.length} of {this.state.customers.length} entries</p>

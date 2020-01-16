@@ -146,25 +146,33 @@ class AssetType extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                        {context.data.map(a => {
-                            return (
-                            <tr key={a.id}>
-                                <td>{a.assettdesc}</td>
-                                <td>
-                                    <Moment format="YYYY/MM/DD">{a.created_at}</Moment>
-                                </td>
-                                <td>
-                                    <button className='update-btn' onClick={() => context.updateUpdate(a.assettdesc, a.id)}>
-                                        <EditIcon />
-                                    </button>
-                                </td>
-                                <td>
-                                    <button className='delete-btn' onClick={() => context.updateDelete(a.assettdesc, a.id)}>
-                                        <DeleteOutlineIcon />
-                                    </button>
-                                </td>
+                        {(context.data[0])
+                            ? context.data.map(a => {
+                                return (
+                                <tr key={a.id}>
+                                    <td>{a.assettdesc}</td>
+                                    <td>
+                                        <Moment format="YYYY/MM/DD">{a.created_at}</Moment>
+                                    </td>
+                                    <td>
+                                        <button className='update-btn' onClick={() => context.updateUpdate(a.assettdesc, a.id)}>
+                                            <EditIcon />
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button className='delete-btn' onClick={() => context.updateDelete(a.assettdesc, a.id)}>
+                                            <DeleteOutlineIcon />
+                                        </button>
+                                    </td>
+                                </tr>
+                            )})
+                            :<tr>
+                                <td className="nothing-to-display">No Asset Types to Display</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                        )})}
+                        }
                         </tbody>
                     </table>
                     <p className="entry-count">Showing {context.data.length} of {context.data.length} entries</p>

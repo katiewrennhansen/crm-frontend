@@ -151,24 +151,33 @@ class Maintenance extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {context.data.map(m => (
-                            <tr key={m.id}>
-                                <td>{m.maindescr}</td>
-                                <td>
-                                    <Moment format="YYYY/MM/DD">{m.created_at}</Moment>
-                                </td>
-                                <td>
-                                    <button className='update-btn' onClick={() => context.updateUpdate(m.maindescr, m.id)}>
-                                        <EditIcon />
-                                    </button>
-                                </td>
-                                <td>
-                                    <button className='delete-btn' onClick={() => context.updateDelete(m.maindescr, m.id)}>
-                                        <DeleteOutlineIcon />
-                                    </button>
-                                </td>
-                            </tr>
-                            ))}
+                            {(context.data[0]) 
+                                ? context.data.map(m => (
+                                <tr key={m.id}>
+                                    <td>{m.maindescr}</td>
+                                    <td>
+                                        <Moment format="YYYY/MM/DD">{m.created_at}</Moment>
+                                    </td>
+                                    <td>
+                                        <button className='update-btn' onClick={() => context.updateUpdate(m.maindescr, m.id)}>
+                                            <EditIcon />
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button className='delete-btn' onClick={() => context.updateDelete(m.maindescr, m.id)}>
+                                            <DeleteOutlineIcon />
+                                        </button>
+                                    </td>
+                                </tr>
+                                ))
+                                : <tr>
+                                    <td className="nothing-to-display">No Maintenance Types to Display</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <p className="entry-count">Showing {context.data.length} of {context.data.length} entries</p>

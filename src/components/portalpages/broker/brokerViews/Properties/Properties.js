@@ -34,7 +34,8 @@ class Properties extends Component {
                     </Link>
                 </div>
                 <div className='broker-properties-grid'>
-                    {this.context.assets.map(a => {
+                    {(this.context.assets[0])
+                    ? this.context.assets.map(a => {
                         return (
                             <div key={a.id}>
                                 <PropertyCard 
@@ -43,7 +44,9 @@ class Properties extends Component {
                                 />
                             </div>
                         )
-                    })}
+                    })
+                    : <p className="nothing-to-display">Click the + icon to add a new listing</p>
+                    }
                 </div>
             </div>
         )
