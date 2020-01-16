@@ -6,7 +6,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ImageUploader from 'react-images-upload'
 import CloseIcon from '@material-ui/icons/Close';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import PageviewIcon from '@material-ui/icons/Pageview';
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 
 class Cost extends Component {
     static contextType = BrokerContext
@@ -224,7 +224,7 @@ class Cost extends Component {
                                     <td>
                                         {(url 
                                             ? <a href={`${url}`} className="close-icon" target="_blank" rel="noopener noreferrer">
-                                                <PageviewIcon />
+                                                <InsertDriveFileIcon />
                                             </a> 
                                             : null)
                                         }

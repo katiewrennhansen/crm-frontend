@@ -52,9 +52,9 @@ class SingleProperty extends Component {
                         <h4>Costs</h4>
                         <div className={(this.state.active === 'cost' ? 'underline active' : 'underline')}></div>
                     </Link>
-                    <Link to={`/user/properties/${this.props.id}/contract-history`} onClick={() => this.setActive('cost')}>
-                        <h4>Costs</h4>
-                        <div className={(this.state.active === 'cost' ? 'underline active' : 'underline')}></div>
+                    <Link to={`/user/properties/${this.props.id}/contract-history`} onClick={() => this.setActive('contract-history')}>
+                        <h4>Contract History</h4>
+                        <div className={(this.state.active === 'contract-history' ? 'underline active' : 'underline')}></div>
                     </Link>
                 </nav>
 
@@ -95,7 +95,7 @@ class SingleProperty extends Component {
                 />
 
                 <Route 
-                    exact path={`/user/properties/${this.props.id}/cosntract-hostory`}
+                    exact path={`/user/properties/${this.props.id}/contract-history`}
                     render={props => (
                         <ErrorBoundary>
                             <ContractHistory id={this.props.id} />

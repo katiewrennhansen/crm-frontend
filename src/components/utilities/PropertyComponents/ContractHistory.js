@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
 import ApiService from '../../../services/api-service'
-import PageviewIcon from '@material-ui/icons/Pageview';
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 
 class ContractHistory extends Component {
     static contextType = BrokerContext
@@ -55,7 +55,7 @@ class ContractHistory extends Component {
                                     <td>
                                         {(f.data.contract_url 
                                             ? <a href={`${f.data.contract_url}`} className="close-icon" target="_blank" rel="noopener noreferrer">
-                                                <PageviewIcon />
+                                                <InsertDriveFileIcon />
                                             </a> 
                                             : null)
                                         }

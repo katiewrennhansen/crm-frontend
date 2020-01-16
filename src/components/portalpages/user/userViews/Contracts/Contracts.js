@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import config from '../../../../../config'
+import ApiService from '../../../../../services/api-service'
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 
 class Contracts extends Component {
@@ -6,13 +8,42 @@ class Contracts extends Component {
         super(props)
         this.state = {
             error: null,
-            contracts: []
+            contracts: [],
+            assets: []
         }
     }
 
-    viewFile = id => {
-        console.log('file clicked')
+    setContracts = contracts => {
+        this.setState({
+            contracts
+        })
     }
+
+    setAssets = assets => {
+        this.setState({
+            assets
+        })
+    }
+
+    componentDidMount(){
+        const endpoint = `${config.API_ENDPOINT}/assets/0/contracthistories`
+        ApiService.getDataHalf(endpoint)
+            .then(data => {
+                this.setContracts(data.histories)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        const assets = `${config.API_ENDPOINT}/assets`
+        ApiService.getDataHalf(assets)
+            .then(data => {
+                this.setAssets(data.assets)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
 
     render(){
         return (
@@ -21,9 +52,9 @@ class Contracts extends Component {
                 <table className='data-table'>
                     <thead>
                         <tr>
-                            <th>Date Issued</th>
-                            <th>Title</th>
-                            <th>Status</th>
+                            <th>Property</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -33,16 +64,22 @@ class Contracts extends Component {
                         ?
                             this.state.contracts.map(c => {
                                 return (
-                                    <tr key={c.id}>
-                                        <td>Date Issued</td>
-                                        <td>Name</td>
-                                        {/* <td>{(c.confirmatindate) ? `Completed ${c.requestdate}` : 'Pending'}</td>  */}
-                                        <td>Status</td>
+                                    <tr key={c.data.id}>
+                                        <td>
+                                            {this.state.assets.map(a => {
+                                                if(a.data.id === c.data.asset_id){
+                                                    return a.data.adescription4  
+                                                } else {
+                                                    return null
+                                                }
+                                            })}
+                                        </td>
+                                        <td>{c.data.startdate}</td>
+                                        <td>{c.data.enddate}</td>
                                         <td className="action-icon">
-                                            <InsertDriveFileIcon 
-                                                onClick={this.viewFile}
-                                                className="active-icon"
-                                            />
+                                            <a href={`${c.data.contract_url}`} className="close-icon" target="_blank" rel="noopener noreferrer">
+                                                <InsertDriveFileIcon />
+                                            </a> 
                                         </td>                                       
                                     </tr>
                                 )})
