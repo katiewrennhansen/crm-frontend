@@ -22,6 +22,7 @@ import ContactPage from '../brokerViews/Contacts/ContactPage'
 import EditContact from '../brokerViews/Contacts/EditContact'
 import AddContact from '../brokerViews/Contacts/AddContact'
 import AddReminder from '../brokerViews/Reminders/AddReminder'
+import CheckIn from '../../../utilities/PropertyComponents/CheckIn'
 import './BrokerHome.css'
 
 
@@ -138,6 +139,18 @@ class BrokerHome extends Component {
                                     const id = history.match.params.id;
                                     return (
                                     <EditProperty 
+                                        id={id}
+                                        history={history}
+                                    />
+                                    )
+                                }}
+                            />
+                            <Route 
+                                exact path='/broker/property/:id/checkin' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    return (
+                                    <CheckIn 
                                         id={id}
                                         history={history}
                                     />

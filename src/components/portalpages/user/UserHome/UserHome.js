@@ -13,6 +13,8 @@ import Visits from '../userViews/Visits/Visits'
 import './UserHome.css'
 import Payments from '../userViews/Payments/Payments'
 import Contracts from '../userViews/Contracts/Contracts'
+import CheckIn from '../../../utilities/PropertyComponents/CheckIn'
+
 
 class UserHome extends Component {
     constructor(props){
@@ -109,6 +111,18 @@ class UserHome extends Component {
                                     const id = history.match.params.id;
                                     return (
                                     <EditProperty 
+                                        id={id}
+                                        history={history}
+                                    />
+                                    )
+                                }}
+                            />
+                            <Route 
+                                exact path='/broker/property/:id/checkin' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    return (
+                                    <CheckIn 
                                         id={id}
                                         history={history}
                                     />
