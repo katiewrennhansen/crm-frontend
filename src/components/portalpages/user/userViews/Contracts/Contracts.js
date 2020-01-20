@@ -29,7 +29,9 @@ class Contracts extends Component {
         const endpoint = `${config.API_ENDPOINT}/assets/0/contracthistories`
         ApiService.getDataHalf(endpoint)
             .then(data => {
-                this.setContracts(data.histories)
+                if(data.histories){
+                    this.setContracts(data.histories)
+                }
             })
             .catch(error => {
                 console.log(error)
@@ -59,8 +61,7 @@ class Contracts extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                        (this.state.contracts[0]) 
+                        {(this.state.contracts[0]) 
                         ?
                             this.state.contracts.map(c => {
                                 return (

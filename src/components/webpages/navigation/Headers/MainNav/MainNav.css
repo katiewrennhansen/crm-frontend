@@ -63,7 +63,7 @@ nav {
 .register,
 .logout,
 .account {
-    border-radius: 5px;
+    border-radius: 3px;
     margin-top: 14px;
     text-align: center;
 }

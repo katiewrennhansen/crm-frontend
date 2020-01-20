@@ -107,6 +107,7 @@ class Maintenance extends Component {
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
                         </tr>
                     }
                     </tbody>
