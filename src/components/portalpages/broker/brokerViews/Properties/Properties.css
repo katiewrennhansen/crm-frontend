@@ -26,9 +26,12 @@ td.delete {
     padding-right: 42px;
 }
 
+.broker-properties {
+    padding: 20px;
+}
+
 .broker-properties-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
     padding-bottom: 60px;
 }
@@ -141,6 +144,7 @@ td.delete {
 .bottom-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
 }
 
 .asset-card div {
@@ -148,7 +152,7 @@ td.delete {
 }
 
 .asset-card p {
-    margin: 0;
+    margin: 0 8px 0 0;
     align-self: flex-end;
 }
 
@@ -178,8 +182,8 @@ td.delete {
 
 .manage-listing {
     border: 1px solid gray;
-    border-radius: 5px;
-    padding: 8px 18px;
+    border-radius: 3px;
+    padding: 5px;
     box-shadow: 1px 1px 2px rgb(199, 199, 199);
 }
 
@@ -196,8 +200,13 @@ td.delete {
     padding-bottom: 100px;
 }
 
+.add-property,
+.edit-property {
+    padding: 0 10px;
+}
+
 .add-property-form {
-    padding: 30px 50px 60px;
+    padding: 30px 0;
     background: white;
     border-radius: 5px;
     margin-bottom: 100px;
@@ -205,7 +214,7 @@ td.delete {
 }
 
 .inner-form-content {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -368,6 +377,20 @@ table {
 }
 
 
+@media (min-width: 768px){
+    .broker-properties-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .manage-listing {
+        padding: 8px 18px;
+    }
+    .add-property-form {
+        padding: 30px 50px 60px;
+    }
+    .inner-form-content {
+        width: 80%;
+    }
+}
 @media (min-width: 1200px){
     .broker-properties-grid {
         grid-template-columns: repeat(3, 1fr);

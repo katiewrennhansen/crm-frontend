@@ -64,8 +64,6 @@ select {
     appearance: none;
     border: 1px sold gray;
     border-radius: 2px;
-    /* width: 75%; */
-    /* background: url(https://image.flaticon.com/icons/svg/32/32195.svg) 95% / 5% no-repeat #fff; */
 }
 
 
@@ -80,6 +78,11 @@ CONTAINER STYLES
 .data-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    padding: 20px;
+}
+
+.dash-nav {
+    position: static;
 }
 
 /* ================
