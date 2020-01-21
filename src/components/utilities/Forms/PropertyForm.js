@@ -261,6 +261,10 @@ class PropertyForm extends Component {
                                     })}
                                 </select>
                             </div>
+                            <div>
+                                <label htmlFor="warranty">Warranty<span className="required">*</span></label>
+                                <input type="number" name="warranty" defaultValue={asset.warranty}></input>
+                            </div>
                         </div>
                         
                         {(this.state.customers[0]) 

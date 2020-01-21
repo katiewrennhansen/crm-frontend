@@ -112,6 +112,10 @@ class PropertyInfo extends Component {
                             <p>{asset.endorsment}</p>
                         </div>
                         <div className="property-info">
+                            <p>Warranty:</p>
+                            <p>${asset.warranty}</p>
+                        </div>
+                        <div className="property-info">
                             <p>Broker:</p>
                             <p>{asset.broker}</p>
                         </div>

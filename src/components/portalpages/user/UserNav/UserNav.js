@@ -34,6 +34,13 @@ class UserNav extends Component {
                     >
                         <p className='account'>Website</p>
                     </Link>
+                    <Link 
+                        className='account-nav-link' 
+                        to='/user/account-settings' 
+                        style={{textDecoration: 'none'}}
+                    >
+                        <p className='account'>Profile</p>
+                    </Link>
                     <button 
                         className='admin-logout' 
                         onClick={this.logout}

@@ -10,9 +10,11 @@ class Features extends Component {
     constructor(props){
         super(props)
         this.state = {
+            error: null,
             features: [],
             featuretypes: [],
-            loading: false
+            loading: false,
+            deliver: ""
         }
     }
 
@@ -47,6 +49,12 @@ class Features extends Component {
             })
     }
 
+    setValue = e => {
+        this.setState({
+            deliver: e.target.value
+        })
+    }
+
     addFeature = (e) => {
         e.preventDefault()
         
@@ -54,7 +62,20 @@ class Features extends Component {
         
         const newFeature = {
             featuredesc: e.target.description.value,
-            featuretype_id: e.target.feature_type.value
+            featuretype_id: e.target.feature_type.value,
+            quantity: e.target.quantity.value,
+            condition: e.target.condition.value,
+            deliver: this.state.deliver
+        }
+
+        for (const key in newFeature) {
+            if(newFeature[key] === ''){
+                this.setState({
+                    error: 'Please fill out all fields',
+                    loading: false
+                })
+                return
+            }
         }
 
         const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/features`
@@ -67,11 +88,13 @@ class Features extends Component {
                         this.toggleForm()
                     })
             })
-            .catch(error => {
-                console.log(error)
+            .then(() => {
                 this.setState({
                     loading: false
                 })
+            })
+            .catch(error => {
+                console.log(error)
             })
 
         e.target.description.value = ""
@@ -110,6 +133,7 @@ class Features extends Component {
                     <button className='add' id="f-btn" onClick={this.toggleForm}>+</button>
                 </div>
                 <form className="sp-form hidden" id="feature-form" onSubmit={(e) => {this.addFeature(e)}}>
+                    {(this.state.error) ? <div className="error">{this.state.error}</div> : null}
                     <div className="form-group">
                         <label htmlFor="feature_type">Feature Type: </label>
                         <select name="feature_type">
@@ -125,6 +149,25 @@ class Features extends Component {
                         <label htmlFor="description">Description: </label>
                         <input type="text" name="description"></input>
                     </div>
+                    <div className="form-group row">
+                        <div>
+                            <label htmlFor="quantity">Quantity: </label>
+                            <input type="number" name="quantity"></input>
+                        </div>
+                        <div>
+                            <label htmlFor="condition">Condition: </label>
+                            <input type="text" name="condition"></input>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label>Deliver</label>
+                        <div className="radio-grid" onChange={(e) => this.setValue(e)}>
+                            <input type="radio" name="yes" value="true"></input>
+                            <label htmlFor="yes">Yes</label>
+                            <input type="radio" name="yes" value="false"></input>
+                            <label htmlFor="yes">No</label>
+                        </div>
+                    </div>
                     {(this.state.loading)
                             ? <div className="loading-property">
                                 <CircularProgress />
@@ -139,6 +182,8 @@ class Features extends Component {
                         <tr>
                             <th>Type</th>
                             <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Condition</th>
                             <th className="delete-heading">Delete</th>
                         </tr>
                     </thead>
@@ -157,6 +202,8 @@ class Features extends Component {
                                         })}
                                     </td>
                                     <td>{f.featuredesc}</td>
+                                    <td>{f.quantity}</td>
+                                    <td>{f.condition}</td>
                                     <td className="delete">
                                         <DeleteOutlineIcon className="delete-btn" onClick={() => this.deleteFeature(f.id)} />
                                     </td>

@@ -88,7 +88,8 @@ class EditProperty extends Component {
             rentadjustment: e.target.rentadjustment.value,
             endorsment: e.target.endorsment.value,
             interestrent: e.target.interestrent.value,
-            daysbeforeexp: e.target.daysbeforeexp.value
+            daysbeforeexp: e.target.daysbeforeexp.value,
+            warranty: e.target.value.warranty
         }
 
         for (const key in updatedFields) {
