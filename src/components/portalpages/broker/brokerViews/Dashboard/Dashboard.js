@@ -34,8 +34,8 @@ class Dashboard extends Component {
         const endpoint = `http://crmmia-api.herokuapp.com/api/users/${id}`
         ApiService.getDataHalf(endpoint)
             .then(data => {
-                this.setFirst(data.firstname)
-                this.setLast(data.lastname)
+                this.setFirst(data.data.firstname)
+                this.setLast(data.data.lastname)
             })
             .catch(error => {
                 console.log(error)

@@ -133,6 +133,7 @@ class PropertyInfo extends Component {
                 ? <a className="contract-link submit" href={asset.contract_url} target="_blank" rel="noopener noreferrer">View Contract</a>
                 : null
                 }
+                <Link className="contract-link submit" to={`/${type}/property/${this.props.id}/checkin`}>Check In Form</Link>   
             </div>
         )
     }

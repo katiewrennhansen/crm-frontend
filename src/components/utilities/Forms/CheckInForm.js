@@ -1,80 +1,108 @@
-import React, { Component } from 'react'
-import ApiService from '../../../services/api-service'
-import config from '../../../config'
-import '../../portalpages/broker/brokerViews/Properties/Properties.css'
-import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
+import React from 'react'
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 
-class CheckInForm extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            asset: [],
-            signature: '',
-            date: ''
-        }
+// const styles = StyleSheet.create({
+//     page: {
+//         backgroundColor: 'white',
+//         fontSize: '20px',
+//         color: 'black',
+//         padding: '20px'
+//     },
+//     heading: {
+//         fontSize: '30px'
+//     }
+// })
+
+const styles = StyleSheet.create({
+    body: {
+      paddingTop: 35,
+      paddingBottom: 65,
+      paddingHorizontal: 35,
+    },
+    title: {
+      fontSize: 18,
+      textAlign: 'center',
+    },
+    subtitle: {
+      fontSize: 14,
+      margin: 12,
+      textAlign: 'center'
+    },
+    text: {
+      margin: 5,
+      fontSize: 12,
+      fontFamily: 'Times-Roman'
+    },
+    header: {
+        marginTop: 30,
+        fontSize: 12,
+        color: '#273443',
+        backgroundColor: '#d5dde6',
+        padding: 8,
+        borderRadius: 3
+    },
+    signature: {
+        marginTop: 50
+    },
+    sign: {
+        display: 'inline',
+        margin: 5,
+        fontSize: 12,
+        fontFamily: 'Times-Roman'
     }
+  });
 
-    setAsset = asset => {
-        this.setState({
-            asset
-        })
-    }
 
-    handleChange = ({ target: {value, name }}) => this.setState({ [name]: value })
 
-    componentDidMount(){
-        ApiService.getDataHalf(`${config.API_ENDPOINT}/assets/${this.props.id}`)
-            .then(data => {
-                this.setAsset(data.data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
-
-    printDocument(e) {
-        e.preventDefault()
-        const input = document.getElementById('divToPrint');
-        html2canvas(input)
-          .then((canvas) => {
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF();
-            pdf.addImage(imgData, 'JPEG', 0, 0);
-            // pdf.output('dataurlnewwindow');
-            pdf.save("download.pdf");
-            console.log(pdf)
-          })
-        ;
-      }
-
-    render(){
-        return (
-            <div>
-            <form className="add-property-form" onSubmit={(e) => this.printDocument(e)}>
-                <div className="inner-form-content">
-                <p>Please review the following information carefully before signing.</p>
-                <div id="divToPrint" className="mt4">
-                    <h3>{this.state.asset.adescription4}</h3>
-
-                    <div className="form-group row" >
-                        <div>
-                            <label htmlFor="signature">Signature<span className="required">*</span></label>
-                            <input type="text" name="signature" onChange={this.handleChange} required></input>
-                        </div>
-                        <div>
-                            <label htmlFor="date">Date<span className="required">*</span></label>
-                            <input type="date" name="date" onChange={this.handleChange} required></input>
-                        </div>
-                    </div>
-                    </div>
-                    <input type="submit" class="submit" />
-                </div>
-            </form>
-            </div>
-        )
-    }
+export default function CheckInForm(props){
+    console.log(props)
+    return (
+        <Document>
+            <Page size="A4" style={styles.body}>
+                <View>
+                    <Text style={styles.title}>{props.asset.adescription4}</Text>
+                    <Text style={styles.subtitle}>
+                        {`${props.asset.adescription5}, ${props.asset.adescription2} ${props.asset.adescription3}`}
+                    </Text>
+                </View>
+                <View>
+                    <Text style={styles.header}>Tenant Information</Text>
+                    <Text style={styles.text}>Name: {props.asset.tenant}</Text>
+                    <Text style={styles.text}>Email: {props.user.email}</Text>
+                    <Text style={styles.text}>Phone: {props.user.phone}</Text>
+                </View>
+                <View>
+                    <Text style={styles.header}>Entrega</Text>
+                    {props.asset.features
+                        ? props.asset.features.map(f => {
+                            return (
+                                <Text style={styles.text}>
+                                    {`${f.type} - ${f.description}`}
+                                </Text>
+                            )
+                        })
+                    : null
+                    }
+                </View>
+                <View>
+                    <Text style={styles.header}>Features</Text>
+                    {props.asset.features
+                        ? props.asset.features.map(f => {
+                            return (
+                                <Text style={styles.text}>
+                                    {`${f.type} - ${f.description}`}
+                                </Text>
+                            )
+                        })
+                    : null
+                    }
+                </View>
+                <View style={styles.signature}>
+                    <Text style={styles.text}>Please sign and date below</Text>
+                    <Text style={styles.text}>Signature ___________________________________                     Date ________________________</Text>
+                </View>
+            </Page>
+        </Document>
+    )
 }
-
-export default CheckInForm
