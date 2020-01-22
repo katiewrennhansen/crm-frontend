@@ -51,6 +51,14 @@ td.delete {
     text-decoration: none;
     align-self: flex-start;
     justify-self: center;
+    display: grid;
+}
+
+.contract-link a {
+    display: block;
+    margin: 12px 0;
+    text-decoration: none;
+    text-align: center;
 }
 
 .edit,

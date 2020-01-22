@@ -2,18 +2,6 @@ import React from 'react'
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 
 
-// const styles = StyleSheet.create({
-//     page: {
-//         backgroundColor: 'white',
-//         fontSize: '20px',
-//         color: 'black',
-//         padding: '20px'
-//     },
-//     heading: {
-//         fontSize: '30px'
-//     }
-// })
-
 const styles = StyleSheet.create({
     body: {
       paddingTop: 35,
@@ -74,26 +62,34 @@ export default function CheckInForm(props){
                 </View>
                 <View>
                     <Text style={styles.header}>Entrega</Text>
-                    {props.asset.features
-                        ? props.asset.features.map(f => {
-                            return (
-                                <Text style={styles.text}>
-                                    {`${f.type} - ${f.description}`}
-                                </Text>
-                            )
+                    {props.features
+                        ? props.features.map((f, i) => {
+                            if(f.deliver){
+                                return (
+                                    <Text style={styles.text}>
+                                        {`${props.asset.features[i].type} - ${f.quantity}`}
+                                    </Text>
+                                )
+                            } else {
+                                return null
+                            }
                         })
                     : null
                     }
                 </View>
                 <View>
                     <Text style={styles.header}>Features</Text>
-                    {props.asset.features
-                        ? props.asset.features.map(f => {
-                            return (
-                                <Text style={styles.text}>
-                                    {`${f.type} - ${f.description}`}
-                                </Text>
-                            )
+                    {props.features
+                        ? props.features.map((f, i) => {
+                            if(!f.deliver){
+                                return (
+                                    <Text style={styles.text}>
+                                        {`${props.asset.features[i].type} - ${f.condition}`}
+                                    </Text>
+                                )
+                            } else {
+                                return null
+                            }
                         })
                     : null
                     }

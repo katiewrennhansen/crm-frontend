@@ -6,6 +6,7 @@ import BrokerContext from '../../../contexts/BrokerContext'
 import CloseIcon from '@material-ui/icons/Close';
 import CheckInForm from '../Forms/CheckInForm'
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import ImageUploader from 'react-images-upload'
 
 class CheckIn extends Component {
     static contextType = BrokerContext
@@ -17,7 +18,9 @@ class CheckIn extends Component {
             asset: [],
             signature: '',
             date: '',
-            user: []
+            user: [],
+            features: [],
+            files: []
         }
     }
 
@@ -26,9 +29,30 @@ class CheckIn extends Component {
             asset
         })
     }
+
     setUser = user => {
         this.setState({
             user
+        })
+    }
+
+    setFeatures = features => {
+        this.setState({
+            features
+        })
+    }
+
+    fileSelectedHandler = (file) => {
+        this.setState({
+            files: [...file]
+        })
+    }
+
+    removeImage = (file, index) => {
+        let newPics = this.state.files
+        newPics.splice(index, 1);
+        this.setState({
+            files: [...newPics]
         })
     }
 
@@ -44,6 +68,41 @@ class CheckIn extends Component {
             .catch(error => {
                 console.log(error)
             })
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/assets/${this.props.id}/features`)
+            .then(data => {
+                this.setFeatures(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    editCheckin = (e) => {
+        e.preventDefault()
+        this.setState({ loading: true })
+        const formData = new FormData();
+
+        formData.append('checkin', this.state.files[0])
+
+        fetch(`${config.API_ENDPOINT}/assets/${this.props.id}`, {
+            method: 'PATCH',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+            })
+            .then(res => {
+                if(!res.ok)
+                    return res.json().then(error => Promise.reject(error))
+                return res
+            })
+            .then(data => {
+                this.props.history.history.push(`/broker/properties/${this.props.id}`)
+            })
+            .catch(error => {
+                console.log(error)
+                this.setState({ loading: false })
+            })
     }
 
     render(){
@@ -58,11 +117,13 @@ class CheckIn extends Component {
                     </Link>
                 </div>
                 <div>
-                    {(this.state.asset.assetdesc && this.state.user.email) && <PDFDownloadLink
+                    <p>Download and sign checkin form and upload it to the portal.</p>
+                    {(this.state.asset.assetdesc && this.state.user.email && this.state.features[0]) && <PDFDownloadLink
                         document={
                             <CheckInForm
                                 asset={this.state.asset}
                                 user={this.state.user}
+                                features={this.state.features}
                             />
                         }
                         fileName="checkin.pdf"
@@ -70,28 +131,50 @@ class CheckIn extends Component {
                         >
                         Download PDF
                     </PDFDownloadLink>}
-                    
                 </div>
-            {/* <form className="add-property-form" onSubmit={(e) => this.printDocument(e)}>
-                <div className="inner-form-content">
-                <p>Please review the following information carefully before signing.</p>
-                <div id="divToPrint" className="mt4">
-                    <h3>{this.state.asset.adescription4}</h3>
-
-                    <div className="form-group row" >
+                <form onSubmit={(e) => this.editCheckin(e)}>
+                    <div className="form-group">
                         <div>
-                            <label htmlFor="signature">Signature<span className="required">*</span></label>
-                            <input type="text" name="signature" onChange={this.handleChange} required></input>
-                        </div>
-                        <div>
-                            <label htmlFor="date">Date<span className="required">*</span></label>
-                            <input type="date" name="date" onChange={this.handleChange} required></input>
+                        <ImageUploader
+                            withIcon={true}
+                            buttonText='Add Checkin Form'
+                            onChange={(e) => this.fileSelectedHandler(e)}
+                            imgExtension={['.pdf']}
+                            accept="application/pdf"
+                            maxFileSize={5242880}
+                            className="image-uploader"
+                            name="contract"
+                            label="Max file size: 5mb | accepted: pdf"
+                        />
+                            <div className="images-container">
+                            {(this.state.files) 
+                            ? this.state.files.map((file, i) => {
+                                return (
+                                    <div 
+                                        key={i}
+                                        className="thumbnail-container"
+                                    >
+                                        <CloseIcon 
+                                            onClick={() => this.removeImage(file, i)}
+                                            className="close-image"
+                                            fontSize="small"
+                                        />
+                                        <img 
+                                            width={100}
+                                            src={file.id ? file.url : URL.createObjectURL(file)} 
+                                            alt="contract"
+                                        />
+                                        <p>{file.name}</p>
+                                    </div>
+                                )
+                            })
+                            : null
+                            }
+                            </div>
                         </div>
                     </div>
-                    </div>
-                    <input type="submit" class="submit" value="Download PDF"/>
-                </div>
-            </form> */}
+                    <input type="submit" class="submit" value="Upload" />
+                 </form>
             </div>
         )
     }
