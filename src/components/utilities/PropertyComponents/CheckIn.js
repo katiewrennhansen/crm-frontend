@@ -20,7 +20,8 @@ class CheckIn extends Component {
             user: [],
             features: [],
             checkin: [],
-            checkout: []
+            checkout: [],
+            closing: []
         }
     }
 
@@ -54,6 +55,12 @@ class CheckIn extends Component {
         })
     }
 
+    closingSelectedHandler = (file) => {
+        this.setState({
+            closing: [...file]
+        })
+    }
+
     removeCheckinImage = (name, index) => {
         let newPics = this.state.checkin
         newPics.splice(index, 1);
@@ -67,6 +74,14 @@ class CheckIn extends Component {
         newPics.splice(index, 1);
         this.setState({
             checkout: [...newPics]
+        })
+    }
+
+    removeClosingImage = (name, index) => {
+        let newPics = this.state.closing
+        newPics.splice(index, 1);
+        this.setState({
+            closing: [...newPics]
         })
     }
 
@@ -125,6 +140,34 @@ class CheckIn extends Component {
         const formData = new FormData();
 
         formData.append('checkout', this.state.checkout[0])
+
+        fetch(`${config.API_ENDPOINT}/assets/${this.props.id}`, {
+            method: 'PATCH',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+            })
+            .then(res => {
+                if(!res.ok)
+                    return res.json().then(error => Promise.reject(error))
+                return res
+            })
+            .then(data => {
+                this.props.history.history.push(`/${this.props.usertype}/properties/${this.props.id}`)
+            })
+            .catch(error => {
+                console.log(error)
+                this.setState({ loading: false })
+            })
+    }
+
+    uploadClosing = (e) => {
+        e.preventDefault()
+        this.setState({ loading: true })
+        const formData = new FormData();
+
+        formData.append('closing', this.state.closing[0])
 
         fetch(`${config.API_ENDPOINT}/assets/${this.props.id}`, {
             method: 'PATCH',
@@ -283,6 +326,55 @@ class CheckIn extends Component {
                     </form>
                     </>
                  : <a href={this.state.asset.checkout_url} target="_blank" rel="noopener noreferrer" className="submit">View Checkout Form</a>}
+                </div>
+                <div>
+                    <h3>Closing Form</h3>
+                    <p>Download and sign closing form and upload it to the portal.</p>
+                    {(!this.state.asset.closing_url)
+                    ? <form onSubmit={(e) => this.uploadClosing(e)}>
+                        <div className="form-group">
+                            <div>
+                            <ImageUploader
+                                withIcon={true}
+                                buttonText='Add Closing Form'
+                                onChange={(e) => this.closingSelectedHandler(e)}
+                                imgExtension={['.pdf']}
+                                accept="application/pdf"
+                                maxFileSize={5242880}
+                                className="image-uploader"
+                                name="contract"
+                                label="Max file size: 5mb | accepted: pdf"
+                            />
+                                <div className="images-container">
+                                {(this.state.closing) 
+                                ? this.state.closing.map((file, i) => {
+                                    return (
+                                        <div 
+                                            key={i}
+                                            className="thumbnail-container"
+                                        >
+                                            <CloseIcon 
+                                                onClick={() => this.removeClosingImage(file, i)}
+                                                className="close-image"
+                                                fontSize="small"
+                                            />
+                                            <img 
+                                                width={100}
+                                                src={file.id ? file.url : URL.createObjectURL(file)} 
+                                                alt="contract"
+                                            />
+                                            <p>{file.name}</p>
+                                        </div>
+                                    )
+                                })
+                                : null
+                                }
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" className="submit" value="Upload" />
+                    </form>
+                 : <a href={this.state.asset.checkout_url} target="_blank" rel="noopener noreferrer" className="submit">View Closing Form</a>}
                 </div>
             </div>
         )
