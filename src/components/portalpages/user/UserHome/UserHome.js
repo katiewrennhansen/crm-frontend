@@ -123,13 +123,14 @@ class UserHome extends Component {
                                 }}
                             />
                             <Route 
-                                exact path='/broker/property/:id/checkin' 
+                                exact path='/user/property/:id/documents' 
                                 render={(history) => {
                                     const id = history.match.params.id;
                                     return (
                                     <CheckIn 
                                         id={id}
                                         history={history}
+                                        usertype="user"
                                     />
                                     )
                                 }}

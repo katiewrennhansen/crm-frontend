@@ -5,6 +5,7 @@ import ApiService from '../../../services/api-service'
 import BrokerContext from '../../../contexts/BrokerContext'
 import CloseIcon from '@material-ui/icons/Close';
 import CheckInForm from '../Forms/CheckInForm'
+import CheckOutForm from '../Forms/CheckOutForm'
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import ImageUploader from 'react-images-upload'
 
@@ -16,11 +17,10 @@ class CheckIn extends Component {
         this.state = {
             error: null,
             asset: [],
-            signature: '',
-            date: '',
             user: [],
             features: [],
-            files: []
+            checkin: [],
+            checkout: []
         }
     }
 
@@ -42,17 +42,31 @@ class CheckIn extends Component {
         })
     }
 
-    fileSelectedHandler = (file) => {
+    checkinSelectedHandler = (file) => {
         this.setState({
-            files: [...file]
+            checkin: [...file]
         })
     }
 
-    removeImage = (file, index) => {
-        let newPics = this.state.files
+    checkoutSelectedHandler = (file) => {
+        this.setState({
+            checkout: [...file]
+        })
+    }
+
+    removeCheckinImage = (name, index) => {
+        let newPics = this.state.checkin
         newPics.splice(index, 1);
         this.setState({
-            files: [...newPics]
+            checkin: [...newPics]
+        })
+    }
+
+    removeCheckoutImage = (name, index) => {
+        let newPics = this.state.checkout
+        newPics.splice(index, 1);
+        this.setState({
+            checkout: [...newPics]
         })
     }
 
@@ -82,7 +96,7 @@ class CheckIn extends Component {
         this.setState({ loading: true })
         const formData = new FormData();
 
-        formData.append('checkin', this.state.files[0])
+        formData.append('checkin', this.state.checkin[0])
 
         fetch(`${config.API_ENDPOINT}/assets/${this.props.id}`, {
             method: 'PATCH',
@@ -97,7 +111,35 @@ class CheckIn extends Component {
                 return res
             })
             .then(data => {
-                this.props.history.history.push(`/broker/properties/${this.props.id}`)
+                this.props.history.history.push(`/${this.props.usertype}/properties/${this.props.id}`)
+            })
+            .catch(error => {
+                console.log(error)
+                this.setState({ loading: false })
+            })
+    }
+
+    editCheckout = (e) => {
+        e.preventDefault()
+        this.setState({ loading: true })
+        const formData = new FormData();
+
+        formData.append('checkout', this.state.checkout[0])
+
+        fetch(`${config.API_ENDPOINT}/assets/${this.props.id}`, {
+            method: 'PATCH',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${config.API_KEY}`
+            }
+            })
+            .then(res => {
+                if(!res.ok)
+                    return res.json().then(error => Promise.reject(error))
+                return res
+            })
+            .then(data => {
+                this.props.history.history.push(`/${this.props.usertype}/properties/${this.props.id}`)
             })
             .catch(error => {
                 console.log(error)
@@ -107,18 +149,20 @@ class CheckIn extends Component {
 
     render(){
         return (
-            <div className='add-property'>
+            <div className='add-property checkout'>
                 <div className='header-grid'>
-                    <h2>Check In Form</h2>
-                    <Link className="close-icon" to='/broker/properties'>
+                    <h2>Property Documents</h2>
+                    <Link className="close-icon" to={`/${this.props.usertype}/properties/${this.props.id}`}>
                         <CloseIcon 
                             className="action-icon" 
                         />
                     </Link>
                 </div>
                 <div>
+                    <h3>Checkin Form</h3>
                     <p>Download and sign checkin form and upload it to the portal.</p>
-                    {(this.state.asset.assetdesc && this.state.user.email && this.state.features[0]) && <PDFDownloadLink
+                    {(!this.state.asset.checkin_url)
+                    ? (this.state.asset.assetdesc && this.state.user.email && this.state.features[0]) && <><PDFDownloadLink
                         document={
                             <CheckInForm
                                 asset={this.state.asset}
@@ -130,51 +174,116 @@ class CheckIn extends Component {
                         className="submit"
                         >
                         Download PDF
-                    </PDFDownloadLink>}
-                </div>
-                <form onSubmit={(e) => this.editCheckin(e)}>
-                    <div className="form-group">
-                        <div>
-                        <ImageUploader
-                            withIcon={true}
-                            buttonText='Add Checkin Form'
-                            onChange={(e) => this.fileSelectedHandler(e)}
-                            imgExtension={['.pdf']}
-                            accept="application/pdf"
-                            maxFileSize={5242880}
-                            className="image-uploader"
-                            name="contract"
-                            label="Max file size: 5mb | accepted: pdf"
-                        />
-                            <div className="images-container">
-                            {(this.state.files) 
-                            ? this.state.files.map((file, i) => {
-                                return (
-                                    <div 
-                                        key={i}
-                                        className="thumbnail-container"
-                                    >
-                                        <CloseIcon 
-                                            onClick={() => this.removeImage(file, i)}
-                                            className="close-image"
-                                            fontSize="small"
-                                        />
-                                        <img 
-                                            width={100}
-                                            src={file.id ? file.url : URL.createObjectURL(file)} 
-                                            alt="contract"
-                                        />
-                                        <p>{file.name}</p>
-                                    </div>
-                                )
-                            })
-                            : null
-                            }
+                    </PDFDownloadLink>
+                    <form onSubmit={(e) => this.editCheckin(e)}>
+                        <div className="form-group">
+                            <div>
+                            <ImageUploader
+                                withIcon={true}
+                                buttonText='Add Checkin Form'
+                                onChange={(e) => this.checkinSelectedHandler(e)}
+                                imgExtension={['.pdf']}
+                                accept="application/pdf"
+                                maxFileSize={5242880}
+                                className="image-uploader"
+                                name="contract"
+                                label="Max file size: 5mb | accepted: pdf"
+                            />
+                                <div className="images-container">
+                                {(this.state.checkin) 
+                                ? this.state.checkin.map((file, i) => {
+                                    return (
+                                        <div 
+                                            key={i}
+                                            className="thumbnail-container"
+                                        >
+                                            <CloseIcon 
+                                                onClick={() => this.removeCheckinImage(file, i)}
+                                                className="close-image"
+                                                fontSize="small"
+                                            />
+                                            <img 
+                                                width={100}
+                                                src={file.id ? file.url : URL.createObjectURL(file)} 
+                                                alt="contract"
+                                            />
+                                            <p>{file.name}</p>
+                                        </div>
+                                    )
+                                })
+                                : null
+                                }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <input type="submit" class="submit" value="Upload" />
-                 </form>
+                        <input type="submit" className="submit" value="Upload" />
+                    </form>
+                    </>
+                 : <a href={this.state.asset.checkin_url} target="_blank" rel="noopener noreferrer" className="submit">View Checkin Form</a>}
+                </div>
+                <div>
+                    <h3>Checkout Form</h3>
+                    <p>Download and sign checkout form and upload it to the portal.</p>
+                    {(!this.state.asset.checkout_url)
+                    ? (this.state.asset.assetdesc && this.state.user.email && this.state.features[0]) && <><PDFDownloadLink
+                        document={
+                            <CheckOutForm
+                                asset={this.state.asset}
+                                user={this.state.user}
+                                features={this.state.features}
+                            />
+                        }
+                        fileName="checkout.pdf"
+                        className="submit"
+                        >
+                        Download PDF
+                    </PDFDownloadLink>
+                    <form onSubmit={(e) => this.editCheckout(e)}>
+                        <div className="form-group">
+                            <div>
+                            <ImageUploader
+                                withIcon={true}
+                                buttonText='Add Checkout Form'
+                                onChange={(e) => this.checkoutSelectedHandler(e)}
+                                imgExtension={['.pdf']}
+                                accept="application/pdf"
+                                maxFileSize={5242880}
+                                className="image-uploader"
+                                name="contract"
+                                label="Max file size: 5mb | accepted: pdf"
+                            />
+                                <div className="images-container">
+                                {(this.state.checkout) 
+                                ? this.state.checkout.map((file, i) => {
+                                    return (
+                                        <div 
+                                            key={i}
+                                            className="thumbnail-container"
+                                        >
+                                            <CloseIcon 
+                                                onClick={() => this.removeCheckoutImage(file, i)}
+                                                className="close-image"
+                                                fontSize="small"
+                                            />
+                                            <img 
+                                                width={100}
+                                                src={file.id ? file.url : URL.createObjectURL(file)} 
+                                                alt="contract"
+                                            />
+                                            <p>{file.name}</p>
+                                        </div>
+                                    )
+                                })
+                                : null
+                                }
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" className="submit" value="Upload" />
+                    </form>
+                    </>
+                 : <a href={this.state.asset.checkout_url} target="_blank" rel="noopener noreferrer" className="submit">View Checkout Form</a>}
+                </div>
             </div>
         )
     }

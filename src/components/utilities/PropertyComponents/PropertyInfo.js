@@ -130,14 +130,11 @@ class PropertyInfo extends Component {
                     </div>
                 </div>
                 <div className="contract-link">
-                {(asset.contract_url)
-                ? <a className=" submit" href={asset.contract_url} target="_blank" rel="noopener noreferrer">View Contract</a>
-                : null
-                }
-                 {(asset.checkin_url)
-                ? <a className="submit" href={asset.checkin_url} target="_blank" rel="noopener noreferrer">View Checkin Form</a>
-                : <Link className="submit" to={`/${type}/property/${this.props.id}/checkin`}>Check In Form</Link>   
-                }
+                    {(asset.contract_url)
+                    ? <a className=" submit" href={asset.contract_url} target="_blank" rel="noopener noreferrer">View Contract</a>
+                    : null
+                    }
+                    <Link className="submit" to={`/${type}/property/${this.props.id}/documents`}>Property Documents</Link> 
                 </div>
             </div>
         )

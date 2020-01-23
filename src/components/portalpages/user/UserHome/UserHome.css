@@ -152,3 +152,11 @@
     margin: 0;
     padding: 0;
 }
+
+.checkout h3 {
+    margin-top: 60px;
+}
+
+.checkout a {
+    text-decoration: none;
+}

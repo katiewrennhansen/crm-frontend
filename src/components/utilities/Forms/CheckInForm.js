@@ -66,7 +66,7 @@ export default function CheckInForm(props){
                         ? props.features.map((f, i) => {
                             if(f.deliver){
                                 return (
-                                    <Text style={styles.text}>
+                                    <Text key={i} style={styles.text}>
                                         {`${props.asset.features[i].type} - ${f.quantity}`}
                                     </Text>
                                 )
@@ -83,7 +83,7 @@ export default function CheckInForm(props){
                         ? props.features.map((f, i) => {
                             if(!f.deliver){
                                 return (
-                                    <Text style={styles.text}>
+                                    <Text key={i} style={styles.text}>
                                         {`${props.asset.features[i].type} - ${f.condition}`}
                                     </Text>
                                 )
