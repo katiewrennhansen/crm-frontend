@@ -35,9 +35,9 @@ class Properties extends Component {
                 </div>
                 <div className='broker-properties-grid'>
                     {(this.context.assets[0])
-                    ? this.context.assets.map(a => {
+                    ? this.context.assets.map((a, i) => {
                         return (
-                            <div key={a.id}>
+                            <div key={i} >
                                 <PropertyCard 
                                     property={a}
                                     type="broker"

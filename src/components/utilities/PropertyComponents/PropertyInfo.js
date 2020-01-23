@@ -70,9 +70,10 @@ class PropertyInfo extends Component {
                 <div className='broker-properties'>
                     <img className="property-image" src={this.state.imgToDisplay} alt="property"/>
                     <div className="property-thumbnail-image-container">
-                        {(url) ? asset.images_url.map(img => {
+                        {(url) ? asset.images_url.map((img, i) => {
                             return (
                                 <img 
+                                    key={i}
                                     className="property-thumbnail-image" 
                                     src={img.image} 
                                     alt="property"

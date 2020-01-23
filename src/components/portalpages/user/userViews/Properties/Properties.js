@@ -47,9 +47,9 @@ class Properties extends Component {
                 </div>
                 <div className='broker-properties-grid'>
                     {(this.state.assets[0])
-                    ? this.state.assets.map(a => {
+                    ? this.state.assets.map((a, i) => {
                         return (
-                            <div key={a.id}>
+                            <div key={i}>
                                 <PropertyCard
                                     property={a}
                                     type='user'
