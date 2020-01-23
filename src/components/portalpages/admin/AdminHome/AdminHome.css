@@ -319,6 +319,7 @@ MEDIA QUERIES
         position: fixed;
         margin-left: 25%;
         transition: 200ms linear;
+        width: 75%;
     }
     .dash-sidebar {
         grid-column: 1 / 4;

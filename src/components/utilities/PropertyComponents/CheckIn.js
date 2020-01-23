@@ -127,7 +127,7 @@ class CheckIn extends Component {
                             />
                         }
                         fileName="checkin.pdf"
-                        className="contract-link submit"
+                        className="submit"
                         >
                         Download PDF
                     </PDFDownloadLink>}

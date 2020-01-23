@@ -14,7 +14,7 @@ import './UserHome.css'
 import Payments from '../userViews/Payments/Payments'
 import Contracts from '../userViews/Contracts/Contracts'
 import CheckIn from '../../../utilities/PropertyComponents/CheckIn'
-import Account from '../userViews/Profile/Profile'
+import Profile from '../../../utilities/CustomerComponents/Profile'
 
 
 class UserHome extends Component {
@@ -89,7 +89,7 @@ class UserHome extends Component {
                             />
                             <Route 
                                 exact path='/user/account-settings' 
-                                component={Account}
+                                component={Profile}
                             />
                             <Route 
                                 exact path='/user/properties' 

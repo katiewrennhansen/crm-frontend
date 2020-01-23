@@ -26,7 +26,6 @@ class Properties extends Component {
         const endpoint = `${config.API_ENDPOINT}/assets`
         ApiService.getDataHalf(endpoint)
             .then(data => {
-                console.log(data)
                 this.setAssets(data.assets)
             })
             .catch(error => {

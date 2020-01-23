@@ -23,6 +23,7 @@ import EditContact from '../brokerViews/Contacts/EditContact'
 import AddContact from '../brokerViews/Contacts/AddContact'
 import AddReminder from '../brokerViews/Reminders/AddReminder'
 import CheckIn from '../../../utilities/PropertyComponents/CheckIn'
+import Profile from '../../../utilities/CustomerComponents/Profile'
 import './BrokerHome.css'
 
 
@@ -69,7 +70,7 @@ class BrokerHome extends Component {
     }
 
     toggleNav = () => {
-        if(this.state.active === false){
+        if(!this.state.active){
             this.setActive() 
         } else {
             this.setCollapsed()
@@ -113,6 +114,10 @@ class BrokerHome extends Component {
                             <Route 
                                 exact path='/broker' 
                                 component={Dashboard}
+                            />
+                            <Route 
+                                exact path='/broker/account-settings' 
+                                component={Profile}
                             />
                             <Route 
                                 exact path='/broker/properties' 

@@ -18,7 +18,7 @@
 .dashboard-nav {
     grid-column: 6 / 7;
     align-items: center;
-    justify-self: flex-start;
+    justify-self: center;
     padding-right: 20px;
 }
 
@@ -37,11 +37,6 @@ button.admin-logout p {
 
 .admin-logout:hover {
     cursor: pointer;
-}
-
-.account {
-    color: #343434;
-    padding-right: 10px;
 }
 
 

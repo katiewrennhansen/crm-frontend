@@ -11,10 +11,10 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 18,
       textAlign: 'center',
-      margin: 12,
     },
     subtitle: {
       fontSize: 14,
+      margin: 12,
       textAlign: 'center'
     },
     text: {
@@ -43,12 +43,12 @@ const styles = StyleSheet.create({
 
 
 
-export default function CheckInForm(props){
+export default function CheckOutForm(props){
     return (
         <Document>
             <Page size="A4" style={styles.body}>
                 <View>
-                    <Text style={styles.title}>Tenant Checkin Form</Text>
+                    <Text style={styles.title}>Tenant Checkout Form</Text>
                     <Text style={styles.subtitle}>{props.asset.adescription4}</Text>
                     <Text style={styles.subtitle}>
                         {`${props.asset.adescription5}, ${props.asset.adescription2} ${props.asset.adescription3}`}
