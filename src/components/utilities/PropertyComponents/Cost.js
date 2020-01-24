@@ -15,6 +15,7 @@ class Cost extends Component {
         this.state = {
             costs: [],
             files: [],
+            concepts: [],
             loading: false
         }
         this.addCost = this.addCost.bind(this)
@@ -26,18 +27,30 @@ class Cost extends Component {
         })
     }
 
+    setTransConcepts = concepts => {
+        this.setState({
+            concepts
+        })
+    }
+
     fileSelectedHandler = (e) => {
-        console.log(e)
         this.setState({
             files: e
         })
     }
 
     componentDidMount(){
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/transactions`
         ApiService.getDataHalf(endpoint)
             .then(data => {
-                this.setCosts(data.costs)
+                this.setCosts(data.transactions)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/transconcepts`)
+            .then(data => {
+                this.setTransConcepts(data)
             })
             .catch(error => {
                 console.log(error)
@@ -50,13 +63,14 @@ class Cost extends Component {
 
         let formData = new FormData()
 
-        formData.append('cost[concept]', e.target.description.value)
-        formData.append('cost[date]', e.target.year.value)
-        formData.append('cost[amount]', e.target.annualamount.value)
-        formData.append('cost[kind]', e.target.kind.value)
-        formData.append('cost[receipts][]', this.state.files[0])
+        formData.append('transaction[transconcept_id]', e.target.transconcept_id.value)
+        formData.append('transaction[date]', e.target.date.value)
+        formData.append('transaction[amount]', e.target.amount.value)
+        formData.append('transaction[kind]', e.target.kind.value)
+        formData.append('transaction[comment]', e.target.comment.value)
+        formData.append('transaction[receipts][]', this.state.files[0])
 
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/transactions`
 
         fetch(endpoint, {
             method: 'POST',
@@ -73,7 +87,7 @@ class Cost extends Component {
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setCosts(data.costs)
+                        this.setCosts(data.transactions)
                         this.toggleForm()
                     })
             })
@@ -83,19 +97,20 @@ class Cost extends Component {
                     loading: false 
                 })
             })
-        e.target.description.value = ""
-        e.target.year.value = ""
-        e.target.annualamount.value = ""
+        e.target.comment.value = ""
+        e.target.date.value = ""
+        e.target.amount.value = ""
         e.target.kind.value = ""
+        e.target.transconcept_id.value = ""
     }
 
     deleteCost = (id) => {
-        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/costs`
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/transactions`
         ApiService.deleteDataHalf(endpoint, id)
             .then(data => {
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
-                        this.setCosts(data.costs)
+                        this.setCosts(data.transactions)
                     })
             })
             .catch(error => {
@@ -171,22 +186,40 @@ class Cost extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="description">Description: </label>
-                        <input type="text" name="description"></input>
+                    <div className="form-group row">
+                        <div>
+                            <label htmlFor="transconcept_id">Type<span className="required">*</span></label>
+                            <select name="transconcept_id">
+                                <option value="">Select a Transaction Type</option>
+                                {this.state.concepts.map(s => {
+                                    return (
+                                        <option key={s.id} value={s.id}>{s.concept}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
+                        <div>
+                            <label htmlFor="kind">Kind<span className="required">*</span></label>
+                            <input type="text" name="kind"></input>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="year">Year: </label>
-                        <input type="date" name="year"></input>
+                    
+                    <div className="form-group row">
+                        <div>
+                            <label htmlFor="date">Date<span className="required">*</span></label>
+                            <input type="date" name="date"></input>
+                        </div>
+                        <div>
+                            <label htmlFor="amount">Amount<span className="required">*</span></label>
+                            <input type="number" name="amount"></input>
+                        </div>
                     </div>
+        
                     <div className="form-group">
-                        <label htmlFor="annualamount">Annual Amount: </label>
-                        <input type="number" name="annualamount"></input>
+                        <label htmlFor="comment">Comment<span className="required">*</span></label>
+                        <input type="text" name="comment"></input>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="kind">Kind: </label>
-                        <input type="text" name="kind"></input>
-                    </div>
+                    
                     {(this.state.loading)
                         ? <div className="loading-property">
                             <CircularProgress />
@@ -203,6 +236,7 @@ class Cost extends Component {
                             <th>Name</th>
                             <th>Amount</th>
                             <th>Year</th>
+                            <th>Comment</th>
                             <th>Reciept</th>
                             <th className="delete-heading">Delete</th>
                         </tr>
@@ -210,7 +244,8 @@ class Cost extends Component {
                     <tbody>
                         {(this.state.costs[0])
                         ? this.state.costs.map(f => {
-                            const receiptUrl = f.data.receipt_url[0]
+                            // const receiptUrl = f.data.receipt_url[0]
+                            const receiptUrl = true
                             let url;
                             if(receiptUrl){
                                 url = receiptUrl.receipt
@@ -219,14 +254,15 @@ class Cost extends Component {
                                 <tr key={f.data.id}>
                                     <td>{f.data.kind}</td>
                                     <td>{f.data.concept}</td>
-                                    <td>${f.data.amount}</td>
+                                    <td>{f.data.amount}</td>
                                     <td>{f.data.date}</td> 
+                                    <td>{f.data.comment}</td>
                                     <td>
-                                        {(url 
-                                            ? <a href={`${url}`} className="close-icon" target="_blank" rel="noopener noreferrer">
-                                                <InsertDriveFileIcon />
-                                            </a> 
-                                            : null)
+                                    {(url 
+                                        ? <a href={`${url}`} className="close-icon" target="_blank" rel="noopener noreferrer">
+                                            <InsertDriveFileIcon />
+                                        </a> 
+                                        : null)
                                         }
                                     </td>
                                     <td className="delete">

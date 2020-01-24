@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import ApiService from '../../../../../services/api-service'
+import config from '../../../../../config'
 
 class PaymentHistory extends Component {
     constructor(props){
@@ -7,6 +9,16 @@ class PaymentHistory extends Component {
             error: null,
             payments: [],
         }
+    }
+
+    componentDidMount(){
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/customers/0/transfers`)
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     render(){

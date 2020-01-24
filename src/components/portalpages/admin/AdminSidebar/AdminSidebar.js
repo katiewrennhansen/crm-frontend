@@ -15,6 +15,7 @@ import WeekendIcon from '@material-ui/icons/Weekend';
 import CategoryIcon from '@material-ui/icons/Category';
 import AdminContext from '../../../../contexts/AdminContext'
 import EventNoteIcon from '@material-ui/icons/EventNote';
+import PaymentIcon from '@material-ui/icons/Payment';
 import './AdminSidebar.css'
 
 
@@ -66,7 +67,7 @@ class AdminSidebar extends Component {
                             onClick={() => this.props.handleTitle('Company Set Up')}
                         >
                             <WorkIcon />
-                            <p className={(this.context.active) ? null : 'collapsed'} >Company Set Up</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Company Set Up</p>
                         </Link>
                     </li>
                     <li>
@@ -76,7 +77,7 @@ class AdminSidebar extends Component {
                             onClick={() => this.props.handleTitle('Comments Type')}
                         >
                             <ChatBubbleOutlineIcon />
-                            <p className={(this.context.active) ? null : 'collapsed'} >Comments Type</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Comments Type</p>
                         </Link>
                     </li>
                     <li>
@@ -86,7 +87,17 @@ class AdminSidebar extends Component {
                             onClick={() => this.props.handleTitle('Categories')}
                         >
                             <CategoryIcon />
-                            <p className={(this.context.active) ? null : 'collapsed'} >Categories</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Categories</p>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to="/dashboard/transactions" 
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
+                            onClick={() => this.props.handleTitle('Transactions')}
+                        >
+                            <PaymentIcon />
+                            <p className={(this.context.active) ? null : 'collapsed'}>Transactions</p>
                         </Link>
                     </li>
                     <li>
@@ -96,7 +107,7 @@ class AdminSidebar extends Component {
                             onClick={() => this.props.handleTitle('Promotions')}
                         >
                             <CardGiftcardIcon />
-                            <p className={(this.context.active) ? null : 'collapsed'} >Promotions</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Promotions</p>
                         </Link>
                     </li>
                     <li>

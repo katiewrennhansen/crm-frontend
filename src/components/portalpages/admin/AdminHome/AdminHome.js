@@ -21,8 +21,8 @@ import AddCustomer from '../adminViews/CustomerAccounts/AddCustomer'
 import Categories from '../adminViews/Categories/Categories'
 import AdminContext from '../../../../contexts/AdminContext'
 import EditCustomer from '../adminViews/CustomerAccounts/EditCustomer'
+import Transactions from '../adminViews/Transactions/Transactions'
 import './AdminHome.css'
-
 
 class AdminHome extends Component {
     constructor(props){
@@ -261,7 +261,7 @@ class AdminHome extends Component {
                                 exact path='/dashboard' 
                                 render={(props) => {
                                     return (
-                                    <AdminDash name={this.props.name} />
+                                        <AdminDash name={this.props.name} />
                                     )
                                 }}
                             />
@@ -269,7 +269,7 @@ class AdminHome extends Component {
                                 exact path='/dashboard/company-setup' 
                                 render={(props) => {
                                     return (
-                                    <CompanySetUp func={propFunctions} />
+                                        <CompanySetUp func={propFunctions} />
                                     )
                                 }}
                             />
@@ -277,7 +277,7 @@ class AdminHome extends Component {
                                 path='/dashboard/comments' 
                                 render={(props) => {
                                     return (
-                                    <AdminComments />
+                                        <AdminComments />
                                     )
                                 }}
                             />
@@ -285,7 +285,15 @@ class AdminHome extends Component {
                                 path='/dashboard/categories' 
                                 render={(props) => {
                                     return (
-                                    <Categories />
+                                        <Categories />
+                                    )
+                                }}
+                            />
+                            <Route 
+                                path='/dashboard/transactions' 
+                                render={(props) => {
+                                    return (
+                                        <Transactions />
                                     )
                                 }}
                             />
