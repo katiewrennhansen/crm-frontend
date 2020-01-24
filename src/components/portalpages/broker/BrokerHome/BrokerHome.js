@@ -132,9 +132,9 @@ class BrokerHome extends Component {
                                 render={(history) => {
                                     const id = history.match.params.id;
                                     return (
-                                    <SinglePropertyPage 
-                                        id={id}
-                                    />
+                                        <SinglePropertyPage 
+                                            id={id}
+                                        />
                                     )
                                 }}
                             />
@@ -143,10 +143,10 @@ class BrokerHome extends Component {
                                 render={(history) => {
                                     const id = history.match.params.id;
                                     return (
-                                    <EditProperty 
-                                        id={id}
-                                        history={history}
-                                    />
+                                        <EditProperty 
+                                            id={id}
+                                            history={history}
+                                        />
                                     )
                                 }}
                             />
@@ -155,11 +155,11 @@ class BrokerHome extends Component {
                                 render={(history) => {
                                     const id = history.match.params.id;
                                     return (
-                                    <CheckIn 
-                                        id={id}
-                                        history={history}
-                                        usertype="broker"
-                                    />
+                                        <CheckIn 
+                                            id={id}
+                                            history={history}
+                                            usertype="broker"
+                                        />
                                     )
                                 }}
                             />
@@ -172,10 +172,10 @@ class BrokerHome extends Component {
                                 render={(history) => {
                                     const id = history.match.params.id;
                                     return (
-                                    <PromotionPage 
-                                        id={id}
-                                        history={history}
-                                    />
+                                        <PromotionPage 
+                                            id={id}
+                                            history={history}
+                                        />
                                     )
                                 }}
                             />
@@ -265,5 +265,6 @@ class BrokerHome extends Component {
         )
     }
 }
+
 
 export default withRouter(BrokerHome)
