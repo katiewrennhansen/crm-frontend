@@ -71,7 +71,7 @@ class Cost extends Component {
         formData.append('transaction[receipts][]', this.state.files[0])
 
         const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/transactions`
-
+        console.log(endpoint)
         fetch(endpoint, {
             method: 'POST',
             body: formData,
@@ -89,6 +89,7 @@ class Cost extends Component {
                     .then(data => {
                         this.setCosts(data.transactions)
                         this.toggleForm()
+                        this.setState({ loading: false })
                     })
             })
             .catch(error => {
@@ -244,11 +245,9 @@ class Cost extends Component {
                     <tbody>
                         {(this.state.costs[0])
                         ? this.state.costs.map(f => {
-                            // const receiptUrl = f.data.receipt_url[0]
-                            const receiptUrl = true
-                            let url;
-                            if(receiptUrl){
-                                url = receiptUrl.receipt
+                            let url
+                            if(f.data.receipt_url){
+                                url = f.data.receipt_url[0].receipt
                             }
                             return (
                                 <tr key={f.data.id}>

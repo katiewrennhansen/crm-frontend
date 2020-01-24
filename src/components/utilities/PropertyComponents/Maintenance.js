@@ -255,34 +255,25 @@ class Maintenance extends Component {
                             <th>Provider</th>
                             <th>Request Date</th>
                             <th>Deliver Date</th>
-                            <th>Reciept</th>
+                            <th>Receipt</th>
                             <th className="delete-heading">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         {(this.state.maintenance[0])
                         ? this.state.maintenance.map(f => {
-                            const receiptUrl = f.data.receipt_url[0]
+                            const receiptUrl = f.data.receipts_url[0]
                             let url;
                             if(receiptUrl){
                                 url = receiptUrl.receipt
                             }
                             return (
                                 <tr key={f.data.id}>
-                                    <td>{f.data.informto}</td>
+                                    <td>{f.data.maintcomm}</td>
                                     <td>${f.data.initialcost}</td>
-                                    <td>
-                                        {(this.state.providers).map(p => {
-                                            if(p.data.id === f.data.provider_id){
-                                                return p.data.name
-                                            }
-                                            else {
-                                                return null
-                                            }
-                                        })}
-                                    </td>
+                                    <td>{f.data.provider}</td>
+                                    <td>{f.data.deliverdate}</td>
                                     <td>{f.data.reqdate}</td>
-                                    <td>{(f.data.deliverdate) ? `Completed ${f.data.deliverdate}` : 'Pending' }</td>
                                     <td>
                                         {(url 
                                             ? <a href={`${url}`} className="close-icon" target="_blank" rel="noopener noreferrer">
