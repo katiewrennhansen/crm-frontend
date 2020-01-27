@@ -23,26 +23,26 @@ class Maintenance extends Component {
         this.fileSelectedHandler = this.fileSelectedHandler.bind(this)
     }
 
-    fileSelectedHandler = (e) => {
+    fileSelectedHandler = e => {
         console.log(e)
         this.setState({
             files: e
         })
     }
 
-    setMaintenance = (maintenance) => {
+    setMaintenance = maintenance => {
         this.setState({
             maintenance
         })
     }
 
-    setMaintTypes = (mainttypes) => {
+    setMaintTypes = mainttypes => {
         this.setState({
             mainttypes
         })
     }
 
-    setProviders = (providers) => {
+    setProviders = providers => {
         this.setState({
             providers
         })
@@ -262,10 +262,10 @@ class Maintenance extends Component {
                     <tbody>
                         {(this.state.maintenance[0])
                         ? this.state.maintenance.map(f => {
-                            const receiptUrl = f.data.receipts_url[0]
                             let url;
-                            if(receiptUrl){
-                                url = receiptUrl.receipt
+                            if(f.data.receipts_url){
+                                const receiptUrl = f.data.receipts_url[0]
+                                url = receiptUrl.receipts
                             }
                             return (
                                 <tr key={f.data.id}>
@@ -275,11 +275,11 @@ class Maintenance extends Component {
                                     <td>{f.data.deliverdate}</td>
                                     <td>{f.data.reqdate}</td>
                                     <td>
-                                        {(url 
+                                        {(url)
                                             ? <a href={`${url}`} className="close-icon" target="_blank" rel="noopener noreferrer">
                                                 <InsertDriveFileIcon />
                                             </a> 
-                                            : null)
+                                            : null
                                         }
                                     </td>
                                     <td className="delete">

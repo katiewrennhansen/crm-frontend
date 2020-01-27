@@ -49,7 +49,7 @@ class SingleProperty extends Component {
                         <div className={(this.state.active === 'maintenance' ? 'underline active' : 'underline')}></div>
                     </Link>
                     <Link to={`/user/properties/${this.props.id}/costs`} onClick={() => this.setActive('cost')}>
-                        <h4>Costs</h4>
+                        <h4>Transactions</h4>
                         <div className={(this.state.active === 'cost' ? 'underline active' : 'underline')}></div>
                     </Link>
                     <Link to={`/user/properties/${this.props.id}/contract-history`} onClick={() => this.setActive('contract-history')}>
