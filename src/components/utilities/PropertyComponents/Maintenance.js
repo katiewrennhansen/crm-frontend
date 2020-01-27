@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import config from '../../../config'
 import BrokerContext from '../../../contexts/BrokerContext'
 import ApiService from '../../../services/api-service'
@@ -262,11 +263,11 @@ class Maintenance extends Component {
                     <tbody>
                         {(this.state.maintenance[0])
                         ? this.state.maintenance.map(f => {
-                            let url;
-                            if(f.data.receipts_url){
-                                const receiptUrl = f.data.receipts_url[0]
-                                url = receiptUrl.receipts
-                            }
+                            // let url;
+                            // if(f.data.receipts_url){
+                            //     const receiptUrl = f.data.receipts_url[0]
+                            //     url = receiptUrl.receipts
+                            // }
                             return (
                                 <tr key={f.data.id}>
                                     <td>{f.data.maintcomm}</td>
@@ -275,13 +276,16 @@ class Maintenance extends Component {
                                     <td>{f.data.deliverdate}</td>
                                     <td>{f.data.reqdate}</td>
                                     <td>
+                                        <Link to={`/user/property/7/maintenance/${f.data.id}`}>View</Link>
+                                    </td>
+                                    {/* <td>
                                         {(url)
                                             ? <a href={`${url}`} className="close-icon" target="_blank" rel="noopener noreferrer">
                                                 <InsertDriveFileIcon />
                                             </a> 
                                             : null
                                         }
-                                    </td>
+                                    </td> */}
                                     <td className="delete">
                                             <DeleteOutlineIcon
                                                 className="delete-btn" 

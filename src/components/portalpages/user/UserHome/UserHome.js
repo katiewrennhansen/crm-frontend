@@ -15,6 +15,7 @@ import Payments from '../userViews/Payments/Payments'
 import Contracts from '../userViews/Contracts/Contracts'
 import CheckIn from '../../../utilities/PropertyComponents/CheckIn'
 import Profile from '../../../utilities/CustomerComponents/Profile'
+import MaintenanceView from '../../../utilities/PropertyComponents/MaintenanceView'
 
 
 class UserHome extends Component {
@@ -132,6 +133,19 @@ class UserHome extends Component {
                                         history={history}
                                         usertype="user"
                                     />
+                                    )
+                                }}
+                            />
+                            <Route 
+                                exact path={`/user/property/:id/maintenance/:maint_id`}
+                                render={(history) => {
+                                    const propId = history.match.params.id;
+                                    const maintId = history.match.params.maint_id;
+                                    return (
+                                        <MaintenanceView 
+                                            propId={propId}
+                                            maintId={maintId} 
+                                        />
                                     )
                                 }}
                             />
