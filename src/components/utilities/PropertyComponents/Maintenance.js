@@ -192,52 +192,64 @@ class Maintenance extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="maint_type">Maintenance Type: </label>
-                        <select name="maint_type">
-                            <option value="">Select a Type</option>
-                            {this.state.mainttypes.map(m => {
-                                return (
-                                <option key={m.id} value={m.id}>{m.maindescr}</option>
-                                )
-                            })}
-                        </select>
+                    <div className="form-group row">
+                        <div>
+                            <label htmlFor="maint_type">Maintenance Type: </label>
+                            <select name="maint_type">
+                                <option value="">Select a Type</option>
+                                {this.state.mainttypes.map(m => {
+                                    return (
+                                    <option key={m.id} value={m.id}>{m.maindescr}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
+                        <div>
+                            <label htmlFor="provider">Maintenance Provider: </label>
+                            <select name="provider">
+                                <option value="">Select a Type</option>
+                                {this.state.providers.map(m => {
+                                    return (
+                                    <option key={m.data.id} value={m.data.id}>{m.data.name}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="provider">Maintenance Provider: </label>
-                        <select name="provider">
-                            <option value="">Select a Type</option>
-                            {this.state.providers.map(m => {
-                                return (
-                                <option key={m.data.id} value={m.data.id}>{m.data.name}</option>
-                                )
-                            })}
-                        </select>
+                    
+                    <div className="form-group row">
+                        <div>
+                            <label htmlFor="description">Description: </label>
+                            <input type="text" name="description"></input>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="comment">Comment: </label>
+                            <input type="text" name="comment"></input>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="description">Description: </label>
-                        <input type="text" name="description"></input>
+                    
+                    <div className="form-group row">
+                        <div>
+                            <label htmlFor="initial_cost">Initial Cost: </label>
+                            <input type="number" name="initial_cost"></input>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="final_cost">Final Cost: </label>
+                            <input type="number" name="final_cost"></input>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="comment">Comment: </label>
-                        <input type="text" name="comment"></input>
+                    
+                    <div className="form-group row">
+                        <div>
+                            <label htmlFor="plan_date">Plan Date: </label>
+                            <input type="date" name="plan_date"></input>
+                        </div>
+                        <div>
+                            <label htmlFor="deliver_date">Deliver Date: </label>
+                            <input type="date" name="deliver_date"></input>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="initial_cost">Initial Cost: </label>
-                        <input type="number" name="initial_cost"></input>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="final_cost">Final Cost: </label>
-                        <input type="number" name="final_cost"></input>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="plan_date">Plan Date: </label>
-                        <input type="date" name="plan_date"></input>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="deliver_date">Deliver Date: </label>
-                        <input type="date" name="deliver_date"></input>
-                    </div>
+                    
                     {(this.state.loading)
                         ? <div className="loading-property">
                             <CircularProgress />

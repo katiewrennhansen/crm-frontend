@@ -23,6 +23,7 @@ import AdminContext from '../../../../contexts/AdminContext'
 import EditCustomer from '../adminViews/CustomerAccounts/EditCustomer'
 import Transactions from '../adminViews/Transactions/Transactions'
 import './AdminHome.css'
+import Transfers from '../../../utilities/CustomerComponents/Transfers'
 
 class AdminHome extends Component {
     constructor(props){
@@ -411,6 +412,20 @@ class AdminHome extends Component {
                                         <EditCustomer 
                                             func={propFunctions} 
                                             id={id}
+                                        />
+                                    )
+                                    }}
+                            />
+                            <Route 
+                                exact path='/dashboard/customer-accounts/:id/transfer/:trans_id' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    const transId = history.match.params.trans_id;
+                                    return (
+                                        <Transfers 
+                                            history={history} 
+                                            id={id}
+                                            transId={transId}
                                         />
                                     )
                                     }}

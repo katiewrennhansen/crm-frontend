@@ -14,14 +14,20 @@ class CustomerPage extends Component {
         this.state = {
             show: false,
             delete: false,
-            customer: []
+            customer: [],
+            transfers: []
         };
     }
 
     setCustomer = customer => {
         this.setState({
-            customer: customer,
-            error: null
+            customer: customer
+        })
+    }
+
+    setTransfers = transfers => {
+        this.setState({
+            transfers
         })
     }
 
@@ -30,6 +36,13 @@ class CustomerPage extends Component {
         ApiService.getById(caEndpoint, id)
             .then(data => {
                 this.setCustomer(data.data)
+            })
+            .catch(error => {
+                this.setState({ error })
+            })
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/customers/${id}/transfers`)
+            .then(data => {
+                this.setTransfers(data.transfers)
             })
             .catch(error => {
                 this.setState({ error })
@@ -83,6 +96,7 @@ class CustomerPage extends Component {
                 </div>
                 <CustomerInfo
                     data={data}
+                    transfers={this.state.transfers}
                 />
             </div>
         )

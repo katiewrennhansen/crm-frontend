@@ -124,17 +124,16 @@ class Messages extends Component {
                         </select>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="description">Description: </label>
-                        <input type="text" name="description"></input>
+                        <label htmlFor="description">Message: </label>
+                        <textarea name="description" rows="3"></textarea>
                     </div>
                     {(this.state.loading)
                         ? <div className="loading-property">
                             <CircularProgress />
                         </div>
-                        : (
-                        <input type="submit" className="submit" value="Add Message"></input>
-                        )
-                    }                </form>
+                        : <input type="submit" className="submit" value="Add Message"></input>
+                    }                
+                </form>
                 <table>
                     <thead>
                         <tr>
@@ -177,7 +176,6 @@ class Messages extends Component {
                         }
                     </tbody>
                 </table>
-                
             </div>
         )
     }

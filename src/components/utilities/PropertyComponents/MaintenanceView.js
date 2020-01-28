@@ -101,7 +101,7 @@ class MaintenanceView extends Component {
                 ApiService.getDataHalf(`${endpoint}/maintenancedetails`)
                     .then(data => this.setDetails(data.maintenancedetails))
                     .catch(error => console.log(error))
-                    
+
                 ApiService.getDataHalf(endpoint)
                     .then(data => this.setTotal(data.data.initialcost))
                     .catch(error => console.log(error))
@@ -122,21 +122,26 @@ class MaintenanceView extends Component {
     render(){
         const detail = this.state.details
         const maint = this.state.maintenance
+        const receipt = maint.receipts_url
         return (
             <div className="contact-container">
                 <Link to={`/user/properties/${this.props.propId}/maintenance`}>Back</Link>
-                <h1>{maint.maintcomm}</h1>
+                <div className="header-grid">
+                    <h1>{maint.maintcomm}</h1>
+                    {(receipt)
+                        ? <a href={Object.values(receipt)[0].receipts} target="_blank" rel="noopener noreferrer" className="active-icon">
+                            View Receipt
+                            <InsertDriveFileIcon />
+                        </a>
+                        : null
+                    }
+                </div>
                 <p>Requested: {maint.reqdate}</p>
                 <p>Plan Data: {maint.plandate}</p>
                 <p>Completed: {maint.deliverdate}</p>
                 <p>Provider: {maint.provider}</p>
                 <p>Status: {maint.status}</p>
-                {/* {(maint.reciepts_url[0])
-                ? <a href={maint.reciepts_url[0]}>
-                    <InsertDriveFileIcon />
-                </a>
-                : null
-                } */}
+                
                 <table>
                     <thead>
                         <tr>
