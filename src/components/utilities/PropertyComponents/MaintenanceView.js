@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import ApiService from '../../../services/api-service'
 import config from '../../../config'
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 
 class MaintenanceView extends Component {
     constructor(props){
@@ -79,7 +80,6 @@ class MaintenanceView extends Component {
                 unit: e.target.unit.value,
                 quantity: e.target.quantity.value,
                 unitcost: e.target.unitcost.value,
-                total: e.target.total.value
             }
         }
         console.log(newCharge)
@@ -97,17 +97,24 @@ class MaintenanceView extends Component {
                 <p>Completed: {maint.deliverdate}</p>
                 <p>Provider: {maint.provider}</p>
                 <p>Status: {maint.status}</p>
-                <form onSubmit={(e) => {this.addCharge(e)}}>
+                {/* {(maint.reciepts_url[0])
+                ? <a href={maint.reciepts_url[0]}>
+                    <InsertDriveFileIcon />
+                </a>
+                : null
+                } */}
+                
+                <form onSubmit={(e) => this.addCharge(e)}>
                     <div className="inner-form-content">
                         <h3>Add Charge</h3>
                         <div className="form-group row">
                             <div>
                                 <label htmlFor="type">Type</label> 
-                                <select>
+                                <select name="type">
                                     <option>Select a Maintenance Type</option>
                                     {this.state.mainttypes.map(t => {
                                         return (
-                                            <option value={t.id}>{t.maindescr}</option>
+                                            <option key={t.id} value={t.id}>{t.maindescr}</option>
                                         )
                                     })}
                                 </select>
@@ -124,20 +131,20 @@ class MaintenanceView extends Component {
                             </div>
                             <div>
                                 <label htmlFor="unit">Unit</label> 
-                                <input type="number" name="unit"/>
+                                <input type="text" name="unit"/>
                             </div>
                         </div>
                         <div className="form-group row">
                             <div>
-                                <label htmlFor="unit-cost">Unit Cost</label> 
-                                <input type="number" name="unit-cost" onChange={(e) => this.setUnitCost(e)}/>
+                                <label htmlFor="unitcost">Unit Cost</label> 
+                                <input type="number" name="unitcost" onChange={(e) => this.setUnitCost(e)}/>
                             </div>
                             <div>
                                 <label htmlFor="total">Total Cost</label> 
-                                <input type="number" name="total" value={this.state.quantity * this.state.unitCost}/>
+                                <input type="number" name="total" value={this.state.quantity * this.state.unitCost} readOnly={true}/>
                             </div>
                         </div>
-                        <input className="submit" value="Add Charge"/>
+                        <input type="submit" className="submit" value="Add Charge"/>
                    </div>
                 </form>
                 <table>

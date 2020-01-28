@@ -7,7 +7,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ImageUploader from 'react-images-upload'
 import CloseIcon from '@material-ui/icons/Close';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
+// import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 
  
 class Maintenance extends Component {
