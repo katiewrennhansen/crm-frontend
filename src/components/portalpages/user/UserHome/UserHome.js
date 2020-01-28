@@ -107,6 +107,7 @@ class UserHome extends Component {
                                     return (
                                     <SingleProperty 
                                         id={id}
+                                        history={history}
                                     />
                                     )
                                 }}

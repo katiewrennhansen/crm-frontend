@@ -7,8 +7,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ImageUploader from 'react-images-upload'
 import CloseIcon from '@material-ui/icons/Close';
 import CircularProgress from '@material-ui/core/CircularProgress';
-// import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
-
+import PageviewIcon from '@material-ui/icons/Pageview';
  
 class Maintenance extends Component {
     static contextType = BrokerContext
@@ -256,18 +255,13 @@ class Maintenance extends Component {
                             <th>Provider</th>
                             <th>Request Date</th>
                             <th>Deliver Date</th>
-                            <th>Receipt</th>
+                            <th>View Details</th>
                             <th className="delete-heading">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         {(this.state.maintenance[0])
                         ? this.state.maintenance.map(f => {
-                            // let url;
-                            // if(f.data.receipts_url){
-                            //     const receiptUrl = f.data.receipts_url[0]
-                            //     url = receiptUrl.receipts
-                            // }
                             return (
                                 <tr key={f.data.id}>
                                     <td>{f.data.maintcomm}</td>
@@ -276,16 +270,10 @@ class Maintenance extends Component {
                                     <td>{f.data.deliverdate}</td>
                                     <td>{f.data.reqdate}</td>
                                     <td>
-                                        <Link to={`/user/property/7/maintenance/${f.data.id}`}>View</Link>
+                                        <Link to={`/user/property/${this.props.id}/maintenance/${f.data.id}`}>
+                                            <PageviewIcon className="active-icon"/>
+                                        </Link>
                                     </td>
-                                    {/* <td>
-                                        {(url)
-                                            ? <a href={`${url}`} className="close-icon" target="_blank" rel="noopener noreferrer">
-                                                <InsertDriveFileIcon />
-                                            </a> 
-                                            : null
-                                        }
-                                    </td> */}
                                     <td className="delete">
                                             <DeleteOutlineIcon
                                                 className="delete-btn" 

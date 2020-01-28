@@ -231,7 +231,8 @@ td.delete {
     margin: 0 auto;
 }
 
-.inner-form-content h3 {
+.inner-form-content h3,
+.inner-maint-form-content h3 {
     background: #27344317;
     padding: 15px;
 }

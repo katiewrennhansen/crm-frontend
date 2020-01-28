@@ -49,7 +49,7 @@ class ContractHistory extends Component {
                         {(contracts[0])
                         ? contracts.map(f => {
                             return (
-                                <tr key={f.data.startdate}>
+                                <tr key={f.data.id}>
                                     <td>{f.data.startdate}</td>
                                     <td>{f.data.enddate}</td>
                                     <td>

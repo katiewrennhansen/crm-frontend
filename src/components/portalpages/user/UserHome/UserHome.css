@@ -160,3 +160,33 @@
 .checkout a {
     text-decoration: none;
 }
+
+
+
+/* MAINTENANCE CHARGE FORM */
+.col-6 {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+}
+
+.col-6 input[type="text"],
+.col-6 input[type="number"],
+.col-6 select {
+    border-top: 1px solid rgba(128, 128, 128, 0.4);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+    border-right: none;
+    border-left: none;
+    margin: 0;
+    border-radius: 0;
+} 
+
+.col-6 div:last-child input {
+    border-right: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.col-6 div:first-child select {
+    border-left: 1px solid rgba(128, 128, 128, 0.4);
+    padding: 10px 15px;
+    height: 39px;
+    background: white;
+}

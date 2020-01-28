@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import ApiService from '../../../services/api-service'
 import config from '../../../config'
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class MaintenanceView extends Component {
     constructor(props){
@@ -13,7 +14,9 @@ class MaintenanceView extends Component {
             mainttypes: [],
             details: [],
             quantity: 0,
-            unitCost: 0
+            unitCost: 0,
+            total: '',
+            loading: false
         }
     }
 
@@ -47,6 +50,12 @@ class MaintenanceView extends Component {
         })
     }
 
+    setTotal = total => {
+        this.setState({
+            total
+        })
+    }
+
     componentDidMount(){
         ApiService.getDataHalf(`${config.API_ENDPOINT}/mainttypes`)
             .then(data => {
@@ -58,6 +67,7 @@ class MaintenanceView extends Component {
         ApiService.getDataHalf(`${config.API_ENDPOINT}/assets/${this.props.propId}/maintenances/${this.props.maintId}`)
             .then(data => {
                 this.setMaintenance(data.data)
+                this.setTotal(data.data.initialcost)
             })
             .catch(error => {
                 console.log(error)
@@ -73,6 +83,9 @@ class MaintenanceView extends Component {
 
     addCharge = e => {
         e.preventDefault()
+        this.setState({loading: true})
+        const endpoint = `${config.API_ENDPOINT}/assets/${this.props.propId}/maintenances/${this.props.maintId}`
+        
         const newCharge = {
             maintenancedetail: {
                 mainttype_id: e.target.type.value,
@@ -82,7 +95,28 @@ class MaintenanceView extends Component {
                 unitcost: e.target.unitcost.value,
             }
         }
-        console.log(newCharge)
+
+        ApiService.postDataHalf(`${endpoint}/maintenancedetails`, newCharge)
+            .then(data => {
+                ApiService.getDataHalf(`${endpoint}/maintenancedetails`)
+                    .then(data => this.setDetails(data.maintenancedetails))
+                    .catch(error => console.log(error))
+                    
+                ApiService.getDataHalf(endpoint)
+                    .then(data => this.setTotal(data.data.initialcost))
+                    .catch(error => console.log(error))
+            })
+            .then(() => this.setState({loading: false}))
+            .catch(error => {
+                this.setState({loading: false})
+                console.log(error)
+            })
+
+        e.target.type.value = ""
+        e.target.description.value = ""
+        e.target.unit.value = ""
+        e.target.quantity.value = ""
+        e.target.unitcost.value = ""
     }
 
     render(){
@@ -90,7 +124,7 @@ class MaintenanceView extends Component {
         const maint = this.state.maintenance
         return (
             <div className="contact-container">
-                <Link to={`/user/properties/${this.props.propId}/maintenance/`}>Back</Link>
+                <Link to={`/user/properties/${this.props.propId}/maintenance`}>Back</Link>
                 <h1>{maint.maintcomm}</h1>
                 <p>Requested: {maint.reqdate}</p>
                 <p>Plan Data: {maint.plandate}</p>
@@ -103,50 +137,6 @@ class MaintenanceView extends Component {
                 </a>
                 : null
                 } */}
-                
-                <form onSubmit={(e) => this.addCharge(e)}>
-                    <div className="inner-form-content">
-                        <h3>Add Charge</h3>
-                        <div className="form-group row">
-                            <div>
-                                <label htmlFor="type">Type</label> 
-                                <select name="type">
-                                    <option>Select a Maintenance Type</option>
-                                    {this.state.mainttypes.map(t => {
-                                        return (
-                                            <option key={t.id} value={t.id}>{t.maindescr}</option>
-                                        )
-                                    })}
-                                </select>
-                            </div>
-                            <div>
-                                <label htmlFor="description">Description</label> 
-                                <input type="text" name="description"/>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <div>
-                                <label htmlFor="quantity">Quantity</label> 
-                                <input type="number" name="quantity" onChange={(e) => this.setQuantity(e)}/>
-                            </div>
-                            <div>
-                                <label htmlFor="unit">Unit</label> 
-                                <input type="text" name="unit"/>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <div>
-                                <label htmlFor="unitcost">Unit Cost</label> 
-                                <input type="number" name="unitcost" onChange={(e) => this.setUnitCost(e)}/>
-                            </div>
-                            <div>
-                                <label htmlFor="total">Total Cost</label> 
-                                <input type="number" name="total" value={this.state.quantity * this.state.unitCost} readOnly={true}/>
-                            </div>
-                        </div>
-                        <input type="submit" className="submit" value="Add Charge"/>
-                   </div>
-                </form>
                 <table>
                     <thead>
                         <tr>
@@ -177,10 +167,49 @@ class MaintenanceView extends Component {
                             <td></td>
                             <td></td>
                             <td><strong>Total</strong></td>
-                            <td>${maint.initialcost}</td>
+                            <td>${this.state.total}</td>
                         </tr>
                     </tbody>
                 </table>
+                <form onSubmit={(e) => this.addCharge(e)}>
+                    <div className="inner-maint-form-content">
+                        <h3>Add Charge</h3>
+                        <div className="form-group col-6">
+                            <div>
+                                <label htmlFor="type">Type</label> 
+                                <select name="type">
+                                    <option>Select a Maintenance Type</option>
+                                    {this.state.mainttypes.map(t => {
+                                        return (
+                                            <option key={t.id} value={t.id}>{t.maindescr}</option>
+                                        )
+                                    })}
+                                </select>
+                            </div>
+                            <div>
+                                <label htmlFor="description">Description</label> 
+                                <input type="text" name="description"/>
+                            </div>
+                            <div>
+                                <label htmlFor="quantity">Quantity</label> 
+                                <input type="number" name="quantity" onChange={(e) => this.setQuantity(e)}/>
+                            </div>
+                            <div>
+                                <label htmlFor="unit">Unit</label> 
+                                <input type="text" name="unit"/>
+                            </div>
+                            <div>
+                                <label htmlFor="unitcost">Unit Cost</label> 
+                                <input type="number" name="unitcost" onChange={(e) => this.setUnitCost(e)}/>
+                            </div>
+                            <div>
+                                <label htmlFor="total">Total Cost</label> 
+                                <input type="number" name="total" value={this.state.quantity * this.state.unitCost} readOnly={true}/>
+                            </div>
+                        </div>
+                        {(this.state.loading) ? <CircularProgress /> : <input type="submit" className="submit" value="Add Charge"/>}
+                   </div>
+                </form>
             </div>
         )
     }

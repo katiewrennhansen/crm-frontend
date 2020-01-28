@@ -15,14 +15,32 @@ class SingleProperty extends Component {
         super(props)
         this.state = {
             error: null,
-            active: 'features'
+            active: ''
         }
     }
 
-    setActive = (type) => {
-        this.setState({
-            active: type
-        })
+    componentDidMount(){
+        if(this.props.history.location.pathname === `/user/properties/${this.props.id}`){
+            this.setState({
+                active: 'features'
+            }) 
+        } else {
+            this.setActive()
+        }
+    }
+
+    setActive = (value) => {
+        const urlArray = this.props.history.location.pathname.split('/')
+        const urlValue = urlArray[urlArray.length - 1]
+        if(value === undefined || ''){
+            this.setState({
+                active: urlValue
+            })
+        } else {
+            this.setState({
+                active: value
+            })
+        }
     }
 
     render(){
