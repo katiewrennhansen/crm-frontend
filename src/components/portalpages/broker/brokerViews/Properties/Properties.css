@@ -232,7 +232,8 @@ td.delete {
 }
 
 .inner-form-content h3,
-.inner-maint-form-content h3 {
+.inner-maint-form-content h3,
+.transactions-table h3 {
     background: #27344317;
     padding: 15px;
 }
