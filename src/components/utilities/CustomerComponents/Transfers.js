@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import ApiService from '../../../services/api-service'
 import config from '../../../config'
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 
