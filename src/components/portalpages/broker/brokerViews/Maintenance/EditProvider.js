@@ -49,7 +49,9 @@ class EditProvider extends Component {
             adescription1: e.target.country.value,
             category_id: e.target.categories.value,
             cstatus_id: e.target.status.value,
-            mainttype_id: e.target.mainttype.value
+            mainttype_id: e.target.mainttype.value,
+            bank_id: e.target.bank_id.value,
+            bankaccount: e.target.bankaccount.value
         }
 
         for (const key in updatedFields) {

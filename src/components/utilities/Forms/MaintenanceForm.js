@@ -12,7 +12,8 @@ class MaintenanceForm extends Component {
             categories: [],
             status: [],
             mainttype: [],
-            provider: []
+            provider: [],
+            banks: []
         }
     }
 
@@ -34,9 +35,15 @@ class MaintenanceForm extends Component {
         })
     }
 
-    setProvider= (provider) => {
+    setProvider = (provider) => {
         this.setState({
             provider
+        })
+    }
+
+    setBanks = (banks) => {
+        this.setState({
+            banks
         })
     }
 
@@ -67,6 +74,13 @@ class MaintenanceForm extends Component {
         ApiService.getDataHalf(`${config.API_ENDPOINT}/mainttypes`)
             .then(data => {
                 this.setMaintType(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/banks`)
+            .then(data => {
+                this.setBanks(data)
             })
             .catch(error => {
                 console.log(error)
@@ -137,6 +151,32 @@ class MaintenanceForm extends Component {
                             <div>
                                 <label htmlFor="country">Country<span className="required">*</span></label>
                                 <input type="text" name="country" defaultValue={info.adescription1}></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-content-section">
+                        <h3>Bank Information</h3>
+                        <div className="form-group row">
+                            <div>
+                                <label htmlFor="bank_id">Bank Name<span className="required">*</span></label>
+                                <select name="bank_id">
+                                    <option value="">Select a Bank</option>
+                                    {this.state.banks.map(b => {
+                                        if(info.bankname && b.bank_id === info.bankname){
+                                            return (
+                                                <option key={b.id} value={b.id} selected>{b.bankname}</option>
+                                                )
+                                        }
+                                        return (
+                                            <option key={b.id} value={b.id}>{b.bankname}</option>
+                                        )
+                                    })}
+                                </select>                            
+                            </div>
+                            <div>
+                                <label htmlFor="bankaccount">Bank Account<span className="required">*</span></label>
+                                <input type="text" name="bankaccount" defaultValue={info.bankaccount}></input>
                             </div>
                         </div>
                     </div>
