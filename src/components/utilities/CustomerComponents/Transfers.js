@@ -56,7 +56,7 @@ class Transfers extends Component {
         const trans = this.state.transfer
         return (
             <div className="contact-container">
-                <Link to={`/dashboard/customer-accounts/${this.props.id}`}>Back</Link>
+                <Link to={`/${this.props.url}/${this.props.id}`}>Back</Link>
                 <h2>Transfer #{trans.transfernumber}</h2>
                 <div>
                     <p>Bank: {trans.bank}</p>

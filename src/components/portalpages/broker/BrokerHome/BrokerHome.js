@@ -24,7 +24,9 @@ import AddContact from '../brokerViews/Contacts/AddContact'
 import AddReminder from '../brokerViews/Reminders/AddReminder'
 import CheckIn from '../../../utilities/PropertyComponents/CheckIn'
 import Profile from '../../../utilities/CustomerComponents/Profile'
+import MaintenanceView from '../../../utilities/PropertyComponents/MaintenanceView'
 import './BrokerHome.css'
+import Transfers from '../../../utilities/CustomerComponents/Transfers'
 
 
 class BrokerHome extends Component {
@@ -184,6 +186,20 @@ class BrokerHome extends Component {
                                 component={Maintenance}
                             />
                             <Route 
+                                exact path={`/broker/property/:id/maintenance/:maint_id`}
+                                render={(history) => {
+                                    const propId = history.match.params.id;
+                                    const maintId = history.match.params.maint_id;
+                                    return (
+                                        <MaintenanceView
+                                            propId={propId}
+                                            maintId={maintId} 
+                                            type="broker"
+                                        />
+                                    )
+                                }}
+                            />
+                            <Route 
                                 exact path='/broker/maintenance/add-provider' 
                                 component={AddProvider}
                             />
@@ -253,6 +269,21 @@ class BrokerHome extends Component {
                                         />
                                     )
                                 }}
+                            />
+                            <Route 
+                                exact path='/broker/contacts/:id/transfer/:trans_id' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    const transId = history.match.params.trans_id;
+                                    return (
+                                        <Transfers
+                                            history={history} 
+                                            id={id}
+                                            transId={transId}
+                                            url="broker/contacts"
+                                        />
+                                    )
+                                    }}
                             />
                             <Route 
                                 path='/broker/alerts' 

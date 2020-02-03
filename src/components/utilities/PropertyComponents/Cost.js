@@ -201,7 +201,11 @@ class Cost extends Component {
                         </div>
                         <div>
                             <label htmlFor="kind">Kind<span className="required">*</span></label>
-                            <input type="text" name="kind"></input>
+                            <select name="kind">
+                                <option value="">Select a Transaction Type</option>
+                                <option value="income">Income</option>
+                                <option value="outcome">Outcome</option>
+                            </select>
                         </div>
                     </div>
                     
@@ -234,10 +238,9 @@ class Cost extends Component {
                     <thead>
                         <tr>
                             <th>Type</th>
-                            <th>Name</th>
+                            <th>Kind</th>
                             <th>Amount</th>
-                            <th>Year</th>
-                            <th>Comment</th>
+                            <th>Date</th>
                             <th>Reciept</th>
                             <th className="delete-heading">Delete</th>
                         </tr>
@@ -251,11 +254,10 @@ class Cost extends Component {
                             }
                             return (
                                 <tr key={f.data.id}>
-                                    <td>{f.data.kind}</td>
                                     <td>{f.data.concept}</td>
+                                    <td>{f.data.kind}</td>
                                     <td>{f.data.amount}</td>
                                     <td>{f.data.date}</td> 
-                                    <td>{f.data.comment}</td>
                                     <td>
                                     {(url 
                                         ? <a href={`${url}`} className="close-icon" target="_blank" rel="noopener noreferrer">
@@ -275,8 +277,7 @@ class Cost extends Component {
                         })
                         :
                         <tr>
-                            <td className='nothing-to-display'>No costs to display</td>
-                            <td></td>
+                            <td className='nothing-to-display'>No transactions to display</td>
                             <td></td>
                             <td></td>
                             <td></td>

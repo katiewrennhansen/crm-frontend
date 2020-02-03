@@ -125,7 +125,7 @@ class MaintenanceView extends Component {
         const receipt = maint.receipts_url
         return (
             <div className="contact-container">
-                <Link to={`/user/properties/${this.props.propId}/maintenance`}>Back</Link>
+                <Link to={`/${this.props.type}/properties/${this.props.propId}/maintenance`}>Back</Link>
                 <div className="header-grid">
                     <h1>{maint.maintcomm}</h1>
                     {(receipt)

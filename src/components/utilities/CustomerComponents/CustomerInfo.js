@@ -120,7 +120,7 @@ export default function CustomerInfo(props){
                                     <td>{t.data.totalamount}</td>
                                     <td>{t.data.trasferdate}</td>
                                     <td>
-                                        <Link to={`/dashboard/customer-accounts/${props.data.id}/transfer/${t.data.id}`}>
+                                        <Link to={`/${props.url}/${props.data.id}/transfer/${t.data.id}`}>
                                             <PageviewIcon className="active-icon"/>
                                         </Link>
                                     </td>

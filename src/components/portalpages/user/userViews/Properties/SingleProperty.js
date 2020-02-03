@@ -98,7 +98,10 @@ class SingleProperty extends Component {
                     exact path={`/user/properties/${this.props.id}/maintenance`}
                     render={props => (
                         <ErrorBoundary>
-                            <Maintenance id={this.props.id} />
+                            <Maintenance 
+                                id={this.props.id} 
+                                type="user"    
+                            />
                         </ErrorBoundary>
                     )}
                 />

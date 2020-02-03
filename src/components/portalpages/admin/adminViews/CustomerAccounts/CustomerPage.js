@@ -97,6 +97,7 @@ class CustomerPage extends Component {
                 <CustomerInfo
                     data={data}
                     transfers={this.state.transfers}
+                    url="dashboard/customer-accounts"
                 />
             </div>
         )

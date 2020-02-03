@@ -435,6 +435,7 @@ class AdminHome extends Component {
                                             history={history} 
                                             id={id}
                                             transId={transId}
+                                            url="dashboard/customer-accounts"
                                         />
                                     )
                                     }}

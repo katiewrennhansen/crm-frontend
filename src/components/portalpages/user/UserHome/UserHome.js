@@ -146,6 +146,7 @@ class UserHome extends Component {
                                         <MaintenanceView 
                                             propId={propId}
                                             maintId={maintId} 
+                                            type="user"
                                         />
                                     )
                                 }}

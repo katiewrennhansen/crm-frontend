@@ -12,7 +12,8 @@ class ContactPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            customer: []
+            customer: [],
+            transfers: []
         };
     }
 
@@ -23,11 +24,26 @@ class ContactPage extends Component {
         })
     }
 
+
+    setTransfers = transfers => {
+        this.setState({
+            transfers
+        })
+    }
+
     componentDidMount(){
         const endpoint = `${config.API_ENDPOINT}/customers`
-        ApiService.getById(endpoint, this.props.id)
+        const id = this.props.id
+        ApiService.getById(endpoint, id)
             .then(data => {
                 this.setCustomer(data.data)
+            })
+            .catch(error => {
+                this.setState({ error })
+            })
+        ApiService.getDataHalf(`${endpoint}/${id}/transfers`)
+            .then(data => {
+                this.setTransfers(data.transfers)
             })
             .catch(error => {
                 this.setState({ error })
@@ -37,6 +53,7 @@ class ContactPage extends Component {
     componentWillUnmount(){
         this.setCustomer([])
     }
+
     
     render(){  
         const data = this.state.customer
@@ -59,6 +76,8 @@ class ContactPage extends Component {
                 </div>
                 <CustomerInfo
                     data={data}
+                    transfers={this.state.transfers}
+                    url="broker/contacts"
                 />
                 <AddNetwork 
                     id={this.props.id}

@@ -82,7 +82,10 @@ class SinglePageProperty extends Component {
                     exact path={`/broker/properties/${this.props.id}/maintenance`}
                     render={props => (
                         <ErrorBoundary>
-                            <Maintenance id={this.props.id} />
+                            <Maintenance 
+                                id={this.props.id} 
+                                type="broker"
+                            />
                         </ErrorBoundary>
                     )}
                 />
