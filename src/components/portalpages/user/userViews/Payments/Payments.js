@@ -3,6 +3,7 @@ import { Link, Route } from 'react-router-dom'
 import PayOnline from './PayOnline'
 import PaymentHistory from './PaymentHistory'
 import PaymentAccounts from './PaymentAccounts'
+import UserTransfers from '../../../../utilities/CustomerComponents/UserTransfers'
 
 class Payments extends Component {
     render(){
@@ -21,6 +22,18 @@ class Payments extends Component {
                     <Route  
                         exact path='/user/payments/history'
                         component={PaymentHistory}
+                    />
+                    <Route  
+                        exact path='/user/payments/history/:id'
+                        render={history => {
+                            const id = history.match.params.id
+                            return (
+                                <UserTransfers 
+                                    id={id}
+                                    url="user/payments/history"
+                                />
+                            )
+                        }}
                     />
                     <Route  
                         exact path='/user/payments/accounts'

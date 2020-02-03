@@ -13,13 +13,14 @@ ul {
 }
 
 .admin-info {
-    padding: 30px;
+    padding: 20px 30px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     align-items: center;
+    height: 92px;
 }
 
-.admin-info:first-child{
+.admin-info:first-child {
     grid-column: 1 / 2;
 }
 
@@ -27,7 +28,7 @@ ul {
     margin: 0;
     font-family: 'Work Sans', sans-serif;
     grid-column: 2 / 6;
-    padding-left: 15px;
+    padding: 0 15px;
     font-size: 20px;
 }
 
@@ -73,6 +74,7 @@ ul {
 .toggle-btn {
     background: none;
     border: none;
+    justify-self: right;
 }
 
 .toggle-btn:hover {
@@ -91,6 +93,11 @@ ul {
     width: 14px;
 }
 
+.profile-img-icon {
+    width: 51px;
+    height: 51px;
+    border-radius: 50%;
+}
 
 @media (min-width: 900px){
     .dash-sidebar-container {
@@ -124,5 +131,8 @@ ul {
         background: rgba(0, 0, 0, 0.6);
         transition: 10ms linear;
         width: 100%;
+    }
+    .profile-img-icon.collapsed {
+        display: none;
     }
 }

@@ -1,20 +1,28 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import ApiService from '../../../../../services/api-service'
 import config from '../../../../../config'
+import PageviewIcon from '@material-ui/icons/Pageview';
 
 class PaymentHistory extends Component {
     constructor(props){
         super(props)
         this.state = {
             error: null,
-            payments: [],
+            transfers: []
         }
+    }
+
+    setTransfers = transfers => {
+        this.setState({
+            transfers
+        })
     }
 
     componentDidMount(){
         ApiService.getDataHalf(`${config.API_ENDPOINT}/customers/0/transfers`)
             .then(data => {
-                console.log(data)
+                this.setTransfers(data.transfers)
             })
             .catch(error => {
                 console.log(error)
@@ -29,29 +37,33 @@ class PaymentHistory extends Component {
                     <thead>
                         <tr>
                             <th>Date</th>
-                            <th>Description</th>
-                            <th>Charge</th>
+                            <th>Bank</th>
+                            <th>Account #</th>
                             <th>Amount</th>
-                            <th>Status</th>
-                            <th></th>
+                            <th>Transfer #</th>
+                            <th>View</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                        (this.state.payments[0]) 
-                        ?
-                            this.state.payments.map(c => {
+                        (this.state.transfers[0]) 
+                        ? this.state.transfers.map(t => {
                                 return (
-                                    <tr key={c.id}>
-                                        <td>Date Issued</td>
-                                        <td>Name</td>
-                                        {/* <td>{(c.confirmatindate) ? `Completed ${c.requestdate}` : 'Pending'}</td>  */}
-                                        <td>Status</td>
-                                        <td className="action-icon">View</td>                                       
+                                    <tr key={t.data.id}>
+                                        <td>{t.data.trasferdate}</td>
+                                        <td>{t.data.bank}</td>
+                                        <td>{t.data.account}</td>    
+                                        <td>{t.data.totalamount}</td>
+                                        <td>{(t.data.transfernumber) ? t.data.transfernumber : '-'}</td>
+                                        <td>
+                                            <Link to={`/user/payments/history/${t.data.id}`}>
+                                                <PageviewIcon className="active-icon"/>
+                                            </Link>
+                                        </td>
                                     </tr>
                                 )})
                             : ( <tr>
-                                    <td className="nothing-to-display">You have not submitted any payments yet</td>
+                                    <td className="nothing-to-display">You have not submitted any transfers yet</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -62,7 +74,7 @@ class PaymentHistory extends Component {
                     </tbody>
                 </table>
                 <br></br>
-                <p className="entry-count">Showing {this.state.payments.length} of {this.state.payments.length} entries</p>
+                <p className="entry-count">Showing {this.state.transfers.length} of {this.state.transfers.length} entries</p>
             </div>
         )
     }

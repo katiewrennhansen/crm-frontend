@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../config'
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
@@ -23,7 +22,8 @@ class BrokerSidebar extends Component {
             title: '',
             firstname: '',
             lastname: '',
-            alert: false
+            alert: false,
+            user: ''
         };
     }
 
@@ -51,11 +51,18 @@ class BrokerSidebar extends Component {
             console.log(str)
         }
     }
+    
+    setUser = user => {
+        this.setState({
+            user
+        })
+    }
 
     componentDidMount(){
         const id = sessionStorage.getItem('id')
         ApiService.getDataHalf(`${config.API_ENDPOINT}/users/${id}`)
             .then(data => {
+                this.setUser(data.data)
                 this.setFirst(data.data.firstname)
                 this.setLast(data.data.lastname)
             })
@@ -78,10 +85,7 @@ class BrokerSidebar extends Component {
         return (
             <div className={`${(this.context.active) ? null : 'collapsed'} dash-sidebar-container`}>
                 <div className='admin-info'>
-                    <AccountCircleIcon 
-                        fontSize='large'
-                        className={`${(this.context.active) ? null : 'collapsed'} icon`}
-                    />
+                <img className={ `${(this.context.active) ? null : 'collapsed'} profile-img-icon`} src={this.state.user.photo_url} alt="profile icon" />
                     <h2 className={(this.context.active) ? null : 'collapsed'}>{this.state.firstname} {this.state.lastname}</h2>
                     <button className="toggle-btn"  aria-label="toggle-nav" onClick={this.context.toggleNav}>
                         <div className="burger-bar"></div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import config from '../../../../config'
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import UserContext from '../../../../contexts/UserContext'
 import ApiService from '../../../../services/api-service'
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
@@ -20,6 +20,7 @@ class UserSidebar extends Component {
             title: '',
             firstname: '',
             lastname: '',
+            user: ''
         };
     }
 
@@ -41,11 +42,18 @@ class UserSidebar extends Component {
         })
     }
 
+    setUser = user => {
+        this.setState({
+            user
+        })
+    }
+
     componentDidMount(){
         const id = sessionStorage.getItem('id')
-        const endpoint = `http://crmmia-api.herokuapp.com/api/users/${id}`
+        const endpoint = `${config.API_ENDPOINT}/users/${id}`
         ApiService.getDataHalf(endpoint)
             .then(data => {
+                this.setUser(data.data)
                 this.setFirst(data.data.firstname)
                 this.setLast(data.data.lastname)
             })
@@ -58,10 +66,7 @@ class UserSidebar extends Component {
         return (
             <div className={`${(this.context.active) ? null : 'collapsed'} dash-sidebar-container`}>
                 <div className='admin-info'>
-                    <AccountCircleIcon 
-                        fontSize='large'
-                        className={`${(this.context.active) ? null : 'collapsed'} icon`}
-                    />
+                    <img className={ `${(this.context.active) ? null : 'collapsed'} profile-img-icon`} src={this.state.user.photo_url} alt="profile icon" />
                     <h2 className={(this.context.active) ? null : 'collapsed'}>{this.state.firstname} {this.state.lastname}</h2>
                     <button className="toggle-btn"  aria-label="toggle-nav" onClick={this.context.toggleNav}>
                         <div className="burger-bar"></div>
