@@ -37,7 +37,9 @@ class AddCustomer extends Component {
             remainder_id: e.target.reminder.value,
             category_id: e.target.category.value,
             caniversary: e.target.anniversary.value,
-            ccomment: e.target.comment.value
+            ccomment: e.target.comment.value,
+            bank_id: e.target.bank_id.value,
+            bankaccount: e.target.bankaccount.value
         }
 
         ApiService.postDataHalf(caEndpoint, newCustomer)

@@ -14,36 +14,39 @@ class ContactForm extends Component{
             brokers: [],
             status: [],
             reminders: [],
-            categories: []
+            categories: [],
+            banks: []
         };
     }
 
 
     setBrokers = data => {
         this.setState({
-            brokers: data.brokers,
-            error: null
+            brokers: data.brokers
         })
     }
 
     setStatus = data => {
         this.setState({
-            status: data,
-            error: null
+            status: data
         })
     }
 
     setReminders = data => {
         this.setState({
-            reminders: data,
-            error: null
+            reminders: data
         })
     }
 
     setCategories = data => {
         this.setState({
-            categories: data,
-            error: null
+            categories: data
+        })
+    }
+
+    setBanks = banks => {
+        this.setState({
+            banks
         })
     }
 
@@ -63,6 +66,10 @@ class ContactForm extends Component{
         ApiService.getData(
             catEndpoint,
             this.setCategories
+        )
+        ApiService.getData(
+            `${config.API_ENDPOINT}/banks`,
+            this.setBanks
         )
     }
 
@@ -178,6 +185,32 @@ class ContactForm extends Component{
                                     type='text'
                                     defaultValue={this.props.cust.country}
                                 />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-content-section">
+                        <h3>Bank Information</h3>
+                        <div className="form-group row">
+                            <div>
+                                <label htmlFor="bank_id">Bank Name<span className="required">*</span></label>
+                                <select name="bank_id">
+                                    <option value="">Select a Bank</option>
+                                    {this.state.banks.map(b => {
+                                        if(this.props.cust.bankname && b.bank_id === this.props.cust.bankname){
+                                            return (
+                                                <option key={b.id} value={b.id} selected>{b.bankname}</option>
+                                                )
+                                        }
+                                        return (
+                                            <option key={b.id} value={b.id}>{b.bankname}</option>
+                                        )
+                                    })}
+                                </select>                            
+                            </div>
+                            <div>
+                                <label htmlFor="bankaccount">Bank Account<span className="required">*</span></label>
+                                <input type="text" name="bankaccount" defaultValue={this.props.cust.bankaccount}></input>
                             </div>
                         </div>
                     </div>
