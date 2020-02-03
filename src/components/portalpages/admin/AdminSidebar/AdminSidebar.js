@@ -16,6 +16,7 @@ import CategoryIcon from '@material-ui/icons/Category';
 import AdminContext from '../../../../contexts/AdminContext'
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import PaymentIcon from '@material-ui/icons/Payment';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import './AdminSidebar.css'
 
 
@@ -98,6 +99,16 @@ class AdminSidebar extends Component {
                         >
                             <PaymentIcon />
                             <p className={(this.context.active) ? null : 'collapsed'}>Transactions</p>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to="/dashboard/banks" 
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
+                            onClick={() => this.props.handleTitle('Banks')}
+                        >
+                            <AccountBalanceIcon />
+                            <p className={(this.context.active) ? null : 'collapsed'}>Banks</p>
                         </Link>
                     </li>
                     <li>

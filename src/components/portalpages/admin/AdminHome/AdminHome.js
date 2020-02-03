@@ -24,6 +24,7 @@ import EditCustomer from '../adminViews/CustomerAccounts/EditCustomer'
 import Transactions from '../adminViews/Transactions/Transactions'
 import './AdminHome.css'
 import Transfers from '../../../utilities/CustomerComponents/Transfers'
+import Banks from '../adminViews/Banks/Banks'
 
 class AdminHome extends Component {
     constructor(props){
@@ -295,6 +296,14 @@ class AdminHome extends Component {
                                 render={(props) => {
                                     return (
                                         <Transactions />
+                                    )
+                                }}
+                            />
+                            <Route 
+                                path='/dashboard/banks' 
+                                render={(props) => {
+                                    return (
+                                        <Banks />
                                     )
                                 }}
                             />

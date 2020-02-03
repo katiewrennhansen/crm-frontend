@@ -10,8 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import EditIcon from '@material-ui/icons/Edit';
 
-
-class Transactions extends Component {
+class Banks extends Component {
     static contextType = AdminContext
 
     constructor(props) {
@@ -23,7 +22,7 @@ class Transactions extends Component {
     
     componentDidMount(){
         ApiService.getData(
-            `${config.API_ENDPOINT}/transconcepts`, 
+            `${config.API_ENDPOINT}/banks`, 
             this.context.setData
         )
     }
@@ -34,12 +33,15 @@ class Transactions extends Component {
 
     addCategory = (e) => {
         e.preventDefault()
-        const newTransactionType = {
-            concept: e.target.transaction.value,
+        const newBank = {
+            bank: {
+                bankname: e.target.bankname.value,
+                bankcode: e.target.bankcode.value
+            }
         }
         ApiService.postData(
-            `${config.API_ENDPOINT}/transconcepts`,
-            newTransactionType,
+            `${config.API_ENDPOINT}/banks`,
+            newBank,
             this.context.updateData,
             this.context.hideModal
         )
@@ -48,13 +50,16 @@ class Transactions extends Component {
     updateData = (e) => {
         e.preventDefault()
         const id = this.context.id
-        const updatedContent = {
-            concept: e.target.transaction.value
+        const updatedBank = {
+            bank: {
+                bankname: e.target.bankname.value,
+                bankcode: e.target.bankcode.value
+            }
         }
         ApiService.updateData(
-            `${config.API_ENDPOINT}/transconcepts`, 
+            `${config.API_ENDPOINT}/banks`, 
             id, 
-            updatedContent, 
+            updatedBank, 
             this.context.setData, 
             this.context.hideUpdate
         )
@@ -63,7 +68,7 @@ class Transactions extends Component {
     deleteCategory = (id) => {
         this.context.deleteData(id)
         ApiService.deleteData(
-            `${config.API_ENDPOINT}/transconcepts`,  
+            `${config.API_ENDPOINT}/banks`,  
             id, 
             this.context.setData
         )
@@ -93,10 +98,20 @@ class Transactions extends Component {
                             <label htmlFor='transaction'>
                                 <h3>Update: {context.name}</h3>
                             </label>
-                            <input
-                                id='transaction'
-                                name='transaction'
-                                placeholder='Update Transaction'
+                            <label htmlFor='bankname'></label>
+                            <input 
+                                id='bankname'
+                                name='bankname'
+                                defaultValue={context.name}
+                                type='text'
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='bankcode'></label>
+                            <input 
+                                id='bankcode'
+                                name='bankcode'
+                                placeholder='Update Bank Code'
                                 type='text'
                             />
                         </div>
@@ -113,13 +128,22 @@ class Transactions extends Component {
                         className='add-content'
                         onSubmit={(e) => this.addCategory(e)}
                     >
-                        <h3>Add a Transaction</h3>
+                        <h3>Add a Bank</h3>
                         <div className='form-group'>
-                            <label htmlFor='transaction'></label>
+                            <label htmlFor='bankname'></label>
                             <input 
-                                id='transaction'
-                                name='transaction'
-                                placeholder='New Transaction'
+                                id='bankname'
+                                name='bankname'
+                                placeholder='New Bank Name'
+                                type='text'
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='bankcode'></label>
+                            <input 
+                                id='bankcode'
+                                name='bankcode'
+                                placeholder='New Bank Code'
                                 type='text'
                             />
                         </div>
@@ -128,7 +152,7 @@ class Transactions extends Component {
                 </Modal>
                 
                 <div className='data-container'>
-                    <h2>Transaction Type</h2>
+                    <h2>Banks</h2>
                     <AddIcon 
                         className="add-icon" 
                         aria-label="add transaction type" 
@@ -138,6 +162,7 @@ class Transactions extends Component {
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Code</th>
                                 <th>Date Created</th>
                                 <th>Update</th>
                                 <th>Delete</th>
@@ -145,26 +170,27 @@ class Transactions extends Component {
                         </thead>
                         <tbody>
                         {(context.data[0])
-                            ? context.data.map(c => (
-                                <tr key={c.id}>
-                                    <td>{c.concept}</td>
+                            ? context.data.map(b => (
+                                <tr key={b.id}>
+                                    <td>{b.bankname}</td>
+                                    <td>{b.bankcode}</td>
                                     <td>
-                                        <Moment format="YYYY/MM/DD">{c.created_at}</Moment>
+                                        <Moment format="YYYY/MM/DD">{b.created_at}</Moment>
                                     </td>
                                     <td>
-                                        <button className='update-btn' onClick={() => context.updateUpdate(c.concept, c.id)}>
+                                        <button className='update-btn' onClick={() => context.updateUpdate(b.bankname, b.id)}>
                                             <EditIcon /> 
                                         </button>
                                     </td>
                                     <td>
-                                        <button className='delete-btn' onClick={() => context.updateDelete(c.concept, c.id)}>
+                                        <button className='delete-btn' onClick={() => context.updateDelete(b.bankname, b.id)}>
                                             <DeleteOutlineIcon />
                                         </button>
                                     </td>
                                 </tr>
                             ))
                             :   <tr>
-                                    <td className="nothing-to-display">No Transactions to Display</td>
+                                    <td className="nothing-to-display">No Banks to Display</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -181,6 +207,6 @@ class Transactions extends Component {
 
 
 
-export default Transactions
+export default Banks
 
 
