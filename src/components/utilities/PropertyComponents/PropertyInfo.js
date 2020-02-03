@@ -65,6 +65,7 @@ class PropertyInfo extends Component {
                         <EditIcon 
                             className="action-icon" 
                         />
+                        <p>Edit Listing</p>
                     </Link>
                 </div>  
                 <div className='broker-properties'>

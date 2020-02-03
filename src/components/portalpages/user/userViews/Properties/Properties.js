@@ -43,7 +43,7 @@ class Properties extends Component {
                             className="action-icon" 
                             aria-label="add property" 
                         />
-                        <p>Add Property</p>
+                        <p>List Property</p>
                     </Link>
                 </div>
                 <div className='broker-properties-grid'>
