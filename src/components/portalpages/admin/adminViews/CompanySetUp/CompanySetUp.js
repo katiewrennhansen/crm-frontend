@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ApiService from '../../../../../services/api-service'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import EditIcon from '@material-ui/icons/Edit';
@@ -9,51 +10,34 @@ class CompanySetUp extends Component {
         super(props);
         this.state = {
             companyInfo: [],
-            error: null
         };
     }
     
     setCompanyInfo = companyInfo => {
         this.setState({
-            companyInfo: companyInfo,
-            error: null
+            companyInfo: companyInfo
         })
     }
     updateCompanyInfo = data => {
         this.setState({
-            companyInfo: data,
-            error: null
+            companyInfo: data
         })
     }
 
     componentDidMount(){
-        fetch(config.COMPANY_SETUP_ENDPOINT, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setCompanyInfo(data.data)
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/companies`)
+            .then(data => {
+                this.setCompanyInfo(data.data)
+            })
+            .catch(error => console.log(error))
     }
 
     render(){
-        const data = this.state.companyInfo
+        // const data = this.state.companyInfo
         return (
             <div className='container contact-container'>
                 <div className='header-grid'>
-                    <h2>{data.company}</h2>
+                    {/* <h2>{data.company}</h2> */}
                     <div className="property-icons">  
                         <Link className="add-icon" to='/dashboard/edit-account-settings'>
                             <EditIcon 
@@ -62,9 +46,9 @@ class CompanySetUp extends Component {
                         </Link>
                     </div>
                 </div>
-                <CompanyInfo 
+                {/* <CompanyInfo 
                     data={data}
-                />
+                /> */}
             </div>
         )
     }

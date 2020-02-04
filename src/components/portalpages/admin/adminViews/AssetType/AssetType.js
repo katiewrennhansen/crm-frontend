@@ -98,7 +98,7 @@ class AssetType extends Component {
                                     <h3>Update: {context.name}</h3>
                                 </label>
                                 <input
-                                    id='asset_type'
+                                    id='update_asset_type'
                                     name='asset_type'
                                     type='text'
                                 />
@@ -120,13 +120,13 @@ class AssetType extends Component {
                         <div className='form-group'>
                             <label htmlFor='asset_type'></label>
                             <input 
-                                id='asset_type'
+                                id='add_asset_type'
                                 name='asset_type'
                                 type='text'
                                 placeholder="Asset Type"
                             />
                         </div>
-                        <input type="submit" className="submit-full submit-modal" value="Update" />
+                        <input type="submit" className="submit-full submit-modal" value="Add" />
                     </form>
                 </Modal>
                 

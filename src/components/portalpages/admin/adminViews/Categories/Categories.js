@@ -99,7 +99,7 @@ class Categories extends Component {
                                 <h3>Update: {context.name}</h3>
                             </label>
                             <input
-                                id='category'
+                                id='update_category'
                                 name='category'
                                 placeholder='Update Category'
                                 type='text'
@@ -122,7 +122,7 @@ class Categories extends Component {
                         <div className='form-group'>
                             <label htmlFor='comment_type'></label>
                             <input 
-                                id='category'
+                                id='add_category'
                                 name='category'
                                 placeholder='New Category'
                                 type='text'

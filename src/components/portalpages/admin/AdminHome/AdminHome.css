@@ -206,7 +206,7 @@ button.add-icon {
     color: #273443;
 }
 
-.add-icon {
+/* .add-icon {
     font-size: 14px;
     text-decoration: none;
     display: grid;
@@ -214,7 +214,7 @@ button.add-icon {
     border: 1px solid gray;
     border-radius: 50px;
     padding: 3px 15px 3px 10px;
-}
+} */
 
 .add-icon p,
 .add-icon .action-icon {

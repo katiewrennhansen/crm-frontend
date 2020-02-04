@@ -52,7 +52,7 @@ class PropertyFeatures extends Component {
         let updatedContent = {}
 
         if(e.target.feat_type.value !== ''){
-            updatedContent.featuredescr = e.target.feat_type.value
+            updatedContent.featuredescr = e.target.feature_name.value
         }
         ApiService.updateDataHalf(pfEndpoint, id, updatedContent)
             .then(res => {
@@ -95,12 +95,12 @@ class PropertyFeatures extends Component {
                     <div className='update-content'>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
-                                <label htmlFor='maint_type'>
+                                <label htmlFor='feature_name'>
                                     <h3>Update: {context.name}</h3>
                                 </label>
                                 <input
-                                    id='feat_type'
-                                    name='feat_type'
+                                    id='update_feature_name'
+                                    name='feature_name'
                                     placeholder='Update Feature Name'
                                     type='text'
                                 />
@@ -123,7 +123,7 @@ class PropertyFeatures extends Component {
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>
                             <input 
-                                id='feature_name'
+                                id='add_feature_name'
                                 name='feature_name'
                                 placeholder='Update Feature Name'
                                 type='text'

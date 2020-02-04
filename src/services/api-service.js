@@ -1,4 +1,3 @@
-import config from '../config'
 import TokenService from './token-service'
 
 const ApiService = {
@@ -22,9 +21,20 @@ const ApiService = {
             console.log(err)
         })
     },
-    getDataHalf(ApiEndpoint,) {
+    
+    getDataFromEffect(endpoint, abortController) {
+        return fetch(endpoint, {
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            },
+            signal: abortController.signal
+        })
+        .then(res => (!res.ok) ? res.json().then(error => Promise.reject(error)) : res.json())
+    },
+
+    getDataHalf(ApiEndpoint) {
         return fetch(ApiEndpoint, {
-            method: 'GET',
             headers: {
                 'content-type': 'application/json',
                 'Authorization': `Bearer ${TokenService.getAuthToken()}`
@@ -42,7 +52,7 @@ const ApiService = {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
         })
         .then(res => {
@@ -59,7 +69,7 @@ const ApiService = {
             body: JSON.stringify(dataObj),
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
         })
         .then(res => 
@@ -82,7 +92,7 @@ const ApiService = {
             body: JSON.stringify(dataObj),
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
         })
         .then(res => {
@@ -98,7 +108,7 @@ const ApiService = {
             body: JSON.stringify(dataObj),
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
         })
         .then(res => 
@@ -121,7 +131,7 @@ const ApiService = {
             body: JSON.stringify(dataObj),
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
         })
         .then(res => 
@@ -136,7 +146,7 @@ const ApiService = {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
         })
         .then(res => 
@@ -157,7 +167,7 @@ const ApiService = {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
         })
         .then(res => 

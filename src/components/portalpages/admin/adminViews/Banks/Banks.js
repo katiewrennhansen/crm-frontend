@@ -100,7 +100,7 @@ class Banks extends Component {
                             </label>
                             <label htmlFor='bankname'></label>
                             <input 
-                                id='bankname'
+                                id='update_bankname'
                                 name='bankname'
                                 defaultValue={context.name}
                                 type='text'
@@ -109,7 +109,7 @@ class Banks extends Component {
                         <div className='form-group'>
                             <label htmlFor='bankcode'></label>
                             <input 
-                                id='bankcode'
+                                id='update_bankcode'
                                 name='bankcode'
                                 placeholder='Update Bank Code'
                                 type='text'
@@ -132,7 +132,7 @@ class Banks extends Component {
                         <div className='form-group'>
                             <label htmlFor='bankname'></label>
                             <input 
-                                id='bankname'
+                                id='add_bankname'
                                 name='bankname'
                                 placeholder='New Bank Name'
                                 type='text'
@@ -141,7 +141,7 @@ class Banks extends Component {
                         <div className='form-group'>
                             <label htmlFor='bankcode'></label>
                             <input 
-                                id='bankcode'
+                                id='add_bankcode'
                                 name='bankcode'
                                 placeholder='New Bank Code'
                                 type='text'

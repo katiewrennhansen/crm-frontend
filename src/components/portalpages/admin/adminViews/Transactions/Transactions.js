@@ -94,7 +94,7 @@ class Transactions extends Component {
                                 <h3>Update: {context.name}</h3>
                             </label>
                             <input
-                                id='transaction'
+                                id='update_transaction'
                                 name='transaction'
                                 placeholder='Update Transaction'
                                 type='text'
@@ -117,7 +117,7 @@ class Transactions extends Component {
                         <div className='form-group'>
                             <label htmlFor='transaction'></label>
                             <input 
-                                id='transaction'
+                                id='add_transaction'
                                 name='transaction'
                                 placeholder='New Transaction'
                                 type='text'

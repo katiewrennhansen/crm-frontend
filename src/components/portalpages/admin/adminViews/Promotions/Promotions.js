@@ -108,9 +108,9 @@ class Promotions extends Component {
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <h3>Update {context.name}</h3>
                             <div className='form-group'>
-                                <label htmlFor='comment_type'>Name</label>
+                                <label htmlFor='promotion_name'>Name</label>
                                 <input
-                                    id='comment_type'
+                                    id='update_promotion_name'
                                     name='promotion_name'
                                     type='text'
                                     defaultValue={context.name}
@@ -120,7 +120,7 @@ class Promotions extends Component {
                                 <div className='form-group'>
                                     <label htmlFor='promotion_start'>Start Date</label>
                                     <input 
-                                        id='promotion_start'
+                                        id='update_promotion_start'
                                         name='promotion_start'
                                         type='date'
                                     />
@@ -128,7 +128,7 @@ class Promotions extends Component {
                                 <div className='form-group'>
                                     <label htmlFor='promotion_end'>End Date</label>
                                     <input 
-                                        id='promotion_end'
+                                        id='update_promotion_end'
                                         name='promotion_end'
                                         type='date'
                                     />
@@ -137,7 +137,7 @@ class Promotions extends Component {
                             <div className='form-group'>
                                 <label htmlFor='promotion_cost'>Total Cost</label>
                                 <input 
-                                    id='total_cost'
+                                    id='update_total_cost'
                                     name='total_cost'
                                     type='number'
                                     defaultValue={context.cost}
@@ -160,7 +160,7 @@ class Promotions extends Component {
                         <div className='form-group'>
                             <label htmlFor='promotion_name'>Name</label>
                             <input 
-                                id='promotion_name'
+                                id='add_promotion_name'
                                 name='promotion_name'
                                 type='text'
                             />
@@ -168,7 +168,7 @@ class Promotions extends Component {
                         <div className='form-group'>
                             <label htmlFor='promotion_start'>Start Date</label>
                             <input 
-                                id='promotion_start'
+                                id='add_promotion_start'
                                 name='promotion_start'
                                 type='date'
 
@@ -177,7 +177,7 @@ class Promotions extends Component {
                         <div className='form-group'>
                             <label htmlFor='promotion_end'>End Date</label>
                             <input 
-                                id='promotion_end'
+                                id='add_promotion_end'
                                 name='promotion_end'
                                 type='date'
                             />
@@ -185,7 +185,7 @@ class Promotions extends Component {
                         <div className='form-group'>
                             <label htmlFor='promotion_cost'>Total Cost</label>
                             <input 
-                                id='total_cost'
+                                id='add_total_cost'
                                 name='total_cost'
                                 type='number'
                             />

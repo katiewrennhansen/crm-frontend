@@ -18,9 +18,9 @@ class AdminDash extends Component {
     }
 
     componentDidMount(){
-        const id = 6
-        ApiService.getDataHalf(`${config.API_ENDPOINT}/companies/${id}`)
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/companies`)
             .then(data => {
+                console.log(data)
                 this.setCompanyInfo(data.data)
             })
             .catch(error => {
@@ -31,7 +31,7 @@ class AdminDash extends Component {
     render(){
         return (
             <div className='dash-container'>
-                <h2>Welcome {this.state.companyInfo.company}</h2>
+                {/* <h2>Welcome {this.state.companyInfo.company}</h2> */}
                 <div className="dash-stats">
                     <img src={CompanyDash} alt="Company Dashboard"/>
                 </div>

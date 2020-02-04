@@ -101,7 +101,7 @@ class Maintenance extends Component {
                                     <h3>Update: {context.name}</h3>
                                 </label>
                                 <input
-                                    id='maint_type'
+                                    id='update_maint_type'
                                     name='maint_type'
                                     placeholder='Update Maintenance Type'
                                     type='text'
@@ -172,7 +172,6 @@ class Maintenance extends Component {
                                 ))
                                 : <tr>
                                     <td className="nothing-to-display">No Maintenance Types to Display</td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

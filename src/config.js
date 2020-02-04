@@ -11,12 +11,10 @@ export default {
     REMINDERS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/remainders',
     CATEGORIES_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/categories',
     PROCESS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/processts',
-    COMPANY_SETUP_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/companies/6',
     ASSET_TYPE_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/assettypes',
     CUSTOMER_ACCOUNTS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/customers',
     MAINTENANCE_PROVIDERS_ENDPOINT: 'https://crmmia-api.herokuapp.com/api/providers',
     ASSIGN_PROMOTIONS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/assignedproms',
     BROKER_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/brokers',
-    API_KEY: process.env.REACT_APP_API_KEY,
     TOKEN_KEY: 'client-auth-token',
   }

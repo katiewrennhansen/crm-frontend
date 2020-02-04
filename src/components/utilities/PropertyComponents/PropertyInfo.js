@@ -126,6 +126,10 @@ class PropertyInfo extends Component {
                             <p>{asset.processt}</p>
                         </div>
                         <div className="property-info">
+                            <p>Process Step:</p>
+                            <p>{asset.step}</p>
+                        </div>
+                        <div className="property-info">
                             <p>Insurance:</p>
                             <p>{asset.assetinsurance}</p>
                         </div>

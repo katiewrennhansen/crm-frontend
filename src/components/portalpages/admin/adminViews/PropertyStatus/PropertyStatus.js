@@ -52,7 +52,7 @@ class PropertyStatus extends Component {
         let updatedContent = {}
 
         if(e.target.status_type.value !== ''){
-            updatedContent.statusdesc = e.target.status_type.value
+            updatedContent.statusdesc = e.target.feature_status.value
         }
 
         ApiService.updateDataHalf(psEndpoint, id, updatedContent)
@@ -96,12 +96,12 @@ class PropertyStatus extends Component {
                     <div className='update-content'>
                         <form className='form-group' onSubmit={(e) => this.updateData(e)}>
                             <div className='form-group'>
-                                <label htmlFor='maint_type'>
+                                <label htmlFor='feature_status'>
                                     <h3>Update: {context.name}</h3>
                                 </label>
                                 <input
-                                    id='status_type'
-                                    name='status_type'
+                                    id='update_feature_status'
+                                    name='feature_status'
                                     placeholder='Property Status Type'
                                     type='text'
                                 />
@@ -122,9 +122,9 @@ class PropertyStatus extends Component {
                     >
                         <h3>Add a Property Status</h3>
                         <div className='form-group'>
-                            <label htmlFor='feature_name'></label>
+                            <label htmlFor='feature_status'></label>
                             <input 
-                                id='feature_status'
+                                id='add_feature_status'
                                 name='feature_status'
                                 placeholder='Update Property Status'
                                 type='text'

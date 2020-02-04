@@ -39,9 +39,7 @@ class Process extends Component {
         const newProcess = {
             processt: {
                 processdesc: e.target.process.value,
-                steps: [],
-                company_id: 6,
-                user_id: 1
+                steps: []
             }
         }
         ApiService.postData(
@@ -106,7 +104,7 @@ class Process extends Component {
                                     <h3>Update: {context.name}</h3>
                                 </label>
                                 <input
-                                    id='process'
+                                    id='update_process'
                                     name='process'
                                     type='text'
                                 />
@@ -129,7 +127,7 @@ class Process extends Component {
                         <div className='form-group'>
                             <label htmlFor='feature_name'></label>
                             <input 
-                                id='process'
+                                id='add_process'
                                 name='process'
                                 placeholder='Process'
                                 type='text'

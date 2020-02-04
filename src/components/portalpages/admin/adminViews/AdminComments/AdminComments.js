@@ -10,7 +10,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import EditIcon from '@material-ui/icons/Edit';
 
-const commEndpoint = config.COMMENTS_ENDPOINT
 
 class AdminComments extends Component {
     static contextType = AdminContext
@@ -23,10 +22,11 @@ class AdminComments extends Component {
     }
     
     componentDidMount(){
-        ApiService.getData(
-            commEndpoint, 
-            this.context.setData
-        )
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/commtypes`)
+            .then(data => {
+                this.context.setData(data)
+            })
+            .catch(error => console.log(error))
     }
 
     componentWillUnmount(){
@@ -36,10 +36,12 @@ class AdminComments extends Component {
     addComment = (e) => {
         e.preventDefault()
         const newCommentType = {
-            commdesc: e.target.comment_type.value,
+            commtype: {
+                commdesc: e.target.comment_type.value
+            }        
         }
         ApiService.postData(
-            commEndpoint, 
+            `${config.API_ENDPOINT}/commtypes`,
             newCommentType,
             this.context.updateData,
             this.context.hideModal
@@ -50,10 +52,12 @@ class AdminComments extends Component {
         e.preventDefault()
         const id = this.context.id
         const updatedContent = {
-            commdesc: e.target.comment_type.value
+            commtype: {
+                commdesc: e.target.comment_type.value
+            }
         }
         ApiService.updateData(
-            commEndpoint, 
+            `${config.API_ENDPOINT}/commtypes`, 
             id, 
             updatedContent, 
             this.context.setData, 
@@ -64,7 +68,7 @@ class AdminComments extends Component {
     deleteComment = (id) => {
         this.context.deleteData(id)
         ApiService.deleteData(
-            commEndpoint, 
+            `${config.API_ENDPOINT}/commtypes`, 
             id, 
             this.context.setData
         )
@@ -77,7 +81,7 @@ class AdminComments extends Component {
             <>
                 <DeleteModal
                     props={context}
-                    endpoint={commEndpoint}
+                    endpoint={`${config.API_ENDPOINT}/commtypes`}
                     deleteFn={this.deleteComment}
                 />
 
@@ -96,7 +100,7 @@ class AdminComments extends Component {
                                 <h3>Update: {context.name}</h3>
                             </label>
                             <input
-                                id='comment_type'
+                                id='update_comment_type'
                                 name='comment_type'
                                 type='text'
                                 placeholder='Update Comment'
@@ -120,13 +124,13 @@ class AdminComments extends Component {
                                 <h3>Add a Comment Type</h3>
                             </label>
                             <input
-                                id='comment_type'
+                                id='add_comment_type'
                                 name='comment_type'
                                 type='text'
                                 placeholder="New Comment"
                             />
                         </div>
-                        <input type="submit" className="submit submit-modal" value="Update" />
+                        <input type="submit" className="submit submit-modal" value="Add" />
                     </form>
                 </Modal>
                 

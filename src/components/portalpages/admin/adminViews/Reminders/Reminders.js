@@ -107,7 +107,7 @@ class Reminders extends Component {
                             <div className='form-group'>
                                 <label htmlFor='reminder'>Reminder</label>
                                 <input
-                                    id='reminder'
+                                    id='update_reminder'
                                     name='reminder'
                                     placeholder='Reminder'
                                     type='text'
@@ -116,7 +116,7 @@ class Reminders extends Component {
                             <div className='form-group'>
                                 <label htmlFor='months'>Months</label>
                                 <input 
-                                    id='months'
+                                    id='update_months'
                                     name='months'
                                     placeholder='Months'
                                     type='number'
@@ -125,7 +125,7 @@ class Reminders extends Component {
                             <div className='form-group'>
                                 <label htmlFor='message'>Message</label>
                                 <input 
-                                    id='message'
+                                    id='update_message'
                                     name='message'
                                     placeholder='Message'
                                     type='text'
@@ -149,7 +149,7 @@ class Reminders extends Component {
                         <div className='form-group'>
                             <label htmlFor='reminder'>Reminder</label>
                             <input
-                                id='reminder'
+                                id='add_reminder'
                                 name='reminder'
                                 type='text'
                             />
@@ -157,7 +157,7 @@ class Reminders extends Component {
                         <div className='form-group'> 
                             <label htmlFor='months'>Months</label>
                             <input 
-                                id='months'
+                                id='add_months'
                                 name='months'
                                 type='number'
                             />
@@ -165,7 +165,7 @@ class Reminders extends Component {
                         <div className='form-group'>
                             <label htmlFor='message'>Message</label>
                             <input 
-                                id='message'
+                                id='add_message'
                                 name='message'
                                 type='text'
                             />
