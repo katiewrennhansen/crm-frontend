@@ -7,7 +7,6 @@ import AuthApiService from '../../../services/auth-api-service'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import './Login.css'
 
-
 class Login extends Component {
     constructor(props){
         super(props)

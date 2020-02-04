@@ -18,6 +18,10 @@ export default function CompanyInfo(props){
                 <p>Tax ID:</p>
                 <p>{data.ctax_id}</p>
             </div>
+            <div className="contact-grid">
+                <p>Portals:</p>
+                <p>{data.portals}</p>
+            </div>
         </div>
     )
 }

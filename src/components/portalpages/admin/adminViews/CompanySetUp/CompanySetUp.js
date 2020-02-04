@@ -9,35 +9,29 @@ class CompanySetUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            companyInfo: [],
+            company: []
         };
     }
     
-    setCompanyInfo = companyInfo => {
+    setCompanyInfo = company => {
         this.setState({
-            companyInfo: companyInfo
-        })
-    }
-    updateCompanyInfo = data => {
-        this.setState({
-            companyInfo: data
+            company
         })
     }
 
     componentDidMount(){
         ApiService.getDataHalf(`${config.API_ENDPOINT}/companies`)
-            .then(data => {
-                this.setCompanyInfo(data.data)
-            })
+            .then(data => this.setCompanyInfo(data.companies[0].data))
             .catch(error => console.log(error))
+        
     }
 
     render(){
-        // const data = this.state.companyInfo
+        const data = this.state.company
         return (
             <div className='container contact-container'>
                 <div className='header-grid'>
-                    {/* <h2>{data.company}</h2> */}
+                    <h2>{data.company}</h2>
                     <div className="property-icons">  
                         <Link className="add-icon" to='/dashboard/edit-account-settings'>
                             <EditIcon 
@@ -46,9 +40,9 @@ class CompanySetUp extends Component {
                         </Link>
                     </div>
                 </div>
-                {/* <CompanyInfo 
+                <CompanyInfo 
                     data={data}
-                /> */}
+                />
             </div>
         )
     }

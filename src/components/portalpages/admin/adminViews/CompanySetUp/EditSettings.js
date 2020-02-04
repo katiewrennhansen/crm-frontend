@@ -9,22 +9,21 @@ class EditSettings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            companyInfo: [],
+            company: [],
             error: null
         };
     }
 
-    setCompanyInfo = companyInfo => {
+    setCompanyInfo = company => {
         this.setState({
-            companyInfo: companyInfo,
-            error: null
+            company
         })
     }
 
     componentDidMount(){
-        ApiService.getDataHalf(config.COMPANY_SETUP_ENDPOINT)
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/companies`)
             .then(data => {
-                this.setCompanyInfo(data.data)
+                this.setCompanyInfo(data.companies[0].data)
             })
         .catch(error => {
             this.setState({ error })
@@ -64,7 +63,7 @@ class EditSettings extends Component {
 
 
     render(){
-        const info = this.state.companyInfo
+        const info = this.state.company
         return (
             <div className='edit-company'>
                 <div className="header-grid">
@@ -183,7 +182,7 @@ class EditSettings extends Component {
                                 <label htmlFor='tax_id'>Tax ID<span className="required">*</span></label>
                                 <input
                                     id='tax_id'
-                                    type='number' 
+                                    type='text' 
                                     name='tax_id'
                                     defaultValue={info.ctax_id}
                                 />

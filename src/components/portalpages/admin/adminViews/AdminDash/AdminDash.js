@@ -7,31 +7,26 @@ class AdminDash extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            companyInfo: []
+            company: []
         };
     }
     
-    setCompanyInfo = companyInfo => {
+    setCompanyInfo = company => {
         this.setState({
-            companyInfo
+            company
         })
     }
 
     componentDidMount(){
         ApiService.getDataHalf(`${config.API_ENDPOINT}/companies`)
-            .then(data => {
-                console.log(data)
-                this.setCompanyInfo(data.data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+            .then(data => this.setCompanyInfo(data.companies[0].data))
+            .catch(error => console.log(error))
     }
 
     render(){
         return (
             <div className='dash-container'>
-                {/* <h2>Welcome {this.state.companyInfo.company}</h2> */}
+                <h2>Welcome {this.state.company.company}</h2>
                 <div className="dash-stats">
                     <img src={CompanyDash} alt="Company Dashboard"/>
                 </div>
@@ -41,3 +36,43 @@ class AdminDash extends Component {
 }
 
 export default AdminDash
+
+
+
+
+
+
+// WORKING ON ADDING HOOKS
+
+// import React, { useState, useEffect } from 'react'
+
+// export default function AdminDash() {
+//     const endpoint = config.API_ENDPOINT
+//     const [company, setCompany] = useState({})
+
+//     useEffect(() => {
+//         const abortController = new AbortController();
+//         ApiService.getDataFromEffect(`${endpoint}/companies`, abortController)
+//             .then(data => {
+//                 console.log(data.companies)
+//                 setCompany(data.companies)
+//             })
+//             .catch(error => {
+//                 if (!abortController.signal.aborted) {
+//                     console.log(error)
+//                 }
+//             })
+//         return function cleanup(){
+//             abortController.abort();
+//         }
+//     }, [endpoint])
+    
+//     return (
+//         <div className='dash-container'>
+//             {/* <h2>Welcome {company}</h2> */}
+//             <div className="dash-stats">
+//                 <img src={CompanyDash} alt="Company Dashboard"/>
+//             </div>
+//         </div>
+//     )
+// }
