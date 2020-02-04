@@ -8,6 +8,8 @@ import CheckInForm from '../Forms/CheckInForm'
 import CheckOutForm from '../Forms/CheckOutForm'
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import ImageUploader from 'react-images-upload'
+import WarrentyForm from '../Forms/WarrantyForm'
+import TokenService from '../../../services/token-service'
 
 class CheckIn extends Component {
     static contextType = BrokerContext
@@ -21,7 +23,8 @@ class CheckIn extends Component {
             features: [],
             checkin: [],
             checkout: [],
-            closing: []
+            closing: [],
+            warranty: []
         }
     }
 
@@ -40,6 +43,12 @@ class CheckIn extends Component {
     setFeatures = features => {
         this.setState({
             features
+        })
+    }
+
+    setWarranty = warranty => {
+        this.setState({
+            warranty
         })
     }
 
@@ -104,6 +113,21 @@ class CheckIn extends Component {
             .catch(error => {
                 console.log(error)
             })
+        
+        fetch(`${config.API_ENDPOINT}/assets/warranty`, {
+            method: 'GET',
+            body: { "asset_id": "7" },
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                this.setWarranty(data)
+            })
+            .catch(error => console.log(error))
     }
 
     editCheckin = (e) => {
@@ -375,6 +399,22 @@ class CheckIn extends Component {
                         <input type="submit" className="submit" value="Upload" />
                     </form>
                  : <a href={this.state.asset.checkout_url} target="_blank" rel="noopener noreferrer" className="submit">View Closing Form</a>}
+                </div>
+
+                <div>
+                    <h3>Warrenty Form</h3>
+                    <p>Download and view warrenty form.</p>
+                    <PDFDownloadLink
+                        document={
+                            <WarrentyForm
+                                warranty={this.state.warranty}
+                            />
+                        }
+                        fileName="warranty.pdf"
+                        className="submit"
+                        >
+                        Download Warrenty Form
+                    </PDFDownloadLink>
                 </div>
             </div>
         )

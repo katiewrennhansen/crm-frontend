@@ -2,7 +2,6 @@ export default {
     API_ENDPOINT: 'https://crmmia-api.herokuapp.com/api',
     LOGIN_ENDPOINT: 'https://crmmia-api.herokuapp.com/api/users',
 
-    COMMENTS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/commtypes',
     PROMOTIONS_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/promotions',
     MAINTENANCE_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/mainttypes',
     PROPERTY_FEATURE_ENDPOINT: 'http://crmmia-api.herokuapp.com/api/featuretypes',
