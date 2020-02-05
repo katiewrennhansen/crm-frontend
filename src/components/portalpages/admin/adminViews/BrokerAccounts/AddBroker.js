@@ -24,7 +24,7 @@ class AddBroker extends Component {
             bemail: e.target.email.value,
             bemail2: e.target.email_alt.value,
             bcomment: e.target.comment.value,
-            // buniqueid: ,
+            buniqueid: e.target.buniqueid.value,
             adescription5: e.target.country.value,
             adescription4: e.target.address.value,
             adescription3: e.target.city.value,

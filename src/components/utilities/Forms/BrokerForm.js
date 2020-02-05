@@ -94,15 +94,6 @@ class BrokerForm extends Component{
                                     defaultValue={this.props.cust.phone}
                                 />
                             </div>
-                            <div>
-                                <label htmlFor='comment'>Comment<span className="required">*</span></label>
-                                <input
-                                    id='comment'
-                                    name='comment'
-                                    type='text'
-                                    defaultValue={this.props.cust.comment}
-                                />
-                            </div>
                         </div>
                     </div>
 
@@ -159,6 +150,7 @@ class BrokerForm extends Component{
                         </div>
                     </div>
 
+
                     <div className="form-content-section">
                         <h3>Bank Information</h3>
                         <div className="form-group col3">
@@ -184,6 +176,30 @@ class BrokerForm extends Component{
                                 <input 
                                     type="text" 
                                     name="bankcode"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-content-section">
+                        <h3>Additional Information</h3>
+                        <div className="form-group row">
+                            <div>
+                                <label htmlFor='buniqueid'>Unique ID<span className="required">*</span></label>
+                                <input
+                                    id='buniqueid'
+                                    name='buniqueid'
+                                    type='text'
+                                    defaultValue={this.props.cust.taxid}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor='comment'>Comment<span className="required">*</span></label>
+                                <input
+                                    id='comment'
+                                    name='comment'
+                                    type='text'
+                                    defaultValue={this.props.cust.comment}
                                 />
                             </div>
                         </div>
