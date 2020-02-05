@@ -33,7 +33,7 @@ class Maintenance extends Component {
     render(){
         return (
             <div className='data-container'>
-                <h2>Maintenance</h2>
+                <h2>Maintenance Providers</h2>
                 <Link to='/broker/maintenance/add-provider' className='add-icon'>
                 <AddIcon 
                     className="action-icon" 
