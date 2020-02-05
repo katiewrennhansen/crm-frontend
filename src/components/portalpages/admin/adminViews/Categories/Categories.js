@@ -44,6 +44,7 @@ class Categories extends Component {
             this.context.updateData,
             this.context.hideModal
         )
+        e.target.category.value = ""
     }
 
     updateData = (e) => {
@@ -59,6 +60,7 @@ class Categories extends Component {
             this.context.setData, 
             this.context.hideUpdate
         )
+        e.target.category.value = ""
     }
 
     deleteCategory = (id) => {
@@ -75,7 +77,6 @@ class Categories extends Component {
 
     render(){ 
         const context = this.context
-
         return (
             <>
                 <DeleteModal

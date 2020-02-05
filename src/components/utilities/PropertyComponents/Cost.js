@@ -71,7 +71,6 @@ class Cost extends Component {
         formData.append('transaction[receipts][]', this.state.files[0])
 
         const endpoint = `${config.API_ENDPOINT}/assets/${this.props.id}/transactions`
-        console.log(endpoint)
         fetch(endpoint, {
             method: 'POST',
             body: formData,
@@ -192,11 +191,9 @@ class Cost extends Component {
                             <label htmlFor="transconcept_id">Type<span className="required">*</span></label>
                             <select name="transconcept_id">
                                 <option value="">Select a Transaction Type</option>
-                                {this.state.concepts.map(s => {
-                                    return (
-                                        <option key={s.id} value={s.id}>{s.concept}</option>
-                                    )
-                                })}
+                                {this.state.concepts.map(s => 
+                                    <option key={s.id} value={s.id}>{s.concept}</option>
+                                )}
                             </select>
                         </div>
                         <div>
@@ -228,10 +225,8 @@ class Cost extends Component {
                     {(this.state.loading)
                         ? <div className="loading-property">
                             <CircularProgress />
-                        </div>
-                        : (
-                        <input type="submit" className="submit" value="Add Cost"></input>
-                        )
+                          </div>
+                        : <input type="submit" className="submit" value="Add Cost"></input>
                     }
                 </form>
                 <table>

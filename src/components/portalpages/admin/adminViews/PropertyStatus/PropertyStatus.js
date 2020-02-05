@@ -44,6 +44,7 @@ class PropertyStatus extends Component {
             this.context.updateData, 
             this.context.hideModal
         )
+        e.target.feature_status.value = ""
     }
 
     updateData = (e) => {
@@ -66,6 +67,7 @@ class PropertyStatus extends Component {
         .catch(error => {
             console.log(error)
         }) 
+        e.target.feature_status.value = ""
     }
 
     deleteStatus = (id) => {

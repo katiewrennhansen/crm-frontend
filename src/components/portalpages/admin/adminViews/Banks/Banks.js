@@ -45,6 +45,9 @@ class Banks extends Component {
             this.context.updateData,
             this.context.hideModal
         )
+
+        e.target.bankname.value = ""
+        e.target.bankcode.value = ""
     }
 
     updateData = (e) => {
@@ -63,6 +66,8 @@ class Banks extends Component {
             this.context.setData, 
             this.context.hideUpdate
         )
+        e.target.bankname.value = ""
+        e.target.bankcode.value = ""
     }
 
     deleteCategory = (id) => {
@@ -191,6 +196,7 @@ class Banks extends Component {
                             ))
                             :   <tr>
                                     <td className="nothing-to-display">No Banks to Display</td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

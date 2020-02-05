@@ -6,49 +6,45 @@ import ApiService from '../../../../../services/api-service'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CloseIcon from '@material-ui/icons/Close';
 
-const processEndpoint = config.PROCESS_ENDPOINT
-
 class ProcessSteps extends Component {
     static contextType = AdminContext
 
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            process: '',
             error: null
         };
     }
 
-    setName = (data) => {
-        const newData = data.data
+    setProcess = (data) => {
         this.setState({
-            name: newData
+            process: data.data
         })
     }
 
     componentDidMount(){
-        const stepsEndpoint = `${processEndpoint}/${this.props.id}/steps`
-        const pNameEndpoint = `${processEndpoint}/${this.props.id}`
+        const endpoint = `${config.API_ENDPOINT}/processts/${this.props.id}`
         ApiService.getData(
-            stepsEndpoint, 
+            `${endpoint}/steps`, 
             this.context.setData
         )
         ApiService.getData(
-            pNameEndpoint, 
-            this.setName
+            endpoint, 
+            this.setProcess
         )
     }
 
     addStep = (e) => {
         e.preventDefault()
-        const stepsEndpoint = `${processEndpoint}/${this.props.id}/steps`
+        const endpoint = `${config.API_ENDPOINT}/processts/${this.props.id}/steps`
         const newProcess = {
                 sequence: e.target.sequence.value,
                 stepdesc: e.target.process.value,
                 processt_id: this.props.id
         }
         ApiService.postData(
-            stepsEndpoint,
+            endpoint,
             newProcess, 
             this.context.updateData,
         )
@@ -56,9 +52,9 @@ class ProcessSteps extends Component {
     }
 
     deleteStep = (id) => {
-        const stepsEndpoint = `${processEndpoint}/${this.props.id}/steps`
+        const endpoint = `${config.API_ENDPOINT}/processts/${this.props.id}/steps`
         ApiService.deleteData(
-            stepsEndpoint, 
+            endpoint, 
             id, 
             this.context.setData
         )
@@ -66,29 +62,32 @@ class ProcessSteps extends Component {
 
     render(){ 
         const context = this.context
+        const name = this.state.process.processdesc
         return (
             <div className='process-container'>
                 <div className="header-grid">
-                    <h2>Process For: {this.state.name.processdesc}</h2>
+                    <h2>Process For: {name}</h2>
                     <Link className='edit-btn edit-customer' to='/dashboard/process'>
                         <CloseIcon className="add-icon" />
                     </Link>
                 </div>
                 <div>
-                    {context.data.map(s => (
-                        <div className='steps-grid' key={s.id}>
-                            <span>{s.sequence}.</span>
-                            <span>{s.stepdesc}</span>
-                            <button className='delete-icon' onClick={() => this.deleteStep(s.id)}>
-                                <DeleteForeverIcon 
-                                    className="delete-icon"
-                                />
-                            </button>
-                        </div>
+                    {context.data
+                        .sort((a, b) => a.sequence - b.sequence)
+                        .map(s => (
+                            <div className='steps-grid' key={s.id}>
+                                <span>{s.sequence}. </span>
+                                <span> {s.stepdesc}</span>
+                                <button className='delete-icon' onClick={() => this.deleteStep(s.id)}>
+                                    <DeleteForeverIcon 
+                                        className="delete-icon"
+                                    />
+                                </button>
+                            </div>
                     ))}
                 </div>
                 <form id='add-steps' className="add-form" onSubmit={(e) => this.addStep(e)}>
-                    <h4>Add Steps to {this.state.name.processdesc}</h4>
+                    <h4>Add Steps to: {name}</h4>
                     <div className='form-group'>
                         <label htmlFor='sequence'>Sequence Number</label>
                         <input 

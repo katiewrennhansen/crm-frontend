@@ -77,6 +77,7 @@ class PropertyForm extends Component {
                     console.log(error)
                 })
         }
+        
         ApiService.getDataHalf(`${config.API_ENDPOINT}/brokers`)
             .then(data => {
                 this.setBrokers(data.brokers)
@@ -84,13 +85,15 @@ class PropertyForm extends Component {
             .catch(error => {
                 console.log(error)
             })
+   
         ApiService.getDataHalf(`${config.API_ENDPOINT}/processts`)
             .then(data => {
-                this.setProcess(data.processts)
+                this.setProcess(data.processts)                
             })
             .catch(error => {
                 console.log(error)
             })
+        
         ApiService.getDataHalf(`${config.API_ENDPOINT}/categories`)
             .then(data => {
                 this.setCategories(data)
@@ -233,32 +236,22 @@ class PropertyForm extends Component {
                                 <label htmlFor="status">Status<span className="required">*</span></label>
                                 <select name="status">
                                     <option value="">Select a Status</option>
-                                    {this.state.status.map(s => {
-                                        if(asset.status === s.statusdesc){
-                                            return (
-                                                <option key={s.id} value={s.id} selected>{s.statusdesc}</option>
-                                            )
-                                        }
-                                        return (
-                                        <option key={s.id} value={s.id}>{s.statusdesc}</option>
-                                        )
-                                    })}
+                                    {this.state.status.map(s => 
+                                        (asset.status === s.statusdesc)
+                                            ?<option key={s.id} value={s.id} selected>{s.statusdesc}</option>
+                                            : <option key={s.id} value={s.id}>{s.statusdesc}</option>
+                                    )}
                                 </select>
                             </div>
                             <div>
                                 <label htmlFor="asset_type">Asset Type<span className="required">*</span></label>
                                 <select name="asset_type">
                                     <option value="">Select an Asset Type</option>
-                                    {this.state.assets.map(a => {
-                                        if(asset.assettype === a.assettdesc){
-                                            return (
-                                                <option key={a.id} value={a.id} selected>{a.assettdesc}</option>
-                                            )
-                                        }
-                                        return (
-                                        <option key={a.id} value={a.id}>{a.assettdesc}</option>
-                                        )
-                                    })}
+                                    {this.state.assets.map(a => 
+                                        (asset.assettype === a.assettdesc)
+                                            ? <option key={a.id} value={a.id} selected>{a.assettdesc}</option>
+                                            : <option key={a.id} value={a.id}>{a.assettdesc}</option>
+                                    )}
                                 </select>
                             </div>
                             <div>
@@ -274,48 +267,33 @@ class PropertyForm extends Component {
                                     <label htmlFor="owner">Owner<span className="required">*</span></label>
                                     <select name="owner">
                                         <option value="">Select an Owner</option>
-                                        {this.state.customers.map(c => {
-                                            if(asset.owner === c.data.name){
-                                                return (
-                                                    <option key={c.data.id} value={c.data.id} selected>{c.data.name}</option>
-                                                )
-                                            }
-                                            return (
-                                            <option key={c.data.id} value={c.data.id}>{c.data.name}</option>
-                                            )
-                                        })}
+                                        {this.state.customers.map(c => 
+                                            (asset.owner === c.data.name)
+                                                ? <option key={c.data.id} value={c.data.id} selected>{c.data.name}</option>
+                                                : <option key={c.data.id} value={c.data.id}>{c.data.name}</option>
+                                        )}
                                     </select>
                                 </div>
                                 <div>
                                     <label htmlFor="tenant">Tenant<span className="required">*</span></label>
                                     <select name="tenant">
                                         <option value="">Select a Tenant</option>
-                                        {this.state.customers.map(c => {
-                                            if(asset.tenant === c.data.name){
-                                                return (
-                                                    <option key={c.data.id} value={c.data.id} selected>{c.data.name}</option>
-                                                )
-                                            }
-                                            return (
-                                            <option key={c.data.id} value={c.data.id}>{c.data.name}</option>
-                                            )
-                                        })}
+                                        {this.state.customers.map(c => 
+                                            (asset.tenant === c.data.name)
+                                                ? <option key={c.data.id} value={c.data.id} selected>{c.data.name}</option>
+                                                : <option key={c.data.id} value={c.data.id}>{c.data.name}</option>
+                                        )}
                                     </select>
                                 </div>
                                 <div>
                                     <label htmlFor="brokers">Broker<span className="required">*</span></label>
                                     <select name="brokers">
                                         <option value="">Select a Broker</option>
-                                        {this.state.brokers.map(b => {
-                                            if(asset.broker === b.data.name){
-                                                return (
-                                                    <option key={b.data.id} value={b.data.id} selected>{b.data.name}</option>
-                                                )
-                                            }
-                                            return (
-                                            <option key={b.data.id} value={b.data.id}>{b.data.name}</option>
-                                            )
-                                        })}
+                                        {this.state.brokers.map(b => 
+                                            (asset.broker === b.data.name)
+                                                ? <option key={b.data.id} value={b.data.id} selected>{b.data.name}</option>
+                                                : <option key={b.data.id} value={b.data.id}>{b.data.name}</option>
+                                        )}
                                     </select>
                                 </div>
                             </div>  
@@ -328,27 +306,20 @@ class PropertyForm extends Component {
                                 <label htmlFor="process">Process<span className="required">*</span></label>
                                 <select name="process" onChange={(e) => {this.getSteps(e)}} >
                                     <option value="">Select a Process</option>
-                                    {this.state.process.map(p => {
-                                        if(asset.processt === p.data.processdesc){
-                                            return (
-                                                <option key={p.data.id} value={p.data.id} selected>{p.data.processdesc}</option>
-                                            )
-                                        }
-                                        return (
-                                        <option key={p.data.id} value={p.data.id}>{p.data.processdesc}</option>
-                                        )
-                                    })}
+                                    {this.state.process.map(p => 
+                                        (asset.processt === p.data.processdesc)
+                                            ? <option key={p.data.id} value={p.data.id} selected>{p.data.processdesc}</option>
+                                            : <option key={p.data.id} value={p.data.id}>{p.data.processdesc}</option>
+                                    )}
                                 </select>
                             </div>
                             <div>
                                 <label htmlFor="steps">Steps<span className="required">*</span></label>
                                 <select name="steps">
                                     <option value="">Select a Step</option>
-                                    {this.state.steps.map(s => {
-                                        return (
+                                    {this.state.steps.map(s => 
                                         <option key={s.id} value={s.id}>{s.stepdesc}</option>
-                                        )
-                                    })}
+                                    )}
                                 </select>
                             </div>
                             <div>

@@ -196,16 +196,11 @@ class ContactForm extends Component{
                                 <label htmlFor="bank_id">Bank Name<span className="required">*</span></label>
                                 <select name="bank_id">
                                     <option value="">Select a Bank</option>
-                                    {this.state.banks.map(b => {
-                                        if(this.props.cust.bankname && b.bank_id === this.props.cust.bankname){
-                                            return (
-                                                <option key={b.id} value={b.id} selected>{b.bankname}</option>
-                                                )
-                                        }
-                                        return (
-                                            <option key={b.id} value={b.id}>{b.bankname}</option>
-                                        )
-                                    })}
+                                    {this.state.banks.map(b =>
+                                        (this.props.cust.bankname && b.bank_id === this.props.cust.bankname)
+                                            ? <option key={b.id} value={b.id} selected>{b.bankname}</option>
+                                            : <option key={b.id} value={b.id}>{b.bankname}</option>
+                                    )}
                                 </select>                            
                             </div>
                             <div>
@@ -217,36 +212,27 @@ class ContactForm extends Component{
 
                     <div className="form-content-section">
                         <h3>Additional Information</h3>
-                        
                         <div className='form-group row'>
                             <div>
                                 <label htmlFor='broker'>Broker<span className="required">*</span></label>
                                 <select name='broker'>
                                     <option>Select a Broker</option>
-                                    {this.state.brokers.map(broker => {
-                                        if(broker.data.name === this.props.cust.broker){
-                                        return (
-                                            <option key={broker.data.id} value={broker.data.id} selected>{broker.data.name}</option>
-                                        )}
-                                        return (
-                                            <option key={broker.data.id} value={broker.data.id}>{broker.data.name}</option>
-                                        )
-                                    })}
+                                    {this.state.brokers.map(broker => 
+                                        (broker.data.name === this.props.cust.broker)
+                                            ? <option key={broker.data.id} value={broker.data.id} selected>{broker.data.name}</option>
+                                            : <option key={broker.data.id} value={broker.data.id}>{broker.data.name}</option>
+                                    )}
                                 </select>
                             </div>
                             <div>
                                 <label htmlFor='status'>Status<span className="required">*</span></label>
                                 <select name='status'>
                                     <option>Select a Status</option>
-                                    {this.state.status.map(s => {
-                                        if(s.csdesc === this.props.cust.status){
-                                        return (
-                                            <option key={s.id} value={s.id} selected>{s.csdesc}</option>
-                                        )}
-                                        return (
-                                            <option key={s.id} value={s.id}>{s.csdesc}</option>
-                                        )
-                                    })}
+                                    {this.state.status.map(s => 
+                                        (s.csdesc === this.props.cust.status)
+                                            ? <option key={s.id} value={s.id} selected>{s.csdesc}</option>
+                                            : <option key={s.id} value={s.id}>{s.csdesc}</option>
+                                    )}
                                 </select>
                             </div>
                         </div>
@@ -256,30 +242,22 @@ class ContactForm extends Component{
                                 <label htmlFor='reminder'>Reminder<span className="required">*</span></label>
                                 <select name='reminder'>
                                     <option>Select a Reminder</option>
-                                    {this.state.reminders.map(r => {
-                                        if(r.rtype === this.props.cust.remainder){
-                                        return (
-                                            <option key={r.id} value={r.id} selected>{r.rtype}</option>
-                                        )}
-                                        return (
-                                            <option key={r.id} value={r.id}>{r.rtype}</option>
-                                        )
-                                    })}
+                                    {this.state.reminders.map(r => 
+                                        (r.rtype === this.props.cust.remainder)
+                                            ? <option key={r.id} value={r.id} selected>{r.rtype}</option>
+                                            : <option key={r.id} value={r.id}>{r.rtype}</option>
+                                    )}
                                 </select>
                             </div>
                             <div>
                                 <label htmlFor='category'>Category<span className="required">*</span></label>
                                 <select name="category">
                                     <option>Select a Category</option>
-                                    {this.state.categories.map(c => {
-                                        if(c.ccategdesc === this.props.cust.category){
-                                        return (
-                                            <option key={c.id} value={c.id} selected>{c.ccategdesc}</option>
-                                        )}
-                                        return (
-                                            <option key={c.id} value={c.id}>{c.ccategdesc}</option>
-                                        )
-                                    })}
+                                    {this.state.categories.map(c => 
+                                        (c.ccategdesc === this.props.cust.category)
+                                            ? <option key={c.id} value={c.id} selected>{c.ccategdesc}</option>
+                                            : <option key={c.id} value={c.id}>{c.ccategdesc}</option>
+                                    )}
                                 </select>
                             </div>
                         </div>
@@ -299,7 +277,7 @@ class ContactForm extends Component{
                             <input
                                 id='tax_id'
                                 name='tax_id'
-                                type='number'
+                                type='text'
                                 defaultValue={this.props.cust.taxid}
                             />
                         </div>

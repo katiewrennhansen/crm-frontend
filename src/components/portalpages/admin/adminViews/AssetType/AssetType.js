@@ -45,6 +45,7 @@ class AssetType extends Component {
             this.context.updateData, 
             this.context.hideModal
         )
+        e.target.asset_type.value = ""
     }
 
     updateData = (e) => {
@@ -65,6 +66,7 @@ class AssetType extends Component {
         .catch(error => {
             console.log(error)
         }) 
+        e.target.asset_type.value = ""
     }
 
     deleteAsset = (id) => {

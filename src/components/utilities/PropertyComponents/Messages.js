@@ -50,7 +50,6 @@ class Messages extends Component {
 
     addMessage = (e) => {
         e.preventDefault()
-
         this.setState({ loading: true })
 
         const newMessage = {
@@ -116,11 +115,9 @@ class Messages extends Component {
                         <label htmlFor="comm_type">Comment Type: </label>
                         <select name="comm_type">
                             <option value="">Select a Type</option>
-                            {this.state.messagetypes.map(c => {
-                                return (
+                            {this.state.messagetypes.map(c => 
                                 <option key={c.id} value={c.id}>{c.commdesc}</option>
-                                )
-                            })}
+                            )}
                         </select>
                     </div>
                     <div className="form-group">
@@ -131,7 +128,7 @@ class Messages extends Component {
                         ? <div className="loading-property">
                             <CircularProgress />
                         </div>
-                        : <input type="submit" className="submit" value="Add Message"></input>
+                        : <input type="submit" className="submit" value="Add Message" />
                     }                
                 </form>
                 <table>
@@ -148,14 +145,9 @@ class Messages extends Component {
                             return (
                                 <tr key={f.data.id}>
                                     <td>
-                                        {this.state.messagetypes.map(p => {
-                                            if(p.id === f.data.commtype_id){
-                                                return p.commdesc
-                                            }
-                                            else {
-                                                return null
-                                            }
-                                        })}
+                                        {this.state.messagetypes.map(p => 
+                                            (p.id === f.data.commtype_id) ? p.commdesc : null
+                                        )}
                                     </td>
                                     <td>{f.data.assetcomment}</td>
                                     <td className="delete">

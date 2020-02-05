@@ -197,22 +197,18 @@ class Maintenance extends Component {
                             <label htmlFor="maint_type">Maintenance Type: </label>
                             <select name="maint_type">
                                 <option value="">Select a Type</option>
-                                {this.state.mainttypes.map(m => {
-                                    return (
+                                {this.state.mainttypes.map(m => 
                                     <option key={m.id} value={m.id}>{m.maindescr}</option>
-                                    )
-                                })}
+                                )}
                             </select>
                         </div>
                         <div>
                             <label htmlFor="provider">Maintenance Provider: </label>
                             <select name="provider">
                                 <option value="">Select a Type</option>
-                                {this.state.providers.map(m => {
-                                    return (
+                                {this.state.providers.map(m => 
                                     <option key={m.data.id} value={m.data.id}>{m.data.name}</option>
-                                    )
-                                })}
+                                )}
                             </select>
                         </div>
                     </div>

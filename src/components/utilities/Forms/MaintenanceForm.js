@@ -162,16 +162,11 @@ class MaintenanceForm extends Component {
                                 <label htmlFor="bank_id">Bank Name<span className="required">*</span></label>
                                 <select name="bank_id">
                                     <option value="">Select a Bank</option>
-                                    {this.state.banks.map(b => {
-                                        if(info.bankname && b.bank_id === info.bankname){
-                                            return (
-                                                <option key={b.id} value={b.id} selected>{b.bankname}</option>
-                                                )
-                                        }
-                                        return (
-                                            <option key={b.id} value={b.id}>{b.bankname}</option>
-                                        )
-                                    })}
+                                    {this.state.banks.map(b => 
+                                        (info.bank && b.bank_id === info.bankname)
+                                            ? <option key={b.id} value={b.id} selected>{b.bankname}</option>
+                                            : <option key={b.id} value={b.id}>{b.bankname}</option>
+                                    )}
                                 </select>                            
                             </div>
                             <div>
@@ -188,32 +183,22 @@ class MaintenanceForm extends Component {
                                 <label htmlFor="mainttype">Maintenance Type<span className="required">*</span></label>
                                 <select name="mainttype">
                                     <option value="">Select a Type</option>
-                                    {this.state.mainttype.map(m => {
-                                        if(m.maindescr === info.typeservice){
-                                            return (
-                                                <option key={m.id} value={m.id} selected>{m.maindescr}</option>
-                                                )
-                                        }
-                                        return (
-                                        <option key={m.id} value={m.id}>{m.maindescr}</option>
-                                        )
-                                    })}
+                                    {this.state.mainttype.map(m => 
+                                        (m.maindescr === info.typeservice)
+                                            ? <option key={m.id} value={m.id} selected>{m.maindescr}</option>
+                                            : <option key={m.id} value={m.id}>{m.maindescr}</option>
+                                    )}
                                 </select>
                             </div>
                             <div>
                                 <label htmlFor="status">Status<span className="required">*</span></label>
                                 <select name="status">
                                     <option value="">Select a Status</option>
-                                    {this.state.status.map(s => {
-                                        if(s.csdesc === info.status){
-                                            return (
-                                                <option key={s.id} value={s.id} selected>{s.csdesc}</option>
-                                            )
-                                        }
-                                        return (
-                                        <option key={s.id} value={s.id}>{s.csdesc}</option>
-                                        )
-                                    })}
+                                    {this.state.status.map(s => 
+                                        (s.csdesc === info.status)
+                                            ? <option key={s.id} value={s.id} selected>{s.csdesc}</option>
+                                            : <option key={s.id} value={s.id}>{s.csdesc}</option>
+                                    )}
                                 </select>
                             </div>
                         </div> 
@@ -223,16 +208,11 @@ class MaintenanceForm extends Component {
                                 <label htmlFor="categories">Category<span className="required">*</span></label>
                                 <select name="categories">
                                     <option value="">Select a Category</option>
-                                    {this.state.categories.map(s => {
-                                        if(s.ccategdesc === info.category){
-                                            return (
-                                                <option key={s.id} value={s.id} selected>{s.ccategdesc}</option>
-                                            )
-                                        }
-                                        return (
-                                        <option key={s.id} value={s.id}>{s.ccategdesc}</option>
-                                        )
-                                    })}
+                                    {this.state.categories.map(s => 
+                                        (s.ccategdesc === info.category)
+                                            ? <option key={s.id} value={s.id} selected>{s.ccategdesc}</option>
+                                            : <option key={s.id} value={s.id}>{s.ccategdesc}</option>
+                                    )}
                                 </select>
                             </div>
                             <div>

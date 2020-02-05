@@ -45,7 +45,7 @@ class Maintenance extends Component {
             this.context.updateData, 
             this.context.hideModal
         )  
-        e.target.add_maint_type.value = '' 
+        e.target.add_maint_type.value = "" 
     }
 
     updateData = (e) => {
@@ -68,6 +68,7 @@ class Maintenance extends Component {
             .catch(error => {
                 console.log(error)
             })
+        e.target.add_maint_type.value = ""
     }
 
     deleteMaintenance = (id) => {

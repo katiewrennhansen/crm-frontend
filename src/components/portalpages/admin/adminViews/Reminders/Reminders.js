@@ -46,6 +46,9 @@ class Reminders extends Component {
             this.context.updateData, 
             this.context.hideModal
         )
+        e.target.reminder.value = ""
+        e.target.months.value = ""
+        e.target.message.value = ""
     }
 
     updateData = (e) => {
@@ -74,6 +77,9 @@ class Reminders extends Component {
         .catch(error => {
             console.log(error)
         }) 
+        e.target.reminder.value = ""
+        e.target.months.value = ""
+        e.target.message.value = ""
     }
 
     deleteReminder = (id) => {

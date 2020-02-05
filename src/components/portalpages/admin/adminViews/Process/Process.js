@@ -48,6 +48,7 @@ class Process extends Component {
             this.context.updateData, 
             this.context.hideModal
         ) 
+        e.target.process.value = ""
     }
 
     updateData = (e) => {
@@ -69,6 +70,7 @@ class Process extends Component {
         .catch(error => {
             console.log(error)
         }) 
+        e.target.process.value = ""
     }
 
 

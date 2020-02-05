@@ -43,6 +43,7 @@ class Transactions extends Component {
             this.context.updateData,
             this.context.hideModal
         )
+        e.target.transaction.value = ""
     }
 
     updateData = (e) => {
@@ -58,6 +59,7 @@ class Transactions extends Component {
             this.context.setData, 
             this.context.hideUpdate
         )
+        e.target.transaction.value = ""
     }
 
     deleteCategory = (id) => {
@@ -67,7 +69,6 @@ class Transactions extends Component {
             id, 
             this.context.setData
         )
-        
         this.context.hideDelete()
     }
 

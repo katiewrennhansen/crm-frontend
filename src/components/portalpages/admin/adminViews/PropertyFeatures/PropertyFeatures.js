@@ -44,6 +44,7 @@ class PropertyFeatures extends Component {
             this.context.updateData, 
             this.context.hideModal
         )
+        e.target.feature_name.value = ""
     }
 
     updateData = (e) => {
@@ -64,7 +65,8 @@ class PropertyFeatures extends Component {
             })
             .catch(error => {
                 console.log(error)
-            })   
+            })
+        e.target.feature_name.value = ""
     }
 
     deleteFeature = (id) => {

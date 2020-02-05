@@ -23,9 +23,7 @@ class AdminComments extends Component {
     
     componentDidMount(){
         ApiService.getDataHalf(`${config.API_ENDPOINT}/commtypes`)
-            .then(data => {
-                this.context.setData(data)
-            })
+            .then(data => this.context.setData(data))
             .catch(error => console.log(error))
     }
 
@@ -46,6 +44,7 @@ class AdminComments extends Component {
             this.context.updateData,
             this.context.hideModal
         )
+        e.target.comment_type.value = ""
     }
 
     updateData = (e) => {
@@ -63,6 +62,7 @@ class AdminComments extends Component {
             this.context.setData, 
             this.context.hideUpdate
         )
+        e.target.comment_type.value = ""
     }
 
     deleteComment = (id) => {

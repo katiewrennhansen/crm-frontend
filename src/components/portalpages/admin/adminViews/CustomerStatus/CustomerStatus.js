@@ -45,6 +45,7 @@ class CustomerStatus extends Component {
             this.context.updateData, 
             this.context.hideModal
         )
+        e.target.customer_status.value = ""
     }
 
     updateData = (e) => {
@@ -67,6 +68,7 @@ class CustomerStatus extends Component {
         .catch(error => {
             console.log(error)
         }) 
+        e.target.customer_status.value = ""
     }
 
     deleteStatus = (id) => {

@@ -48,6 +48,10 @@ class Promotions extends Component {
             .catch(error => {
                 this.setState({ error })
             })
+        e.target.promotion_name.value = ""
+        e.target.promotion_start.value = ""
+        e.target.promotion_end.value = ""
+        e.target.total_cost.value = ""
     }
 
     updateData = (e) => {
@@ -77,6 +81,10 @@ class Promotions extends Component {
             .catch(error => {
                 this.setState({ error })
             })
+        e.target.promotion_name.value = ""
+        e.target.promotion_start.value = ""
+        e.target.promotion_end.value = ""
+        e.target.total_cost.value = ""
     }
 
     deletePromotion = (id) => {

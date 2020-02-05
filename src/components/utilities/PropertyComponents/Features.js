@@ -138,11 +138,9 @@ class Features extends Component {
                         <label htmlFor="feature_type">Feature Type: </label>
                         <select name="feature_type">
                             <option value="">Select a Feature</option>
-                            {this.state.featuretypes.map(f => {
-                                return (
+                            {this.state.featuretypes.map(f => 
                                 <option key={f.id} value={f.id}>{f.featuredescr}</option>
-                                )
-                            })}
+                            )}
                         </select>
                     </div>
                     <div className="form-group">
@@ -172,9 +170,7 @@ class Features extends Component {
                             ? <div className="loading-property">
                                 <CircularProgress />
                             </div>
-                            : (
-                            <input type="submit" className="submit" value="Add Feature"></input>
-                            )
+                            : <input type="submit" className="submit" value="Add Feature" />
                         }
                 </form>
                 <table>
@@ -193,26 +189,26 @@ class Features extends Component {
                             return (
                                 <tr key={f.id}>
                                     <td>
-                                        {(this.state.featuretypes).map(t => {
-                                            if(t.id === f.featuretype_id){
-                                                return t.featuredescr
-                                            } else {
-                                                return null
-                                            }
-                                        })}
+                                        {(this.state.featuretypes).map(t => 
+                                            (t.id === f.featuretype_id) ? t.featuredescr : null
+                                        )}
                                     </td>
                                     <td>{f.featuredesc}</td>
                                     <td>{f.quantity}</td>
                                     <td>{f.condition}</td>
                                     <td className="delete">
-                                        <DeleteOutlineIcon className="delete-btn" onClick={() => this.deleteFeature(f.id)} />
+                                        <DeleteOutlineIcon 
+                                            className="delete-btn" 
+                                            onClick={() => this.deleteFeature(f.id)} 
+                                        />
                                     </td>
                                 </tr>
                             )
                         })
-                        :
-                        <tr>
+                        :<tr>
                             <td className='nothing-to-display'>No features to display</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                         </tr>
