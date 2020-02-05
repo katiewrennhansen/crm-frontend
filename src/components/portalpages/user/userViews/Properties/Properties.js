@@ -58,8 +58,7 @@ class Properties extends Component {
                             </div>
                         )
                     })
-                    :
-                    <p className="nothing-to-display">Click the + icon to add a new listing</p>
+                    : <p className="nothing-to-display">Click the + icon to add a new listing</p>
                     }
                 </div>
             </div>
