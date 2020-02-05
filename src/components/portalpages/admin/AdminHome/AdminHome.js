@@ -25,6 +25,10 @@ import Transactions from '../adminViews/Transactions/Transactions'
 import './AdminHome.css'
 import Transfers from '../../../utilities/CustomerComponents/Transfers'
 import Banks from '../adminViews/Banks/Banks'
+import BrokerAccounts from '../adminViews/BrokerAccounts/BrokerAccounts'
+import BrokerPage from '../adminViews/BrokerAccounts/BrokerPage'
+import AddBroker from '../adminViews/BrokerAccounts/AddBroker'
+import EditBroker from '../adminViews/BrokerAccounts/EditBroker'
 
 class AdminHome extends Component {
     constructor(props){
@@ -436,6 +440,46 @@ class AdminHome extends Component {
                                             id={id}
                                             transId={transId}
                                             url="dashboard/customer-accounts"
+                                        />
+                                    )
+                                    }}
+                            />
+                            <Route 
+                                exact path='/dashboard/broker-accounts' 
+                                render={(props) => {
+                                    return (
+                                        <BrokerAccounts func={propFunctions} />
+                                    )
+                                    }}
+                            />
+                            <Route 
+                                exact path='/dashboard/broker-accounts/add' 
+                                render={(props) => {
+                                    return (
+                                        <AddBroker func={propFunctions} />
+                                    )
+                                    }}
+                            />
+                            <Route 
+                                exact path='/dashboard/broker-accounts/:id' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    return (
+                                        <BrokerPage
+                                            func={propFunctions} 
+                                            id={id}
+                                        />
+                                    )
+                                    }}
+                            />
+                            <Route 
+                                exact path='/dashboard/broker-accounts/:id/edit' 
+                                render={(history) => {
+                                    const id = history.match.params.id;
+                                    return (
+                                        <EditBroker 
+                                            func={propFunctions} 
+                                            id={id}
                                         />
                                     )
                                     }}

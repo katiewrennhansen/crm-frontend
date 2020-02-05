@@ -17,6 +17,7 @@ import AdminContext from '../../../../contexts/AdminContext'
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import PaymentIcon from '@material-ui/icons/Payment';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import './AdminSidebar.css'
 
 
@@ -199,6 +200,16 @@ class AdminSidebar extends Component {
                         >
                             <EmojiPeopleIcon />
                             <p className={(this.context.active) ? null : 'collapsed'} >Customer Accounts</p>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to="/dashboard/broker-accounts" 
+                            className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
+                            onClick={() => this.props.handleTitle('Broker Accounts')}                        
+                        >
+                            <SupervisedUserCircleIcon />
+                            <p className={(this.context.active) ? null : 'collapsed'} >Broker Accounts</p>
                         </Link>
                     </li>
                 </ul>
