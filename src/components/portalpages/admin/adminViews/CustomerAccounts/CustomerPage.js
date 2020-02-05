@@ -53,28 +53,6 @@ class CustomerPage extends Component {
         this.setCustomer([])
     }
 
-    addCustomer = (e) => {
-        e.preventDefault()
-        const newCustomer = {
-            customer: {
-                name: e.target.customer.value,
-                email: e.target.customer_email.value,
-                phone: e.target.customer_phone.value,
-                dateCreated: this.props.formatDate(),
-                company_id: 6,
-                user_id: 1
-            }
-        }
-        ApiService.postDataHalf(caEndpoint, newCustomer)
-        .then(data => {
-            this.setCustomers(data.customers)
-            this.props.hideModal()
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
-    }
-    
     render(){  
         const data = this.state.customer
         return (

@@ -32,27 +32,6 @@ class BrokerPage extends Component {
             })
     }
 
-    addCustomer = (e) => {
-        const endpoint = `${config.API_ENDPOINT}/brokers`
-        e.preventDefault()
-        const newCustomer = {
-            customer: {
-                name: e.target.customer.value,
-                email: e.target.customer_email.value,
-                phone: e.target.customer_phone.value,
-                dateCreated: this.props.formatDate()
-            }
-        }
-        ApiService.postDataHalf(endpoint, newCustomer)
-        .then(data => {
-            this.setCustomers(data.customers)
-            this.props.hideModal()
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
-    }
-    
     render(){  
         const data = this.state.broker
         return (
