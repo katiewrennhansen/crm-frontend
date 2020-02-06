@@ -190,7 +190,7 @@ class PropertyForm extends Component {
                         <h3>Address</h3>
                         <div className="form-group">
                             <label htmlFor="street_name">Street Name<span className="required">*</span></label>
-                            <input type="text" name="street_name" defaultValue={asset.adescription4} required></input>
+                            <input type="text" name="street_name" defaultValue={asset.adescription4}></input>
                         </div>
                         <div className="form-group row">
                             <div>
@@ -230,7 +230,19 @@ class PropertyForm extends Component {
                                 <input type="number" name="future_price" defaultValue={asset.futureprice}></input>
                             </div>
                         </div>
-                        
+
+                        <div className="form-group row">
+                            <div>
+                                <label htmlFor="assetrent">Rent<span className="required">*</span></label>
+                                <input type="number" name="assetrent" defaultValue={asset.assetrent}></input>
+                            </div>
+                            <div>
+                                <label htmlFor="futurerent">Future Rent<span className="required">*</span></label>
+                                <input type="number" name="futurerent" defaultValue={asset.futurerent}></input>
+                            </div>
+                        </div>
+
+
                         <div className="form-group col3">
                             <div>
                                 <label htmlFor="status">Status<span className="required">*</span></label>
@@ -327,7 +339,23 @@ class PropertyForm extends Component {
                                 <input type="date" name="step_date" defaultValue={asset.stepdate}></input>
                             </div>
                         </div>
+
+                        <div className="form-group col3">
+                            <div>
+                                <label htmlFor="category">Category<span className="required">*</span></label>
+                                <select name="category">
+                                    <option value="">Select a Category</option>
+                                    {this.state.categories.map(p => 
+                                        (asset.category === p.ccategdesc)
+                                            ? <option key={p.id} value={p.id} selected>{p.ccategdesc}</option>
+                                            : <option key={p.id} value={p.id}>{p.ccategdesc}</option>
+                                    )}
+                                </select>
+                            </div>
+                        </div>
                     </div>
+
+                    
 
                     <div className="form-content-section">
                         <h3>Insurance Information</h3>
@@ -412,6 +440,17 @@ class PropertyForm extends Component {
                                     <div>
                                         <label htmlFor="daysbeforeexp">Days Before Expiration<span className="required">*</span></label>
                                         <input type="number" name="daysbeforeexp" defaultValue={asset.daysbeforeexp}></input>
+                                    </div>
+                                </div>
+
+                                <div className="form-group row">
+                                    <div>
+                                        <label htmlFor="assetstart">Contract Start<span className="required">*</span></label>
+                                        <input type="date" name="assetstart" defaultValue={asset.assetstart}></input>
+                                    </div>
+                                    <div>
+                                        <label htmlFor="assetdue">Contract End<span className="required">*</span></label>
+                                        <input type="date" name="assetdue" defaultValue={asset.assetdue}></input>
                                     </div>
                                 </div>
                         </div>

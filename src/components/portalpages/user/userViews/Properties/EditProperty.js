@@ -69,27 +69,35 @@ class EditProperty extends Component {
         this.setState({ loading: true })
         const formData = new FormData();
         const updatedFields = {
+            assetdesc: e.target.description.value,
+            assetinsurance: e.target.insurance.value,
+            insurancedued : e.target.insurance_due.value,
+            assetprice: e.target.price.value,
+            futureprice: e.target.future_price.value,
+            assetrent: e.target.assetrent.value,
+            futurerent: e.target.futurerent.value,
+            assetstart: e.target.assetstart.value,
+            assetdue: e.target.assetdue,
+            assettype_id: e.target.asset_type.value,
+            customer_id: e.target.owner.value,
+            tcustomer_id: e.target.tenant.value,
+            broker_id: e.target.brokers.value,
+            processt_id: e.target.process.value,
+            step_id: e.target.steps.value,
+            category_id: e.target.category.value,
+            stepdate: e.target.step_date.value,
+            status_id: e.target.status.value,
             adescription4: e.target.street_name.value,
             adescription5: e.target.city.value,
             adescription2: e.target.state.value,
             adescription3: e.target.zip_code.value,
             adescription1: e.target.country.value,
-            assetdesc: e.target.description.value,
-            assetprice: e.target.price.value,
-            futureprice: e.target.future_price.value,
-            assettype_id: e.target.asset_type.value,
-            processt_id: e.target.process.value,
-            step_id: e.target.steps.value,
-            stepdate: e.target.step_date.value,
-            status_id: e.target.status.value,
-            assetinsurance: e.target.insurance.value,
-            insurancedued : e.target.insurance_due.value,
             emailnewcontract: this.state.radioValue,
             rentadjustment: e.target.rentadjustment.value,
             endorsment: e.target.endorsment.value,
             interestrent: e.target.interestrent.value,
             daysbeforeexp: e.target.daysbeforeexp.value,
-            warranty: e.target.value.warranty
+            warranty: e.target.warranty.value
         }
 
         for (const key in updatedFields) {

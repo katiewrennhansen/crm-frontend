@@ -97,9 +97,23 @@ class PropertyInfo extends Component {
                             <p>Status:</p> 
                             <p>{asset.status}</p>
                         </div>
+                        {(asset.assetprice)
+                            ? <div className="property-info">
+                                <p>Asset Price:</p>
+                                <p>${asset.assetprice}</p>
+                            </div>
+                        : null
+                        }
+                        {(asset.futureprice)
+                            ? <div className="property-info">
+                                <p>Future Price:</p>
+                                <p>${asset.futureprice}</p>
+                            </div>
+                        : null
+                        }
                         <div className="property-info">
-                            <p>List Price:</p>
-                            <p>${asset.assetprice}</p>
+                            <p>Asset Rent:</p>
+                            <p>${asset.assetrent}</p>
                         </div>
                         <div className="property-info">
                         <p>Owner:</p> 
@@ -132,6 +146,10 @@ class PropertyInfo extends Component {
                         <div className="property-info">
                             <p>Insurance:</p>
                             <p>{asset.assetinsurance}</p>
+                        </div>
+                        <div className="property-info">
+                            <p>Contract Start Date:</p>
+                            <p>{asset.assetstart}</p>
                         </div>
                     </div>
                 </div>

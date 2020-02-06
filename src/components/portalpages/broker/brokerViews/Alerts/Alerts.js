@@ -5,7 +5,6 @@ import ApiService from '../../../../../services/api-service'
 // import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 
-const endpoint = `${config.API_ENDPOINT}/assets/0/assetcomments`
 
 class Alerts extends Component {
     constructor(props) {
@@ -30,6 +29,7 @@ class Alerts extends Component {
     }
 
     componentDidMount(){
+        const endpoint = `${config.API_ENDPOINT}/assets/0/assetcomments`
         ApiService.getDataHalf(endpoint)
             .then(data => {
                 this.setAlerts(data.assetcomments)
@@ -47,6 +47,7 @@ class Alerts extends Component {
     }
 
     handleCompleted = (id) => {
+        const endpoint = `${config.API_ENDPOINT}/assets/0/assetcomments`
         const completed = {
             alert: false,
             confirmatindate: new Date()
@@ -79,7 +80,7 @@ class Alerts extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {(this.state.alerts[0])
+                        {(this.state.alerts)
                             ? this.state.alerts.map(a => (
                             <tr key={a.data.id}>
                                 <td className="mark-completed" id={a.data.id}>
@@ -110,7 +111,10 @@ class Alerts extends Component {
                         }
                     </tbody>
                 </table>
-                <p className="entry-count">Showing {this.state.alerts.length} of {this.state.alerts.length} entries</p>
+                {(this.state.alerts)
+                ? <p className="entry-count">Showing {this.state.alerts.length} of {this.state.alerts.length} entries</p>
+                : <p className="entry-count">Showing 0 of 0 entries</p>
+                }
             </div>
         )
     }
