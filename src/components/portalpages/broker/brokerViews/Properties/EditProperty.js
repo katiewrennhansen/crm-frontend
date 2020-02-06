@@ -6,6 +6,7 @@ import BrokerContext from '../../../../../contexts/BrokerContext'
 import CloseIcon from '@material-ui/icons/Close';
 import PropertyForm from '../../../../utilities/Forms/PropertyForm'
 import './Properties.css'
+import TokenService from '../../../../../services/token-service'
 
 class EditProperty extends Component {
     static contextType = BrokerContext
@@ -115,7 +116,7 @@ class EditProperty extends Component {
             method: 'PATCH',
             body: formData,
             headers: {
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
             })
             .then(res => {

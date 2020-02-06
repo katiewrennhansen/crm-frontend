@@ -4,6 +4,7 @@ import config from '../../../../../config'
 import BrokerContext from '../../../../../contexts/BrokerContext'
 import PropertyForm from '../../../../utilities/Forms/PropertyForm'
 import CloseIcon from '@material-ui/icons/Close';
+import TokenService from '../../../../../services/token-service'
 
 class AddProperty extends Component {
     static contextType = BrokerContext
@@ -87,7 +88,7 @@ class AddProperty extends Component {
             method: 'POST',
             body: formData,
             headers: {
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
             })
             .then(res => {
