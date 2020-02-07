@@ -272,7 +272,7 @@ class PropertyForm extends Component {
                             </div>
                         </div>
                         
-                        {(this.state.customers[0]) 
+                        {(this.state.customers[0])
                             ? (
                             <div className="form-group col3">
                                 <div>

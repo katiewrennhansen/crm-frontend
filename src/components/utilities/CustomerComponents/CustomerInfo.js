@@ -18,18 +18,18 @@ export default function CustomerInfo(props){
 
             {(data.bankaccount) 
                 ? <>
-                <div className="contact-grid">
-                    <p>Bank:</p>
-                    <p>{data.bank}</p>
-                </div>
-                <div className="contact-grid">
-                    <p>Bank Code:</p>
-                    <p>{data.bankcode}</p>
-                </div>
-                <div className="contact-grid">
-                    <p>Bank Account:</p>
-                    <p>{data.bankaccount}</p>
-                </div>
+                    <div className="contact-grid">
+                        <p>Bank:</p>
+                        <p>{data.bank}</p>
+                    </div>
+                    <div className="contact-grid">
+                        <p>Bank Code:</p>
+                        <p>{data.bankcode}</p>
+                    </div>
+                    <div className="contact-grid">
+                        <p>Bank Account:</p>
+                        <p>{data.bankaccount}</p>
+                    </div>
                 </>
                 : <div className="contact-grid">
                     <p className="nothing-to-display">No bank information to display</p>
