@@ -214,7 +214,7 @@ class Cost extends Component {
                         </div>
                         <div>
                             <label htmlFor="amount">Amount<span className="required">*</span></label>
-                            <input type="number" name="amount"></input>
+                            <input type="text" name="amount"></input>
                         </div>
                     </div>
         

@@ -90,7 +90,7 @@ class BrokerForm extends Component{
                                 <input
                                     id='phone'
                                     name='phone'
-                                    type='number'
+                                    type='text'
                                     defaultValue={this.props.cust.phone}
                                 />
                             </div>

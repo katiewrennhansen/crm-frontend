@@ -228,11 +228,11 @@ class Maintenance extends Component {
                     <div className="form-group row">
                         <div>
                             <label htmlFor="initial_cost">Initial Cost: </label>
-                            <input type="number" name="initial_cost"></input>
+                            <input type="text" name="initial_cost"></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor="final_cost">Final Cost: </label>
-                            <input type="number" name="final_cost"></input>
+                            <input type="text" name="final_cost"></input>
                         </div>
                     </div>
                     

@@ -223,22 +223,22 @@ class PropertyForm extends Component {
                         <div className="form-group row">
                             <div>
                                 <label htmlFor="price">Price<span className="required">*</span></label>
-                                <input type="number" name="price" defaultValue={asset.assetprice}></input>
+                                <input type="text" name="price" defaultValue={asset.assetprice}></input>
                             </div>
                             <div>
                                 <label htmlFor="future_price">Future Price<span className="required">*</span></label>
-                                <input type="number" name="future_price" defaultValue={asset.futureprice}></input>
+                                <input type="text" name="future_price" defaultValue={asset.futureprice}></input>
                             </div>
                         </div>
 
                         <div className="form-group row">
                             <div>
                                 <label htmlFor="assetrent">Rent<span className="required">*</span></label>
-                                <input type="number" name="assetrent" defaultValue={asset.assetrent}></input>
+                                <input type="text" name="assetrent" defaultValue={asset.assetrent}></input>
                             </div>
                             <div>
                                 <label htmlFor="futurerent">Future Rent<span className="required">*</span></label>
-                                <input type="number" name="futurerent" defaultValue={asset.futurerent}></input>
+                                <input type="text" name="futurerent" defaultValue={asset.futurerent}></input>
                             </div>
                         </div>
 
@@ -268,7 +268,7 @@ class PropertyForm extends Component {
                             </div>
                             <div>
                                 <label htmlFor="warranty">Warranty<span className="required">*</span></label>
-                                <input type="number" name="warranty" defaultValue={asset.warranty}></input>
+                                <input type="text" name="warranty" defaultValue={asset.warranty}></input>
                             </div>
                         </div>
                         
@@ -424,7 +424,7 @@ class PropertyForm extends Component {
                                 <div className="form-group row">
                                     <div>
                                         <label htmlFor="rentadjustment">Rent Adjustment<span className="required">*</span></label>
-                                        <input type="number" name="rentadjustment" defaultValue={asset.rentadjustment}></input>
+                                        <input type="text" name="rentadjustment" defaultValue={asset.rentadjustment}></input>
                                     </div>
                                     <div>
                                         <label htmlFor="endorsment">Endorsment<span className="required">*</span></label>
@@ -435,11 +435,11 @@ class PropertyForm extends Component {
                                 <div className="form-group row">
                                     <div>
                                         <label htmlFor="interestrent">Interest<span className="required">*</span></label>
-                                        <input type="number" name="interestrent" defaultValue={asset.interestrent}></input>
+                                        <input type="text" name="interestrent" defaultValue={asset.interestrent}></input>
                                     </div>
                                     <div>
                                         <label htmlFor="daysbeforeexp">Days Before Expiration<span className="required">*</span></label>
-                                        <input type="number" name="daysbeforeexp" defaultValue={asset.daysbeforeexp}></input>
+                                        <input type="text" name="daysbeforeexp" defaultValue={asset.daysbeforeexp}></input>
                                     </div>
                                 </div>
 

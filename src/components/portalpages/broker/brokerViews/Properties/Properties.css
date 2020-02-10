@@ -122,6 +122,7 @@ td.delete {
 .image-container {
     position: relative;
     overflow: hidden;
+    max-height: 220px;
 }
 
 .property-photo {
@@ -390,7 +391,6 @@ table {
     color:red;
     font-size: 11px;
 }
-
 
 @media (min-width: 768px){
     .broker-properties-grid {

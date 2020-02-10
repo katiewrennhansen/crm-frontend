@@ -111,7 +111,7 @@ class MaintenanceForm extends Component {
                             </div>
                             <div>
                                 <label htmlFor="phone">Phone<span className="required">*</span></label>
-                                <input type="number" name="phone" defaultValue={info.phone}></input>
+                                <input type="text" name="phone" defaultValue={info.phone}></input>
                             </div>
                         </div>
                         
@@ -217,7 +217,7 @@ class MaintenanceForm extends Component {
                             </div>
                             <div>
                                 <label htmlFor="provider_id">Provider ID<span className="required">*</span></label>
-                                <input type="number" name="provider_id" defaultValue={info.taxid}></input>
+                                <input type="text" name="provider_id" defaultValue={info.taxid}></input>
                             </div>
                         </div>
 

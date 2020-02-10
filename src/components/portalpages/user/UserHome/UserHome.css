@@ -16,8 +16,9 @@
     font-size: 14px;
 }
 
+
 .property-image {
-    width: 100%;
+    max-width: 100%;
     border-radius: 2px;
 }
 
@@ -189,4 +190,11 @@
     padding: 10px 15px;
     height: 39px;
     background: white;
+}
+
+
+@media (min-width: 768px){
+    .property-image {
+        min-height: 450px;
+    }
 }

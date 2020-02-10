@@ -197,7 +197,7 @@ class MaintenanceView extends Component {
                             </div>
                             <div>
                                 <label htmlFor="quantity">Quantity</label> 
-                                <input type="number" name="quantity" onChange={(e) => this.setQuantity(e)}/>
+                                <input type="text" name="quantity" onChange={(e) => this.setQuantity(e)}/>
                             </div>
                             <div>
                                 <label htmlFor="unit">Unit</label> 
@@ -205,11 +205,11 @@ class MaintenanceView extends Component {
                             </div>
                             <div>
                                 <label htmlFor="unitcost">Unit Cost</label> 
-                                <input type="number" name="unitcost" onChange={(e) => this.setUnitCost(e)}/>
+                                <input type="text" name="unitcost" onChange={(e) => this.setUnitCost(e)}/>
                             </div>
                             <div>
                                 <label htmlFor="total">Total Cost</label> 
-                                <input type="number" name="total" value={this.state.quantity * this.state.unitCost} readOnly={true}/>
+                                <input type="number" name="total" value={Number(this.state.quantity) * Number(this.state.unitCost)} readOnly={true}/>
                             </div>
                         </div>
                         {(this.state.loading) ? <CircularProgress /> : <input type="submit" className="submit" value="Add Charge"/>}
