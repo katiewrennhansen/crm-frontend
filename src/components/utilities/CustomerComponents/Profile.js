@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import ImageUploader from 'react-images-upload'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import TokenService from '../../../services/token-service';
 
 class Account extends Component {
     constructor(props){
@@ -80,7 +81,7 @@ class Account extends Component {
             method: 'PATCH',
             body: formData,
             headers: {
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
             })
             .then(res => {
@@ -117,7 +118,13 @@ class Account extends Component {
                 </div>
                 {(!this.state.edit)
                 ? <div className="user">
-                    <img src={user.photo_url} alt="profile" className="profile-img" />
+                    {(user.photo_url)
+                        ? <img className="customer-image" src={user.photo_url} alt="customer profile"/>
+                        : <div className="default-image">
+                            <span role="img" aria-label="camera icon">📷</span>
+                            <p className="nothing-to-display">No photo to display</p>
+                        </div>
+                    } 
                     <div className="user-info">
                         <h3>{`${user.firstname} ${user.lastname}`}</h3>
                         <p>Email: {user.email}</p>

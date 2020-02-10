@@ -8,6 +8,7 @@ import ImageUploader from 'react-images-upload'
 import CloseIcon from '@material-ui/icons/Close';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import PageviewIcon from '@material-ui/icons/Pageview';
+import TokenService from '../../../services/token-service'
  
 class Maintenance extends Component {
     static contextType = BrokerContext
@@ -96,7 +97,7 @@ class Maintenance extends Component {
             method: 'POST',
             body: formData,
             headers: {
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
             })
             .then(res => {

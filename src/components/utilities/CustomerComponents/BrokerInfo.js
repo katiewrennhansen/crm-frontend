@@ -5,7 +5,13 @@ export default function BrokerInfo(props){
     return (
         <div className="customer-info">
             <div className="customer-info-flex">
-                <img className="customer-image" src={data.photo_url} alt="customer profile"/>
+                {(data.photo_url)
+                    ? <img className="customer-image" src={data.photo_url} alt="customer profile"/>
+                    : <div className="default-image">
+                        <span role="img" aria-label="camera icon">📷</span>
+                        <p className="nothing-to-display">No photo to display</p>
+                    </div>
+                } 
                 <div>
                     <p>{data.email}</p>
                     <p>{data.secondemail}</p>
