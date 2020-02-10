@@ -56,7 +56,7 @@ class PaymentHistory extends Component {
                                         <td>{t.data.totalamount}</td>
                                         <td>{(t.data.transfernumber) ? t.data.transfernumber : '-'}</td>
                                         <td>
-                                            <Link to={`/user/payments/history/${t.data.id}`}>
+                                            <Link to={`/user/payments/view/${t.data.id}`}>
                                                 <PageviewIcon className="active-icon"/>
                                             </Link>
                                         </td>

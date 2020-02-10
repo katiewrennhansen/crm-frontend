@@ -10,31 +10,32 @@ class Payments extends Component {
         return (
             <>
                 <nav className="payments-nav">
-                    <Link to='/user/payments'>Pay Online</Link>
-                    <Link to='/user/payments/history'>Payment History</Link>
+                    <Link to='/user/payments'>Payment History</Link>
+                    <Link to='/user/payments/history'>Pay Online</Link>
                     <Link to='/user/payments/accounts'>Payment Account</Link>
                 </nav>
                 <div>
                     <Route  
                         exact path='/user/payments'
-                        component={PayOnline}
-                    />
-                    <Route  
-                        exact path='/user/payments/history'
                         component={PaymentHistory}
                     />
                     <Route  
-                        exact path='/user/payments/history/:id'
+                        exact path='/user/payments/view/:id'
                         render={history => {
                             const id = history.match.params.id
                             return (
                                 <UserTransfers 
                                     id={id}
-                                    url="user/payments/history"
+                                    url="user/payments"
                                 />
                             )
                         }}
                     />
+                    <Route  
+                        exact path='/user/payments/history'
+                        component={PayOnline}
+                    />
+                    
                     <Route  
                         exact path='/user/payments/accounts'
                         component={PaymentAccounts}

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Moment from 'react-moment'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
-// import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 
 
@@ -32,6 +31,7 @@ class Alerts extends Component {
         const endpoint = `${config.API_ENDPOINT}/assets/0/assetcomments`
         ApiService.getDataHalf(endpoint)
             .then(data => {
+                console.log(data)
                 this.setAlerts(data.assetcomments)
             }) 
             .catch(error => {

@@ -57,7 +57,7 @@ class Contracts extends Component {
                             <th>Property</th>
                             <th>Start Date</th>
                             <th>End Date</th>
-                            <th></th>
+                            <th>View Contract</th>
                         </tr>
                     </thead>
                     <tbody>

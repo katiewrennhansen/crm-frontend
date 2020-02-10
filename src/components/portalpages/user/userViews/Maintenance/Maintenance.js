@@ -73,6 +73,7 @@ class Maintenance extends Component {
                             <th>Type</th>
                             <th>Cost</th>
                             <th>Date Requested</th>
+                            <th>Deliver Date</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -85,7 +86,8 @@ class Maintenance extends Component {
                             <td>{p.data.maintcomm}</td>
                             <td>${p.data.initialcost}</td>
                             <td>{p.data.reqdate}</td>
-                            <td>{(p.data.deliverdate) ? 'Completed' : 'Pending'}</td>
+                            <td>{(p.data.deliverdate) ? p.data.deliverdate : '-' }</td>
+                            <td>{p.data.status}</td>
                         </tr>
                         ))
                         : <tr>

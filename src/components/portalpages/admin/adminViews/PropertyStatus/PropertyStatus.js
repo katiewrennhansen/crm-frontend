@@ -147,6 +147,7 @@ class PropertyStatus extends Component {
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Promotional Web</th>
                                 <th>Date Created</th>
                                 <th>Update</th>
                                 <th>Delete</th>
@@ -157,6 +158,7 @@ class PropertyStatus extends Component {
                                 ? context.data.map(s => (
                                 <tr key={s.id}>
                                     <td>{s.statusdesc}</td>
+                                    <td>{(s.showinportal) ? 'True' : 'False'}</td>
                                     <td>
                                         <Moment format="YYYY/MM/DD">{s.created_at}</Moment>                                
                                     </td>
@@ -174,6 +176,7 @@ class PropertyStatus extends Component {
                                 ))
                                 : <tr>
                                     <td className="nothing-to-display">No Property Statuses to Display</td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
