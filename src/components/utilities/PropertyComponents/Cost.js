@@ -7,6 +7,7 @@ import ImageUploader from 'react-images-upload'
 import CloseIcon from '@material-ui/icons/Close';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
+import TokenService from '../../../services/token-service';
 
 class Cost extends Component {
     static contextType = BrokerContext
@@ -75,7 +76,7 @@ class Cost extends Component {
             method: 'POST',
             body: formData,
             headers: {
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
             })
             .then(res => {
