@@ -136,8 +136,8 @@ class MaintenanceView extends Component {
                         : null
                     }
                 </div>
-                <p>Requested: {maint.reqdate}</p>
-                <p>Plan Data: {maint.plandate}</p>
+                <p>Request Date: {maint.reqdate}</p>
+                <p>Plan Date: {maint.plandate}</p>
                 <p>Completed: {maint.deliverdate}</p>
                 <p>Provider: {maint.provider}</p>
                 <p>Status: {maint.status}</p>

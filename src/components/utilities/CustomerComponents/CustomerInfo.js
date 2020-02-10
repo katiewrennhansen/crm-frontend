@@ -6,16 +6,20 @@ export default function CustomerInfo(props){
     const data = props.data
     return (
         <div className="customer-info">
-            <p>{data.email}</p>
-            <p>{data.phone}</p>
-            <h3>Address</h3>
-            <address>
-                <p>{data.adescription4}</p>
-                <p>{`${data.adescription2}, ${data.adescription3}`}</p>
-                <p>{data.adescription1}</p>
-            </address>
-            <h3>Bank Information</h3>
+            <div className="customer-info-flex">
+                <img className="customer-image" src={data.photo_url} alt="customer profile"/>
+                <div>
+                    <p>{data.email}</p>
+                    <p>{data.phone}</p>
+                    <address>
+                        <p>{data.adescription4}</p>
+                        <p>{`${data.adescription2}, ${data.adescription3}`}</p>
+                        <p>{data.adescription1}</p>
+                    </address>
+                </div>
+            </div>
 
+            <h3>Bank Information</h3>
             {(data.bankaccount) 
                 ? <>
                     <div className="contact-grid">

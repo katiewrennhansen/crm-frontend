@@ -59,7 +59,9 @@ class Transfers extends Component {
                 <Link to={`/${this.props.url}/${this.props.id}`}>Back</Link>
                 <h2>Transfer #{trans.transfernumber}</h2>
                 <div>
+                    <p>Customer Name: {trans.customer}</p>
                     <p>Bank: {trans.bank}</p>
+                    <p>Account#: {trans.account}</p>
                     <p>Date: {trans.trasferdate}</p>
                     <p>Observations: {trans.observations}</p>
                 </div>
@@ -68,7 +70,7 @@ class Transfers extends Component {
                     <table>
                         <thead>
                             <tr>
-                                <th>Type</th>
+                                <th>Concept</th>
                                 <th>Comment</th>
                                 <th>Kind</th>
                                 <th>Amount</th>

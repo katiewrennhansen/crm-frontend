@@ -275,8 +275,8 @@ class Maintenance extends Component {
                                     <td>{f.data.maintcomm}</td>
                                     <td>${f.data.initialcost}</td>
                                     <td>{f.data.provider}</td>
-                                    <td>{f.data.deliverdate}</td>
                                     <td>{f.data.reqdate}</td>
+                                    <td>{f.data.deliverdate}</td>
                                     <td>
                                         <Link to={`/${this.props.type}/property/${this.props.id}/maintenance/${f.data.id}`}>
                                             <PageviewIcon className="active-icon"/>

@@ -42,7 +42,7 @@ class ContractHistory extends Component {
                         <tr>
                             <th>Start Date</th>
                             <th>End Date</th>
-                            <th>Reciept</th>
+                            <th>View Contract</th>
                         </tr>
                     </thead>
                     <tbody>
