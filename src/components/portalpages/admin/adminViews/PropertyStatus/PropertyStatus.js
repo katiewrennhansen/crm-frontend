@@ -37,6 +37,7 @@ class PropertyStatus extends Component {
         e.preventDefault()
         const newPropertyStatus = {
             statusdesc: e.target.feature_status.value,
+            showinportal: e.target.showinportal.value
         }
         ApiService.postData(
             psEndpoint, 
@@ -45,6 +46,7 @@ class PropertyStatus extends Component {
             this.context.hideModal
         )
         e.target.feature_status.value = ""
+        e.target.showinportal.value = ""
     }
 
     updateData = (e) => {
@@ -54,6 +56,7 @@ class PropertyStatus extends Component {
 
         if(e.target.status_type.value !== ''){
             updatedContent.statusdesc = e.target.feature_status.value
+            updatedContent.showinportal = e.target.showinportal.value
         }
 
         ApiService.updateDataHalf(psEndpoint, id, updatedContent)
@@ -68,6 +71,7 @@ class PropertyStatus extends Component {
             console.log(error)
         }) 
         e.target.feature_status.value = ""
+        e.target.showinportal.value = ""
     }
 
     deleteStatus = (id) => {
@@ -107,6 +111,12 @@ class PropertyStatus extends Component {
                                     placeholder='Property Status Type'
                                     type='text'
                                 />
+                                <label htmlFor="showinportal">Require to Show in Website?<span className="required">*</span></label>
+                            <select name="showinportal">
+                                <option value="">Select an option</option>
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
                             </div>
                             <input type="submit" className="submit-full submit-modal" value="Update" />
                         </form>
@@ -131,8 +141,14 @@ class PropertyStatus extends Component {
                                 placeholder='Update Property Status'
                                 type='text'
                             />
+                            <label htmlFor="showinportal">Require to Show in Website?<span className="required">*</span></label>
+                            <select name="showinportal">
+                                <option value="">Select an option</option>
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
                         </div>
-                        <input type="submit" className="submit-full submit-modal" value="Update" />
+                        <input type="submit" className="submit-full submit-modal" value="Add" />
                     </form>
                 </Modal>
 
@@ -158,7 +174,7 @@ class PropertyStatus extends Component {
                                 ? context.data.map(s => (
                                 <tr key={s.id}>
                                     <td>{s.statusdesc}</td>
-                                    <td>{(s.showinportal) ? 'True' : 'False'}</td>
+                                    <td>{(s.showinportal) ? 'Yes' : 'No'}</td>
                                     <td>
                                         <Moment format="YYYY/MM/DD">{s.created_at}</Moment>                                
                                     </td>
