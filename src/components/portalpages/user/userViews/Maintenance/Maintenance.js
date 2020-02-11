@@ -82,7 +82,7 @@ class Maintenance extends Component {
                         ? this.state.requests.map(p => (
                         <tr key={p.data.id}>
                             <td>{(p.data.adescription1)+(', ')}
-                            {p.data.adescription2}</td>
+                                {p.data.adescription2}</td>
                             <td>{p.data.provider}</td>
                             <td>{p.data.maintcomm}</td>
                             <td>${p.data.initialcost}</td>
