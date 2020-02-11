@@ -201,8 +201,9 @@ class Cost extends Component {
                             <label htmlFor="kind">Kind<span className="required">*</span></label>
                             <select name="kind">
                                 <option value="">Select a Transaction Type</option>
-                                <option value="income">Income</option>
-                                <option value="outcome">Outcome</option>
+                                <option value="cash">Cash</option>
+                                <option value="check">Check</option>
+                                <option value="transfer">Transfer</option>
                             </select>
                         </div>
                     </div>
