@@ -43,59 +43,42 @@ const styles = StyleSheet.create({
 
 
 export default function WarrentyForm(props){
-    console.log(props)
+    console.log(props.warranty)
+    const warranty = props.warranty
     return (
         <Document>
             <Page size="A4" style={styles.body}>
                 <View>
-                    <Text style={styles.title}>Tenant Checkin Form</Text>
-                    {/* <Text style={styles.subtitle}>{props.warranty.data.adescription4}</Text> */}
+                    <Text style={styles.title}>Warranty Form</Text>
+                    <Text style={styles.subtitle}>{warranty.adescription4}</Text>
                     <Text style={styles.subtitle}>
-                        {`${props.adescription5}, ${props.adescription2} ${props.adescription3}`}
+                        {`${warranty.adescription5}, ${warranty.adescription2} ${warranty.adescription3}`}
                     </Text>
                 </View>
                 <View>
-                    <Text style={styles.header}>Tenant Information</Text>
-                    <Text style={styles.text}>Name: {props.tenant}</Text>
-                </View>
-                {/* <View>
-                    <Text style={styles.header}>Entrega</Text>
-                    {props.features
-                        ? props.features.map((f, i) => {
-                            if(f.deliver){
-                                return (
-                                    <Text key={i} style={styles.text}>
-                                        {`${props.asset.features[i].type} - ${f.quantity}`}
-                                    </Text>
-                                )
-                            } else {
-                                return null
-                            }
-                        })
-                    : null
-                    }
+                    <Text style={styles.header}>Company Information</Text>
+                    <Text style={styles.text}>Name: {warranty.companyname}</Text>
+                    <Text style={styles.text}>ID: {warranty.companyuniqid}</Text>
+                    <Text style={styles.text}>Tenant: {warranty.tenant}</Text>
                 </View>
                 <View>
-                    <Text style={styles.header}>Features</Text>
-                    {props.features
-                        ? props.features.map((f, i) => {
-                            if(!f.deliver){
-                                return (
-                                    <Text key={i} style={styles.text}>
-                                        {`${props.asset.features[i].type} - ${f.condition}`}
-                                    </Text>
-                                )
-                            } else {
-                                return null
-                            }
-                        })
-                    : null
+                    <Text style={styles.header}>Transactions</Text>
+                    <Text style={styles.text}>Warranty Amount: {warranty.warrantyamount}</Text>
+                    <Text style={styles.text}>Total Reduce: {warranty.totaltoreduce}</Text>
+                    <Text style={styles.text}>Return: {warranty.return}</Text>
+                </View>
+                <View>
+                    <Text style={styles.header}>Costs</Text>
+                    {warranty.transactions
+                        ? warranty.transactions.map((t, i) => {
+                            return (
+                                <Text key={i} style={styles.text}>
+                                    {`${t.concept} - ${t.amount}`}
+                                </Text>
+                            )})
+                        : null
                     }
                 </View>
-                <View style={styles.signature}>
-                    <Text style={styles.text}>Please sign and date below</Text>
-                    <Text style={styles.text}>Signature ___________________________________                     Date ________________________</Text>
-                </View> */}
             </Page>
         </Document>
     )

@@ -113,20 +113,15 @@ class CheckIn extends Component {
             .catch(error => {
                 console.log(error)
             })
-        
-        fetch(`${config.API_ENDPOINT}/assets/warranty`, {
-            method: 'GET',
-            body: { "asset_id": "7" },
+       
+        fetch(`${config.API_ENDPOINT}/assets/${this.props.id}/warranties`, {
             headers: {
                 'content-type': 'application/json',
                 'Authorization': `Bearer ${TokenService.getAuthToken()}`
             },
         })
             .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                this.setWarranty(data)
-            })
+            .then(data => this.setWarranty(data.data))
             .catch(error => console.log(error))
     }
 
@@ -141,7 +136,7 @@ class CheckIn extends Component {
             method: 'PATCH',
             body: formData,
             headers: {
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
             })
             .then(res => {
@@ -169,7 +164,7 @@ class CheckIn extends Component {
             method: 'PATCH',
             body: formData,
             headers: {
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
             })
             .then(res => {
@@ -197,7 +192,7 @@ class CheckIn extends Component {
             method: 'PATCH',
             body: formData,
             headers: {
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
             })
             .then(res => {
@@ -213,6 +208,34 @@ class CheckIn extends Component {
                 this.setState({ loading: false })
             })
     }
+
+    // getWa = (e) => {
+    //     e.preventDefault()
+    //     this.setState({ loading: true })
+    //     const formData = new FormData();
+
+    //     formData.append('closing', this.state.closing[0])
+
+    //     fetch(`${config.API_ENDPOINT}/assets/${this.props.id}`, {
+    //         method: 'PATCH',
+    //         body: formData,
+    //         headers: {
+    //             'Authorization': `Bearer ${TokenService.getAuthToken()}`
+    //         }
+    //         })
+    //         .then(res => {
+    //             if(!res.ok)
+    //                 return res.json().then(error => Promise.reject(error))
+    //             return res
+    //         })
+    //         .then(data => {
+    //             this.props.history.history.push(`/${this.props.usertype}/properties/${this.props.id}`)
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //             this.setState({ loading: false })
+    //         })
+    // }
 
     render(){
         return (
