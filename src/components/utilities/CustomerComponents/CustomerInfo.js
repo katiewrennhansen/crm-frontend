@@ -18,9 +18,9 @@ export default function CustomerInfo(props){
                     <p>{data.email}</p>
                     <p>{data.phone}</p>
                     <address>
-                        <p>{data.adescription4}</p>
-                        <p>{`${data.adescription2}, ${data.adescription3}`}</p>
                         <p>{data.adescription1}</p>
+                        <p>{`${data.adescription2}, ${data.adescription3}`}</p>
+                        <p>{data.adescription4}</p>
                     </address>
                 </div>
             </div>
@@ -47,6 +47,22 @@ export default function CustomerInfo(props){
             }
             
             <h3>Additional Information</h3>
+            <div className="contact-grid">
+                <p>Title:</p> 
+                <p>{data.title}</p>
+            </div>
+            <div className="contact-grid">
+                <p>Profession:</p> 
+                <p>{data.profession}</p>
+            </div>
+            <div className="contact-grid">
+                <p>Marital:</p> 
+                <p>{data.marital}</p>
+            </div>
+            <div className="contact-grid">
+                <p>Gender:</p> 
+                <p>{data.gender}</p>
+            </div>
             <div className="contact-grid">
                 <p>Category:</p> 
                 <p>{data.category}</p>
