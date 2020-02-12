@@ -70,7 +70,7 @@ class Visits extends Component {
                                         
                                         <td>{p.data.assetcomment}</td>
                                         <td>{p.data.requestdate}</td>
-                                        <td>{(p.data.confirmatindate) ? `Completed ${p.data.requestdate}` : 'Pending'}</td>
+                                        <td>{(p.data.confirmatindate) ? `Completed ${p.data.confirmatindate}` : 'Pending'}</td>
                                     </tr>
                                 )
                             } else {

@@ -67,13 +67,8 @@ class Contracts extends Component {
                                 return (
                                     <tr key={c.data.id}>
                                         <td>
-                                            {this.state.assets.map(a => {
-                                                if(a.data.id === c.data.asset_id){
-                                                    return a.data.adescription4  
-                                                } else {
-                                                    return null
-                                                }
-                                            })}
+                                        {(c.data.adescription1)+(', ')}
+                                        {c.data.adescription2}
                                         </td>
                                         <td>{c.data.startdate}</td>
                                         <td>{c.data.enddate}</td>

@@ -37,7 +37,8 @@ class AddNetwork extends Component {
                 referencename: e.target.referencename.value,
                 email_phone: e.target.email_phone.value,
                 specialevent: e.target.specialevent.value,
-                eventdate: e.target.eventdate.value
+                eventdate: e.target.eventdate.value,
+                typeof: e.target.typeof.value
             }
         }
 
@@ -57,6 +58,7 @@ class AddNetwork extends Component {
         e.target.email_phone.value = ""
         e.target.specialevent.value = ""
         e.target.eventdate.value = ""
+        e.target.typeof.value = ""
         const form = document.getElementById('costs-form')
         form.classList.add('hidden')
     }
@@ -100,6 +102,10 @@ class AddNetwork extends Component {
                         <input type="text" name="referencename"></input>
                     </div>
                     <div className="form-group">
+                        <label htmlFor="typeof">Relationship: </label>
+                        <input type="text" name="typeof"></input>
+                    </div>
+                    <div className="form-group">
                         <label htmlFor="email_phone">Email/Phone: </label>
                         <input type="text" name="email_phone"></input>
                     </div>
@@ -118,6 +124,7 @@ class AddNetwork extends Component {
                         <tr>
                             <th>Reference</th>
                             <th>Contact</th>
+                            <th>Relationship</th>
                             <th>Special Event</th>
                             <th>Event Date</th>
                             <th></th>
@@ -129,6 +136,7 @@ class AddNetwork extends Component {
                                 <tr key={n.data.id}>
                                     <td>{n.data.reference}</td>
                                     <td>{n.data.contact}</td>
+                                    <td>{n.data.type}</td>
                                     <td>{n.data.specialevent}</td>
                                     <td>{n.data.eventdate}</td>
                                     <td>

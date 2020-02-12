@@ -40,6 +40,7 @@ class Network extends Component {
                         <tr>
                             <th>Name</th>
                             <th>Contact</th>
+                            <th>Relationship</th>
                             <th>Reference</th>
                             <th>Special Event</th>
                             <th>Event Date</th>
@@ -51,6 +52,7 @@ class Network extends Component {
                             <tr key={p.data.id}>
                                 <td>{p.data.customer}</td>
                                 <td>{p.data.contact}</td>
+                                <td>{p.data.type}</td>
                                 <td>{p.data.reference}</td>
                                 <td>{p.data.specialevent}</td>
                                 <td>{p.data.eventdate}</td>
