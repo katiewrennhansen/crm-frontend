@@ -108,7 +108,8 @@ export default function CustomerInfo(props){
                         ? props.data.assets.map(a => {
                             return (
                                 <tr key={a.id}>
-                                    <td>{a.id}</td>
+                                    <td>{(a.adescription1)+(', ')}
+                                        {a.adescription2}</td>
                                     <td>{a.status}</td>
                                     <td>{a.broker}</td>
                                     <td>{a.tenant}</td>
@@ -131,7 +132,8 @@ export default function CustomerInfo(props){
                 <table>
                     <thead>
                         <tr>
-                            <th>Description</th>
+                            <th>Observations</th>
+                            <th>Transfer #</th>
                             <th>Amount</th>
                             <th>Date</th>
                             <th>View</th>
@@ -143,6 +145,7 @@ export default function CustomerInfo(props){
                             return (
                                 <tr key={t.data.id}>
                                     <td>{t.data.observations}</td>
+                                    <td>{(t.data.banktransaction) ? t.data.banktransaction : '-'}</td>
                                     <td>{t.data.totalamount}</td>
                                     <td>{t.data.trasferdate}</td>
                                     <td>
