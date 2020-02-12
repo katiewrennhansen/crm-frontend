@@ -90,6 +90,7 @@ class ContactForm extends Component{
                                     id='first_name'
                                     name='first_name'
                                     type='text'
+                                    defaultValue={this.props.cust.firstname}
                                 />
                             </div>
                             <div>
@@ -98,6 +99,7 @@ class ContactForm extends Component{
                                     id='last_name'
                                     name='last_name'
                                     type='text'
+                                    defaultValue={this.props.cust.lastname}
                                 />
                             </div>
                         </div>
@@ -144,7 +146,7 @@ class ContactForm extends Component{
                                 id='address'
                                 name='address'
                                 type='text'
-                                defaultValue={this.props.cust.adescription4}
+                                defaultValue={this.props.cust.adescription1}
                             />
                         </div>
                         <div className='form-group row'>
@@ -154,7 +156,7 @@ class ContactForm extends Component{
                                     id='city'
                                     name='city'
                                     type='text'
-                                    defaultValue={this.props.cust.adescription3}
+                                    defaultValue={this.props.cust.adescription2}
                                 />
                             </div>
                             <div>
@@ -163,7 +165,7 @@ class ContactForm extends Component{
                                     id='state'
                                     name='state'
                                     type='text'
-                                    defaultValue={this.props.cust.adescription2}
+                                    defaultValue={this.props.cust.adescription3}
                                 />
                             </div>
                         </div>
@@ -174,7 +176,7 @@ class ContactForm extends Component{
                                     id='zip_code'
                                     name='zip_code'
                                     type='text'
-                                    defaultValue={this.props.cust.adescription1}
+                                    defaultValue={this.props.cust.adescription4}
                                 />
                             </div>
                             <div>
@@ -249,6 +251,39 @@ class ContactForm extends Component{
                                     )}
                                 </select>
                             </div>
+                            
+                            <div>
+                                <label htmlFor='title'>Title<span className="required">*</span></label>
+                                <select name="title">
+                                    <option value="">Select a Title</option>
+                                    <option value="Mr.">Mr.</option>
+                                    <option value="Mrs.">Mrs.</option>
+                                    <option value="Ms.">Ms.</option>
+                                    <option value="Miss.">Miss.</option>    
+
+                                </select>
+                            </div>
+                            <div>
+                                <label htmlFor='profession'>Profession<span className="required">*</span></label>
+                                <input
+                                    id='profession'
+                                    name='profession'
+                                    type='text'
+                                    defaultValue={this.props.cust.profession}
+                                />   
+                            </div>
+                            <div>
+                                <label htmlFor='marital'>Marital<span className="required">*</span></label>
+                                <select name="marital">
+                                    <option value="">Select a Marital Status</option>
+                                    <option value="single">Single</option>
+                                    <option value="married">Married</option>    
+                                    <option value="divorce">Divorced</option>  
+                                    <option value="widow">Widow</option>       
+                                      
+
+                                </select>
+                            </div>
                             <div>
                                 <label htmlFor='category'>Category<span className="required">*</span></label>
                                 <select name="category">
@@ -260,7 +295,16 @@ class ContactForm extends Component{
                                     )}
                                 </select>
                             </div>
-                        </div>
+
+                            <div>
+                                <label htmlFor='gender'>Gender<span className="required">*</span></label>
+                                <select name="gender">
+                                    <option value="">Select one</option>
+                                    <option value="female">Female</option>
+                                    <option value="male">Male</option>    
+                                    
+                                </select>
+                            </div>
                        
                         <div className='form-group'>
                             <label htmlFor='anniversary'>Anniversary<span className="required">*</span></label>
@@ -281,6 +325,8 @@ class ContactForm extends Component{
                                 defaultValue={this.props.cust.taxid}
                             />
                         </div>
+
+                    </div>
                         <div className='form-group'>
                             <label htmlFor='comment'>Comment</label>
                             <textarea
