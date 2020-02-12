@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import CloseIcon from '@material-ui/icons/Close';
 
 const endpoint = `${config.API_ENDPOINT}/assignedproms`
 
@@ -108,9 +110,16 @@ class PromotionPage extends Component {
     render(){
         const data = this.state.promotion
         return (
-            <div className='container'>
+            <div className='container contact-container'>
                 <div className='header-grid'>
                     <h2>{data.typepromotion}</h2>
+                    <div className="property-icons">
+                        <Link to='/broker/promotions' className="close-icon">
+                            <CloseIcon
+                                className="action-icon" 
+                            />
+                        </Link>
+                    </div>
                 </div>
                 <p>Start: {data.startdate}</p>
                 <p>End: {data.enddate}</p>

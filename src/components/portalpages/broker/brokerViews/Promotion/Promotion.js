@@ -83,78 +83,46 @@ class Promotion extends Component {
 
     render(){
         return (
-            <>
-                <Modal className='add-modal' show={this.state.assign}>
-                    <form className='add-content' onSubmit={(e) => this.assignPromotion(e)}>
-                        <h2>Assign user to {this.state.name}</h2>
-                        <div className='form-group'>
-                            <select name="user" onChange={(e) => this.changeUser(e.target.value)}>
-                                <option value="">Select a User</option>
-                                {this.state.users.map(user => (
-                                    <option 
-                                        key={user.customer.id} 
-                                        value={user.customer.email}
-                                    >
-                                        {user.customer.name}
-                                    </option>
-                                ))}  
-                            </select>
-                        </div>
-                        <div className='form-group'>
-                            <label htmlFor="cost">Cost</label>
-                            <input 
-                                id="cost"
-                                type='number' 
-                                name='cost' 
-                                placeholder="Cost"
-                            />
-                        </div>
-                        <SubmitButton className='submit-content' text='Save'/>
-                    </form>
-                    <button className='cancel-btn' onClick={() => this.setAssign(false)}>Cancel</button>
-                </Modal>
-
-                <div className='data-container'>
-                    <h3>Promotions</h3>
-                    <table className='data-table'>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Total Cost</th>
-                                <th>Assign User</th>
+            <div className='data-container'>
+                <h2>Promotions</h2>
+                <table className='data-table'>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Total Cost</th>
+                            <th>Assign User</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {(this.state.data[0]) 
+                            ? this.state.data.map(p => (
+                            <tr className="promotions-table" key={p.data.id}>
+                                <td>{p.data.typepromotion}</td>
+                                <td>{p.data.startdate}</td>
+                                <td>{p.data.duedate}</td>
+                                <td>{p.data.totalcost}</td>
+                                <td>
+                                    <Link className="close-icon" to={`/broker/promotions/${p.data.id}`}>
+                                        <PersonAddIcon />
+                                    </Link>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {(this.state.data[0]) 
-                                ? this.state.data.map(p => (
-                                <tr className="promotions-table" key={p.data.id}>
-                                    <td>{p.data.typepromotion}</td>
-                                    <td>{p.data.startdate}</td>
-                                    <td>{p.data.duedate}</td>
-                                    <td>{p.data.totalcost}</td>
-                                    <td>
-                                        <Link className="close-icon" to={`/broker/promotions/${p.data.id}`}>
-                                            <PersonAddIcon />
-                                        </Link>
-                                    </td>
+                            ))
+                            :  <tr>
+                                    <td className="nothing-to-display">No Promotions to Display</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
-                                ))
-                                :  <tr>
-                                        <td className="nothing-to-display">No Promotions to Display</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                            }
-                        </tbody>
-                    </table>
-                    <p>{(this.state.error) ? this.state.error : null}</p>
-                    <p className="entry-count">Showing {this.state.data.length} of {this.state.data.length} entries</p>
-                </div>
-            </>
+                        }
+                    </tbody>
+                </table>
+                <p>{(this.state.error) ? this.state.error : null}</p>
+                <p className="entry-count">Showing {this.state.data.length} of {this.state.data.length} entries</p>
+            </div>
         )
     }
 }
