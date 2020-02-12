@@ -93,7 +93,7 @@ export default function CustomerInfo(props){
             </div>
         
             <div className="assets-table">
-                <h3>Assets</h3>
+                <h3>Properties</h3>
                 <table>
                     <thead>
                         <tr>
