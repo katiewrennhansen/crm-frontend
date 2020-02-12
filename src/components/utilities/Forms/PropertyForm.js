@@ -68,16 +68,7 @@ class PropertyForm extends Component {
     }
 
     componentDidMount(){
-        if(this.props.id){
-            ApiService.getDataHalf(`${config.API_ENDPOINT}/assets/${this.props.id}`)
-                .then(data => {
-                    this.context.setSingleAsset(data.data)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-        }
-        
+        console.log(this.props)
         ApiService.getDataHalf(`${config.API_ENDPOINT}/brokers`)
             .then(data => {
                 this.setBrokers(data.brokers)
@@ -133,6 +124,23 @@ class PropertyForm extends Component {
             .catch(error => {
                 console.log(error)
             })
+    }
+
+    getInitialSteps = () => {
+        let id;
+        if(this.props.asset.processt){
+            this.state.process.map(p => {
+                if(this.props.asset.processt === p.data.processdesc){
+                    id = p.data.id
+                    return id
+                }
+            })
+            ApiService.getDataHalf(`${config.API_ENDPOINT}/processts/${id}/steps`)
+                .then(data => {
+                    this.setSteps(data)
+                })
+                .catch(error => console.log(error))
+        }
     }
 
     render(){
@@ -330,7 +338,9 @@ class PropertyForm extends Component {
                                 <select name="steps">
                                     <option value="">Select a Step</option>
                                     {this.state.steps.map(s => 
-                                        <option key={s.id} value={s.id}>{s.stepdesc}</option>
+                                    (asset.step === s.stepdesc)
+                                       ? <option key={s.id} value={s.id} selected>{s.stepdesc}</option>
+                                       : <option key={s.id} value={s.id}>{s.stepdesc}</option>
                                     )}
                                 </select>
                             </div>
