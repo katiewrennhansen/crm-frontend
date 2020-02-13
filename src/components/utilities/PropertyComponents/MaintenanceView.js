@@ -161,8 +161,8 @@ class MaintenanceView extends Component {
                                 <td>{d.data.description}</td>
                                 <td>{d.data.quantity}</td>
                                 <td>{d.data.until}</td>
-                                <td>${d.data.unitcost}</td>
-                                <td>${d.data.total}</td>
+                                <td>{d.data.unitcost}</td>
+                                <td>{d.data.total}</td>
                             </tr>
                             )
                         })}
@@ -172,7 +172,7 @@ class MaintenanceView extends Component {
                             <td></td>
                             <td></td>
                             <td><strong>Total</strong></td>
-                            <td>${this.state.total}</td>
+                            <td>{this.state.total}</td>
                         </tr>
                     </tbody>
                 </table>

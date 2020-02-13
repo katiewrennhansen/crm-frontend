@@ -253,7 +253,7 @@ class Cost extends Component {
                                 <tr key={f.data.id}>
                                     <td>{f.data.concept}</td>
                                     <td>{f.data.kind}</td>
-                                    <td>${f.data.amount}</td>
+                                    <td>{f.data.amount}</td>
                                     <td>{f.data.date}</td> 
                                     <td>
                                     {(url 
@@ -286,7 +286,7 @@ class Cost extends Component {
                        ?  <tr>
                             <td><strong>Total</strong></td>
                             <td></td>
-                            <td>${this.state.costs.reduce((a, b) => a + (b.data.amount || 0), 0)}</td>
+                            <td>${this.state.costs.reduce((a, b) => a + Number(b.data.amount2), 0)}</td>
                             <td></td>
                             <td></td>
                             <td></td>

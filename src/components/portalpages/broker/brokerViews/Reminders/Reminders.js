@@ -60,7 +60,7 @@ class Reminders extends Component {
                                     <td>{r.periodmonths}</td>
                                     <td>{r.bodymessage}</td>
                                     <td>
-                                        <Moment format="YYYY/MM/DD">{r.created_at}</Moment>
+                                        <Moment format="MM/DD/YYYY">{r.created_at}</Moment>
                                     </td>
                                 </tr>
                             ))
