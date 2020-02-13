@@ -28,10 +28,11 @@ class Transfers extends Component {
             transactions
         })
     }
+    
 
     setTotal = arr => {
         let total = 0
-        arr.map(a => total += a.data.amount)
+        arr.map(a => total += Number(a.data.amount2))
         this.setState({
             total
         })

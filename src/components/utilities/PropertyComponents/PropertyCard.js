@@ -19,7 +19,7 @@ class PropertyCard extends Component {
             >
                 <div className="image-container">
                     <img className="property-photo" src={(url) ? url[0].image : null} alt="property"/>
-                    <p className="price">${a.data.assetprice}</p>
+                    <p className="price">{a.data.assetprice}</p>
                 </div>
 
                 <div className="top-content">

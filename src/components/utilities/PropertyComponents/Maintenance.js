@@ -274,7 +274,7 @@ class Maintenance extends Component {
                             return (
                                 <tr key={f.data.id}>
                                     <td>{f.data.maintcomm}</td>
-                                    <td>${(f.data.status === 'Final') ? f.data.finalcost : f.data.initialcost}</td>
+                                    <td>{(f.data.status === 'Final') ? f.data.finalcost : f.data.initialcost}</td>
                                     <td>{f.data.provider}</td>
                                     <td>{f.data.reqdate}</td>
                                     <td>{f.data.deliverdate}</td>

@@ -97,9 +97,9 @@ class Alerts extends Component {
                                     })}
                                 </td>
                                 <td>{a.data.assetcomment}</td>
-                                <td>
-                                    <Moment format="YYYY/MM/DD">{a.data.requestdate}</Moment>
-                                </td>
+                                
+                                    <td>{a.data.requestdate}</td>
+                                
                             </tr>
                             )) 
                             : <tr>

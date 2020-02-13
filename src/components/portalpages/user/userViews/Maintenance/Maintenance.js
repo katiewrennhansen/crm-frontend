@@ -85,7 +85,7 @@ class Maintenance extends Component {
                                 {p.data.adescription2}</td>
                             <td>{p.data.provider}</td>
                             <td>{p.data.maintcomm}</td>
-                            <td>${p.data.initialcost}</td>
+                            <td>{p.data.initialcost}</td>
                             <td>{p.data.reqdate}</td>
                             <td>{(p.data.deliverdate) ? p.data.deliverdate : '-' }</td>
                             <td>{p.data.status}</td>
