@@ -151,6 +151,7 @@ class EditProperty extends Component {
                     loading={this.state.loading}
                     contract={this.state.contract}
                     setValue={this.setValue}
+                    id={this.props.history.match.params.id}
                 />
             </div>
         )
