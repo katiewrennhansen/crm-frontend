@@ -68,7 +68,6 @@ class PropertyForm extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props)
         ApiService.getDataHalf(`${config.API_ENDPOINT}/brokers`)
             .then(data => {
                 this.setBrokers(data.brokers)

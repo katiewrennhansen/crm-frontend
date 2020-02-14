@@ -36,7 +36,10 @@ class PropertyStatus extends Component {
     addPropertyStatus = (e) => {
         e.preventDefault()
         const newPropertyStatus = {
-            statusdesc: e.target.feature_status.value,
+            status: {
+                statusdesc: e.target.feature_status.value,
+                showinportal: e.target.showinportal.value
+            }
         }
         ApiService.postData(
             psEndpoint, 
@@ -50,10 +53,18 @@ class PropertyStatus extends Component {
     updateData = (e) => {
         e.preventDefault()
         const id = this.context.id
-        let updatedContent = {}
+        let updatedContent = {
+            status: {
 
-        if(e.target.status_type.value !== ''){
-            updatedContent.statusdesc = e.target.feature_status.value
+            }
+        }
+
+        if(e.target.feature_status.value !== ''){
+            updatedContent.status.statusdesc = e.target.feature_status.value
+        }
+
+        if(e.target.showinportal.value !== ''){
+            updatedContent.status.showinportal = e.target.showinportal.value
         }
 
         ApiService.updateDataHalf(psEndpoint, id, updatedContent)
@@ -107,6 +118,11 @@ class PropertyStatus extends Component {
                                     placeholder='Property Status Type'
                                     type='text'
                                 />
+                                <label htmlFor="showinportal">Show In Web</label>
+                                <select name="showinportal">
+                                    <option value={true}>True</option>
+                                    <option value={false}>False</option>
+                                </select>
                             </div>
                             <input type="submit" className="submit-full submit-modal" value="Update" />
                         </form>
@@ -131,6 +147,11 @@ class PropertyStatus extends Component {
                                 placeholder='Update Property Status'
                                 type='text'
                             />
+                            <label htmlFor="showinportal">Show In Web</label>
+                            <select name="showinportal">
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
                         </div>
                         <input type="submit" className="submit-full submit-modal" value="Update" />
                     </form>
