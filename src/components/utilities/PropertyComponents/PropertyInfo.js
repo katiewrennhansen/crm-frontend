@@ -100,20 +100,20 @@ class PropertyInfo extends Component {
                         {(asset.assetprice)
                             ? <div className="property-info">
                                 <p>Asset Price:</p>
-                                <p>${asset.assetprice}</p>
+                                <p>{asset.assetprice}</p>
                             </div>
                         : null
                         }
                         {(asset.futureprice)
                             ? <div className="property-info">
                                 <p>Future Price:</p>
-                                <p>${asset.futureprice}</p>
+                                <p>{asset.futureprice}</p>
                             </div>
                         : null
                         }
                         <div className="property-info">
                             <p>Asset Rent:</p>
-                            <p>${asset.assetrent}</p>
+                            <p>{asset.assetrent}</p>
                         </div>
                         <div className="property-info">
                         <p>Owner:</p> 
@@ -129,7 +129,7 @@ class PropertyInfo extends Component {
                         </div>
                         <div className="property-info">
                             <p>Warranty:</p>
-                            <p>${asset.warranty}</p>
+                            <p>{asset.warranty}</p>
                         </div>
                         <div className="property-info">
                             <p>Broker:</p>

@@ -201,8 +201,9 @@ class Cost extends Component {
                             <label htmlFor="kind">Kind<span className="required">*</span></label>
                             <select name="kind">
                                 <option value="">Select a Transaction Type</option>
-                                <option value="income">Income</option>
-                                <option value="outcome">Outcome</option>
+                                <option value="cash">Cash</option>
+                                <option value="check">Check</option>
+                                <option value="transfer">Transfer</option>
                             </select>
                         </div>
                     </div>
@@ -252,7 +253,7 @@ class Cost extends Component {
                                 <tr key={f.data.id}>
                                     <td>{f.data.concept}</td>
                                     <td>{f.data.kind}</td>
-                                    <td>${f.data.amount}</td>
+                                    <td>{f.data.amount}</td>
                                     <td>{f.data.date}</td> 
                                     <td>
                                     {(url 
@@ -285,7 +286,7 @@ class Cost extends Component {
                        ?  <tr>
                             <td><strong>Total</strong></td>
                             <td></td>
-                            <td>${this.state.costs.reduce((a, b) => a + (b.data.amount || 0), 0)}</td>
+                            <td>${this.state.costs.reduce((a, b) => a + Number(b.data.amount2), 0)}</td>
                             <td></td>
                             <td></td>
                             <td></td>

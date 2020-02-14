@@ -28,10 +28,11 @@ class Transfers extends Component {
             transactions
         })
     }
+    
 
     setTotal = arr => {
         let total = 0
-        arr.map(a => total += a.data.amount)
+        arr.map(a => total += Number(a.data.amount2))
         this.setState({
             total
         })
@@ -70,6 +71,7 @@ class Transfers extends Component {
                     <table>
                         <thead>
                             <tr>
+                                <th>Property</th>
                                 <th>Concept</th>
                                 <th>Comment</th>
                                 <th>Kind</th>
@@ -84,6 +86,7 @@ class Transfers extends Component {
                             const receipt = t.data.receipt_url
                             return (
                                 <tr key={t.data.id}>
+                                    <td>{t.data.adescription1}</td>
                                     <td>{t.data.concept}</td>
                                     <td>{t.data.comment}</td>
                                     <td>{t.data.kind}</td>

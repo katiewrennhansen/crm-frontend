@@ -64,18 +64,13 @@ class Visits extends Component {
                             if(p.data.alarm){
                                 return (
                                     <tr key={p.data.id}>
-                                        <td>
-                                            {this.state.assets.map(a => {
-                                                if(a.data.id === p.data.asset_id){
-                                                    return a.data.adescription4  
-                                                } else {
-                                                    return null
-                                                }
-                                            })}
-                                        </td>
+                                        
+                                        <td>{(p.data.adescription1)+(', ')}
+                                        {p.data.adescription2}</td>
+                                        
                                         <td>{p.data.assetcomment}</td>
                                         <td>{p.data.requestdate}</td>
-                                        <td>{(p.data.confirmatindate) ? `Completed ${p.data.requestdate}` : 'Pending'}</td>
+                                        <td>{(p.data.confirmatindate) ? `Completed ${p.data.confirmatindate}` : 'Pending'}</td>
                                     </tr>
                                 )
                             } else {

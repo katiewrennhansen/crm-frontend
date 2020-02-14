@@ -136,6 +136,7 @@ class Messages extends Component {
                         <tr>
                             <th>Type</th>
                             <th>Description</th>
+                            <th>Status </th>
                             <th className="delete-heading">Delete</th>
                         </tr>
                     </thead>
@@ -150,6 +151,7 @@ class Messages extends Component {
                                         )}
                                     </td>
                                     <td>{f.data.assetcomment}</td>
+                                    <td>{(f.data.confirmatindate)? `Completed ${f.data.confirmatindate}` : 'Pending'}</td>
                                     <td className="delete">
                                             <DeleteOutlineIcon
                                                 className="delete-btn"

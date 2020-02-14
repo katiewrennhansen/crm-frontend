@@ -81,10 +81,11 @@ class Maintenance extends Component {
                         {(this.state.requests[0])
                         ? this.state.requests.map(p => (
                         <tr key={p.data.id}>
-                            <td>{this.state.assets.map(a => (a.data.id === p.data.asset_id) ? a.data.adescription4 : null)}</td>
+                            <td>{(p.data.adescription1)+(', ')}
+                                {p.data.adescription2}</td>
                             <td>{p.data.provider}</td>
                             <td>{p.data.maintcomm}</td>
-                            <td>${p.data.initialcost}</td>
+                            <td>{p.data.initialcost}</td>
                             <td>{p.data.reqdate}</td>
                             <td>{(p.data.deliverdate) ? p.data.deliverdate : '-' }</td>
                             <td>{p.data.status}</td>

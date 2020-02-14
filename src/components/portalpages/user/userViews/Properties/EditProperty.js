@@ -149,7 +149,6 @@ class EditProperty extends Component {
                     contractOnChange={this.contractSelectedHandler}
                     contract={this.state.contract}
                     setValue={this.setValue}
-                    history={this.props.history}
                     id={this.props.history.match.params.id}
                 />
             </div>

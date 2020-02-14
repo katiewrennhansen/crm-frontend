@@ -18,9 +18,9 @@ export default function CustomerInfo(props){
                     <p>{data.email}</p>
                     <p>{data.phone}</p>
                     <address>
-                        <p>{data.adescription4}</p>
-                        <p>{`${data.adescription2}, ${data.adescription3}`}</p>
                         <p>{data.adescription1}</p>
+                        <p>{`${data.adescription2}, ${data.adescription3}`}</p>
+                        <p>{data.adescription4}</p>
                     </address>
                 </div>
             </div>
@@ -47,6 +47,22 @@ export default function CustomerInfo(props){
             }
             
             <h3>Additional Information</h3>
+            <div className="contact-grid">
+                <p>Title:</p> 
+                <p>{data.title}</p>
+            </div>
+            <div className="contact-grid">
+                <p>Profession:</p> 
+                <p>{data.profession}</p>
+            </div>
+            <div className="contact-grid">
+                <p>Marital:</p> 
+                <p>{data.marital}</p>
+            </div>
+            <div className="contact-grid">
+                <p>Gender:</p> 
+                <p>{data.gender}</p>
+            </div>
             <div className="contact-grid">
                 <p>Category:</p> 
                 <p>{data.category}</p>
@@ -77,7 +93,7 @@ export default function CustomerInfo(props){
             </div>
         
             <div className="assets-table">
-                <h3>Assets</h3>
+                <h3>Properties</h3>
                 <table>
                     <thead>
                         <tr>
@@ -92,7 +108,8 @@ export default function CustomerInfo(props){
                         ? props.data.assets.map(a => {
                             return (
                                 <tr key={a.id}>
-                                    <td>{a.id}</td>
+                                    <td>{(a.adescription1)+(', ')}
+                                        {a.adescription2}</td>
                                     <td>{a.status}</td>
                                     <td>{a.broker}</td>
                                     <td>{a.tenant}</td>
@@ -115,7 +132,8 @@ export default function CustomerInfo(props){
                 <table>
                     <thead>
                         <tr>
-                            <th>Description</th>
+                            <th>Observations</th>
+                            <th>Transfer #</th>
                             <th>Amount</th>
                             <th>Date</th>
                             <th>View</th>
@@ -127,6 +145,7 @@ export default function CustomerInfo(props){
                             return (
                                 <tr key={t.data.id}>
                                     <td>{t.data.observations}</td>
+                                    <td>{(t.data.banktransaction) ? t.data.banktransaction : '-'}</td>
                                     <td>{t.data.totalamount}</td>
                                     <td>{t.data.trasferdate}</td>
                                     <td>
