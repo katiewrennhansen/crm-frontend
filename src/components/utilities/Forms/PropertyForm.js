@@ -21,7 +21,8 @@ class PropertyForm extends Component {
             status: [],
             assets: [],
             customers: [],
-            pictures: []
+            pictures: [],
+            processId: ''
         }
     }
 
@@ -67,6 +68,12 @@ class PropertyForm extends Component {
         })
     }
 
+    setId = processId => {
+        this.setState({
+            processId
+        })
+    }
+
     componentDidMount(){
         ApiService.getDataHalf(`${config.API_ENDPOINT}/brokers`)
             .then(data => {
@@ -79,6 +86,30 @@ class PropertyForm extends Component {
         ApiService.getDataHalf(`${config.API_ENDPOINT}/processts`)
             .then(data => {
                 this.setProcess(data.processts)                
+            })
+            .then(() => {
+                ApiService.getDataHalf(`${config.API_ENDPOINT}/assets/${this.props.id}`)
+                .then(data => {
+                    this.state.process.forEach(p => {
+                        if(data.data.processt === p.data.processdesc){
+                            this.setId(p.data.id)
+                        } else {
+                            return null
+                        }
+                    })
+                })
+                .then(() => {
+                    ApiService.getDataHalf(`${config.API_ENDPOINT}/processts/${this.state.processId}/steps`)
+                        .then(data => {
+                            this.setSteps(data)
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                })
+                .catch(error => {
+                    console.log(error)
+                })
             })
             .catch(error => {
                 console.log(error)
