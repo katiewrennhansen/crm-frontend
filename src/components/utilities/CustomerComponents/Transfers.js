@@ -104,15 +104,20 @@ class Transfers extends Component {
                                 </tr>
                                 )
                             })}
+                            {(this.state.transactions[0])
+                       ? 
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
                                 <td><strong>Total</strong></td>
-                                <td>${this.state.total}</td>
+                                <td>${this.state.transactions.reduce((a,b) => a + Number(b.data.amount2), 0)}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
+                            : null
+                            }
                         </tbody>
                     </table>
                     <p className="entry-count">Showing {this.state.transactions.length} of {this.state.transactions.length} entries</p>

@@ -166,14 +166,19 @@ class MaintenanceView extends Component {
                             </tr>
                             )
                         })}
-                        <tr>
+                        {(this.state.details[0])
+                        ?<tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
+                            
                             <td><strong>Total</strong></td>
-                            <td>{this.state.total}</td>
+                            <td>${this.state.details.reduce((a, b) => a + Number(b.data.total2), 0)}</td>
+                            
                         </tr>
+                        : null
+                    }
                     </tbody>
                 </table>
                 <form onSubmit={(e) => this.addCharge(e)}>
