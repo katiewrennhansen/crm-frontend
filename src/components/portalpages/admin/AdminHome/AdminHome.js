@@ -29,6 +29,7 @@ import BrokerAccounts from '../adminViews/BrokerAccounts/BrokerAccounts'
 import BrokerPage from '../adminViews/BrokerAccounts/BrokerPage'
 import AddBroker from '../adminViews/BrokerAccounts/AddBroker'
 import EditBroker from '../adminViews/BrokerAccounts/EditBroker'
+import SuperBroker from '../adminViews/SuperBroker/SuperBroker'
 
 class AdminHome extends Component {
     constructor(props){
@@ -481,6 +482,14 @@ class AdminHome extends Component {
                                             func={propFunctions} 
                                             id={id}
                                         />
+                                    )
+                                    }}
+                            />
+                            <Route 
+                                exact path='/dashboard/superbroker' 
+                                render={(props) => {
+                                    return (
+                                        <SuperBroker func={propFunctions} />
                                     )
                                     }}
                             />
