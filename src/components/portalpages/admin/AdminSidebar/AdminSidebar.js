@@ -217,10 +217,10 @@ class AdminSidebar extends Component {
                         <Link 
                             to="/dashboard/superbroker" 
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
-                            onClick={() => this.props.handleTitle('User Type')}                        
+                            onClick={() => this.props.handleTitle('Superbroker Access')}                        
                         >
                             <AssignmentIndIcon />
-                            <p className={(this.context.active) ? null : 'collapsed'}>User Type</p>
+                            <p className={(this.context.active) ? null : 'collapsed'}>Superbroker Access</p>
                         </Link>
                     </li>
                 </ul>

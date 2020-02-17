@@ -44,7 +44,7 @@ class SuperBroker extends Component {
     render(){  
         return (
             <div className='data-container'>
-                <h2>Users</h2>
+                <h2>Superbroker Access</h2>
                 <table className='data-table'>
                     <thead>
                         <tr>
