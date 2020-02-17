@@ -18,6 +18,7 @@ import EventNoteIcon from '@material-ui/icons/EventNote';
 import PaymentIcon from '@material-ui/icons/Payment';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import './AdminSidebar.css'
 
 
@@ -216,10 +217,10 @@ class AdminSidebar extends Component {
                         <Link 
                             to="/dashboard/superbroker" 
                             className={`${(this.context.active) ? null : 'collapsed'} dash-nav-link`}
-                            onClick={() => this.props.handleTitle('Super Brokers')}                        
+                            onClick={() => this.props.handleTitle('User Type')}                        
                         >
-                            <SupervisedUserCircleIcon />
-                            <p className={(this.context.active) ? null : 'collapsed'} >Super Brokers</p>
+                            <AssignmentIndIcon />
+                            <p className={(this.context.active) ? null : 'collapsed'}>User Type</p>
                         </Link>
                     </li>
                 </ul>
