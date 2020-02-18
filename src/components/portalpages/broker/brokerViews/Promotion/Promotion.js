@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
-import Modal from '../../../../utilities/Modal/Modal'
-import SubmitButton from '../../../../utilities/Login/LoginComponents/SubmitButton'
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 const promotionsEndpoint = config.PROMOTIONS_ENDPOINT
