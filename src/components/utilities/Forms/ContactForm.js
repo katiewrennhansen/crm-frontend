@@ -131,7 +131,7 @@ class ContactForm extends Component{
                                 <input
                                     id='phone'
                                     name='phone'
-                                    type='number'
+                                    type='text'
                                     defaultValue={this.props.cust.phone}
                                 />
                             </div>
@@ -263,6 +263,9 @@ class ContactForm extends Component{
 
                                 </select>
                             </div>
+                        </div>
+
+                        <div className='form-group row'>
                             <div>
                                 <label htmlFor='profession'>Profession<span className="required">*</span></label>
                                 <input
@@ -279,11 +282,12 @@ class ContactForm extends Component{
                                     <option value="single">Single</option>
                                     <option value="married">Married</option>    
                                     <option value="divorce">Divorced</option>  
-                                    <option value="widow">Widow</option>       
-                                      
-
+                                    <option value="widow">Widow</option>  
                                 </select>
                             </div>
+                        </div>
+
+                        <div className='form-group row'>
                             <div>
                                 <label htmlFor='category'>Category<span className="required">*</span></label>
                                 <select name="category">
@@ -305,6 +309,7 @@ class ContactForm extends Component{
                                     
                                 </select>
                             </div>
+                        </div>
                        
                         <div className='form-group'>
                             <label htmlFor='anniversary'>Anniversary<span className="required">*</span></label>
@@ -326,7 +331,6 @@ class ContactForm extends Component{
                             />
                         </div>
 
-                    </div>
                         <div className='form-group'>
                             <label htmlFor='comment'>Comment</label>
                             <textarea

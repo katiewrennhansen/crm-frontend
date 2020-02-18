@@ -63,15 +63,20 @@ class EditContact extends Component {
                 updatedCustomer[key] = updatedCustomerFields[key]
         }
 
+        console.log(updatedCustomer)
+
         ApiService.updateDataHalf(endpoint, id, updatedCustomer)
             .then(data => {
+                console.log(data)
                 ApiService.getDataHalf(endpoint)
                     .then(data => {
+                        console.log(data.data)
                         this.setCustomer(data.customers)
                     })
                     .then(() => {
                         this.props.history.history.push(`/broker/contacts/${id}`)
                     })
+                    .catch(error => console.log(error))
             })
             .catch(error => {
                 console.log(error)
