@@ -52,8 +52,8 @@ class PropertyInfo extends Component {
         return (
             <div className='header-grid'>
                 <address>
-                    <h2>{asset.adescription4}</h2>
-                    <h3>{asset.adescription5} {asset.adescription2}, {asset.adescription3}</h3>
+                    <h2>{asset.adescription1}</h2>
+                    <h3>{asset.adescription2} {asset.adescription3}, {asset.adescription4}</h3>
                 </address>  
                 <div className="property-icons">               
                     <Link className="close-icon" to={`/${type}/properties`}>

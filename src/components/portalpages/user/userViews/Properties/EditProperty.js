@@ -88,11 +88,11 @@ class EditProperty extends Component {
             category_id: e.target.category.value,
             stepdate: e.target.step_date.value,
             status_id: e.target.status.value,
-            adescription4: e.target.street_name.value,
-            adescription5: e.target.city.value,
-            adescription2: e.target.state.value,
-            adescription3: e.target.zip_code.value,
-            adescription1: e.target.country.value,
+            adescription1: e.target.street_name.value,
+            adescription2: e.target.city.value,
+            adescription3: e.target.state.value,
+            adescription4: e.target.zip_code.value,
+            adescription5: e.target.country.value,
             emailnewcontract: this.state.radioValue,
             rentadjustment: e.target.rentadjustment.value,
             endorsment: e.target.endorsment.value,
@@ -142,7 +142,7 @@ class EditProperty extends Component {
                     handleSubmit={this.editProperty}
                     asset={asset}
                     onChange={this.fileSelectedHandler}
-                    button="Edit Property"
+                    button="Submit"
                     files={this.state.files}
                     removeImage={this.removeImage}
                     loading={this.state.loading}

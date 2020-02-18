@@ -4,7 +4,6 @@ import config from '../../../../../config'
 import ApiService from '../../../../../services/api-service'
 import CloseIcon from '@material-ui/icons/Close';
 
-
 class EditSettings extends Component {
     constructor(props) {
         super(props);
@@ -33,16 +32,20 @@ class EditSettings extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const endpoint = `${config.API_ENDPOINT}/companies`
-        const { company_name, contact, address, email, phone, country, tax_id } = e.target
+        const { company_name, contact, address, city, state, zip_code, country, email, phone, tax_id } = e.target
         const id = 6
         let updatedInfo = {}
         let updatedFields = {
             cianame: company_name.value,
             ccontact: contact.value,
             adescription1: address.value,
+            adescription2: city.value,
+            adescription3: state.value,
+            adescription4: zip_code.value,
+            adescription5: country.value,
             cemail: email.value,
             cphone: phone.value,
-            adescription2: country.value,
+            
             ctaxinfo: tax_id.value
         }
 
@@ -129,7 +132,7 @@ class EditSettings extends Component {
                                     id='address'
                                     type='text' 
                                     name='address'
-                                    defaultValue={info.adescription3}
+                                    defaultValue={info.adescription1}
                                 />
                             </div>
 
@@ -144,12 +147,12 @@ class EditSettings extends Component {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor='city'>State<span className="required">*</span></label>
+                                    <label htmlFor='state'>State<span className="required">*</span></label>
                                     <input 
                                         id='state'
                                         type='text' 
                                         name='state'
-                                        defaultValue={info.adescription5}
+                                        defaultValue={info.adescription3}
                                     />
                                 </div>
                             </div>
@@ -159,7 +162,7 @@ class EditSettings extends Component {
                                     <label htmlFor='zip_code'>Zip Code<span className="required">*</span></label>
                                     <input 
                                         id='zip_code'
-                                        type='number' 
+                                        type='text' 
                                         name='zip_code'
                                         defaultValue={info.adescription4}
                                     />
@@ -170,7 +173,7 @@ class EditSettings extends Component {
                                         id='country'
                                         type='text' 
                                         name='country'
-                                        defaultValue={info.adescription1}
+                                        defaultValue={info.adescription5}
                                     />
                                 </div>
                             </div>
