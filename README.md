@@ -39,20 +39,21 @@ This project contains 4 distinct sections:
 
 ### Admin Portal Pages
 
-This contains all of the components that are specific to the admin portal sysetem. Each folder contains a file/multiple files that make up a single admin view. 
+This contains all of the components that are specific to the admin portal sysetem. Each folder within the admin folder contains a file/multiple files that make up a single admin view. This content is stored in src/components/portalpages/admin.
 
 ### Broker Portal Pages
 
-This contains all of the components that are specific to the broker portal sysetem. Each folder contains a file/multiple files that make up a single broker view. 
+This contains all of the components that are specific to the broker portal sysetem. Each folder within the broker folder contains a file/multiple files that make up a single broker view. This content is stored in src/components/portalpages/broker.
 
 ### User Portal Pages
 
-This contains all of the components that are specific to the user portal sysetem. Each folder contains a file/multiple files that make up a single user view. 
+This contains all of the components that are specific to the user portal sysetem. Each folder within the user folder contains a file/multiple files that make up a single user view. This content is stored in src/components/portalpages/user.
 
 ### Utilities
 
-This folder contains all of the components that are reused throughout this application. These components include forms, components to display various property data, customer data displays and so on.
+This folder contains all of the components that are reused throughout this application. These components include forms, components to display various property data, customer data displays and so on. This content is stored in src/components/utilities.
 
 ### Other Notible Folders
 
-This project also contains contexts and services folders. The context folder contains contexts that are specific to each portal while the services folder contains verious services for api calls, token authentication and form validation. 
+This project also contains contexts and services folders. The context folder contains contexts that are specific to each portal while the services folder contains verious services for api calls, token authentication and form validation. All API endpoints used are stored in the config.js file under the src directory. 
+
