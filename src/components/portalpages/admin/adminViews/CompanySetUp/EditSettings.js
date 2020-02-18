@@ -42,7 +42,7 @@ class EditSettings extends Component {
             adescription2: city.value,
             adescription3: state.value,
             adescription4: zip_code.value,
-            adescription5: country.value,
+            country: country.value,
             cemail: email.value,
             cphone: phone.value,
             
@@ -173,7 +173,7 @@ class EditSettings extends Component {
                                         id='country'
                                         type='text' 
                                         name='country'
-                                        defaultValue={info.adescription5}
+                                        defaultValue={info.country}
                                     />
                                 </div>
                             </div>

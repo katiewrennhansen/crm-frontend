@@ -48,7 +48,6 @@ class EditContact extends Component {
             adescription2: e.target.city.value,
             adescription3: e.target.state.value,
             adescription4: e.target.zip_code.value,
-            adescription5: e.target.country.value,
             country: e.target.country.value,
             ctax: e.target.tax_id.value,
             broker_id: e.target.broker.value,

@@ -20,7 +20,7 @@ export default function CustomerInfo(props){
                     <address>
                         <p>{data.adescription1}</p>
                         <p>{`${data.adescription2}, ${data.adescription3}`}</p>
-                        <p>{data.adescription4}, {data.adescription5}</p>
+                        <p>{data.adescription4}, {data.country}</p>
                     </address>
                 </div>
             </div>
