@@ -1,4 +1,4 @@
-# Front-End Component of CRM system for Real Estate purposes.
+# CRM Front-End for Real Estate purposes.
 
 ## Downloading the App
 
