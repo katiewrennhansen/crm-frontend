@@ -51,6 +51,7 @@ class BrokerForm extends Component{
                                     id='first_name'
                                     name='first_name'
                                     type='text'
+                                    defaultValue={this.props.cust.firstname}
                                 />
                             </div>
                             <div>
@@ -59,6 +60,7 @@ class BrokerForm extends Component{
                                     id='last_name'
                                     name='last_name'
                                     type='text'
+                                    defaultValue={this.props.cust.lastname}
                                 />
                             </div>
                         </div>
@@ -105,7 +107,7 @@ class BrokerForm extends Component{
                                 id='address'
                                 name='address'
                                 type='text'
-                                defaultValue={this.props.cust.adescription4}
+                                defaultValue={this.props.cust.adescription1}
                             />
                         </div>
                         <div className='form-group row'>
@@ -115,7 +117,7 @@ class BrokerForm extends Component{
                                     id='city'
                                     name='city'
                                     type='text'
-                                    defaultValue={this.props.cust.adescription3}
+                                    defaultValue={this.props.cust.adescription2}
                                 />
                             </div>
                             <div>
@@ -124,7 +126,7 @@ class BrokerForm extends Component{
                                     id='state'
                                     name='state'
                                     type='text'
-                                    defaultValue={this.props.cust.adescription2}
+                                    defaultValue={this.props.cust.adescription3}
                                 />
                             </div>
                         </div>
@@ -135,7 +137,7 @@ class BrokerForm extends Component{
                                     id='zip_code'
                                     name='zip_code'
                                     type='text'
-                                    defaultValue={this.props.cust.adescription1}
+                                    defaultValue={this.props.cust.adescription4}
                                 />
                             </div>
                             <div>

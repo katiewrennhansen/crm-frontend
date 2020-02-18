@@ -50,9 +50,9 @@ export default function WarrentyForm(props){
             <Page size="A4" style={styles.body}>
                 <View>
                     <Text style={styles.title}>Warranty Form</Text>
-                    <Text style={styles.subtitle}>{warranty.adescription4}</Text>
+                    <Text style={styles.subtitle}>{warranty.adescription1}</Text>
                     <Text style={styles.subtitle}>
-                        {`${warranty.adescription5}, ${warranty.adescription2} ${warranty.adescription3}`}
+                        {`${warranty.adescription2}, ${warranty.adescription3} ${warranty.adescription4}`}
                     </Text>
                 </View>
                 <View>

@@ -51,7 +51,7 @@ export default function CheckOutForm(props){
                     <Text style={styles.title}>Tenant Checkout Form</Text>
                     <Text style={styles.subtitle}>{props.asset.adescription4}</Text>
                     <Text style={styles.subtitle}>
-                        {`${props.asset.adescription5}, ${props.asset.adescription2} ${props.asset.adescription3}`}
+                        {`${props.asset.adescription1}, ${props.asset.adescription2} ${props.asset.adescription3}`}
                     </Text>
                 </View>
                 <View>

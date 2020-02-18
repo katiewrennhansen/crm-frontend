@@ -25,9 +25,11 @@ class PropertyCard extends Component {
                 <div className="top-content">
                     <h4>{a.data.processt}</h4>
                     <address>
-                        {a.data.adescription4}
+                        {a.data.adescription1}
                         <br></br>
                         {a.data.adescription2}, {a.data.adescription3}
+                        <br></br>
+                        {a.data.adescription4}, {a.data.adescription5}
                     </address>
                     <div className="bottom-grid">
                         <p>Status: {a.data.status}</p>

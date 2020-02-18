@@ -49,9 +49,9 @@ export default function CheckInForm(props){
             <Page size="A4" style={styles.body}>
                 <View>
                     <Text style={styles.title}>Tenant Checkin Form</Text>
-                    <Text style={styles.subtitle}>{props.asset.adescription4}</Text>
+                    <Text style={styles.subtitle}>{props.asset.adescription1}</Text>
                     <Text style={styles.subtitle}>
-                        {`${props.asset.adescription5}, ${props.asset.adescription2} ${props.asset.adescription3}`}
+                        {`${props.asset.adescription2}, ${props.asset.adescription3} ${props.asset.adescription4}`}
                     </Text>
                 </View>
                 <View>
