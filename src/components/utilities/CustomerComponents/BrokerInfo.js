@@ -17,9 +17,9 @@ export default function BrokerInfo(props){
                     <p>{data.secondemail}</p>
                     <p>{data.phone}</p>
                     <address>
-                        <p>{data.adescription4}</p>
-                        <p>{`${data.adescription2}, ${data.adescription3}`}</p>
                         <p>{data.adescription1}</p>
+                        <p>{`${data.adescription2}, ${data.adescription3}`}</p>
+                        <p>{data.adescription4}</p>
                     </address>
                 </div>
             </div>

@@ -131,26 +131,26 @@ class MaintenanceForm extends Component {
                         <h3>Address</h3>
                         <div className="form-group">
                             <label htmlFor="street_name">Street Name<span className="required">*</span></label>
-                            <input type="text" name="street_name" defaultValue={info.adescription4}></input>
+                            <input type="text" name="street_name" defaultValue={info.adescription1}></input>
                         </div>
                         <div className="form-group row">
                             <div>
                                 <label htmlFor="city">City<span className="required">*</span></label>
-                                <input type="text" name="city" defaultValue={info.adescription5}></input>
+                                <input type="text" name="city" defaultValue={info.adescription2}></input>
                             </div>
                             <div>
                                 <label htmlFor="state">State<span className="required">*</span></label>
-                                <input type="text" name="state" defaultValue={info.adescription2}></input>
+                                <input type="text" name="state" defaultValue={info.adescription3}></input>
                             </div>
                         </div>
                         <div className="form-group row">
                             <div>
                                 <label htmlFor="zip_code">Zip Code<span className="required">*</span></label>
-                                <input type="text" name="zip_code" defaultValue={info.adescription3}></input>
+                                <input type="text" name="zip_code" defaultValue={info.adescription4}></input>
                             </div>
                             <div>
                                 <label htmlFor="country">Country<span className="required">*</span></label>
-                                <input type="text" name="country" defaultValue={info.adescription1}></input>
+                                <input type="text" name="country" defaultValue={info.adescription5}></input>
                             </div>
                         </div>
                     </div>

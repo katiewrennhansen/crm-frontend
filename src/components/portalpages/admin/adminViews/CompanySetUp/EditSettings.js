@@ -42,7 +42,7 @@ class EditSettings extends Component {
             adescription1: address.value,
             cemail: email.value,
             cphone: phone.value,
-            adescription2: country.value,
+            adescription5: country.value,
             ctaxinfo: tax_id.value
         }
 
@@ -129,7 +129,7 @@ class EditSettings extends Component {
                                     id='address'
                                     type='text' 
                                     name='address'
-                                    defaultValue={info.adescription3}
+                                    defaultValue={info.adescription1}
                                 />
                             </div>
 
@@ -149,7 +149,7 @@ class EditSettings extends Component {
                                         id='state'
                                         type='text' 
                                         name='state'
-                                        defaultValue={info.adescription5}
+                                        defaultValue={info.adescription3}
                                     />
                                 </div>
                             </div>
@@ -170,7 +170,7 @@ class EditSettings extends Component {
                                         id='country'
                                         type='text' 
                                         name='country'
-                                        defaultValue={info.adescription1}
+                                        defaultValue={info.adescription5}
                                     />
                                 </div>
                             </div>

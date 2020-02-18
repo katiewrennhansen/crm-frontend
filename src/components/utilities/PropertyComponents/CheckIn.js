@@ -265,6 +265,7 @@ class CheckIn extends Component {
                         >
                         Download PDF
                     </PDFDownloadLink>
+                        
                     <form onSubmit={(e) => this.editCheckin(e)}>
                         <div className="form-group">
                             <div>
