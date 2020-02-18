@@ -82,8 +82,8 @@ class Maintenance extends Component {
         let formData = new FormData()
 
         formData.append('maintenance[informto]', e.target.description.value)
-        formData.append('maintenance[initialcost]', e.target.initial_cost.value)
-        formData.append('maintenance[finalcost]', e.target.final_cost.value)
+        // formData.append('maintenance[initialcost]', e.target.initial_cost.value)
+        // formData.append('maintenance[finalcost]', e.target.final_cost.value)
         formData.append('maintenance[maintcomm]', e.target.comment.value)
         formData.append('maintenance[plandate]', e.target.plan_date.value)
         formData.append('maintenance[deliverdate]', e.target.deliver_date.value)
@@ -226,14 +226,14 @@ class Maintenance extends Component {
                     </div>
                     
                     <div className="form-group row">
-                        <div>
+                        {/* <div> No requiere Backend is calculating
                             <label htmlFor="initial_cost">Initial Cost: </label>
                             <input type="text" name="initial_cost"></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor="final_cost">Final Cost: </label>
                             <input type="text" name="final_cost"></input>
-                        </div>
+                        </div> */}
                     </div>
                     
                     <div className="form-group row">
@@ -245,6 +245,7 @@ class Maintenance extends Component {
                             <label htmlFor="deliver_date">Deliver Date: </label>
                             <input type="date" name="deliver_date"></input>
                         </div>
+                        
                     </div>
                     
                     {(this.state.loading)
@@ -259,6 +260,7 @@ class Maintenance extends Component {
                 <table>
                     <thead>
                         <tr>
+                            <th>Status</th>
                             <th>Description</th>
                             <th>Cost</th>
                             <th>Provider</th>
@@ -273,8 +275,9 @@ class Maintenance extends Component {
                         ? this.state.maintenance.map(f => {
                             return (
                                 <tr key={f.data.id}>
+                                    <td>{f.data.status}</td>
                                     <td>{f.data.maintcomm}</td>
-                                    <td>{(f.data.status === 'Final') ? f.data.finalcost : f.data.initialcost}</td>
+                                    <td>{(f.data.status === 'accepted') ? f.data.finalcost : f.data.initialcost}</td>
                                     <td>{f.data.provider}</td>
                                     <td>{f.data.reqdate}</td>
                                     <td>{f.data.deliverdate}</td>
