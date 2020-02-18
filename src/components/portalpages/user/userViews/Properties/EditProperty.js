@@ -142,7 +142,7 @@ class EditProperty extends Component {
                     handleSubmit={this.editProperty}
                     asset={asset}
                     onChange={this.fileSelectedHandler}
-                    button="Edit Property"
+                    button="Submit"
                     files={this.state.files}
                     removeImage={this.removeImage}
                     loading={this.state.loading}

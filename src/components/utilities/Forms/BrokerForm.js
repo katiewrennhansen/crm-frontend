@@ -51,6 +51,7 @@ class BrokerForm extends Component{
                                     id='first_name'
                                     name='first_name'
                                     type='text'
+                                    defaultValue={this.props.cust.firstname}
                                 />
                             </div>
                             <div>
@@ -59,6 +60,7 @@ class BrokerForm extends Component{
                                     id='last_name'
                                     name='last_name'
                                     type='text'
+                                    defaultValue={this.props.cust.lastname}
                                 />
                             </div>
                         </div>

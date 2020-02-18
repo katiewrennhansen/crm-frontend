@@ -12,6 +12,7 @@ export default function CompanyInfo(props){
                 <p>{data.adescription1}</p>
                 <p>{`${data.adescription2}, ${data.adescription3}`}</p>
                 <p>{data.adescription4}</p>
+                <p>{data.adescription5}</p>
             </address>
             <h3>Additional Information</h3>
             <div className="contact-grid">

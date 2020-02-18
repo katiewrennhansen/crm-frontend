@@ -19,7 +19,7 @@ export default function BrokerInfo(props){
                     <address>
                         <p>{data.adescription1}</p>
                         <p>{`${data.adescription2}, ${data.adescription3}`}</p>
-                        <p>{data.adescription4}</p>
+                        <p>{data.adescription4}, {data.adescription5}</p>
                     </address>
                 </div>
             </div>

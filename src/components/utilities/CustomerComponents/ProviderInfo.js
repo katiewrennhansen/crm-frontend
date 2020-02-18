@@ -14,7 +14,7 @@ export default function ProviderInfo(props){
             <address>
                 <p>{data.adescription1}</p>
                 <p>{`${data.adescription2}, ${data.adescription3}`}</p>
-                <p>{data.adescription4}</p>
+                <p>{data.adescription4}, {data.adescription5}</p>
             </address>
 
             <h3>Bank Information</h3>
