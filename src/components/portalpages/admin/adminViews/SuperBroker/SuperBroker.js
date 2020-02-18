@@ -67,8 +67,8 @@ class SuperBroker extends Component {
                                         <td>{c.data.usertype}</td>
                                         <td>
                                             {(!c.data.superbroker)
-                                                ? <button onClick={() => this.updateSuperBroker(c.data.id, true)}>Add as Superbroker</button>
-                                                : <button onClick={() => this.updateSuperBroker(c.data.id, false)}>Remove Superbroker</button>
+                                                ? <button className="superbroker-btn superbroker-add" onClick={() => this.updateSuperBroker(c.data.id, true)}>Add as Superbroker</button>
+                                                : <button className="superbroker-btn superbroker-remove" onClick={() => this.updateSuperBroker(c.data.id, false)}>Remove Superbroker</button>
                                             }
                                         </td>
                                     </tr>

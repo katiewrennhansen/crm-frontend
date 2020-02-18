@@ -206,16 +206,6 @@ button.add-icon {
     color: #273443;
 }
 
-/* .add-icon {
-    font-size: 14px;
-    text-decoration: none;
-    display: grid;
-    grid-template-columns: 25px auto;
-    border: 1px solid gray;
-    border-radius: 50px;
-    padding: 3px 15px 3px 10px;
-} */
-
 .add-icon p,
 .add-icon .action-icon {
     align-self: center;
@@ -224,7 +214,8 @@ button.add-icon {
 }
 
 
-button.add-icon {
+button.add-icon,
+.superbroker-btn {
     background: none;
     border: none;
 }
@@ -238,12 +229,23 @@ button.add-icon {
 
 .add-icon:hover,
 .delete-icon:hover,
-.close-icon:hover {
+.close-icon:hover,
+.superbroker-btn:hover {
     cursor: pointer;
 }
 
 .property-icons {
     display: grid;
+}
+
+.superbroker-add {
+    color: rgb(23, 136, 87);
+    font-weight: 700;
+}
+
+.superbroker-remove {
+    color: rgb(167, 25, 63);
+    font-weight: 700;
 }
 
 /* FORMS */
