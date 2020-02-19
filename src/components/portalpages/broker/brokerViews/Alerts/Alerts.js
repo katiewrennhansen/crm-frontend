@@ -73,6 +73,7 @@ class Alerts extends Component {
                     <thead>
                         <tr>
                             <th>Mark Completed</th>
+                            <th>Property</th>
                             <th>Comment Type</th>
                             <th>Comment</th>
                             <th>Request Date</th>
@@ -85,6 +86,7 @@ class Alerts extends Component {
                                 <td className="mark-completed" id={a.data.id}>
                                     <RadioButtonUncheckedIcon onClick={() => this.handleCompleted(a.data.id)} />
                                 </td>
+                                <td>{a.data.adescription1}</td>
                                 <td>
                                     {this.state.commtypes.map(c => {
                                         if(c.id === a.data.commtype_id){
@@ -95,6 +97,7 @@ class Alerts extends Component {
                                         }
                                     })}
                                 </td>
+                                
                                 <td>{a.data.assetcomment}</td>
                                 
                                     <td>{a.data.requestdate}</td>
