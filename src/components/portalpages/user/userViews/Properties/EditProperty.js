@@ -78,7 +78,7 @@ class EditProperty extends Component {
             assetrent: e.target.assetrent.value,
             futurerent: e.target.futurerent.value,
             assetstart: e.target.assetstart.value,
-            assetdue: e.target.assetdue,
+            assetdue: e.target.assetdue.value,
             assettype_id: e.target.asset_type.value,
             // customer_id: e.target.owner.value,
             // tcustomer_id: e.target.tenant.value,

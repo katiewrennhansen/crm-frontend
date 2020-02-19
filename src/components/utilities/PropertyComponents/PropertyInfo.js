@@ -148,6 +148,10 @@ class PropertyInfo extends Component {
                             <p>{asset.assetinsurance}</p>
                         </div>
                         <div className="property-info">
+                            <p>Insurance End Date:</p>
+                            <p>{asset.insurancedued}</p>
+                        </div>
+                        <div className="property-info">
                             <p>Contract Start Date:</p>
                             <p>{asset.assetstart}</p>
                         </div>
