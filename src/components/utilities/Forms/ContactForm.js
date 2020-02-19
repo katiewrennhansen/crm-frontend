@@ -311,8 +311,29 @@ class ContactForm extends Component{
                             </div>
                         </div>
                        
+                        <div className='form-group row'>
+                            <div>
+                                <label htmlFor='ctype'>Type Customer<span className="required">*</span></label>
+                                <select name="ctype">
+                                            <option value="">Select a Type</option>
+                                            <option value="customer">Owner</option>
+                                            <option value="customer">Tenant</option>    
+                                            <option value="endorser">Endorser</option>  
+                                </select>
+                            </div>
+                            <div>
+                                <label htmlFor='tax_id'>Tax ID<span className="required">*</span></label>
+                                <input
+                                    id='tax_id'
+                                    name='tax_id'
+                                    type='text'
+                                    defaultValue={this.props.cust.taxid}
+                                />
+                                
+                            </div>
+                        </div>
                         <div className='form-group'>
-                            <label htmlFor='anniversary'>Anniversary<span className="required">*</span></label>
+                        <label htmlFor='anniversary'>Anniversary<span className="required">*</span></label>
                             <input
                                 id='anniversary'
                                 name='anniversary'
@@ -320,16 +341,7 @@ class ContactForm extends Component{
                                 defaultValue={this.props.cust.anniversary}
                             />
                         </div>
-
-                        <div className='form-group'>
-                            <label htmlFor='tax_id'>Tax ID<span className="required">*</span></label>
-                            <input
-                                id='tax_id'
-                                name='tax_id'
-                                type='text'
-                                defaultValue={this.props.cust.taxid}
-                            />
-                        </div>
+                        
 
                         <div className='form-group'>
                             <label htmlFor='comment'>Comment</label>

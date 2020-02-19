@@ -61,7 +61,8 @@ class EditContact extends Component {
             title: e.target.title.value,
             profession: e.target.profession.value,
             marital: e.target.marital.value,
-            gender: e.target.gender.value
+            gender: e.target.gender.value,
+            ctype: e.target.ctype.value
         }
 
         for (const key in updatedCustomerFields) {
