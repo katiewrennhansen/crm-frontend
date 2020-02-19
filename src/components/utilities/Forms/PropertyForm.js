@@ -163,6 +163,8 @@ class PropertyForm extends Component {
                 if(this.props.asset.processt === p.data.processdesc){
                     id = p.data.id
                     return id
+                } else {
+                    return null
                 }
             })
             ApiService.getDataHalf(`${config.API_ENDPOINT}/processts/${id}/steps`)
