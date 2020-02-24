@@ -85,6 +85,7 @@ class EditProperty extends Component {
             assettype_id: e.target.asset_type.value,
             customer_id: e.target.owner.value,
             tcustomer_id: e.target.tenant.value,
+            ecustomer_id: e.target.endorser.value,
             broker_id: e.target.brokers.value,
             processt_id: e.target.process.value,
             step_id: e.target.steps.value,
@@ -98,7 +99,7 @@ class EditProperty extends Component {
             adescription5: e.target.country.value,
             emailnewcontract: this.state.radioValue,
             rentadjustment: e.target.rentadjustment.value,
-            endorsment: e.target.endorsment.value,
+            
             interestrent: e.target.interestrent.value,
             daysbeforeexp: e.target.daysbeforeexp.value,
             warranty: e.target.warranty.value

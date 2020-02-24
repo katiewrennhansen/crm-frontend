@@ -20,7 +20,8 @@ class PropertyForm extends Component {
             categories: [],
             status: [],
             assets: [],
-            customers: [],
+            customeros: [],
+            endorsers: [],
             pictures: [],
             processId: ''
         }
@@ -29,6 +30,11 @@ class PropertyForm extends Component {
     setBrokers = (brokers) => {
         this.setState({
             brokers
+        })
+    }
+    setEndorsers = (endorsers) => {
+        this.setState({
+            endorsers
         })
     }
 
@@ -62,9 +68,9 @@ class PropertyForm extends Component {
         })
     }
 
-    setCustomers = (customers) => {
+    setCustomeros = (customeros) => {
         this.setState({
-            customers
+            customeros
         })
     }
 
@@ -78,6 +84,13 @@ class PropertyForm extends Component {
         ApiService.getDataHalf(`${config.API_ENDPOINT}/brokers`)
             .then(data => {
                 this.setBrokers(data.brokers)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+            ApiService.getDataHalf(`${config.API_ENDPOINT}/endorsers`)
+            .then(data => {
+                this.setEndorsers(data.endorsers)
             })
             .catch(error => {
                 console.log(error)
@@ -136,9 +149,9 @@ class PropertyForm extends Component {
             .catch(error => {
                 console.log(error)
             })
-        ApiService.getDataHalf(`${config.API_ENDPOINT}/customers`)
+        ApiService.getDataHalf(`${config.API_ENDPOINT}/customeros`)
             .then(data => {
-                this.setCustomers(data.customers)
+                this.setCustomeros(data.customeros)
             })
             .catch(error => {
                 console.log(error)
@@ -312,14 +325,14 @@ class PropertyForm extends Component {
                             </div>
                         </div>
                         
-                        {(this.state.customers[0])
+                        {(this.state.customeros[0])
                             ? (
                             <div className="form-group col3">
                                 <div>
                                     <label htmlFor="owner">Owner<span className="required">*</span></label>
                                     <select name="owner">
                                         <option value="">Select an Owner</option>
-                                        {this.state.customers.map(c => 
+                                        {this.state.customeros.map(c => 
                                             (asset.owner === c.data.name)
                                                 ? <option key={c.data.id} value={c.data.id} selected>{c.data.name}</option>
                                                 : <option key={c.data.id} value={c.data.id}>{c.data.name}</option>
@@ -330,13 +343,14 @@ class PropertyForm extends Component {
                                     <label htmlFor="tenant">Tenant<span className="required">*</span></label>
                                     <select name="tenant">
                                         <option value="">Select a Tenant</option>
-                                        {this.state.customers.map(c => 
+                                        {this.state.customeros.map(c => 
                                             (asset.tenant === c.data.name)
                                                 ? <option key={c.data.id} value={c.data.id} selected>{c.data.name}</option>
                                                 : <option key={c.data.id} value={c.data.id}>{c.data.name}</option>
                                         )}
                                     </select>
                                 </div>
+                                
                                 <div>
                                     <label htmlFor="brokers">Broker<span className="required">*</span></label>
                                     <select name="brokers">
@@ -468,9 +482,17 @@ class PropertyForm extends Component {
                                         <label htmlFor="rentadjustment">Rent Adjustment<span className="required">*</span></label>
                                         <input type="text" name="rentadjustment" defaultValue={asset.rentadjustment}></input>
                                     </div>
+                                    
                                     <div>
-                                        <label htmlFor="endorsment">Endorsment<span className="required">*</span></label>
-                                        <input type="text" name="endorsment" defaultValue={asset.endorsment}></input>
+                                        <label htmlFor="endorser">Endorser<span className="required">*</span></label>
+                                        <select name="endorser">
+                                            <option value="">Select a Endorser</option>
+                                            {this.state.endorsers.map(c => 
+                                                (asset.endorser === c.data.name)
+                                                    ? <option key={c.data.id} value={c.data.id} selected>{c.data.name}</option>
+                                                    : <option key={c.data.id} value={c.data.id}>{c.data.name}</option>
+                                            )}
+                                        </select>
                                     </div>
                                 </div>
 
