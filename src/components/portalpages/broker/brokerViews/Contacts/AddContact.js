@@ -51,7 +51,14 @@ class AddContact extends Component {
             remainder_id: e.target.reminder.value,
             category_id: e.target.category.value,
             caniversary: e.target.anniversary.value,
-            ccomment: e.target.comment.value
+            ccomment: e.target.comment.value,
+            bank_id: e.target.bank_id.value,
+            bankaccount: e.target.bankaccount.value,
+            title: e.target.title.value,
+            profession: e.target.profession.value,
+            marital: e.target.marital.value,
+            gender: e.target.gender.value,
+            ctype: e.target.ctype.value
         }
         const endpoint = `${config.API_ENDPOINT}/customers`
         ApiService.postDataHalf(endpoint, newCustomer)

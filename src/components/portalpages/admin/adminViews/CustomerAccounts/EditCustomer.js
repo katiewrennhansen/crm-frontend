@@ -58,7 +58,12 @@ class EditCustomer extends Component {
             caniversary: e.target.anniversary.value,
             ccomment: e.target.comment.value,
             bank_id: e.target.bank_id.value,
-            bankaccount: e.target.bankaccount.value
+            bankaccount: e.target.bankaccount.value,
+            title: e.target.title.value,
+            profession: e.target.profession.value,
+            marital: e.target.marital.value,
+            gender: e.target.gender.value,
+            ctype: e.target.ctype.value
         }
 
         for (const key in updatedFields) {

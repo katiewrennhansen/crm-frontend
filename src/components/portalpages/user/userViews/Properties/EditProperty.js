@@ -95,7 +95,7 @@ class EditProperty extends Component {
             adescription5: e.target.country.value,
             emailnewcontract: this.state.radioValue,
             rentadjustment: e.target.rentadjustment.value,
-            endorsment: e.target.endorsment.value,
+        
             interestrent: e.target.interestrent.value,
             daysbeforeexp: e.target.daysbeforeexp.value,
             warranty: e.target.warranty.value

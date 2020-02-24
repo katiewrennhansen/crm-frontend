@@ -15,6 +15,9 @@ export default function CustomerInfo(props){
                     </div>
                 }                
                 <div>
+                <div className="contact-grid">
+                <p>Type: {data.ctype}</p> 
+            </div>
                     <p>{data.email}</p>
                     <p>{data.phone}</p>
                     <address>
